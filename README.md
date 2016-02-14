@@ -1,2 +1,2 @@
 # CPSO
-Cooperative 
+Cooperative PSO with Spatially Meaningful Neighbors using Delaunay Triangulation
