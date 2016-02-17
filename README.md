@@ -1,4 +1,4 @@
-# CPSO
+# CPSO   [![Build Status](https://travis-ci.org/rippedpants/CPSO.svg?branch=develop)](https://travis-ci.org/rippedpants/CPSO)
 Cooperative PSO with Spatially Meaningful Neighbors using Delaunay Triangulation
 
 
