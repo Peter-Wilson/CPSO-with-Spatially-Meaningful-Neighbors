@@ -17,7 +17,27 @@ public class CPSO {
         int loops;
         boolean problemSatisfied = false;
         boolean min = true;
-        Swarm[] swarms; 
+        private Swarm[] swarms; 
+        int dimensionSize;
+        int swarmSize;
+        double C1 = 1;
+        double C2 = 1;
+        double INERTIA = 1;
+        
+        public CPSO(int dimensionSize)
+        {
+            this.dimensionSize = dimensionSize;
+            InitializeSwarms();
+        }
+        
+        private void InitializeSwarms()
+        {
+            swarms = new Swarm[dimensionSize];
+            for(int i = 0; i < dimensionSize; i++)
+            {
+                swarms[i] = new Swarm(swarmSize, C1, C2, INERTIA, min);
+            }
+        }
         
         //calculate the fitness of the PSO
         public void PSO()
@@ -25,7 +45,7 @@ public class CPSO {
             int loopsSinceNoNewGlobalBest = 0;
             while (!problemSatisfied)
             {
-                for (Swarm s : swarms)
+                for (Swarm s : getSwarms())
                 {
                     for(Particle i : s.getParticles()){
                         double fitness = CalculateFitness(i.getPosition());
@@ -70,5 +90,19 @@ public class CPSO {
         private void writeOutput(String output)
         {
             System.out.println(output);
+        }
+
+        /**
+         * @return the swarms
+         */
+        public Swarm[] getSwarms() {
+            return swarms;
+        }
+
+        /**
+         * @param swarms the swarms to set
+         */
+        public void setSwarms(Swarm[] swarms) {
+            this.swarms = swarms;
         }
 }

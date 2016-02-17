@@ -5,6 +5,7 @@
  */
 package cpso;
 
+import cpso.Classes.Swarm;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -51,6 +52,23 @@ public class CPSOTest {
         fail("The test case is a prototype.");
     }*/
     
+    /**
+     * Test of CPSO constructor.
+     */
+    @Test
+    public void testCPSO() {
+        System.out.println("CPSO constructor");
+        int expectedListSize = 5;
+        CPSO instance = new CPSO(expectedListSize);
+        
+        for(Swarm s : instance.getSwarms())
+        {
+            assertNotNull(s);
+        }
+        
+        assertEquals(instance.getSwarms().length, expectedListSize);
+    }
+    
     
     /**
      * Test of PSO method, of class CPSO.
@@ -58,7 +76,7 @@ public class CPSOTest {
     @Test
     public void testCalculateFitness() {
         System.out.println("Calculate Fitness");
-        CPSO instance = new CPSO();
+        CPSO instance = new CPSO(1);
         double position = 2.34;
         double expectedFitness = -2.4756;
         double result = instance.CalculateFitness(position);
