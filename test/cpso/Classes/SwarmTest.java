@@ -90,5 +90,25 @@ public class SwarmTest {
         //ensure the actual position is the same
         assertEquals(p.getPosition(), expectedPosition, 0.1);  
     }
+
+    /**
+     * Test of getParticles method, of class Swarm.
+     */
+    @Test
+    public void testGetParticles() {
+        System.out.println("getParticles");
+        int expSize = 20;
+        Swarm instance = new Swarm(expSize, 0.5, 0.2, 0.3, true);
+        Particle[] result = instance.getParticles();
+        
+        //check if correct size
+        assertEquals(expSize, result.length);
+        
+        //check if not null
+        for(int i = 0; i < result.length; i++)
+        {
+            assertNotNull(result[i]);
+        }
+    }
     
 }

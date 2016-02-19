@@ -17,7 +17,7 @@ public class Particle {
     
     public Particle(double initialPosition)
     {
-        this.position = initialPosition;
+        setPosition(initialPosition);
     }
 
     /**

@@ -36,10 +36,11 @@ public class Swarm
         {
             setGlobalBest(null);
             particles = new Particle[swarmSize];
+            
             Random rand = new Random();
             for (int i = 0; i < swarmSize; i++)
             {
-                particles[i] = new Particle((int)(rand.nextDouble()* 100) - 50);
+                particles[i] = new Particle((int)(rand.nextDouble()* 50)+1);
             }
         }
         
@@ -88,7 +89,7 @@ public class Swarm
         /**
          * @param globalBest the globalBest to set
          */
-        public void setGlobalBest(Particle globalBest) {
+        public void setGlobalBest(Particle globalBest) { 
             this.globalBest = globalBest;
         }
 
