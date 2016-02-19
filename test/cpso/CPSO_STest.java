@@ -131,18 +131,6 @@ public class CPSO_STest {
     }
 
     /**
-     * Test of start method, of class CPSO_S.
-     */
-    @Test
-    public void testStart() {
-        System.out.println("start");
-        CPSO_S instance = null;
-        instance.start();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getSolution method, of class CPSO_S.
      */
     @Test
