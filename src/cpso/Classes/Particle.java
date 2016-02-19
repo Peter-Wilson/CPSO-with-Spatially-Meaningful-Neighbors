@@ -31,10 +31,7 @@ public class Particle {
      * @param position the position to set
      */
     public void setPosition(double position) {
-        if(position < 1) 
-            this.position = 1.0;
-        else
-            this.position = position;
+        this.position = position;
     }
 
     /**
