@@ -15,22 +15,24 @@ import cpso.Classes.Swarm;
 public class CPSO_S {    
     
         int loops;
-        boolean problemSatisfied = false;
         boolean min = true;
         private Swarm[] swarms; 
         private double[] solution;
         int dimensionSize;
         int swarmSize;
-        double C1 = 1;
-        double C2 = 1;
-        double INERTIA = 1;
+        double C1 = 0.5;
+        double C2 = 0.3;
+        double INERTIA = 0.3;
         int maxLoops;
         
-        public CPSO_S(int dimensionSize, int maxLoops, int swarmSize)
+        public CPSO_S(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2)
         {
             this.dimensionSize = dimensionSize;
             this.maxLoops = maxLoops;
             this.swarmSize = swarmSize;
+            this.INERTIA = Inertia;
+            this.C1 = c1;
+            this.C2 = c2;
             InitializeSwarms();
         }
         
@@ -51,15 +53,19 @@ public class CPSO_S {
         {
             for(int i = 0; i < maxLoops; i++)
             {
-                for (int s = 0; s < swarms.length; s++)
+                for (int s = 0; s < swarms.length; s++) //iterate through swarms
                 {
-                    for(Particle p : swarms[s].getParticles()){
-                        double fitness = CalculateFitness(s, p.getPosition());
-                        if (p.UpdatePersonalBest(fitness, p.getPosition(), min))
+                    for(Particle p : swarms[s].getParticles()){ //for each particle
+                        
+                        double fitness = CalculateFitness(s, p.getPosition()); //calculate the new fitness
+                        writeOutput("Fitness:" + CalculateFitness(s, p.getPosition()) + " index:"+s+" position:"+p.getPosition());
+                        
+                        if (p.UpdatePersonalBest(fitness, p.getPosition(), min))  //update the personal best
                             writeOutput("New Particle " + p + " best: x=" + p.getPosition());
+                        
                         if ((swarms[s].getGlobalBest() == null) ||
                             (p.getFitness() < swarms[s].getGlobalBest().getFitness() && min) ||
-                            (swarms[s].getGlobalBest().getFitness() < p.getFitness() && !min))
+                            (swarms[s].getGlobalBest().getFitness() < p.getFitness() && !min))      //update the global best
                         {
 
                             swarms[s].setGlobalBest(p);
@@ -67,7 +73,7 @@ public class CPSO_S {
                         }
                     }
                     
-                    for (Particle p : swarms[s].getParticles())
+                    for (Particle p : swarms[s].getParticles()) //move the particles
                     {
                         swarms[s].UpdateVelocity(p);
                         swarms[s].UpdatePosition(p);
@@ -77,6 +83,11 @@ public class CPSO_S {
                         writeOutput("Final Best X Value is...."+swarms[s].getGlobalBest().getPosition());                        
                 }
             }
+            for(int i = 0; i < solution.length; i++)
+            {
+                writeOutput("Solution "+(i+1)+": "+ solution[i]);
+            }
+            writeOutput("The final fitness value is: "+ CalculateFinalFitness());
         }
 
         /**
@@ -94,8 +105,21 @@ public class CPSO_S {
                 else
                     fitness += Math.log(getSolution()[i]);
             }
-            return fitness;
-                
+            return fitness;   
+        }
+        
+        /**
+         * Returns the final fitness based on the solution function
+         * @return fitness
+         */
+        public double CalculateFinalFitness()
+        {
+            double fitness = 0;
+            for(int i = 0; i < getSolution().length; i++)
+            {
+                fitness += Math.log(getSolution()[i]);
+            }
+            return fitness; 
         }
 
         private void writeOutput(String output)

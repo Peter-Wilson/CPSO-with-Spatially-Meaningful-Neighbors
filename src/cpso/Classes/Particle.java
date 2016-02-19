@@ -17,7 +17,7 @@ public class Particle {
     
     public Particle(double initialPosition)
     {
-        this.position = initialPosition;
+        setPosition(initialPosition);
     }
 
     /**
@@ -31,7 +31,10 @@ public class Particle {
      * @param position the position to set
      */
     public void setPosition(double position) {
-        this.position = position;
+        if(position < 1) 
+            this.position = 1.0;
+        else
+            this.position = position;
     }
 
     /**

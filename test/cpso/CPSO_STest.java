@@ -48,12 +48,18 @@ public class CPSO_STest {
         int expectedDimensions = 5;
         int expectedMaxLoops = 10;
         int expectedSwarmSize = 20;
-        instance = new CPSO_S(expectedDimensions, expectedMaxLoops, expectedSwarmSize);
+        double expectedInertia = 0.5;
+        double expectedC1 = 0.3;
+        double expectedC2 = 0.2;
+        instance = new CPSO_S(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2);
         
         //test the values are set properly
         assertEquals(expectedDimensions, instance.dimensionSize);
         assertEquals(expectedMaxLoops, instance.maxLoops);
         assertEquals(expectedSwarmSize, instance.swarmSize);
+        assertEquals(expectedInertia, instance.INERTIA, 0.0);
+        assertEquals(expectedC1, instance.C1, 0.0);
+        assertEquals(expectedC2, instance.C2, 0.0);
     }
     
     /**
@@ -65,7 +71,10 @@ public class CPSO_STest {
         int expectedDimensions = 5;
         int expectedMaxLoops = 10;
         int expectedSwarmSize = 20;
-        CPSO_S instance = new CPSO_S(expectedDimensions, expectedMaxLoops, expectedSwarmSize);
+        double expectedInertia = 0.5;
+        double expectedC1 = 0.3;
+        double expectedC2 = 0.2;
+        CPSO_S instance = new CPSO_S(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2);
         instance.InitializeSwarms();
         
         Swarm[] swarms = instance.getSwarms();
@@ -105,7 +114,7 @@ public class CPSO_STest {
         System.out.println("CalculateFitness");
         int index = 0;
         double position = 1.0;
-        CPSO_S instance = new CPSO_S(5, 5, 20);
+        CPSO_S instance = new CPSO_S(5, 5, 20, 0.5, 0.3, 0.2);
         double[] testSolution = {1.0,1.0,1.0,1.0,1.0};
         instance.setSolution(testSolution);
         double expResult = 0.0;
@@ -113,13 +122,30 @@ public class CPSO_STest {
         assertEquals(expResult, result, 0.0);
     }
 
+    
+    /**
+     * Test of CalculateFitness method, of class CPSO_S.
+     */
+    @Test
+    public void testCalculateFitness2() throws Exception {
+        System.out.println("CalculateFitness");
+        int index = 0;
+        double position = 50.0;
+        CPSO_S instance = new CPSO_S(5, 5, 20, 0.5, 0.3, 0.2);
+        double[] testSolution = {12.0,3.2,6.2,8.0,14.1};
+        instance.setSolution(testSolution);
+        double expResult = 11.6253394463;
+        double result = instance.CalculateFitness(index, position);
+        assertEquals(expResult, result, 0.1);
+    }
+    
     /**
      * Test of getSwarms method, of class CPSO_S.
      */
     @Test
     public void testGetSwarms() {
         System.out.println("getSwarms");
-        CPSO_S instance = new CPSO_S(5, 5, 20);
+        CPSO_S instance = new CPSO_S(5, 5, 20, 0.5, 0.3, 0.2);
         int expResult = 5;
         Swarm[] result = instance.getSwarms();
         assertEquals(expResult, result.length);
@@ -137,7 +163,7 @@ public class CPSO_STest {
     public void testGetSolution() {
         System.out.println("getSolution");
         int expectedDimensions = 5;
-        CPSO_S instance = new CPSO_S(5,5, 20);
+        CPSO_S instance = new CPSO_S(5, 5, 20, 0.5, 0.3, 0.2);
         
         double[] result = instance.getSolution();
         
@@ -161,7 +187,7 @@ public class CPSO_STest {
     public void testSetSolution() throws Exception {
         System.out.println("setSolution");
         double[] solution = {1.0,2.0,3.0,4.0,5.0};
-        CPSO_S instance = new CPSO_S(5,5, 20);
+        CPSO_S instance = new CPSO_S(5, 5, 20, 0.5, 0.3, 0.2);
         
         // test setting a correct size solution
         instance.setSolution(solution);
@@ -181,6 +207,33 @@ public class CPSO_STest {
         {
             System.out.println("incorrect solution size not alowed to be set: SUCCESS");
         }
+    }
+
+    /**
+     * Test of start method, of class CPSO_S.
+     */
+    @Test
+    public void testStart() {
+        System.out.println("start");
+        CPSO_S instance = new CPSO_S(5, 5, 20, 0.5, 0.3, 0.2);
+        instance.start();
+        //TODO need to add a test for this
+    }
+
+    /**
+     * Test of CaluclateFinalFitness method, of class CPSO_S.
+     */
+    @Test
+    public void testCalculateFinalFitness() throws Exception {
+        System.out.println("Calculate Final Fitness");
+        int index = 0;
+        double position = 1.0;
+        CPSO_S instance = new CPSO_S(5, 5, 20, 0.5, 0.3, 0.2);
+        double[] testSolution = {1.0,1.0,1.0,1.0,1.0};
+        instance.setSolution(testSolution);
+        double expResult = 0.0;
+        double result = instance.CalculateFinalFitness();
+        assertEquals(expResult, result, 0.0);
     }
     
 }

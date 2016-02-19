@@ -40,7 +40,7 @@ public class Swarm
             Random rand = new Random();
             for (int i = 0; i < swarmSize; i++)
             {
-                particles[i] = new Particle((int)(rand.nextDouble()* 100) - 50);
+                particles[i] = new Particle((int)(rand.nextDouble()* 50)+1);
             }
         }
         
