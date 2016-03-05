@@ -5,8 +5,6 @@
  */
 package cpso_s_k;
 
-import cpso_s.*;
-import cpso_s.Particle;
 import java.util.Random;
 
 /**

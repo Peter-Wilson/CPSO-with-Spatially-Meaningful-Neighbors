@@ -5,7 +5,6 @@
  */
 package cpso_s_k;
 
-import cpso_s.*;
 
 /**
  *
