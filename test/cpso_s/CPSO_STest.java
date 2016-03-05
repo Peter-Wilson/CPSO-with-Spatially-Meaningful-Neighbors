@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cpso;
+package cpso_s;
 
-import cpso.Classes.Swarm;
+import cpso_s.CPSO_S;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -135,6 +135,38 @@ public class CPSO_STest {
         double[] testSolution = {12.0,3.2,6.2,8.0,14.1};
         instance.setSolution(testSolution);
         double expResult = 11.6253394463;
+        double result = instance.CalculateFitness(index, position);
+        assertEquals(expResult, result, 0.1);
+    }
+    
+    /**
+     * Test of CalculateFitness method, of class CPSO_S.
+     */
+    @Test
+    public void testCalculateFitnessZero() throws Exception {
+        System.out.println("CalculateFitnessZero");
+        int index = 0;
+        double position = 0.0;
+        CPSO_S instance = new CPSO_S(5, 5, 20, 0.5, 0.3, 0.2);
+        double[] testSolution = {0.0,0.0,0.0,0.0,0.0};
+        instance.setSolution(testSolution);
+        double expResult = Double.NEGATIVE_INFINITY;
+        double result = instance.CalculateFitness(index, position);
+        assertEquals(expResult, result, 0.1);
+    }
+    
+    /**
+     * Test of CalculateFitness method, of class CPSO_S.
+     */
+    @Test
+    public void testCalculateFitnessNegative() throws Exception {
+        System.out.println("CalculateFitnessNegative");
+        int index = 0;
+        double position = -50.0;
+        CPSO_S instance = new CPSO_S(5, 5, 20, 0.5, 0.3, 0.2);
+        double[] testSolution = {-12.0,-3.2,-6.2,-8.0,-14.1};
+        instance.setSolution(testSolution);
+        double expResult = Double.NaN;
         double result = instance.CalculateFitness(index, position);
         assertEquals(expResult, result, 0.1);
     }

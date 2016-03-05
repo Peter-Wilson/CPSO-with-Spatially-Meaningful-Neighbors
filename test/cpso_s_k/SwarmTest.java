@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cpso.Classes;
+package cpso_s_k;
 
+import cpso_s.Particle;
+import cpso_s.Swarm;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.AfterClass;

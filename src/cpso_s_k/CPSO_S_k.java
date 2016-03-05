@@ -3,16 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cpso;
-
-import cpso.Classes.Particle;
-import cpso.Classes.Swarm;
+package cpso_s_k;
 
 /**
  *
  * @author Peter
  */
-public class CPSO_S {    
+public class CPSO_S_k {    
     
         int loops;
         boolean min = true;
@@ -25,7 +22,7 @@ public class CPSO_S {
         double INERTIA = 0.3;
         int maxLoops;
         
-        public CPSO_S(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2)
+        public CPSO_S_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2)
         {
             this.dimensionSize = dimensionSize;
             this.maxLoops = maxLoops;
