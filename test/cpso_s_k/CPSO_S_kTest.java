@@ -248,7 +248,7 @@ public class CPSO_S_kTest {
     public void testStart() {
         System.out.println("start");
         CPSO_S_k instance = new CPSO_S_k(5, 5, 20, 0.5, 0.3, 0.2);
-        //instance.start();
+        instance.start();
         //TODO need to add a test for this
     }
 
