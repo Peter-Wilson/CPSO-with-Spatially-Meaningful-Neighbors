@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cpso.Classes;
+package cpso_s;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,8 +17,8 @@ import org.junit.runners.Suite;
  * @author Peter
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({cpso.Classes.ParticleTest.class, cpso.Classes.SwarmTest.class, cpso.Classes.CoordinatesTest.class})
-public class ClassesSuite {
+@Suite.SuiteClasses({cpso_s.ParticleTest.class, cpso_s.CPSO_STest.class, cpso_s.SwarmTest.class, cpso_s.MainTest.class, cpso_s.CoordinatesTest.class})
+public class Cpso_sSuite {
 
     @BeforeClass
     public static void setUpClass() throws Exception {

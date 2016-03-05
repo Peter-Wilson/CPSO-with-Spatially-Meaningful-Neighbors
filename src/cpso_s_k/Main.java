@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cpso;
+package cpso_s_k;
 
-import cpso.Classes.Particle;
+import cpso_s.*;
 
 /**
  *

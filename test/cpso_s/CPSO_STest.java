@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cpso;
+package cpso_s;
 
-import cpso.Classes.Swarm;
+import cpso_s.CPSO_S;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

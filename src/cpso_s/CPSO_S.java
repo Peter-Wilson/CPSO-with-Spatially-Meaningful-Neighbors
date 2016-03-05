@@ -3,10 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cpso;
-
-import cpso.Classes.Particle;
-import cpso.Classes.Swarm;
+package cpso_s;
 
 /**
  *
