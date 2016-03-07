@@ -37,7 +37,7 @@ public class CPSO_S_k {
         
         public void InitializeSwarms()
         {
-            swarms = new Swarm[dimensionSize];
+            swarms = new Swarm[dimensionSize/k];
             solution = new double[dimensionSize];
             for(int i = 0; i < dimensionSize/k; i++)
             {
@@ -97,11 +97,11 @@ public class CPSO_S_k {
         public double CalculateFitness(int index, double[] position)
         {
             double fitness = 0;
-            for(int i = 0; i < getSolution().length; i++)
+            for(int i = 0; i < (getSolution().length/k); i++)
             {
                 if(i == index)
                     for(int j = 0; j < k; j++)
-                        fitness += Math.log(position[(i*k)+j]);
+                        fitness += Math.log(position[j]);
                 else
                     for(int j = 0; j < k; j++)
                         fitness += Math.log(getSolution()[(i*k)+j]);
@@ -116,7 +116,7 @@ public class CPSO_S_k {
         public double CalculateFinalFitness()
         {
             double fitness = 0;
-            for(int i = 0; i < getSolution().length; i++)
+            for(int i = 0; i < (getSolution().length/k); i++)
             {
                 fitness += Math.log(getSolution()[i]);
             }
