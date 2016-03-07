@@ -21,8 +21,9 @@ public class CPSO_S_k {
         double C2 = 0.3;
         double INERTIA = 0.3;
         int maxLoops;
+        int k = 0;
         
-        public CPSO_S_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2)
+        public CPSO_S_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k)
         {
             this.dimensionSize = dimensionSize;
             this.maxLoops = maxLoops;
@@ -30,6 +31,7 @@ public class CPSO_S_k {
             this.INERTIA = Inertia;
             this.C1 = c1;
             this.C2 = c2;
+            this.k = k;
             InitializeSwarms();
         }
         
@@ -37,11 +39,14 @@ public class CPSO_S_k {
         {
             swarms = new Swarm[dimensionSize];
             solution = new double[dimensionSize];
-            for(int i = 0; i < dimensionSize; i++)
+            for(int i = 0; i < dimensionSize/k; i++)
             {
-                swarms[i] = new Swarm(swarmSize, C1, C2, INERTIA, min);
+                swarms[i] = new Swarm(swarmSize, C1, C2, INERTIA, min, k);
                 
-                solution[i] = swarms[i].getParticles()[0].getPosition();
+                for(int j = 0; j < k; j++)
+                {
+                    solution[(i*k)+j] = swarms[i].getParticles()[0].getPosition()[j];
+                }
             }
         }
         
@@ -89,15 +94,17 @@ public class CPSO_S_k {
          * @param position the current position
          * @return 
          */
-        public double CalculateFitness(int index, double position)
+        public double CalculateFitness(int index, double[] position)
         {
             double fitness = 0;
             for(int i = 0; i < getSolution().length; i++)
             {
                 if(i == index)
-                    fitness += Math.log(position);
+                    for(int j = 0; j < k; j++)
+                        fitness += Math.log(position[(i*k)+j]);
                 else
-                    fitness += Math.log(getSolution()[i]);
+                    for(int j = 0; j < k; j++)
+                        fitness += Math.log(getSolution()[(i*k)+j]);
             }
             return fitness;   
         }
