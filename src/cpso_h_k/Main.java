@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cpso_s;
+package cpso_h_k;
+
 
 /**
  *
@@ -16,8 +17,8 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        int dimensionSize = 5;
-        CPSO_S cpso = new CPSO_S(dimensionSize, 20, 20, 0.5, 0.3, 0.2);
+        int dimensionSize = 6;
+        CPSO_H_k cpso = new CPSO_H_k(dimensionSize, 20, 200, 0.5, 0.3, 0.2,2);
         cpso.start();
     }
     

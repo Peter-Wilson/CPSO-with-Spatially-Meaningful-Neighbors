@@ -3,15 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Peter/Desktop/School/Brock%20University/Year%203/COSC%203F90%20-%20Research%20Project/CPSO/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/Peter/Desktop/School/Brock%20University/Year%203/COSC%203F90%20-%20Research%20Project/CPSO/src/cpso/Classes/Coordinates.java</file>
-            <file>file:/C:/Users/Peter/Desktop/School/Brock%20University/Year%203/COSC%203F90%20-%20Research%20Project/CPSO/.travis.yml</file>
-            <file>file:/C:/Users/Peter/Desktop/School/Brock%20University/Year%203/COSC%203F90%20-%20Research%20Project/CPSO/test/cpso/Classes/SwarmTest.java</file>
-            <file>file:/C:/Users/Peter/Desktop/School/Brock%20University/Year%203/COSC%203F90%20-%20Research%20Project/CPSO/test/cpso/Classes/CoordinatesTest.java</file>
-            <file>file:/C:/Users/Peter/Desktop/School/Brock%20University/Year%203/COSC%203F90%20-%20Research%20Project/CPSO/src/cpso/Main.java</file>
-            <file>file:/C:/Users/Peter/Desktop/School/Brock%20University/Year%203/COSC%203F90%20-%20Research%20Project/CPSO/test/cpso/CPSOTest.java</file>
-            <file>file:/C:/Users/Peter/Desktop/School/Brock%20University/Year%203/COSC%203F90%20-%20Research%20Project/CPSO/.gitignore</file>
-            <file>file:/C:/Users/Peter/Desktop/School/Brock%20University/Year%203/COSC%203F90%20-%20Research%20Project/CPSO/build.xml</file>
+            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso_s_k/Main.java</file>
+            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso_s/Main.java</file>
+            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso_h_k/Main.java</file>
         </group>
     </open-files>
 </project-private>
