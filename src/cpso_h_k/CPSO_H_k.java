@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package cpso_h_k;
-
 /**
  *
  * @author Peter
@@ -14,12 +13,16 @@ public class CPSO_H_k {
         int loops;
         boolean min = true;
         private Swarm[] swarms; 
+        private cpso_h_k.PSO.Swarm pso_swarm;
         private double[] solution;
         int dimensionSize;
         int swarmSize;
         double C1 = 0.5;
         double C2 = 0.3;
         double INERTIA = 0.3;
+        double PSO_C1 = 0.5;
+        double PSO_C2 = 0.3;
+        double PSO_INTERTIA = 0.3;
         int maxLoops;
         int k = 0;
         
@@ -38,6 +41,7 @@ public class CPSO_H_k {
         public void InitializeSwarms()
         {
             swarms = new Swarm[dimensionSize/k];
+            pso_swarm = new cpso_h_k.PSO.Swarm(swarmSize, PSO_C1, PSO_C2, PSO_INTERTIA, min, dimensionSize);
             solution = new double[dimensionSize];
             for(int i = 0; i < dimensionSize/k; i++)
             {
