@@ -73,7 +73,9 @@ public class CPSO_S {
                     {
                         swarms[s].UpdateVelocity(p);
                         swarms[s].UpdatePosition(p);
-                    }                       
+                    } 
+                    
+                    UpdateSolution();
                 }
             }
             
@@ -114,6 +116,19 @@ public class CPSO_S {
                 fitness += Math.log(getSolution()[i]);
             }
             return fitness; 
+        }
+        
+        /**
+         * Update to the best current solution by taking the global best values
+         */
+        private void UpdateSolution()
+        {
+            for(int i = 0; i < swarms.length; i++)
+            {
+                Particle best = swarms[i].getGlobalBest();
+                if(best == null) continue;
+                else solution[i] = best.getPosition();
+            }
         }
 
         private void writeOutput(String output)

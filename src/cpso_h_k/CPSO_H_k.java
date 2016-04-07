@@ -13,7 +13,7 @@ public class CPSO_H_k {
         int loops;
         boolean min = true;
         private Swarm[] swarms; 
-        private cpso_h_k.PSO.Swarm pso_swarm;
+        private Swarm pso_swarm;
         private double[] solution;
         int dimensionSize;
         int swarmSize;
@@ -41,7 +41,7 @@ public class CPSO_H_k {
         public void InitializeSwarms()
         {
             swarms = new Swarm[dimensionSize/k];
-            pso_swarm = new cpso_h_k.PSO.Swarm(swarmSize, PSO_C1, PSO_C2, PSO_INTERTIA, min, dimensionSize);
+            pso_swarm = new Swarm(swarmSize, PSO_C1, PSO_C2, PSO_INTERTIA, min, dimensionSize);
             solution = new double[dimensionSize];
             for(int i = 0; i < dimensionSize/k; i++)
             {
@@ -59,23 +59,17 @@ public class CPSO_H_k {
         {
             for(int i = 0; i < maxLoops; i++)
             {
+                
+                // <editor-fold desc="CPSO swarm">
+                    /////////////////////////////////////////
+                    /////    Update the CPSO Swarms    //////
+                    /////////////////////////////////////////
                 for (int s = 0; s < swarms.length; s++) //iterate through swarms
-                {
+                {                    
                     for(Particle p : swarms[s].getParticles()){ //for each particle
                         
-                        double fitness = CalculateFitness(s, p.getPosition()); //calculate the new fitness
-                        
-                        if (p.UpdatePersonalBest(fitness, p.getPosition(), min))  //update the personal best
-                            writeOutput("New Personal best for " + p + ": x=" + p.getPosition());
-                        
-                        if ((swarms[s].getGlobalBest() == null) ||
-                            (p.getFitness() < swarms[s].getGlobalBest().getFitness() && min) ||
-                            (swarms[s].getGlobalBest().getFitness() < p.getFitness() && !min))      //update the global best
-                        {
-
-                            swarms[s].setGlobalBest(p);
-                            writeOutput("New Global Best for Swarm " + s + ": x=" + p.getPosition());
-                        }
+                        double fitness = CalculateFitness(s, k, p.getPosition()); //calculate the new fitness
+                        UpdateBests(fitness, p, swarms[s]);   
                     }
                     
                     for (Particle p : swarms[s].getParticles()) //move the particles
@@ -84,6 +78,27 @@ public class CPSO_H_k {
                         swarms[s].UpdatePosition(p);
                     }                       
                 }
+                // </editor-fold>
+                
+                // <editor-fold desc="PSO swarm"> 
+                    /////////////////////////////////////////
+                    /////     Update the PSO Swarm     //////
+                    /////////////////////////////////////////                               
+                for(Particle p : pso_swarm.getParticles()){ //for each particle
+
+                    double fitness = CalculateFitness(0, dimensionSize, p.getPosition()); //calculate the new fitness
+                    UpdateBests(fitness, p, pso_swarm);                    
+                }
+
+                for (Particle p : pso_swarm.getParticles()) //move the particles
+                {
+                    pso_swarm.UpdateVelocity(p);
+                    pso_swarm.UpdatePosition(p);
+                }     
+                // </editor-fold>
+                
+                //Transfer knowledge from PSO to CPSO
+                
             }
             
             for(int i = 0; i < solution.length; i++) //loop to print off solution
@@ -94,20 +109,41 @@ public class CPSO_H_k {
         }
 
         /**
+         * Takes the new fitness and particle and determine if it is the new 
+         * global best and or personal best
+         * @param fitness the new fitness value
+         * @param p the particle that is being updated
+         * @param swarm the swarm that particle is from
+         */
+        private void UpdateBests(double fitness, Particle p, Swarm swarm)
+        {
+            if (p.UpdatePersonalBest(fitness, p.getPosition(), min))  //update the personal best
+                writeOutput("New Personal best for " + p + ": x=" + p.getPosition());
+
+            if ((swarm.getGlobalBest() == null) ||
+                (p.getFitness() < swarm.getGlobalBest().getFitness() && min) ||
+                (swarm.getGlobalBest().getFitness() < p.getFitness() && !min))      //update the global best
+            {
+                swarm.setGlobalBest(p);
+                writeOutput("New Global Best for Swarm " + swarm + ": x=" + p.getPosition());
+            }
+        }
+        
+        /**
          * Calculate the fitness of the current swarm
          * @param position the current position
          * @return 
          */
-        public double CalculateFitness(int index, double[] position)
+        public double CalculateFitness(int index, int size, double[] position)
         {
             double fitness = 0;
-            for(int i = 0; i < (getSolution().length/k); i++)
+            for(int i = 0; i < (getSolution().length/size); i++)
             {
                 if(i == index)
-                    for(int j = 0; j < k; j++)
+                    for(int j = 0; j < size; j++)
                         fitness += Math.log(position[j]);
                 else
-                    for(int j = 0; j < k; j++)
+                    for(int j = 0; j < size; j++)
                         fitness += Math.log(getSolution()[(i*k)+j]);
             }
             return fitness;   

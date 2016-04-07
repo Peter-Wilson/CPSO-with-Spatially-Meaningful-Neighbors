@@ -112,5 +112,59 @@ public class SwarmTest {
             assertNotNull(result[i]);
         }
     }
+
+    /**
+     * Test of UpdateVelocity method, of class Swarm.
+     */
+    @Test
+    public void testUpdateVelocity_Particle() {
+        System.out.println("UpdateVelocity");
+        cpso_h_k.Particle p = null;
+        cpso_h_k.Swarm instance = null;
+        instance.UpdateVelocity(p);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of UpdateVelocity method, of class Swarm.
+     */
+    @Test
+    public void testUpdateVelocity_Particle_boolean() {
+        System.out.println("UpdateVelocity");
+        cpso_h_k.Particle p = null;
+        boolean test = false;
+        cpso_h_k.Swarm instance = null;
+        instance.UpdateVelocity(p, test);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getGlobalBest method, of class Swarm.
+     */
+    @Test
+    public void testGetGlobalBest() {
+        System.out.println("getGlobalBest");
+        cpso_h_k.Swarm instance = null;
+        cpso_h_k.Particle expResult = null;
+        cpso_h_k.Particle result = instance.getGlobalBest();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setGlobalBest method, of class Swarm.
+     */
+    @Test
+    public void testSetGlobalBest() {
+        System.out.println("setGlobalBest");
+        cpso_h_k.Particle globalBest = null;
+        cpso_h_k.Swarm instance = null;
+        instance.setGlobalBest(globalBest);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }
