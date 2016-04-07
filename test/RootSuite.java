@@ -16,7 +16,7 @@ import org.junit.runners.Suite;
  * @author pw12nb
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({GUI.GUISuite.class, PSO_ParticleTest.class, cpso_s_k.Cpso_s_kSuite.class, cpso_s.Cpso_sSuite.class, cpso_h_k.Cpso_h_kSuite.class})
+@Suite.SuiteClasses({GUI.GUISuite.class, cpso_s_k.Cpso_s_kSuite.class, cpso_s.Cpso_sSuite.class, cpso_h_k.Cpso_h_kSuite.class})
 public class RootSuite {
 
     @BeforeClass
