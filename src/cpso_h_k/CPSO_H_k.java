@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package cpso_h_k;
-
 /**
  *
  * @author Peter
@@ -14,12 +13,16 @@ public class CPSO_H_k {
         int loops;
         boolean min = true;
         private Swarm[] swarms; 
+        private Swarm pso_swarm;
         private double[] solution;
         int dimensionSize;
         int swarmSize;
         double C1 = 0.5;
         double C2 = 0.3;
         double INERTIA = 0.3;
+        double PSO_C1 = 0.5;
+        double PSO_C2 = 0.3;
+        double PSO_INTERTIA = 0.3;
         int maxLoops;
         int k = 0;
         
@@ -38,6 +41,7 @@ public class CPSO_H_k {
         public void InitializeSwarms()
         {
             swarms = new Swarm[dimensionSize/k];
+            pso_swarm = new Swarm(swarmSize, PSO_C1, PSO_C2, PSO_INTERTIA, min, dimensionSize);
             solution = new double[dimensionSize];
             for(int i = 0; i < dimensionSize/k; i++)
             {
@@ -55,23 +59,17 @@ public class CPSO_H_k {
         {
             for(int i = 0; i < maxLoops; i++)
             {
+                
+                // <editor-fold desc="CPSO swarm">
+                    /////////////////////////////////////////
+                    /////    Update the CPSO Swarms    //////
+                    /////////////////////////////////////////
                 for (int s = 0; s < swarms.length; s++) //iterate through swarms
-                {
+                {                    
                     for(Particle p : swarms[s].getParticles()){ //for each particle
                         
-                        double fitness = CalculateFitness(s, p.getPosition()); //calculate the new fitness
-                        
-                        if (p.UpdatePersonalBest(fitness, p.getPosition(), min))  //update the personal best
-                            writeOutput("New Personal best for " + p + ": x=" + p.getPosition());
-                        
-                        if ((swarms[s].getGlobalBest() == null) ||
-                            (p.getFitness() < swarms[s].getGlobalBest().getFitness() && min) ||
-                            (swarms[s].getGlobalBest().getFitness() < p.getFitness() && !min))      //update the global best
-                        {
-
-                            swarms[s].setGlobalBest(p);
-                            writeOutput("New Global Best for Swarm " + s + ": x=" + p.getPosition());
-                        }
+                        double fitness = CalculateFitness(s, k, p.getPosition()); //calculate the new fitness
+                        UpdateBests(fitness, p, swarms[s]);   
                     }
                     
                     for (Particle p : swarms[s].getParticles()) //move the particles
@@ -80,6 +78,59 @@ public class CPSO_H_k {
                         swarms[s].UpdatePosition(p);
                     }                       
                 }
+                // </editor-fold>
+                
+                UpdateSolution();
+                
+                //transfer knowledge from CPSO to PSO
+                if(swarms[0].getGlobalBest() != null)
+                {
+                    double[] velocity = new double[dimensionSize];
+                    for(int s = 0; s < swarms.length; s++)
+                    {
+                        for(int j = 0; j < k; j++)
+                        {
+                            velocity[(s*k)+j] = swarms[s].getGlobalBest().getVelocity()[j];
+                        }
+                    }
+                    pso_swarm.setRandomParticle(getSolution(), velocity);
+                }
+                
+                // <editor-fold desc="PSO swarm"> 
+                    /////////////////////////////////////////
+                    /////     Update the PSO Swarm     //////
+                    /////////////////////////////////////////                               
+                for(Particle p : pso_swarm.getParticles()){ //for each particle
+
+                    double fitness = CalculateFitness(0, dimensionSize, p.getPosition()); //calculate the new fitness
+                    UpdateBests(fitness, p, pso_swarm);                    
+                }
+
+                for (Particle p : pso_swarm.getParticles()) //move the particles
+                {
+                    pso_swarm.UpdateVelocity(p);
+                    pso_swarm.UpdatePosition(p);
+                }     
+                // </editor-fold>
+                
+                //Transfer knowledge from PSO to CPSO
+                if(pso_swarm.getGlobalBest() != null)
+                {
+                    //for each swarm
+                    for(int s = 0; s < swarms.length; s++)
+                    {
+                        //select a random particle to replace with the pso global best
+                        double[] value = new double[k];
+                        double[] velocity = new double[k];
+                        for(int j = 0; j < k; j++)
+                        {
+                            value[j] = pso_swarm.getGlobalBest().getPosition()[(s*k)+j];
+                            velocity[j] = pso_swarm.getGlobalBest().getVelocity()[(s*k)+j];
+                        }
+                        swarms[s].setRandomParticle(value, velocity);
+                    }
+                }
+                
             }
             
             for(int i = 0; i < solution.length; i++) //loop to print off solution
@@ -90,20 +141,64 @@ public class CPSO_H_k {
         }
 
         /**
+         * Takes the new fitness and particle and determine if it is the new 
+         * global best and or personal best
+         * @param fitness the new fitness value
+         * @param p the particle that is being updated
+         * @param swarm the swarm that particle is from
+         */
+        private void UpdateBests(double fitness, Particle p, Swarm swarm)
+        {
+            if (p.UpdatePersonalBest(fitness, p.getPosition(), min))  //update the personal best
+                writeOutput("New Personal best for " + p + ": x=" + p.getPosition());
+
+            if ((swarm.getGlobalBest() == null) ||
+                (p.getFitness() < swarm.getGlobalBest().getFitness() && min) ||
+                (swarm.getGlobalBest().getFitness() < p.getFitness() && !min))      //update the global best
+            {
+                swarm.setGlobalBest(p);
+                writeOutput("New Global Best for Swarm " + swarm + ": x=" + p.getPosition());
+            }
+        }
+        
+         /**
+         * Update to the best current solution by taking the global best values
+         */
+        private void UpdateSolution()
+        {
+            int index = 0;
+            for(int i = 0; i < swarms.length; i++)
+            {
+                Particle best = swarms[i].getGlobalBest();
+                if(best == null){
+                    index+= k;
+                    continue;
+                }
+                else{
+                    for(int j = 0; j < best.getPosition().length; j++)
+                    {
+                        solution[index] = best.getPosition()[j];
+                        index++;
+                    }
+                }
+            }
+        }
+        
+        /**
          * Calculate the fitness of the current swarm
          * @param position the current position
          * @return 
          */
-        public double CalculateFitness(int index, double[] position)
+        public double CalculateFitness(int index, int size, double[] position)
         {
             double fitness = 0;
-            for(int i = 0; i < (getSolution().length/k); i++)
+            for(int i = 0; i < (getSolution().length/size); i++)
             {
                 if(i == index)
-                    for(int j = 0; j < k; j++)
+                    for(int j = 0; j < size; j++)
                         fitness += Math.log(position[j]);
                 else
-                    for(int j = 0; j < k; j++)
+                    for(int j = 0; j < size; j++)
                         fitness += Math.log(getSolution()[(i*k)+j]);
             }
             return fitness;   

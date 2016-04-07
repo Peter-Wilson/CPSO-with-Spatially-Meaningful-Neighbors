@@ -80,6 +80,7 @@ public class CPSO_S_k {
                         swarms[s].UpdatePosition(p);
                     }                       
                 }
+                UpdateSolution();
             }
             
             for(int i = 0; i < solution.length; i++) //loop to print off solution
@@ -107,6 +108,29 @@ public class CPSO_S_k {
                         fitness += Math.log(getSolution()[(i*k)+j]);
             }
             return fitness;   
+        }
+        
+         /**
+         * Update to the best current solution by taking the global best values
+         */
+        private void UpdateSolution()
+        {
+            int index = 0;
+            for(int i = 0; i < swarms.length; i++)
+            {
+                Particle best = swarms[i].getGlobalBest();
+                if(best == null){
+                    index+= k;
+                    continue;
+                }
+                else{
+                    for(int j = 0; j < best.getPosition().length; j++)
+                    {
+                        solution[index] = best.getPosition()[j];
+                        index++;
+                    }
+                }
+            }
         }
         
         /**

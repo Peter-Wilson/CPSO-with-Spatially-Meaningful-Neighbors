@@ -101,5 +101,22 @@ public class Swarm
         public void setGlobalBest(Particle globalBest) { 
             this.globalBest = globalBest;
         }
+        
+        /**
+         * Sets the value of a random particle to the supplied value
+         * @param value 
+         */
+        public boolean setRandomParticle(double[] position, double[] velocity)
+        {
+            if(position.length != k || velocity.length != k)
+                return false;
+            else
+            {
+                int randomIndex = (int)(Math.random()*k);
+                particles[randomIndex].setPosition(position);
+                particles[randomIndex].setVelocity(velocity);
+                return true;
+            }
+        }
 
     }
