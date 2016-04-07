@@ -116,12 +116,12 @@ public class CPSO_H_kTest {
         System.out.println("CalculateFitness");
         int index = 0;
         int k = 2;
-        CPSO_H_k instance = new CPSO_H_k(6, 5, 20, 0.5, 0.3, 0.2, 2);
+        CPSO_H_k instance = new CPSO_H_k(6, 5, 20, 0.5, 0.3, 0.2, k);
         double[] testSolution = {1.0,1.0,1.0,1.0,1.0,1.0};
         instance.setSolution(testSolution);
         double expResult = 0.0;
         double[] position = {1.0, 1.0};
-        double result = instance.CalculateFitness(3, position);
+        double result = instance.CalculateFitness(3, k, position);
         assertEquals(expResult, result, 0.0);
     }
 
@@ -139,7 +139,7 @@ public class CPSO_H_kTest {
         double[] testSolution = {12.0,3.2,6.2,8.0,14.1,1.0};
         instance.setSolution(testSolution);
         double expResult = 11.6253394463;
-        double result = instance.CalculateFitness(index, position);
+        double result = instance.CalculateFitness(index, k, position);
         assertEquals(expResult, result, 0.1);
     }
     
@@ -156,7 +156,7 @@ public class CPSO_H_kTest {
         double[] testSolution = {0.0,0.0,0.0,0.0,0.0,0.0};
         instance.setSolution(testSolution);
         double expResult = Double.NEGATIVE_INFINITY;
-        double result = instance.CalculateFitness(index, position);
+        double result = instance.CalculateFitness(index, k, position);
         assertEquals(expResult, result, 0.1);
     }
     
@@ -173,7 +173,7 @@ public class CPSO_H_kTest {
         double[] testSolution = {-12.0,-3.2,-6.2,-8.0,-14.1,-12.7};
         instance.setSolution(testSolution);
         double expResult = Double.NaN;
-        double result = instance.CalculateFitness(index, position);
+        double result = instance.CalculateFitness(index, k, position);
         assertEquals(expResult, result, 0.1);
     }
     

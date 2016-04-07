@@ -273,11 +273,11 @@ public class ParticleTest {
     @Test
     public void testSetPosition_doubleArr() {
         System.out.println("setPosition");
-        double[] position = null;
-        Particle instance = null;
-        instance.setPosition(position);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        double[] position = {50, 100, 27, 18};
+        double[] position_new = {80, 12, 12, 100};
+        Particle instance = new Particle(position);
+        instance.setPosition(position_new);
+        assertArrayEquals(instance.getPosition(), position_new, 0.0);
     }
 
     /**
@@ -286,12 +286,12 @@ public class ParticleTest {
     @Test
     public void testSetPosition_double_int() {
         System.out.println("setPosition");
-        double position = 0.0;
-        int index = 0;
-        Particle instance = null;
+        double position = 56.12;
+        int index = 3;
+        double[] initialPosition = {4.3, 5.22, 43.3,88.7,2,56,8};
+        Particle instance = new Particle(initialPosition);
         instance.setPosition(position, index);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(instance.getPosition()[index], position, 0.0);
     }
 
     /**
@@ -300,11 +300,11 @@ public class ParticleTest {
     @Test
     public void testSetVelocity_doubleArr() {
         System.out.println("setVelocity");
-        double[] velocity = null;
-        Particle instance = null;
+        double[] velocity = {50, 100, 27, 18};
+        double[] position = {80, 12, 12, 100};
+        Particle instance = new Particle(position);
         instance.setVelocity(velocity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertArrayEquals(instance.getVelocity(), velocity, 0.0);
     }
 
     /**
@@ -313,12 +313,12 @@ public class ParticleTest {
     @Test
     public void testSetVelocity_double_int() {
         System.out.println("setVelocity");
-        double velocity = 0.0;
-        int index = 0;
-        Particle instance = null;
+        double velocity = 3.456;
+        int index = 3;
+        double[] position = {50, 34, 12, 56, 89, 12};
+        Particle instance = new Particle(position);
         instance.setVelocity(velocity, index);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(instance.getVelocity()[index], velocity, 0.0);
     }
 
     /**
@@ -327,11 +327,11 @@ public class ParticleTest {
     @Test
     public void testSetpBest_doubleArr() {
         System.out.println("setpBest");
-        double[] pBest = null;
-        Particle instance = null;
+        double[] pBest = {5.5,2.2,4};
+        double[] startPosition = {4,2,6};
+        Particle instance = new Particle(startPosition);
         instance.setpBest(pBest);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertArrayEquals(instance.getpBest(), pBest, 0.0);
     }
 
     /**
@@ -340,29 +340,14 @@ public class ParticleTest {
     @Test
     public void testSetpBest_double_int() {
         System.out.println("setpBest");
-        double pBest = 0.0;
-        int index = 0;
-        Particle instance = null;
+        double pBest = 55.7;
+        double[] pBest_initial = {5.5,2.2,4};
+        int index = 1;
+        double[] startPosition = {4,2,6};
+        Particle instance = new Particle(startPosition);
+        instance.setpBest(pBest_initial);
         instance.setpBest(pBest, index);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of UpdatePersonalBest method, of class Particle.
-     */
-    @Test
-    public void testUpdatePersonalBest() {
-        System.out.println("UpdatePersonalBest");
-        double newFitness = 0.0;
-        double[] newPosition = null;
-        boolean min = false;
-        Particle instance = null;
-        boolean expResult = false;
-        boolean result = instance.UpdatePersonalBest(newFitness, newPosition, min);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(instance.getpBest()[index], pBest, 0.0);
     }
     
 }
