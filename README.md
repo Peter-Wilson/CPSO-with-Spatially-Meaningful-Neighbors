@@ -6,8 +6,9 @@ Developed using Test Driven Development practices and utilizes continuous integr
 Currently has 100 tests
 
 # Variants
-CPSO-S
-CPSO-Sk
-CPSO-Hk
+1. CPSO-S
+2. CPSO-Sk
+3. CPSO-Hk
+4. CPSO-Rk
 
 ## Wiki detailing the algorithms used coming soon
