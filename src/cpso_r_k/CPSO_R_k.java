@@ -28,6 +28,16 @@ public class CPSO_R_k {
         int maxLoops;
         int k = 0;
         
+        /**
+         * Create a CPSO_R_k
+         * @param dimensionSize the overall dimension size
+         * @param maxLoops the max loops to perform
+         * @param swarmSize the number of particles in each swarm
+         * @param Inertia
+         * @param c1
+         * @param c2
+         * @param k the number of swarms
+         */
         public CPSO_R_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k)
         {
             this.dimensionSize = dimensionSize;
@@ -36,23 +46,29 @@ public class CPSO_R_k {
             this.INERTIA = Inertia;
             this.C1 = c1;
             this.C2 = c2;
+            if(k > dimensionSize) k = dimensionSize;
             this.k = k;
             InitializeSwarms();
         }
         
         public void InitializeSwarms()
         {
+            int remaining = 0;
+            int count = 0;
             swarms = new Swarm[k];
             pso_swarm = new Swarm(swarmSize, PSO_C1, PSO_C2, PSO_INTERTIA, min, dimensionSize);
             solution = new double[dimensionSize];
             for(int i = 0; i < k; i++)
             {
                 //select the random grouping into k subgroups
-                swarms[i] = new Swarm(swarmSize, C1, C2, INERTIA, min, k);
+                int randomValue = (int)((Math.random())*((dimensionSize/k)-1))+1;                
+                int randomWidth = remaining + randomValue;
+                remaining = (int)(Math.ceil((dimensionSize/k)-randomValue));
+                swarms[i] = new Swarm(swarmSize, C1, C2, INERTIA, min, randomWidth);
                 
-                for(int j = 0; j < k; j++)
+                for(int j = 0; j < randomWidth; j++)
                 {
-                    solution[(i*k)+j] = swarms[i].getParticles()[0].getPosition()[j];
+                    solution[count++] = swarms[i].getParticles()[0].getPosition()[j];
                 }
             }
         }
@@ -150,7 +166,10 @@ public class CPSO_R_k {
             {
                 if(i == index)
                     for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
-                        fitness += Math.log(position[count++]);
+                    {
+                        fitness += Math.log(position[j]);
+                        count++;
+                    }
                 else
                     for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
                         fitness += Math.log(getSolution()[count++]);
