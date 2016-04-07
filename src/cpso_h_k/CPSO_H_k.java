@@ -80,6 +80,22 @@ public class CPSO_H_k {
                 }
                 // </editor-fold>
                 
+                UpdateSolution();
+                
+                //transfer knowledge from CPSO to PSO
+                if(swarms[0].getGlobalBest() != null)
+                {
+                    double[] velocity = new double[dimensionSize];
+                    for(int s = 0; s < swarms.length; s++)
+                    {
+                        for(int j = 0; j < k; j++)
+                        {
+                            velocity[(s*k)+j] = swarms[s].getGlobalBest().getVelocity()[j];
+                        }
+                    }
+                    pso_swarm.setRandomParticle(getSolution(), velocity);
+                }
+                
                 // <editor-fold desc="PSO swarm"> 
                     /////////////////////////////////////////
                     /////     Update the PSO Swarm     //////
@@ -98,6 +114,22 @@ public class CPSO_H_k {
                 // </editor-fold>
                 
                 //Transfer knowledge from PSO to CPSO
+                if(pso_swarm.getGlobalBest() != null)
+                {
+                    //for each swarm
+                    for(int s = 0; s < swarms.length; s++)
+                    {
+                        //select a random particle to replace with the pso global best
+                        double[] value = new double[k];
+                        double[] velocity = new double[k];
+                        for(int j = 0; j < k; j++)
+                        {
+                            value[j] = pso_swarm.getGlobalBest().getPosition()[(s*k)+j];
+                            velocity[j] = pso_swarm.getGlobalBest().getVelocity()[(s*k)+j];
+                        }
+                        swarms[s].setRandomParticle(value, velocity);
+                    }
+                }
                 
             }
             
@@ -126,6 +158,29 @@ public class CPSO_H_k {
             {
                 swarm.setGlobalBest(p);
                 writeOutput("New Global Best for Swarm " + swarm + ": x=" + p.getPosition());
+            }
+        }
+        
+         /**
+         * Update to the best current solution by taking the global best values
+         */
+        private void UpdateSolution()
+        {
+            int index = 0;
+            for(int i = 0; i < swarms.length; i++)
+            {
+                Particle best = swarms[i].getGlobalBest();
+                if(best == null){
+                    index+= k;
+                    continue;
+                }
+                else{
+                    for(int j = 0; j < best.getPosition().length; j++)
+                    {
+                        solution[index] = best.getPosition()[j];
+                        index++;
+                    }
+                }
             }
         }
         

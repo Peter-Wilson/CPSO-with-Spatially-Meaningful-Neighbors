@@ -75,8 +75,8 @@ public class CPSO_S {
                         swarms[s].UpdatePosition(p);
                     } 
                     
-                    UpdateSolution();
                 }
+                    UpdateSolution();
             }
             
             for(int i = 0; i < solution.length; i++) //loop to print off solution

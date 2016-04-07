@@ -166,5 +166,21 @@ public class SwarmTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of setRandomParticle method, of class Swarm.
+     */
+    @Test
+    public void testSetRandomParticle() {
+        System.out.println("setRandomParticle");
+        double[] position = null;
+        double[] velocity = null;
+        cpso_h_k.Swarm instance = null;
+        boolean expResult = false;
+        boolean result = instance.setRandomParticle(position, velocity);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }
