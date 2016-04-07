@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cpso_h_k;
+package cpso_r_k;
 
-import cpso_h_k.CPSO_H_k;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -15,11 +14,11 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Peter
+ * @author pw12nb
  */
-public class CPSO_H_kTest {
+public class CPSO_R_kTest {
     
-    public CPSO_H_kTest() {
+    public CPSO_R_kTest() {
     }
     
     @BeforeClass
@@ -42,9 +41,9 @@ public class CPSO_H_kTest {
      * Test of CPSO_S method, of class CPSO_S.
      */
     @Test
-    public void testCPSO_S() {
+    public void testCPSO_R_k() {
         System.out.println("CPSO_S");
-        CPSO_H_k instance = null;
+        CPSO_R_k instance = null;
         int expectedDimensions = 6;
         int expectedMaxLoops = 10;
         int expectedSwarmSize = 20;
@@ -52,7 +51,7 @@ public class CPSO_H_kTest {
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 2;
-        instance = new CPSO_H_k(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2, k);
+        instance = new CPSO_R_k(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2, k);
         
         //test the values are set properly
         assertEquals(expectedDimensions, instance.dimensionSize);
@@ -76,13 +75,13 @@ public class CPSO_H_kTest {
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 2;
-        CPSO_H_k instance = new CPSO_H_k(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k);
+        CPSO_R_k instance = new CPSO_R_k(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k);
         instance.InitializeSwarms();
         
         Swarm[] swarms = instance.getSwarms();
         
         //ensure it is the correct size
-        assertEquals(expectedDimensions/k, swarms.length);        
+        assertEquals(k, swarms.length);        
         
         for(int i = 0; i < swarms.length/k; i++){
             //ensure the swarms have been initialized
@@ -115,13 +114,13 @@ public class CPSO_H_kTest {
     public void testCalculateFitness() throws Exception {
         System.out.println("CalculateFitness");
         int index = 0;
-        int k = 2;
-        CPSO_H_k instance = new CPSO_H_k(6, 5, 20, 0.5, 0.3, 0.2, k);
+        int k = 6;
+        CPSO_R_k instance = new CPSO_R_k(6, 5, 20, 0.5, 0.3, 0.2, k);
         double[] testSolution = {1.0,1.0,1.0,1.0,1.0,1.0};
         instance.setSolution(testSolution);
         double expResult = 0.0;
-        double[] position = {1.0, 1.0};
-        double result = instance.CalculateFitness(3, k, position);
+        double[] position = {1.0};
+        double result = instance.CalculateFitness(3, position);
         assertEquals(expResult, result, 0.0);
     }
 
@@ -133,13 +132,13 @@ public class CPSO_H_kTest {
     public void testCalculateFitness2() throws Exception {
         System.out.println("CalculateFitness");
         int index = 0;
-        double[] position = {50.0, 3.2};
-        int k = 2;
-        CPSO_H_k instance = new CPSO_H_k(6, 5, 20, 0.5, 0.3, 0.2, k);
+        double[] position = {50.0};
+        int k = 6;
+        CPSO_R_k instance = new CPSO_R_k(6, 5, 20, 0.5, 0.3, 0.2, k);
         double[] testSolution = {12.0,3.2,6.2,8.0,14.1,1.0};
         instance.setSolution(testSolution);
         double expResult = 11.6253394463;
-        double result = instance.CalculateFitness(index, k, position);
+        double result = instance.CalculateFitness(index, position);
         assertEquals(expResult, result, 0.1);
     }
     
@@ -150,13 +149,13 @@ public class CPSO_H_kTest {
     public void testCalculateFitnessZero() throws Exception {
         System.out.println("CalculateFitnessZero");
         int index = 0;
-        double[] position = {0.0, 0.0};
-        int k = 2;
-        CPSO_H_k instance = new CPSO_H_k(6, 5, 20, 0.5, 0.3, 0.2, k);
+        double[] position = {0.0};
+        int k = 6;
+        CPSO_R_k instance = new CPSO_R_k(6, 5, 20, 0.5, 0.3, 0.2, k);
         double[] testSolution = {0.0,0.0,0.0,0.0,0.0,0.0};
         instance.setSolution(testSolution);
         double expResult = Double.NEGATIVE_INFINITY;
-        double result = instance.CalculateFitness(index, k, position);
+        double result = instance.CalculateFitness(index, position);
         assertEquals(expResult, result, 0.1);
     }
     
@@ -167,13 +166,13 @@ public class CPSO_H_kTest {
     public void testCalculateFitnessNegative() throws Exception {
         System.out.println("CalculateFitnessNegative");
         int index = 0;
-        double[] position = {-50.0, -1.0};
-        int k = 2;
-        CPSO_H_k instance = new CPSO_H_k(6, 5, 20, 0.5, 0.3, 0.2, k);
+        double[] position = {-50.0};
+        int k = 6;
+        CPSO_R_k instance = new CPSO_R_k(6, 5, 20, 0.5, 0.3, 0.2, k);
         double[] testSolution = {-12.0,-3.2,-6.2,-8.0,-14.1,-12.7};
         instance.setSolution(testSolution);
         double expResult = Double.NaN;
-        double result = instance.CalculateFitness(index, k, position);
+        double result = instance.CalculateFitness(index, position);
         assertEquals(expResult, result, 0.1);
     }
     
@@ -185,8 +184,8 @@ public class CPSO_H_kTest {
         System.out.println("getSwarms");
         double[] position = {50.0, 1.0};
         int k = 2;
-        CPSO_H_k instance = new CPSO_H_k(6, 5, 20, 0.5, 0.3, 0.2, k);
-        int expResult = 6/k;
+        CPSO_R_k instance = new CPSO_R_k(6, 5, 20, 0.5, 0.3, 0.2, k);
+        int expResult = k;
         Swarm[] result = instance.getSwarms();
         assertEquals(expResult, result.length);
         
@@ -205,7 +204,7 @@ public class CPSO_H_kTest {
         int expectedDimensions = 6;
         double[] position = {50.0, 1.0};
         int k = 2;
-        CPSO_H_k instance = new CPSO_H_k(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO_R_k instance = new CPSO_R_k(6, 5, 20, 0.5, 0.3, 0.2, k);
         
         double[] result = instance.getSolution();
         
@@ -231,7 +230,7 @@ public class CPSO_H_kTest {
         double[] solution = {1.0,2.0,3.0,4.0,5.0};
         double[] position = {50.0, 1.0};
         int k = 2;
-        CPSO_H_k instance = new CPSO_H_k(5, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO_R_k instance = new CPSO_R_k(5, 5, 20, 0.5, 0.3, 0.2, k);
         
         // test setting a correct size solution
         instance.setSolution(solution);
@@ -261,7 +260,7 @@ public class CPSO_H_kTest {
         System.out.println("start");
         double[] position = {50.0, 1.0};
         int k = 2;
-        CPSO_H_k instance = new CPSO_H_k(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO_R_k instance = new CPSO_R_k(6, 5, 20, 0.5, 0.3, 0.2, k);
         //instance.start();
         //TODO need to add a test for this
     }
@@ -275,12 +274,11 @@ public class CPSO_H_kTest {
         int index = 0;
         double[] position = {1.0, 1.0};
         int k = 2;
-        CPSO_H_k instance = new CPSO_H_k(5, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO_R_k instance = new CPSO_R_k(5, 5, 20, 0.5, 0.3, 0.2, k);
         double[] testSolution = {1.0,1.0,1.0,1.0,1.0};
         instance.setSolution(testSolution);
         double expResult = 0.0;
         double result = instance.CalculateFinalFitness();
         assertEquals(expResult, result, 0.0);
     }
-    
 }

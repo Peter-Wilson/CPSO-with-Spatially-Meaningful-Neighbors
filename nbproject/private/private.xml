@@ -3,19 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso_h_k/Main.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/test/cpso_s/SwarmTest.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/test/cpso_h_k/CPSO_H_kTest.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso_h_k/Particle.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso_s_k/Main.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/test/cpso_h_k/SwarmTest.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso_s/Main.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/test/cpso_h_k/ParticleTest.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/test/cpso_s/MainTest.java</file>
+            <file>file:/Z:/git/GitPortable/Data/home/CPSO/test/cpso_r_k/CPSO_R_kTest.java</file>
+            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso_r_k/CPSO_R_k.java</file>
             <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso_h_k/CPSO_H_k.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/test/cpso_s/ParticleTest.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/test/cpso_s_k/SwarmTest.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/test/RootSuite.java</file>
+            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso_r_k/Swarm.java</file>
         </group>
     </open-files>
 </project-private>
