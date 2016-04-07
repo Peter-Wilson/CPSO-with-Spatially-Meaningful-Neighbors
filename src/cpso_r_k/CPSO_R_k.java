@@ -42,11 +42,12 @@ public class CPSO_R_k {
         
         public void InitializeSwarms()
         {
-            swarms = new Swarm[dimensionSize/k];
+            swarms = new Swarm[k];
             pso_swarm = new Swarm(swarmSize, PSO_C1, PSO_C2, PSO_INTERTIA, min, dimensionSize);
             solution = new double[dimensionSize];
-            for(int i = 0; i < dimensionSize/k; i++)
+            for(int i = 0; i < k; i++)
             {
+                //select the random grouping into k subgroups
                 swarms[i] = new Swarm(swarmSize, C1, C2, INERTIA, min, k);
                 
                 for(int j = 0; j < k; j++)
@@ -70,7 +71,7 @@ public class CPSO_R_k {
                 {                    
                     for(Particle p : swarms[s].getParticles()){ //for each particle
                         
-                        double fitness = CalculateFitness(s, k, p.getPosition()); //calculate the new fitness
+                        double fitness = CalculateFitness(s, p.getPosition()); //calculate the new fitness
                         UpdateBests(fitness, p, swarms[s]);   
                     }
                     
@@ -83,55 +84,6 @@ public class CPSO_R_k {
                 // </editor-fold>
                 
                 UpdateSolution();
-                
-                //transfer knowledge from CPSO to PSO
-                if(swarms[0].getGlobalBest() != null)
-                {
-                    double[] velocity = new double[dimensionSize];
-                    for(int s = 0; s < swarms.length; s++)
-                    {
-                        for(int j = 0; j < k; j++)
-                        {
-                            velocity[(s*k)+j] = swarms[s].getGlobalBest().getVelocity()[j];
-                        }
-                    }
-                    pso_swarm.setRandomParticle(getSolution(), velocity);
-                }
-                
-                // <editor-fold desc="PSO swarm"> 
-                    /////////////////////////////////////////
-                    /////     Update the PSO Swarm     //////
-                    /////////////////////////////////////////                               
-                for(Particle p : pso_swarm.getParticles()){ //for each particle
-
-                    double fitness = CalculateFitness(0, dimensionSize, p.getPosition()); //calculate the new fitness
-                    UpdateBests(fitness, p, pso_swarm);                    
-                }
-
-                for (Particle p : pso_swarm.getParticles()) //move the particles
-                {
-                    pso_swarm.UpdateVelocity(p);
-                    pso_swarm.UpdatePosition(p);
-                }     
-                // </editor-fold>
-                
-                //Transfer knowledge from PSO to CPSO
-                if(pso_swarm.getGlobalBest() != null)
-                {
-                    //for each swarm
-                    for(int s = 0; s < swarms.length; s++)
-                    {
-                        //select a random particle to replace with the pso global best
-                        double[] value = new double[k];
-                        double[] velocity = new double[k];
-                        for(int j = 0; j < k; j++)
-                        {
-                            value[j] = pso_swarm.getGlobalBest().getPosition()[(s*k)+j];
-                            velocity[j] = pso_swarm.getGlobalBest().getVelocity()[(s*k)+j];
-                        }
-                        swarms[s].setRandomParticle(value, velocity);
-                    }
-                }
                 
             }
             
@@ -173,14 +125,13 @@ public class CPSO_R_k {
             {
                 Particle best = swarms[i].getGlobalBest();
                 if(best == null){
-                    index+= k;
+                    index+= swarms[i].getParticles()[0].getPosition().length;
                     continue;
                 }
                 else{
                     for(int j = 0; j < best.getPosition().length; j++)
                     {
-                        solution[index] = best.getPosition()[j];
-                        index++;
+                        solution[index++] = best.getPosition()[j];
                     }
                 }
             }
@@ -191,17 +142,18 @@ public class CPSO_R_k {
          * @param position the current position
          * @return 
          */
-        public double CalculateFitness(int index, int size, double[] position)
+        public double CalculateFitness(int index, double[] position)
         {
             double fitness = 0;
-            for(int i = 0; i < (getSolution().length/size); i++)
+            int count = 0;
+            for(int i = 0; i < k; i++)
             {
                 if(i == index)
-                    for(int j = 0; j < size; j++)
-                        fitness += Math.log(position[j]);
+                    for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
+                        fitness += Math.log(position[count++]);
                 else
-                    for(int j = 0; j < size; j++)
-                        fitness += Math.log(getSolution()[(i*k)+j]);
+                    for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
+                        fitness += Math.log(getSolution()[count++]);
             }
             return fitness;   
         }
@@ -213,7 +165,7 @@ public class CPSO_R_k {
         public double CalculateFinalFitness()
         {
             double fitness = 0;
-            for(int i = 0; i < (getSolution().length/k); i++)
+            for(int i = 0; i < dimensionSize; i++)
             {
                 fitness += Math.log(getSolution()[i]);
             }
