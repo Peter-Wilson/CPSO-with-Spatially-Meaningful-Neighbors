@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cpso_s_k;
+package cpso_r_k;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Peter
+ * @author pw12nb
  */
 public class MainTest {
     
