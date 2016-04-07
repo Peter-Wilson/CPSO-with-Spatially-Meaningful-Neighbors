@@ -262,7 +262,7 @@ public class CPSO_S_kTest {
         double[] position = {50.0, 1.0};
         int k = 2;
         CPSO_S_k instance = new CPSO_S_k(6, 5, 20, 0.5, 0.3, 0.2, k);
-        instance.start();
+        //instance.start();
         //TODO need to add a test for this
     }
 
