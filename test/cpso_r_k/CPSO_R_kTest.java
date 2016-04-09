@@ -77,7 +77,6 @@ public class CPSO_R_kTest {
         double expectedC2 = 0.2;
         int k = 2;
         CPSO_R_k instance = new CPSO_R_k(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k);
-        instance.InitializeSwarms();
         
         Swarm[] swarms = instance.getSwarms();
         
@@ -106,6 +105,18 @@ public class CPSO_R_kTest {
         assertNotEquals(value, 0);
         
         
+    }
+
+    /**
+     * Test of start method, of class CPSO_R_k.
+     */
+    @Test
+    public void testStart() {
+        System.out.println("start");
+        CPSO_R_k instance = null;
+        instance.start();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     

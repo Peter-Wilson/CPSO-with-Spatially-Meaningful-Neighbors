@@ -27,11 +27,10 @@ public class CPSO_S_k extends CPSO {
     public CPSO_S_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k)
     {
         super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k);
-        super.InitializeSwarms();
+        super.InitializeSwarms(false);
     }
 
     //calculate the fitness of the PSO
-    @Override
     public void start()
     {
         for(int i = 0; i < maxLoops; i++)

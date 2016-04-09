@@ -12,31 +12,19 @@ import cpso.*;
  */
 public class CPSO_H_k extends CPSO {    
     
-    int loops;
-    boolean min = true;
-    private Swarm[] swarms; 
     private Swarm pso_swarm;
-    private double[] solution;
-    int dimensionSize;
-    int swarmSize;
-    double C1 = 0.5;
-    double C2 = 0.3;
-    double INERTIA = 0.3;
     double PSO_C1 = 0.5;
     double PSO_C2 = 0.3;
     double PSO_INTERTIA = 0.3;
-    int maxLoops;
-    int k = 0;
 
     public CPSO_H_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k)
     {
         super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k);
         pso_swarm = new Swarm(dimensionSize, PSO_C1, PSO_C2, PSO_INTERTIA, min, 1);
-        super.InitializeSwarms();
+        InitializeSwarms(false);
     }
 
     //calculate the fitness of the PSO
-    @Override
     public void start()
     {
         for(int i = 0; i < maxLoops; i++)
@@ -75,7 +63,7 @@ public class CPSO_H_k extends CPSO {
                         velocity[(s*k)+j] = swarms[s].getGlobalBest().getVelocity()[j];
                     }
                 }
-                pso_swarm.setRandomParticle(getSolution(), velocity);
+                pso_swarm.setRandomParticle(super.getSolution(), velocity);
             }
 
             // <editor-fold desc="PSO swarm"> 

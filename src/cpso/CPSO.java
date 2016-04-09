@@ -9,20 +9,55 @@ package cpso;
  *
  * @author Peter
  */
-public abstract class CPSO {
+public class CPSO {
     
-    public CPSO(){}
+    public int loops;
+    public boolean min = true;
+    public Swarm[] swarms; 
+    public double[] solution;
+    public int dimensionSize;
+    public int swarmSize;
+    public double C1 = 0.5;
+    public double C2 = 0.3;
+    public double INERTIA = 0.3;
+    public int maxLoops;
+    public int k;
+    
+    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k)
+    {
+        this.dimensionSize = dimensionSize;
+        this.maxLoops = maxLoops;
+        this.swarmSize = swarmSize;
+        this.INERTIA = Inertia;
+        this.C1 = c1;
+        this.C2 = c2;
+        if(k > dimensionSize) k = dimensionSize;
+        this.k = k;            
+        solution = new double[dimensionSize];
+    }
 
-    public Swarm[] InitializeSwarms(int k, double[] solution,
-            int dimensionSize, int swarmSize, double C1, double C2, double INERTIA, boolean min)
+    /**
+     * Creates the swarms
+     */
+    public void InitializeSwarms(boolean random)
     {
         int remaining = 0;
         int count = 0;
-        Swarm[] swarms = new Swarm[k];
+        swarms = new Swarm[k];
         for(int i = 0; i < k; i++)
         {
-            //select the random grouping into k subgroups
-            int width = (int)(Math.ceil((dimensionSize/k)));
+            int width = 0;
+            
+            if(!random)
+                width = (int)(Math.ceil((dimensionSize/k)));
+            else
+            {
+                //select the random grouping into k subgroups
+                int randomValue = (int)((Math.random())*((dimensionSize/k)-1))+1;                
+                width = remaining + randomValue;
+                remaining = (int)(Math.ceil((dimensionSize/k)-randomValue));
+            }
+            
             swarms[i] = new Swarm(swarmSize, C1, C2, INERTIA, min, width);
 
             for(int j = 0; j < width; j++)
@@ -30,11 +65,7 @@ public abstract class CPSO {
                 solution[count++] = swarms[i].getParticles()[0].getPosition()[j];
             }
         }
-        return swarms;
     }
-
-    //calculate the fitness of the PSO
-    public abstract void start();
 
     /**
      * Takes the new fitness and particle and determine if it is the new 
@@ -43,7 +74,7 @@ public abstract class CPSO {
      * @param p the particle that is being updated
      * @param swarm the swarm that particle is from
      */
-    public void UpdateBests(double fitness, Particle p, Swarm swarm, boolean min)
+    public void UpdateBests(double fitness, Particle p, Swarm swarm)
     {
         if (p.UpdatePersonalBest(fitness, p.getPosition(), min))  //update the personal best
             writeOutput("New Personal best for " + p + ": x=" + p.getPosition());
@@ -60,7 +91,7 @@ public abstract class CPSO {
      /**
      * Update to the best current solution by taking the global best values
      */
-    public void UpdateSolution(Swarm[] swarms, double[] solution)
+    public void UpdateSolution()
     {
         int index = 0;
         for(int i = 0; i < swarms.length; i++)
@@ -84,7 +115,7 @@ public abstract class CPSO {
      * @param position the current position
      * @return 
      */
-    public double CalculateFitness(int index, double[] position, int k, Swarm[] swarms, double[] solution)
+    public double CalculateFitness(int index, double[] position)
     {
         double fitness = 0;
         int count = 0;
@@ -107,7 +138,7 @@ public abstract class CPSO {
      * Returns the final fitness based on the solution function
      * @return fitness
      */
-    public double CalculateFinalFitness(int dimensionSize, double[] solution)
+    public double CalculateFinalFitness()
     {
         double fitness = 0;
         for(int i = 0; i < dimensionSize; i++)
@@ -120,5 +151,31 @@ public abstract class CPSO {
     public void writeOutput(String output)
     {
         System.out.println(output);
+    }
+       
+    /**
+     * @return the swarms
+     */
+    public Swarm[] getSwarms() {
+        return swarms;
+    }
+
+    /**
+     * @return the solution
+     */
+    public double[] getSolution() {
+        return solution;
+    }
+
+    /**
+     * @param solution the solution to set
+     * @throws exception incorrect solution size
+     */
+    public void setSolution(double[] solution) throws Exception {
+        if(solution.length == dimensionSize)
+        {
+            this.solution = solution;
+        }
+        else throw new Exception("Incorrect solution size");
     }
 }

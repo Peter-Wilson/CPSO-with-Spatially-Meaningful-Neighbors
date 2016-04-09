@@ -14,21 +14,6 @@ import cpso.*;
  */
 public class CPSO_R_k extends CPSO {    
     
-    int loops;
-    boolean min = true;
-    private Swarm[] swarms; 
-    private double[] solution;
-    int dimensionSize;
-    int swarmSize;
-    double C1 = 0.5;
-    double C2 = 0.3;
-    double INERTIA = 0.3;
-    double PSO_C1 = 0.5;
-    double PSO_C2 = 0.3;
-    double PSO_INTERTIA = 0.3;
-    int maxLoops;
-    int k = 0;
-
     /**
      * Create a CPSO_R_k
      * @param dimensionSize the overall dimension size
@@ -42,33 +27,10 @@ public class CPSO_R_k extends CPSO {
     public CPSO_R_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k)
     {
         super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k);
-        this.InitializeSwarms();
-    }
-
-    @Override
-    public void InitializeSwarms()
-    {
-        int remaining = 0;
-        int count = 0;
-        swarms = new Swarm[k];
-        solution = new double[dimensionSize];
-        for(int i = 0; i < k; i++)
-        {
-            //select the random grouping into k subgroups
-            int randomValue = (int)((Math.random())*((dimensionSize/k)-1))+1;                
-            int randomWidth = remaining + randomValue;
-            remaining = (int)(Math.ceil((dimensionSize/k)-randomValue));
-            swarms[i] = new Swarm(swarmSize, C1, C2, INERTIA, min, randomWidth);
-
-            for(int j = 0; j < randomWidth; j++)
-            {
-                solution[count++] = swarms[i].getParticles()[0].getPosition()[j];
-            }
-        }
+        InitializeSwarms(true);
     }
 
     //calculate the fitness of the PSO
-    @Override
     public void start()
     {
         for(int i = 0; i < maxLoops; i++)
