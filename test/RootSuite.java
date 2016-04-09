@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 
+import GUI.GUISuite;
+import cpso.CpsoSuite;
+import cpso_h_k.Cpso_h_kSuite;
+import cpso_r_k.Cpso_r_kSuite;
+import cpso_s.Cpso_sSuite;
+import cpso_s_k.Cpso_s_kSuite;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,7 +22,7 @@ import org.junit.runners.Suite;
  * @author pw12nb
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({GUI.GUISuite.class, cpso_s_k.Cpso_s_kSuite.class, cpso_s.Cpso_sSuite.class, cpso_h_k.Cpso_h_kSuite.class, cpso_r_k.Cpso_r_kSuite.class})
+@Suite.SuiteClasses({GUISuite.class, Cpso_s_kSuite.class, Cpso_r_kSuite.class, Cpso_sSuite.class, CpsoSuite.class, Cpso_h_kSuite.class})
 public class RootSuite {
 
     @BeforeClass

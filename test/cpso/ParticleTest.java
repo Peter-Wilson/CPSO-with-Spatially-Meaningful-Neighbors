@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cpso_s_k;
+package cpso;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Peter
+ * @author pw12nb
  */
 public class ParticleTest {
     
@@ -341,11 +341,11 @@ public class ParticleTest {
     public void testSetpBest_double_int() {
         System.out.println("setpBest");
         double pBest = 55.7;
-        double[] pBest_initial = {5.5,2.2,4};
+        double[] pBest_Default = {5.5,2.2,4};
         int index = 1;
         double[] startPosition = {4,2,6};
         Particle instance = new Particle(startPosition);
-        instance.setpBest(pBest_initial);
+        instance.setpBest(pBest_Default);
         instance.setpBest(pBest, index);
         assertEquals(instance.getpBest()[index], pBest, 0.0);
     }
