@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cpso_s;
+package cpso;
 
-import cpso_s.Particle;
 import java.util.Random;
 
 /**
@@ -21,13 +20,15 @@ public class Swarm
         double C1 = 1;
         double C2 = 1;
         double INERTIA = 1;
+        int k = 0;
 
-        public Swarm(int swarmSize, double C1, double C2, double INERTIA, boolean min)
+        public Swarm(int swarmSize, double C1, double C2, double INERTIA, boolean min, int k)
         {
             this.min = min;
             this.swarmSize = swarmSize;
             this.C1 = C1;
             this.C2 = C2;
+            this.k = k;
             this.INERTIA = INERTIA;
             InitializeParticles();
         }
@@ -40,7 +41,11 @@ public class Swarm
             Random rand = new Random();
             for (int i = 0; i < swarmSize; i++)
             {
-                particles[i] = new Particle((int)(rand.nextDouble()* 50)+1);
+                double[] position = new double[k];
+                for(int j = 0; j < k; j++)
+                    position[j] = (rand.nextDouble()* 50)+1;
+                
+                particles[i] = new Particle(position);
             }
         }
         
@@ -61,15 +66,19 @@ public class Swarm
             //for testing purposes remove the randomness
             if(test){ R1 = 1; R2 = 1; }
 
-            p.setVelocity((INERTIA * p.getVelocity()) +
-                         C1 * R1 * (p.getpBest() - p.getPosition()) +
-                         C2 * R2 * (getGlobalBest().getPosition() - p.getPosition()));
+            for(int i = 0; i < k; i ++)
+            p.setVelocity((INERTIA * p.getVelocity()[i]) +
+                         C1 * R1 * (p.getpBest()[i] - p.getPosition()[i]) +
+                         C2 * R2 * (getGlobalBest().getPosition()[i] - p.getPosition()[i]), i);
         }
 
         //Use the velocity to update the position
         public void UpdatePosition(Particle p)
         {
-            p.setPosition(p.getPosition() + p.getVelocity());
+            for(int i = 0; i < k; i++)
+            {
+                p.setPosition(p.getPosition()[i] + p.getVelocity()[i], i);
+            }
         }
 
         /**
@@ -91,6 +100,23 @@ public class Swarm
          */
         public void setGlobalBest(Particle globalBest) { 
             this.globalBest = globalBest;
+        }
+        
+        /**
+         * Sets the value of a random particle to the supplied value
+         * @param value 
+         */
+        public boolean setRandomParticle(double[] position, double[] velocity)
+        {
+            if(position.length != k || velocity.length != k)
+                return false;
+            else
+            {
+                int randomIndex = (int)(Math.random()*k);
+                particles[randomIndex].setPosition(position);
+                particles[randomIndex].setVelocity(velocity);
+                return true;
+            }
         }
 
     }
