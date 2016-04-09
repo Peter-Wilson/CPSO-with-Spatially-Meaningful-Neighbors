@@ -11,18 +11,6 @@ import cpso.*;
  * @author Peter
  */
 public class CPSO_S_k extends CPSO {    
-    
-    int loops;
-    boolean min = true;
-    private Swarm[] swarms; 
-    private double[] solution;
-    int dimensionSize;
-    int swarmSize;
-    double C1 = 0.5;
-    double C2 = 0.3;
-    double INERTIA = 0.3;
-    int maxLoops;
-    int k = 0;
 
     public CPSO_S_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k)
     {
@@ -39,7 +27,7 @@ public class CPSO_S_k extends CPSO {
             {
                 for(Particle p : swarms[s].getParticles()){ //for each particle
 
-                    double fitness = CalculateFitness(s, p.getPosition()); //calculate the new fitness
+                    double fitness = CalculateFitness(s, p.getPosition(), k); //calculate the new fitness
                     UpdateBests(fitness, p, swarms[s]);  
                 }
 

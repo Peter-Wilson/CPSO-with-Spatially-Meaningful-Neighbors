@@ -61,17 +61,5 @@ public class CPSO_STest {
         assertEquals(expectedC1, instance.C1, 0.0);
         assertEquals(expectedC2, instance.C2, 0.0);
     }
-
-    /**
-     * Test of start method, of class CPSO_S.
-     */
-    @Test
-    public void testStart() {
-        System.out.println("start");
-        CPSO_S instance = null;
-        instance.start();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
     
 }

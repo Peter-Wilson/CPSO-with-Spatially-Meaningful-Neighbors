@@ -349,22 +349,5 @@ public class ParticleTest {
         instance.setpBest(pBest, index);
         assertEquals(instance.getpBest()[index], pBest, 0.0);
     }
-
-    /**
-     * Test of UpdatePersonalBest method, of class Particle.
-     */
-    @Test
-    public void testUpdatePersonalBest() {
-        System.out.println("UpdatePersonalBest");
-        double newFitness = 0.0;
-        double[] newPosition = null;
-        boolean min = false;
-        Particle instance = null;
-        boolean expResult = false;
-        boolean result = instance.UpdatePersonalBest(newFitness, newPosition, min);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
     
 }

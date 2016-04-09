@@ -107,17 +107,5 @@ public class CPSO_R_kTest {
         
     }
 
-    /**
-     * Test of start method, of class CPSO_R_k.
-     */
-    @Test
-    public void testStart() {
-        System.out.println("start");
-        CPSO_R_k instance = null;
-        instance.start();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
     
 }

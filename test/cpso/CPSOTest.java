@@ -103,33 +103,6 @@ public class CPSOTest {
     }
 
     /**
-     * Test of UpdateBests method, of class CPSO.
-     */
-    @Test
-    public void testUpdateBests() {
-        System.out.println("UpdateBests");
-        double fitness = 0.0;
-        Particle p = null;
-        Swarm swarm = null;
-        CPSO instance = null;
-        instance.UpdateBests(fitness, p, swarm);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of UpdateSolution method, of class CPSO.
-     */
-    @Test
-    public void testUpdateSolution() {
-        System.out.println("UpdateSolution");
-        CPSO instance = null;
-        instance.UpdateSolution();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of CalculateFitness method, of class CPSO_S.
      */
     @Test
@@ -138,11 +111,12 @@ public class CPSOTest {
         int index = 0;
         int k = 6;
         CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        instance.InitializeSwarms(false);
         double[] testSolution = {1.0,1.0,1.0,1.0,1.0,1.0};
         instance.setSolution(testSolution);
         double expResult = 0.0;
         double[] position = {1.0};
-        double result = instance.CalculateFitness(3, position);
+        double result = instance.CalculateFitness(3, position, k);
         assertEquals(expResult, result, 0.0);
     }
 
@@ -157,10 +131,11 @@ public class CPSOTest {
         double[] position = {50.0};
         int k = 6;
         CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        instance.InitializeSwarms(false);
         double[] testSolution = {12.0,3.2,6.2,8.0,14.1,1.0};
         instance.setSolution(testSolution);
         double expResult = 11.6253394463;
-        double result = instance.CalculateFitness(index, position);
+        double result = instance.CalculateFitness(index, position, k);
         assertEquals(expResult, result, 0.1);
     }
     
@@ -174,10 +149,11 @@ public class CPSOTest {
         double[] position = {0.0};
         int k = 6;
         CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        instance.InitializeSwarms(false);
         double[] testSolution = {0.0,0.0,0.0,0.0,0.0,0.0};
         instance.setSolution(testSolution);
         double expResult = Double.NEGATIVE_INFINITY;
-        double result = instance.CalculateFitness(index, position);
+        double result = instance.CalculateFitness(index, position, k);
         assertEquals(expResult, result, 0.1);
     }
     
@@ -191,10 +167,11 @@ public class CPSOTest {
         double[] position = {-50.0};
         int k = 6;
         CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        instance.InitializeSwarms(false);
         double[] testSolution = {-12.0,-3.2,-6.2,-8.0,-14.1,-12.7};
         instance.setSolution(testSolution);
         double expResult = Double.NaN;
-        double result = instance.CalculateFitness(index, position);
+        double result = instance.CalculateFitness(index, position, k);
         assertEquals(expResult, result, 0.1);
     }
 
@@ -208,6 +185,7 @@ public class CPSOTest {
         double[] position = {1.0, 1.0};
         int k = 2;
         CPSO instance = new CPSO(5, 5, 20, 0.5, 0.3, 0.2, k);
+        instance.InitializeSwarms(false);
         double[] testSolution = {1.0,1.0,1.0,1.0,1.0};
         instance.setSolution(testSolution);
         double expResult = 0.0;
@@ -224,11 +202,12 @@ public class CPSOTest {
         double[] position = {50.0, 1.0};
         int k = 2;
         CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        instance.InitializeSwarms(false);
         int expResult = k;
         Swarm[] result = instance.getSwarms();
         assertEquals(expResult, result.length);
         
-        for(int i = 0; i < result.length/k; i++)
+        for(int i = 0; i < expResult; i++)
         {
             assertNotNull(result[i]);
         }
@@ -244,6 +223,7 @@ public class CPSOTest {
         double[] position = {50.0, 1.0};
         int k = 2;
         CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        instance.InitializeSwarms(false);
         
         double[] result = instance.getSolution();
         
@@ -270,6 +250,7 @@ public class CPSOTest {
         double[] position = {50.0, 1.0};
         int k = 2;
         CPSO instance = new CPSO(5, 5, 20, 0.5, 0.3, 0.2, k);
+        instance.InitializeSwarms(false);
         
         // test setting a correct size solution
         instance.setSolution(solution);

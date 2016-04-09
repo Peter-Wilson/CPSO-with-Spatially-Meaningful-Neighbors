@@ -20,7 +20,7 @@ public class CPSO_H_k extends CPSO {
     public CPSO_H_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k)
     {
         super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k);
-        pso_swarm = new Swarm(dimensionSize, PSO_C1, PSO_C2, PSO_INTERTIA, min, 1);
+        pso_swarm = new Swarm(dimensionSize, PSO_C1, PSO_C2, PSO_INTERTIA, min, dimensionSize);
         InitializeSwarms(false);
     }
 
@@ -38,7 +38,7 @@ public class CPSO_H_k extends CPSO {
             {                    
                 for(Particle p : swarms[s].getParticles()){ //for each particle
 
-                    double fitness = CalculateFitness(s, p.getPosition()); //calculate the new fitness
+                    double fitness = CalculateFitness(s, p.getPosition(), k); //calculate the new fitness
                     UpdateBests(fitness, p, swarms[s]);   
                 }
 
@@ -72,7 +72,7 @@ public class CPSO_H_k extends CPSO {
                 /////////////////////////////////////////                               
             for(Particle p : pso_swarm.getParticles()){ //for each particle
 
-                double fitness = CalculateFitness(0, p.getPosition()); //calculate the new fitness
+                double fitness = CalculateFitness(0, p.getPosition(), 1); //calculate the new fitness
                 UpdateBests(fitness, p, pso_swarm);                    
             }
 

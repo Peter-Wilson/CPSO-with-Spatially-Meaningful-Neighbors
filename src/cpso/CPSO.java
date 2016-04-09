@@ -115,22 +115,45 @@ public class CPSO {
      * @param position the current position
      * @return 
      */
-    public double CalculateFitness(int index, double[] position)
+    public double CalculateFitness(int index, double[] position, int k)
     {
         double fitness = 0;
         int count = 0;
-        for(int i = 0; i < k; i++)
+        if(k == 1)
         {
-            if(i == index)
-                for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
-                {
-                    fitness += Math.log(position[j]);
-                    count++;
-                }
-            else
-                for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
-                    fitness += Math.log(solution[count++]);
+            for(int i = 0; i < position.length; i++)
+            {
+                fitness += Math.log(position[i]);
+            }
         }
+        else
+        {
+            for(int i = 0; i < k; i++)
+            {
+                if(i == index)
+                    for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
+                    {
+                        fitness += Math.log(position[j]);
+                        count++;
+                    }
+                else
+                    for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
+                        fitness += Math.log(solution[count++]);
+            }
+        }
+        return fitness;   
+    }
+    
+    /**
+     * Calculate the fitness of the current swarm
+     * @param position the current position
+     * @return 
+     */
+    public double CalculateFitness(int index, double[] position, Swarm s)
+    {
+        double fitness = 0;
+        int count = 0;
+        
         return fitness;   
     }
 
