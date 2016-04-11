@@ -152,19 +152,6 @@ public class CPSO {
         }
         return fitness;   
     }
-    
-    /**
-     * Calculate the fitness of the current swarm
-     * @param position the current position
-     * @return 
-     */
-    public double CalculateFitness(int index, double[] position, Swarm s)
-    {
-        double fitness = 0;
-        int count = 0;
-        
-        return fitness;   
-    }
 
     /**
      * Returns the final fitness based on the solution function
