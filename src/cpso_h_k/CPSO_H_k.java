@@ -38,7 +38,7 @@ public class CPSO_H_k extends CPSO {
             {                    
                 for(Particle p : swarms[s].getParticles()){ //for each particle
 
-                    double fitness = CalculateFitness(s, p.getPosition(), k); //calculate the new fitness
+                    double fitness = CalculateFitness(s, p.getPosition(), numSwarms); //calculate the new fitness
                     UpdateBests(fitness, p, swarms[s]);   
                 }
 
@@ -58,9 +58,9 @@ public class CPSO_H_k extends CPSO {
                 double[] velocity = new double[dimensionSize];
                 for(int s = 0; s < swarms.length; s++)
                 {
-                    for(int j = 0; j < k; j++)
+                    for(int j = 0; j < numSwarms; j++)
                     {
-                        velocity[(s*k)+j] = swarms[s].getGlobalBest().getVelocity()[j];
+                        velocity[(s*numSwarms)+j] = swarms[s].getGlobalBest().getVelocity()[j];
                     }
                 }
                 pso_swarm.setRandomParticle(super.getSolution(), velocity);
@@ -90,12 +90,12 @@ public class CPSO_H_k extends CPSO {
                 for(int s = 0; s < swarms.length; s++)
                 {
                     //select a random particle to replace with the pso global best
-                    double[] value = new double[k];
-                    double[] velocity = new double[k];
-                    for(int j = 0; j < k; j++)
+                    double[] value = new double[numSwarms];
+                    double[] velocity = new double[numSwarms];
+                    for(int j = 0; j < numSwarms; j++)
                     {
-                        value[j] = pso_swarm.getGlobalBest().getPosition()[(s*k)+j];
-                        velocity[j] = pso_swarm.getGlobalBest().getVelocity()[(s*k)+j];
+                        value[j] = pso_swarm.getGlobalBest().getPosition()[(s*numSwarms)+j];
+                        velocity[j] = pso_swarm.getGlobalBest().getVelocity()[(s*numSwarms)+j];
                     }
                     swarms[s].setRandomParticle(value, velocity);
                 }

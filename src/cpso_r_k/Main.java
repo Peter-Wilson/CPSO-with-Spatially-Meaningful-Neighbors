@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         int dimensionSize = 6;
-        CPSO_R_k cpso = new CPSO_R_k(dimensionSize, 200, 20, 0.5, 0.3, 0.2,2);
+        CPSO_R_k cpso = new CPSO_R_k(dimensionSize, 200, 20, 0.5, 0.3, 0.2,3);
         cpso.start();
     }
     

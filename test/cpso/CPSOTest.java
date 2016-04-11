@@ -63,7 +63,7 @@ public class CPSOTest {
      * Test of InitializeSwarms method, of class CPSO.
      */
     @Test
-    public void testInitializeSwarms() {
+    public void testInitializeSwarms1() {
         System.out.println("Initialize Swarms");
         int expectedDimensions = 6;
         int expectedMaxLoops = 10;
@@ -80,7 +80,7 @@ public class CPSOTest {
         //ensure it is the correct size
         assertEquals(k, swarms.length);        
         
-        for(int i = 0; i < swarms.length/k; i++){
+        for(int i = 0; i < swarms.length; i++){
             //ensure the swarms have been initialized
             assertNotNull(swarms[i]);
             assertEquals(expectedSwarmSize, swarms[i].getParticles().length);
@@ -95,6 +95,139 @@ public class CPSOTest {
         double value = 0;
         for(int i = 0; i < solution.length; i++){
             //ensure the swarms have been initialized
+            assertNotEquals(solution[i], 0.0);
+            value += solution[i];
+        }
+        
+        //ensure the values are set
+        assertNotEquals(value, 0);
+    }
+    
+    /**
+     * Test of InitializeSwarms method, of class CPSO.
+     */
+    @Test
+    public void testInitializeSwarms2() {
+        System.out.println("Initialize Swarms for size 1");
+        int expectedDimensions = 6;
+        int expectedMaxLoops = 10;
+        int expectedSwarmSize = 20;
+        double expectedInertia = 0.5;
+        double expectedC1 = 0.3;
+        double expectedC2 = 0.2;
+        int k = 1;
+        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k);
+        instance.InitializeSwarms(false);
+        
+        Swarm[] swarms = instance.getSwarms();
+        
+        //ensure it is the correct size
+        assertEquals(k, swarms.length);        
+        
+        for(int i = 0; i < swarms.length; i++){
+            //ensure the swarms have been initialized
+            assertNotNull(swarms[i]);
+            assertEquals(expectedSwarmSize, swarms[i].getParticles().length);
+        }
+        
+        double[] solution = instance.getSolution();
+        
+        
+        //ensure it is the correct size
+        assertEquals(expectedDimensions, solution.length);  
+        
+        double value = 0;
+        for(int i = 0; i < solution.length; i++){
+            //ensure the swarms have been initialized
+            assertNotEquals(solution[i], 0.0);
+            value += solution[i];
+        }
+        
+        //ensure the values are set
+        assertNotEquals(value, 0);
+    }
+    
+    /**
+     * Test of InitializeSwarms method, of class CPSO.
+     */
+    @Test
+    public void testInitializeSwarms3() {
+        System.out.println("Initialize Swarms for random sizes");
+        int expectedDimensions = 6;
+        int expectedMaxLoops = 10;
+        int expectedSwarmSize = 20;
+        double expectedInertia = 0.5;
+        double expectedC1 = 0.3;
+        double expectedC2 = 0.2;
+        int k = 3;
+        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k);
+        instance.InitializeSwarms(true);
+        
+        Swarm[] swarms = instance.getSwarms();
+        
+        //ensure it is the correct size
+        assertEquals(k, swarms.length);        
+        
+        for(int i = 0; i < swarms.length; i++){
+            //ensure the swarms have been initialized
+            assertNotNull(swarms[i]);
+            assertEquals(expectedSwarmSize, swarms[i].getParticles().length);
+        }
+        
+        double[] solution = instance.getSolution();
+        
+        
+        //ensure it is the correct size
+        assertEquals(expectedDimensions, solution.length);  
+        
+        double value = 0;
+        for(int i = 0; i < solution.length; i++){
+            //ensure the swarms have been initialized
+            assertNotEquals(solution[i], 0.0);
+            value += solution[i];
+        }
+        
+        //ensure the values are set
+        assertNotEquals(value, 0);
+    }
+    
+    /**
+     * Test of InitializeSwarms method, of class CPSO.
+     */
+    @Test
+    public void testInitializeSwarms4() {
+        System.out.println("Initialize Swarms of uneven size");
+        int expectedDimensions = 5;
+        int expectedMaxLoops = 10;
+        int expectedSwarmSize = 20;
+        double expectedInertia = 0.5;
+        double expectedC1 = 0.3;
+        double expectedC2 = 0.2;
+        int k = 2;
+        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k);
+        instance.InitializeSwarms(false);
+        
+        Swarm[] swarms = instance.getSwarms();
+        
+        //ensure it is the correct size
+        assertEquals(k, swarms.length);        
+        
+        for(int i = 0; i < swarms.length; i++){
+            //ensure the swarms have been initialized
+            assertNotNull(swarms[i]);
+            assertEquals(expectedSwarmSize, swarms[i].getParticles().length);
+        }
+        
+        double[] solution = instance.getSolution();
+        
+        
+        //ensure it is the correct size
+        assertEquals(expectedDimensions, solution.length);  
+        
+        double value = 0;
+        for(int i = 0; i < solution.length; i++){
+            //ensure the swarms have been initialized
+            assertNotEquals(solution[i], 0.0);
             value += solution[i];
         }
         
