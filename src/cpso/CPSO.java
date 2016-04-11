@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The skeleton CPSO program
+ * This is extended by all the variants
  */
 package cpso;
 
@@ -21,9 +20,9 @@ public class CPSO {
     public double C2 = 0.3;
     public double INERTIA = 0.3;
     public int maxLoops;
-    public int k;
+    public int numSwarms;
     
-    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k)
+    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms)
     {
         this.dimensionSize = dimensionSize;
         this.maxLoops = maxLoops;
@@ -31,8 +30,8 @@ public class CPSO {
         this.INERTIA = Inertia;
         this.C1 = c1;
         this.C2 = c2;
-        if(k > dimensionSize) k = dimensionSize;
-        this.k = k;            
+        if(numSwarms > dimensionSize) numSwarms = dimensionSize;
+        this.numSwarms = numSwarms;            
         solution = new double[dimensionSize];
     }
 
@@ -43,19 +42,29 @@ public class CPSO {
     {
         int remaining = 0;
         int count = 0;
-        swarms = new Swarm[k];
-        for(int i = 0; i < k; i++)
+        swarms = new Swarm[numSwarms];
+        for(int i = 0; i < numSwarms; i++)
         {
             int width = 0;
             
             if(!random)
-                width = (int)(Math.ceil((dimensionSize/k)));
+            {
+                if(i%numSwarms == 0)
+                    width = (int)(Math.ceil(((double)dimensionSize/numSwarms)));
+                else
+                    width = (int)(Math.floor(((double)dimensionSize/numSwarms)));
+            }
             else
             {
-                //select the random grouping into k subgroups
-                int randomValue = (int)((Math.random())*((dimensionSize/k)-1))+1;                
-                width = remaining + randomValue;
-                remaining = (int)(Math.ceil((dimensionSize/k)-randomValue));
+                if(i == numSwarms-1)
+                    width = (int)(Math.ceil(((double)dimensionSize/numSwarms)))+remaining;
+                else
+                {
+                    //select the random grouping into k subgroups
+                    int randomValue = (int)((Math.random())*(((double)dimensionSize/numSwarms)))+1;                
+                    width = remaining + randomValue;
+                    remaining = (int)(Math.ceil(((double)dimensionSize/numSwarms)-randomValue));
+                }
             }
             
             swarms[i] = new Swarm(swarmSize, C1, C2, INERTIA, min, width);
@@ -115,11 +124,11 @@ public class CPSO {
      * @param position the current position
      * @return 
      */
-    public double CalculateFitness(int index, double[] position, int k)
+    public double CalculateFitness(int index, double[] position, int numSwarms)
     {
         double fitness = 0;
         int count = 0;
-        if(k == 1)
+        if(numSwarms == 1)
         {
             for(int i = 0; i < position.length; i++)
             {
@@ -128,7 +137,7 @@ public class CPSO {
         }
         else
         {
-            for(int i = 0; i < k; i++)
+            for(int i = 0; i < numSwarms; i++)
             {
                 if(i == index)
                     for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
@@ -141,19 +150,6 @@ public class CPSO {
                         fitness += Math.log(solution[count++]);
             }
         }
-        return fitness;   
-    }
-    
-    /**
-     * Calculate the fitness of the current swarm
-     * @param position the current position
-     * @return 
-     */
-    public double CalculateFitness(int index, double[] position, Swarm s)
-    {
-        double fitness = 0;
-        int count = 0;
-        
         return fitness;   
     }
 
