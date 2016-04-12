@@ -35,13 +35,15 @@ public class CPSO_H_k extends CPSO {
                 /////    Update the CPSO Swarms    //////
                 /////////////////////////////////////////
             for (int s = 0; s < swarms.length; s++) //iterate through swarms
-            {                    
+            {      
+                // calculate delaunay neighbours
                 for(Particle p : swarms[s].getParticles()){ //for each particle
 
                     double fitness = CalculateFitness(s, p.getPosition(), numSwarms); //calculate the new fitness
                     UpdateBests(fitness, p, swarms[s]);   
+                    //get closest neighbour
                 }
-
+                
                 for (Particle p : swarms[s].getParticles()) //move the particles
                 {
                     swarms[s].UpdateVelocity(p);
