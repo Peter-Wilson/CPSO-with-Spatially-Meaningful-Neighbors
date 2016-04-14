@@ -29,10 +29,10 @@ public class Display extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnCPSOS = new javax.swing.JButton();
+        btnCPSOSK = new javax.swing.JButton();
+        btnCPSOHK = new javax.swing.JButton();
+        btnCPSORK = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tfDimensionSize = new javax.swing.JTextField();
@@ -51,53 +51,74 @@ public class Display extends javax.swing.JPanel {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        taOutput = new javax.swing.JTextArea();
 
-        jButton1.setText("CPSO-S");
+        btnCPSOS.setText("CPSO-S");
+        btnCPSOS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCPSOSActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("CPSO-Sk");
+        btnCPSOSK.setText("CPSO-Sk");
+        btnCPSOSK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCPSOSKActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("CPSO-Hk");
+        btnCPSOHK.setText("CPSO-Hk");
+        btnCPSOHK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCPSOHKActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("CPSO-Rk");
+        btnCPSORK.setText("CPSO-Rk");
+        btnCPSORK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCPSORKActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Dimension Size:");
 
         jLabel2.setText("Max Loops:");
 
-        tfDimensionSize.setText("jTextField1");
+        tfDimensionSize.setText("6");
 
-        tfMaxLoops.setText("jTextField1");
+        tfMaxLoops.setText("200");
 
         jLabel3.setText("# of Particles:");
 
         jLabel4.setText("Inertia:");
 
-        tfNumParticles.setText("jTextField1");
+        tfNumParticles.setText("20");
 
-        tfInertia.setText("jTextField1");
+        tfInertia.setText("0.5");
 
         jLabel5.setText("Delaunay Traingulate?");
 
-        tfNumSwarms.setText("jTextField1");
+        tfNumSwarms.setText("6");
 
         jLabel6.setText("PBest Influence (0-1):");
 
         jLabel7.setText("GBest Influence (0-1):");
 
-        tfC1.setText("jTextField1");
+        tfC1.setText("0.3");
 
-        tfC2.setText("jTextField1");
+        tfC2.setText("0.2");
 
         jLabel8.setText("# of Swarms to divide into:");
 
+        jRadioButton1.setSelected(true);
         jRadioButton1.setText("Yes");
 
         jRadioButton2.setText("No");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        taOutput.setColumns(20);
+        taOutput.setRows(5);
+        jScrollPane1.setViewportView(taOutput);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -113,10 +134,10 @@ public class Display extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(btnCPSOS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                                    .addComponent(btnCPSOSK, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                                     .addComponent(tfDimensionSize)
                                     .addComponent(tfMaxLoops)))
                             .addGroup(layout.createSequentialGroup()
@@ -130,9 +151,9 @@ public class Display extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnCPSOHK, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnCPSORK, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -198,21 +219,37 @@ public class Display extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnCPSORK, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCPSOHK, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnCPSOSK, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                        .addComponent(btnCPSOS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCPSOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCPSOSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCPSOSActionPerformed
+
+    private void btnCPSOSKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCPSOSKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCPSOSKActionPerformed
+
+    private void btnCPSOHKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCPSOHKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCPSOHKActionPerformed
+
+    private void btnCPSORKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCPSORKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCPSORKActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnCPSOHK;
+    private javax.swing.JButton btnCPSORK;
+    private javax.swing.JButton btnCPSOS;
+    private javax.swing.JButton btnCPSOSK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -224,7 +261,7 @@ public class Display extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea taOutput;
     private javax.swing.JTextField tfC1;
     private javax.swing.JTextField tfC2;
     private javax.swing.JTextField tfDimensionSize;

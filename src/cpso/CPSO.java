@@ -4,6 +4,8 @@
  */
 package cpso;
 
+import javax.swing.JTextArea;
+
 /**
  *
  * @author Peter
@@ -21,6 +23,7 @@ public class CPSO {
     public double INERTIA = 0.3;
     public int maxLoops;
     public int numSwarms;
+    JTextArea screen;
     
     public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms)
     {
@@ -33,6 +36,21 @@ public class CPSO {
         if(numSwarms > dimensionSize) numSwarms = dimensionSize;
         this.numSwarms = numSwarms;            
         solution = new double[dimensionSize];
+        screen = null;
+    }
+    
+    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, JTextArea op)
+    {
+        this.dimensionSize = dimensionSize;
+        this.maxLoops = maxLoops;
+        this.swarmSize = swarmSize;
+        this.INERTIA = Inertia;
+        this.C1 = c1;
+        this.C2 = c2;
+        if(numSwarms > dimensionSize) numSwarms = dimensionSize;
+        this.numSwarms = numSwarms;            
+        solution = new double[dimensionSize];
+        screen = op;
     }
 
     /**
@@ -169,7 +187,10 @@ public class CPSO {
 
     public void writeOutput(String output)
     {
-        System.out.println(output);
+        if(screen == null)
+            System.out.println(output);
+        else
+            screen.append("\n "+output);
     }
        
     /**
