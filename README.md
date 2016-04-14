@@ -11,4 +11,4 @@ Currently has 135 tests
 3. CPSO-Hk
 4. CPSO-Rk
 
-## Wiki detailing the algorithms: https://github.com/Peter-Wilson/CPSO/wiki/CPSO-Wiki-Page
+## Wiki detailing the algorithms: https://github.com/Peter-Wilson/CPSO/wiki
