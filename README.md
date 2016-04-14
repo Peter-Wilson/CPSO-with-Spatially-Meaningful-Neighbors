@@ -10,5 +10,8 @@ Currently has 135 tests
 2. CPSO-Sk
 3. CPSO-Hk
 4. CPSO-Rk
+ 
+# User Interface Mockup
+[[https://github.com/Peter-Wilson/CPSO/blob/develop/UI%20Mockup/UI%20mockup.png|alt=ui mockup]]
 
 ## Wiki detailing the algorithms: https://github.com/Peter-Wilson/CPSO/wiki
