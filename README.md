@@ -12,6 +12,6 @@ Currently has 135 tests
 4. CPSO-Rk
  
 # User Interface Mockup
-[[https://github.com/Peter-Wilson/CPSO/blob/develop/UI%20Mockup/UI%20mockup.png|alt=ui mockup]]
+![ui mockup](https://github.com/Peter-Wilson/CPSO/blob/develop/UI%20Mockup/UI%20mockup.png)
 
 ## Wiki detailing the algorithms: https://github.com/Peter-Wilson/CPSO/wiki
