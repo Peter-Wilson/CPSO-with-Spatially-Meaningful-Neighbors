@@ -126,4 +126,10 @@ public class Particle {
             }
             return false;
     }
+    
+    public boolean inside(Particle a, Particle b, Particle c)
+    {
+        //TODO: finish
+        return false;
+    }
 }
