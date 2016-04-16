@@ -41,20 +41,42 @@ public class DulaunayTriangulation {
         return adjMatrix;
     }
     
-    static int[][] convexHull(Particle[] particles, int[] extraDimension, int[][] ajdMatrix)
+    /**
+     * Computes the convex hull of the specified list and returns the list of connected 
+     * faces (ArrayList of Simplexes)
+     * @param particles the list of points to compute the convex hull
+     * @param extraDimension the newly computed dimension
+     * @return the list of connected faces in the convex hull in an arraylist
+     */
+    static ArrayList<ParticleSimplex> convexHull(Particle[] particles, int[] extraDimension)
     {
-        //find the furthest d+1 points
         ArrayList<Particle> used = new ArrayList<Particle>();
-        ArrayList<Particle> outside = new ArrayList<Particle>();
+        
+        //find the 'edge' points (the furthest d+1 points)
         Particle[] points = findFurthest(particles);
+        
         //create a simplex of d+1 points
+        ArrayList<ParticleSimplex> faces = new ArrayList<ParticleSimplex>();
+        ParticleSimplex startSimplex = new ParticleSimplex(points);
+        faces.add(startSimplex);
         
         //for each facet F
+        for(int f = 0; f < faces.size(); f++)
+        {
             //for each unassigned point p
+            for(int p = 0; p < particles.length; p++)
+            {
                 //if p is above F
+                if(faces.get(f).particleAbove(particles[p], extraDimension[p]))
+                {
                     //assign p to F's outside set
+                    faces.get(f).addToOutsideList(particles[p]);
+                }
+            }
+        }
         
         //for each facet F with a non-empty outside set
+        
             //select the furthest point p on F's outside set
             //initialize the visible set V to F
             //for all unvisited neighbors N of facets in V
@@ -70,7 +92,7 @@ public class DulaunayTriangulation {
                         //assign q to F's outside set
             //delete the facets in V
         
-        return ajdMatrix;
+        return faces;
     }
     
     static Particle[] findFurthest(Particle[] p)
