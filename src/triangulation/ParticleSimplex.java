@@ -55,11 +55,20 @@ public class ParticleSimplex {
     {
         outsideList.remove(p);
     }
+    
+    public int outsideLength()
+    {
+        return outsideList.size();
+    }
             
     public boolean particleAbove(Particle p, int extraDimension)
     {
         //TODO: return true if the particle stated is above the current simplex
         return true;
+    }
+
+    Particle getFurthestPoint() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

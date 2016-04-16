@@ -76,8 +76,13 @@ public class DulaunayTriangulation {
         }
         
         //for each facet F with a non-empty outside set
-        
+        for(int f = 0; f < faces.size(); f++)
+        {
+            if(faces.get(f).outsideLength() <= 0) continue;
+            
             //select the furthest point p on F's outside set
+            Particle p = faces.get(f).getFurthestPoint();
+            
             //initialize the visible set V to F
             //for all unvisited neighbors N of facets in V
                 //if p is above N
@@ -91,6 +96,7 @@ public class DulaunayTriangulation {
                     //if q is above F'
                         //assign q to F's outside set
             //delete the facets in V
+        }
         
         return faces;
     }
