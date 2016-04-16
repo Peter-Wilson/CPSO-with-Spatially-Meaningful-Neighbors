@@ -41,7 +41,7 @@ public class DulaunayTriangulation {
         return adjMatrix;
     }
     
-    static int[][] convexHull(Particle[] particles, int[] extraDimension)
+    static int[][] convexHull(Particle[] particles, int[] extraDimension, int[][] ajdMatrix)
     {
         //find the furthest d+1 points
         ArrayList<Particle> used = new ArrayList<Particle>();
@@ -69,6 +69,8 @@ public class DulaunayTriangulation {
                     //if q is above F'
                         //assign q to F's outside set
             //delete the facets in V
+        
+        return ajdMatrix;
     }
     
     static Particle[] findFurthest(Particle[] p)
