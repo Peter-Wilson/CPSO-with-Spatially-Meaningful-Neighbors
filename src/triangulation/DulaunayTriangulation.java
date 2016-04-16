@@ -6,6 +6,7 @@
 package triangulation;
 
 import cpso.Particle;
+import java.util.ArrayList;
 
 /**
  *
@@ -36,83 +37,46 @@ public class DulaunayTriangulation {
             }
         }
         
-        //Find the endpoints
-        int start = 0;
-        int end = 0;
-        
-        //calculate convex hull on these points
-        //quick hull works with any dimensionality
-        QuickHull(start, end, extraDimension, particles, adjMatrix);
-        QuickHull(end, start, extraDimension, particles, adjMatrix);
         
         return adjMatrix;
     }
     
-    /**
-     * an nlogn algorithm that computes the quick hull in any dimension
-     * @param start the index of the start particle
-     * @param end the index of the end particle
-     * @param extraDimension the pre-computed extra dimension values
-     * @param particles the list of particles to scan through
-     * @param adjMatrix the adjacency matrix that will be updated
-     */
-    private static void QuickHull(int start, int end, int[] extraDimension, Particle[] particles, int[][] adjMatrix)
+    static int[][] convexHull(Particle[] particles, int[] extraDimension)
     {
-	int max = 0;
-	double maxDistance = Double.MIN_VALUE;
-	double d, minD, current;
+        //find the furthest d+1 points
+        ArrayList<Particle> used = new ArrayList<Particle>();
+        ArrayList<Particle> outside = new ArrayList<Particle>();
+        Particle[] points = findFurthest(particles);
+        //create a simplex of d+1 points
         
-	for(int i = 0; i < particles.length; i++)
-	{
-		//if the point is inbetween the line and is not drawn yet
-		if (point->drawn == 0 && i != start && i != end)
-		{
-			d = distancePointToLine(particles[i].getPosition(), particles[start].getPosition(), particles[end].getPosition());
-
-			if (d == 0)
-			{
-				//check if collinear point
-				//if slope is infinity, use the points to determine if it is in between
-				if (line->start->y - point->y == 0 && (Min(line->start->x, line->end->x) > point->x || Max(line->start->x, line->end->x) < point->x))
-					continue; 
-				//if slope is 0, use the points
-				else if (line->start->x - point->x == 0 && (Min(line->start->y, line->end->y) > point->y || Max(line->start->y, line->end->y) < point->y))
-					continue;
-				//otherwise, use opposing slopes to determine if in the middle
-				else if ((((line->start->x - point->x) / (line->start->y - point->y)) + ((line->end->x - point->x) / (line->end->y - point->y))) != 0)
-					continue;
-
-			}
-			if(d > maxDistance)
-			{
-				max = i;
-				maxDistance = d;
-			}
-		}
-	}
-
-	if(maxDistance >= 0)
-	{
-		edge* one = AddEdge(line->start, max);
-		edge* two = AddEdge(max, line->end);
-		RemoveEdge(line);
-
-		Quick_Hull(head, one);
-		Quick_Hull(head, two);
-	}
-	/*
-	else if (maxDistance == 0)
-	{
-		if ()
-		{
-			edge* one = AddEdge(line->start, max);
-			edge* two = AddEdge(max, line->end);
-			RemoveEdge(line);
-
-			Quick_Hull(head, one);
-			Quick_Hull(head, two);
-		}
-	}*/
+        //for each facet F
+            //for each unassigned point p
+                //if p is above F
+                    //assign p to F's outside set
+        
+        //for each facet F with a non-empty outside set
+            //select the furthest point p on F's outside set
+            //initialize the visible set V to F
+            //for all unvisited neighbors N of facets in V
+                //if p is above N
+                    //add N to V
+            //the boundary of V is the set of horizon ridges H
+            //for each ridge R in H
+                //create a new facet from R and p
+                //link the new facet to its neighbors
+            //for each new facet F'
+                //for each unassigned point q in an outside set of a facet in V
+                    //if q is above F'
+                        //assign q to F's outside set
+            //delete the facets in V
+    }
+    
+    static Particle[] findFurthest(Particle[] p)
+    {
+        Particle[] points = new Particle[p[0].getPosition().length+1];
+        //find the d+1 outlier points
+        
+        return points;
     }
     
     // dist_Point_to_Line(): get the distance of a point to a line
