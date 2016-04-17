@@ -84,18 +84,29 @@ public class DulaunayTriangulation {
             Particle p = faces.get(f).getFurthestPoint();
             
             //initialize the visible set V to F
+            ArrayList<ParticleSimplex> visibleSet = new ArrayList<ParticleSimplex>();
+            visibleSet.add(faces.get(f));
+            ArrayList<ParticleSimplex> neighbors = getNeighbors(faces.get(f), faces);
+            
             //for all unvisited neighbors N of facets in V
-                //if p is above N
-                    //add N to V
-            //the boundary of V is the set of horizon ridges H
-            //for each ridge R in H
-                //create a new facet from R and p
-                //link the new facet to its neighbors
-            //for each new facet F'
-                //for each unassigned point q in an outside set of a facet in V
-                    //if q is above F'
-                        //assign q to F's outside set
-            //delete the facets in V
+            for(int i = 0; i < neighbors.size(); i++)
+            {
+                if(neighbors[i].above(p))
+                {
+                    //if p is above N
+                        //add N to V
+                }
+                
+                //the boundary of V is the set of horizon ridges H
+                //for each ridge R in H
+                    //create a new facet from R and p
+                    //link the new facet to its neighbors
+                //for each new facet F'
+                    //for each unassigned point q in an outside set of a facet in V
+                        //if q is above F'
+                            //assign q to F's outside set
+                //delete the facets in V
+            }
         }
         
         return faces;
