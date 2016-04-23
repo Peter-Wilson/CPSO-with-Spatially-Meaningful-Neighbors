@@ -68,11 +68,44 @@ public class ParticleSimplex {
     }
 
     Particle getFurthestPoint() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       double maxDistance = Double.MIN_VALUE;
+       Particle furthestParticle = null;
+       
+       for(Particle p : outsideList)
+       {
+          double distance = getDistance(p, this.getPoints());
+          if(distance > maxDistance)
+          {
+              maxDistance = distance;
+              furthestParticle = p;
+          }
+       }
+       return furthestParticle;
     }
 
     boolean above(Particle p) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private double getDistance(Particle p, Particle[] points) {
+        if(points.length == 1)
+        {
+            return EuclideanDistance(p,points[0]);
+        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private double EuclideanDistance(Particle p, Particle point) {
+        int distance = 0;
+        double[] pointPosition = point.getPosition();
+        double[] pPosition = p.getPosition();
+        
+        for(int i = 0; i < pPosition.length; i++)
+        {
+            distance += Math.pow((pointPosition[i] - pPosition[i]), 2);
+        }
+        
+        return Math.sqrt(distance);
     }
     
 }

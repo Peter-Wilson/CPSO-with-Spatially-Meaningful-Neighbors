@@ -99,10 +99,10 @@ public class DulaunayTriangulation {
                 }
                 
                 //the boundary of V is the set of horizon ridges H
-                if()
+                //if()
                 {
                     //for each ridge R in H
-                    for(int r = 0; r = horizon.size(); i++)
+                    //for(int r = 0; r = horizon.size(); i++)
                     {
                         //create a new facet from R and p
                         ParticleSimplex newFacet = new ParticleSimplex(R,p);
