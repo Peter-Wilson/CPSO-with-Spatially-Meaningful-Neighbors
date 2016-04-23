@@ -91,21 +91,32 @@ public class DulaunayTriangulation {
             //for all unvisited neighbors N of facets in V
             for(int i = 0; i < neighbors.size(); i++)
             {
-                if(neighbors[i].above(p))
+                if(neighbors.get(i).above(p))
                 {
                     //if p is above N
+                        visibleSet.add(neighbors.get(i));
                         //add N to V
                 }
                 
                 //the boundary of V is the set of horizon ridges H
-                //for each ridge R in H
-                    //create a new facet from R and p
-                    //link the new facet to its neighbors
-                //for each new facet F'
-                    //for each unassigned point q in an outside set of a facet in V
-                        //if q is above F'
-                            //assign q to F's outside set
-                //delete the facets in V
+                if()
+                {
+                    //for each ridge R in H
+                    for(int r = 0; r = horizon.size(); i++)
+                    {
+                        //create a new facet from R and p
+                        ParticleSimplex newFacet = new ParticleSimplex(R,p);
+                        
+                        //link the new facet to its neighbors
+                            
+                        //for each new facet F'
+                        
+                            //for each unassigned point q in an outside set of a facet in V
+                                //if q is above F'
+                                    //assign q to F's outside set
+                        //delete the facets in V
+                    }
+                }
             }
         }
         
@@ -210,5 +221,9 @@ public class DulaunayTriangulation {
         //choose best from list (see algorithm)
         
         return best;        
+    }
+
+    private static ArrayList<ParticleSimplex> getNeighbors(ParticleSimplex get, ArrayList<ParticleSimplex> faces) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
