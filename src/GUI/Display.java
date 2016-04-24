@@ -1,5 +1,8 @@
 package GUI;
 
+import cpso_h_k.CPSO_H_k;
+import cpso_r_k.CPSO_R_k;
+import cpso_s.CPSO_S;
 import cpso_s_k.CPSO_S_k;
 
 /*
@@ -63,6 +66,7 @@ public class Display extends javax.swing.JPanel {
         rbRosenbrock = new javax.swing.JRadioButton();
         rbGriewanck = new javax.swing.JRadioButton();
         rbAckley = new javax.swing.JRadioButton();
+        rbLog = new javax.swing.JRadioButton();
 
         btnCPSOS.setText("CPSO-S");
         btnCPSOS.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +138,6 @@ public class Display extends javax.swing.JPanel {
         jScrollPane1.setViewportView(taOutput);
 
         buttonGroup2.add(rbSchaffer);
-        rbSchaffer.setSelected(true);
         rbSchaffer.setText("Schaffer");
 
         jLabel9.setText("Function:");
@@ -151,6 +154,10 @@ public class Display extends javax.swing.JPanel {
         buttonGroup2.add(rbAckley);
         rbAckley.setText("Ackley");
 
+        buttonGroup2.add(rbLog);
+        rbLog.setSelected(true);
+        rbLog.setText("Sum of Log");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,16 +168,18 @@ public class Display extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(18, 18, 18)
+                        .addComponent(rbLog)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addComponent(rbSchaffer)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(rbRastrigin)
-                        .addGap(27, 27, 27)
+                        .addGap(18, 18, 18)
                         .addComponent(rbRosenbrock)
-                        .addGap(26, 26, 26)
+                        .addGap(18, 18, 18)
                         .addComponent(rbGriewanck)
-                        .addGap(37, 37, 37)
+                        .addGap(18, 18, 18)
                         .addComponent(rbAckley)
-                        .addGap(70, 70, 70))
+                        .addGap(33, 33, 33))
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,8 +199,8 @@ public class Display extends javax.swing.JPanel {
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfNumParticles, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                                    .addComponent(tfInertia))))
+                                    .addComponent(tfInertia)
+                                    .addComponent(tfNumParticles))))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -262,12 +271,13 @@ public class Display extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel9)
-                        .addComponent(rbSchaffer)
-                        .addComponent(rbGriewanck)
-                        .addComponent(rbAckley))
+                        .addComponent(rbLog))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(rbRosenbrock)
-                        .addComponent(rbRastrigin)))
+                        .addComponent(rbRastrigin)
+                        .addComponent(rbSchaffer)
+                        .addComponent(rbGriewanck)
+                        .addComponent(rbAckley)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -283,7 +293,21 @@ public class Display extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCPSOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCPSOSActionPerformed
-        // TODO add your handling code here:
+        int dimensionSize = Integer.parseInt(this.tfDimensionSize.getText());
+        int maxLoops = Integer.parseInt(this.tfMaxLoops.getText());
+        int swarmSize = Integer.parseInt(this.tfNumParticles.getText());
+        double Inertia = Double.parseDouble(this.tfInertia.getText());
+        double C1 = Double.parseDouble(this.tfC1.getText());
+        double C2 = Double.parseDouble(this.tfC2.getText());
+        int numSwarms = Integer.parseInt(this.tfNumSwarms.getText());
+        boolean DT = this.rbDT.isSelected();
+        //boolean Delaunay = this.rbDT
+        CPSO_S cpso = new CPSO_S(dimensionSize, maxLoops, swarmSize, 
+                                Inertia, C1, C2, numSwarms, DT, getSelectedFunction(), this.taOutput);
+        cpso.start();
+    }//GEN-LAST:event_btnCPSOSActionPerformed
+
+    private void btnCPSOSKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCPSOSKActionPerformed
         int dimensionSize = Integer.parseInt(this.tfDimensionSize.getText());
         int maxLoops = Integer.parseInt(this.tfMaxLoops.getText());
         int swarmSize = Integer.parseInt(this.tfNumParticles.getText());
@@ -294,20 +318,38 @@ public class Display extends javax.swing.JPanel {
         boolean DT = this.rbDT.isSelected();
         //boolean Delaunay = this.rbDT
         CPSO_S_k cpso = new CPSO_S_k(dimensionSize, maxLoops, swarmSize, 
-                                Inertia, C1, C2, numSwarms, DT, this.taOutput);
+                                Inertia, C1, C2, numSwarms, DT, getSelectedFunction(), this.taOutput);
         cpso.start();
-    }//GEN-LAST:event_btnCPSOSActionPerformed
-
-    private void btnCPSOSKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCPSOSKActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnCPSOSKActionPerformed
 
     private void btnCPSOHKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCPSOHKActionPerformed
-        // TODO add your handling code here:
+        int dimensionSize = Integer.parseInt(this.tfDimensionSize.getText());
+        int maxLoops = Integer.parseInt(this.tfMaxLoops.getText());
+        int swarmSize = Integer.parseInt(this.tfNumParticles.getText());
+        double Inertia = Double.parseDouble(this.tfInertia.getText());
+        double C1 = Double.parseDouble(this.tfC1.getText());
+        double C2 = Double.parseDouble(this.tfC2.getText());
+        int numSwarms = Integer.parseInt(this.tfNumSwarms.getText());
+        boolean DT = this.rbDT.isSelected();
+        //boolean Delaunay = this.rbDT
+        CPSO_H_k cpso = new CPSO_H_k(dimensionSize, maxLoops, swarmSize, 
+                                Inertia, C1, C2, numSwarms, DT, getSelectedFunction(), this.taOutput);
+        cpso.start();
     }//GEN-LAST:event_btnCPSOHKActionPerformed
 
     private void btnCPSORKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCPSORKActionPerformed
-        // TODO add your handling code here:
+        int dimensionSize = Integer.parseInt(this.tfDimensionSize.getText());
+        int maxLoops = Integer.parseInt(this.tfMaxLoops.getText());
+        int swarmSize = Integer.parseInt(this.tfNumParticles.getText());
+        double Inertia = Double.parseDouble(this.tfInertia.getText());
+        double C1 = Double.parseDouble(this.tfC1.getText());
+        double C2 = Double.parseDouble(this.tfC2.getText());
+        int numSwarms = Integer.parseInt(this.tfNumSwarms.getText());
+        boolean DT = this.rbDT.isSelected();
+        //boolean Delaunay = this.rbDT
+        CPSO_R_k cpso = new CPSO_R_k(dimensionSize, maxLoops, swarmSize, 
+                                Inertia, C1, C2, numSwarms, DT, getSelectedFunction(), this.taOutput);
+        cpso.start();
     }//GEN-LAST:event_btnCPSORKActionPerformed
 
 
@@ -332,6 +374,7 @@ public class Display extends javax.swing.JPanel {
     private javax.swing.JRadioButton rbAckley;
     private javax.swing.JRadioButton rbDT;
     private javax.swing.JRadioButton rbGriewanck;
+    private javax.swing.JRadioButton rbLog;
     private javax.swing.JRadioButton rbNoDT;
     private javax.swing.JRadioButton rbRastrigin;
     private javax.swing.JRadioButton rbRosenbrock;
@@ -345,4 +388,8 @@ public class Display extends javax.swing.JPanel {
     private javax.swing.JTextField tfNumParticles;
     private javax.swing.JTextField tfNumSwarms;
     // End of variables declaration//GEN-END:variables
+
+    private int getSelectedFunction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

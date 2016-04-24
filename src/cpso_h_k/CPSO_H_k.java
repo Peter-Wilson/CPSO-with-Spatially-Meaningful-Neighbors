@@ -18,16 +18,16 @@ public class CPSO_H_k extends CPSO {
     double PSO_C2 = 0.3;
     double PSO_INTERTIA = 0.3;
 
-    public CPSO_H_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT)
+    public CPSO_H_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function)
     {
-        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT);
+        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function);
         pso_swarm = new Swarm(dimensionSize, PSO_C1, PSO_C2, PSO_INTERTIA, min, dimensionSize);
         InitializeSwarms(false);
     }
     
-    public CPSO_H_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, JTextArea op)
+    public CPSO_H_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function, JTextArea op)
     {
-        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, op);
+        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, op);
         pso_swarm = new Swarm(dimensionSize, PSO_C1, PSO_C2, PSO_INTERTIA, min, dimensionSize);
         InitializeSwarms(false);
     }

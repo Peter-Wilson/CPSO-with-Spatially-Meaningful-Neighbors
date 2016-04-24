@@ -25,15 +25,15 @@ public class CPSO_R_k extends CPSO {
      * @param c2
      * @param k the number of swarms
      */
-    public CPSO_R_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT)
+    public CPSO_R_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function)
     {
-        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT);
+        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function);
         InitializeSwarms(true);
     }
     
-    public CPSO_R_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, JTextArea op)
+    public CPSO_R_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function, JTextArea op)
     {
-        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, op);
+        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, op);
         InitializeSwarms(true);
     }
 

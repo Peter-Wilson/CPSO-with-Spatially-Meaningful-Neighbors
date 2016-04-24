@@ -30,16 +30,18 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="rbLog" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
                       <Component id="rbSchaffer" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="rbRastrigin" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="rbRosenbrock" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="rbGriewanck" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="rbAckley" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
@@ -64,8 +66,8 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="tfNumParticles" pref="136" max="32767" attributes="0"/>
                                   <Component id="tfInertia" max="32767" attributes="0"/>
+                                  <Component id="tfNumParticles" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -163,13 +165,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="rbSchaffer" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="rbGriewanck" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="rbAckley" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbLog" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="rbRosenbrock" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="rbRastrigin" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbSchaffer" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbGriewanck" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbAckley" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="10" max="32767" attributes="0"/>
@@ -335,7 +338,6 @@
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup2"/>
         </Property>
-        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Schaffer"/>
       </Properties>
     </Component>
@@ -374,6 +376,15 @@
           <ComponentRef name="buttonGroup2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Ackley"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="rbLog">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup2"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="Sum of Log"/>
       </Properties>
     </Component>
   </SubComponents>

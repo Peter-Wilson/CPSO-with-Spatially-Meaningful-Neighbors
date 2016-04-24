@@ -13,15 +13,15 @@ import javax.swing.JTextArea;
  */
 public class CPSO_S extends CPSO {    
     
-        public CPSO_S(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT)
+        public CPSO_S(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function)
         {
-            super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT);
+            super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function);
             InitializeSwarms(false);
         }
         
-        public CPSO_S(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, JTextArea op)
+        public CPSO_S(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function, JTextArea op)
         {
-            super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, op);
+            super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, op);
             InitializeSwarms(false);
         }
         
