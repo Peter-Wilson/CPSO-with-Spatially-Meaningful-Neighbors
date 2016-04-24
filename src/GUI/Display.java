@@ -31,6 +31,9 @@ public class Display extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         btnCPSOS = new javax.swing.JButton();
         btnCPSOSK = new javax.swing.JButton();
         btnCPSOHK = new javax.swing.JButton();
@@ -54,6 +57,12 @@ public class Display extends javax.swing.JPanel {
         rbNoDT = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         taOutput = new javax.swing.JTextArea();
+        rbSchaffer = new javax.swing.JRadioButton();
+        jLabel9 = new javax.swing.JLabel();
+        rbRastrigin = new javax.swing.JRadioButton();
+        rbRosenbrock = new javax.swing.JRadioButton();
+        rbGriewanck = new javax.swing.JRadioButton();
+        rbAckley = new javax.swing.JRadioButton();
 
         btnCPSOS.setText("CPSO-S");
         btnCPSOS.addActionListener(new java.awt.event.ActionListener() {
@@ -113,14 +122,34 @@ public class Display extends javax.swing.JPanel {
 
         jLabel8.setText("# of Swarms to divide into:");
 
+        buttonGroup1.add(rbDT);
         rbDT.setSelected(true);
         rbDT.setText("Yes");
 
+        buttonGroup1.add(rbNoDT);
         rbNoDT.setText("No");
 
         taOutput.setColumns(20);
         taOutput.setRows(5);
         jScrollPane1.setViewportView(taOutput);
+
+        buttonGroup2.add(rbSchaffer);
+        rbSchaffer.setSelected(true);
+        rbSchaffer.setText("Schaffer");
+
+        jLabel9.setText("Function:");
+
+        buttonGroup2.add(rbRastrigin);
+        rbRastrigin.setText("Rastrigin");
+
+        buttonGroup2.add(rbRosenbrock);
+        rbRosenbrock.setText("Rosenbrock");
+
+        buttonGroup2.add(rbGriewanck);
+        rbGriewanck.setText("Griewanck");
+
+        buttonGroup2.add(rbAckley);
+        rbAckley.setText("Ackley");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -129,6 +158,19 @@ public class Display extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbSchaffer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rbRastrigin)
+                        .addGap(27, 27, 27)
+                        .addComponent(rbRosenbrock)
+                        .addGap(26, 26, 26)
+                        .addComponent(rbGriewanck)
+                        .addGap(37, 37, 37)
+                        .addComponent(rbAckley)
+                        .addGap(70, 70, 70))
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,7 +259,17 @@ public class Display extends javax.swing.JPanel {
                             .addComponent(rbDT)
                             .addComponent(rbNoDT))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(rbSchaffer)
+                        .addComponent(rbGriewanck)
+                        .addComponent(rbAckley))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rbRosenbrock)
+                        .addComponent(rbRastrigin)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -264,6 +316,9 @@ public class Display extends javax.swing.JPanel {
     private javax.swing.JButton btnCPSORK;
     private javax.swing.JButton btnCPSOS;
     private javax.swing.JButton btnCPSOSK;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -272,9 +327,15 @@ public class Display extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton rbAckley;
     private javax.swing.JRadioButton rbDT;
+    private javax.swing.JRadioButton rbGriewanck;
     private javax.swing.JRadioButton rbNoDT;
+    private javax.swing.JRadioButton rbRastrigin;
+    private javax.swing.JRadioButton rbRosenbrock;
+    private javax.swing.JRadioButton rbSchaffer;
     private javax.swing.JTextArea taOutput;
     private javax.swing.JTextField tfC1;
     private javax.swing.JTextField tfC2;

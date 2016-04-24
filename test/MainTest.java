@@ -83,17 +83,5 @@ public class MainTest {
         CPSO_S_k cpso = new CPSO_S_k(dimensionSize, 200, 20, 0.5, 0.3, 0.2,3, false);
         //cpso.start();
     }
-
-    /**
-     * Test of main method, of class Main.
-     */
-    @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        Main.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
     
 }

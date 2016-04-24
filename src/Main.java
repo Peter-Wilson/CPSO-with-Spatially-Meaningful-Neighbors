@@ -30,6 +30,7 @@ public class Main extends javax.swing.JFrame {
         display1 = new GUI.Display();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Peter Wilson's CPSO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
