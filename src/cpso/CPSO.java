@@ -23,9 +23,10 @@ public class CPSO {
     public double INERTIA = 0.3;
     public int maxLoops;
     public int numSwarms;
+    public boolean Delaunay;
     JTextArea screen;
     
-    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms)
+    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay)
     {
         this.dimensionSize = dimensionSize;
         this.maxLoops = maxLoops;
@@ -34,12 +35,13 @@ public class CPSO {
         this.C1 = c1;
         this.C2 = c2;
         if(numSwarms > dimensionSize) numSwarms = dimensionSize;
-        this.numSwarms = numSwarms;            
+        this.numSwarms = numSwarms;   
+        this.Delaunay = Delaunay;
         solution = new double[dimensionSize];
         screen = null;
     }
     
-    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, JTextArea op)
+    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay, JTextArea op)
     {
         this.dimensionSize = dimensionSize;
         this.maxLoops = maxLoops;
@@ -48,7 +50,8 @@ public class CPSO {
         this.C1 = c1;
         this.C2 = c2;
         if(numSwarms > dimensionSize) numSwarms = dimensionSize;
-        this.numSwarms = numSwarms;            
+        this.numSwarms = numSwarms;  
+        this.Delaunay = Delaunay;            
         solution = new double[dimensionSize];
         screen = op;
     }

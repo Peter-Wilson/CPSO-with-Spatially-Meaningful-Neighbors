@@ -6,6 +6,9 @@
 package cpso;
 
 import java.util.Random;
+import org.jzy3d.plot3d.builder.delaunay.jdt.Delaunay_Triangulation;
+import org.jzy3d.plot3d.builder.delaunay.jdt.Point_dt;
+
 
 /**
  *
@@ -20,6 +23,7 @@ public class Swarm
         double C1 = 1;
         double C2 = 1;
         double INERTIA = 1;
+        Delaunay_Triangulation dt;
         int k = 0;
 
         public Swarm(int swarmSize, double C1, double C2, double INERTIA, boolean min, int k)
@@ -117,6 +121,35 @@ public class Swarm
                 particles[randomIndex].setVelocity(velocity);
                 return true;
             }
+        }
+        
+        /**
+         * Creates the Delaunay Triangulation
+         * @throws Exception if the dimensions are incorrect
+         */
+        public void CalculateDelaunatTriangulation3D() throws Exception
+        {
+            Point_dt[] points = new Point_dt[particles.length];
+            int dimensions = particles[0].getPosition().length;
+            for(int i = 0; i < particles.length; i++)
+            {
+                if(dimensions == 2)
+                {
+                    double[] part = particles[i].getPosition();
+                    points[i] = new Point_dt(part[0], part[1]);
+                }
+                else if(dimensions == 3)
+                {
+                    double[] part = particles[i].getPosition();
+                    points[i] = new Point_dt(part[0], part[1], part[2]);
+                }
+                else
+                {
+                    throw new Exception("Only works for 2D and 3D swarms");
+                }                
+            }
+            
+           dt = new Delaunay_Triangulation(points);
         }
 
     }

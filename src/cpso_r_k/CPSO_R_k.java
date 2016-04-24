@@ -6,6 +6,7 @@
 package cpso_r_k;
 
 import cpso.*;
+import javax.swing.JTextArea;
 
 
 /**
@@ -24,9 +25,15 @@ public class CPSO_R_k extends CPSO {
      * @param c2
      * @param k the number of swarms
      */
-    public CPSO_R_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k)
+    public CPSO_R_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT)
     {
-        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k);
+        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT);
+        InitializeSwarms(true);
+    }
+    
+    public CPSO_R_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, JTextArea op)
+    {
+        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, op);
         InitializeSwarms(true);
     }
 

@@ -52,7 +52,7 @@ public class CPSO_S_kTest {
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 2;
-        instance = new CPSO_S_k(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2, k);
+        instance = new CPSO_S_k(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2, k, true);
         
         //test the values are set properly
         assertEquals(expectedDimensions, instance.dimensionSize);

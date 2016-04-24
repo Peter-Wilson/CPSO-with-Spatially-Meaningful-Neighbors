@@ -113,5 +113,17 @@ public class SwarmTest {
             assertNotNull(result[i]);
         }
     }
+
+    /**
+     * Test of CalculateDelaunatTriangulation3D method, of class Swarm.
+     */
+    @Test
+    public void testCalculateDelaunatTriangulation3D() throws Exception {
+        System.out.println("CalculateDelaunatTriangulation3D");
+        Swarm instance = null;
+        instance.CalculateDelaunatTriangulation3D();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

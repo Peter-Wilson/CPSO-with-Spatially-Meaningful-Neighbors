@@ -46,7 +46,7 @@ public class CpsoSuite {
         System.out.println("CalculateFitness");
         int index = 0;
         int k = 6;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         double[] testSolution = {1.0,1.0,1.0,1.0,1.0,1.0};
         instance.setSolution(testSolution);
         double expResult = 0.0;
@@ -65,7 +65,7 @@ public class CpsoSuite {
         int index = 0;
         double[] position = {50.0};
         int k = 6;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         double[] testSolution = {12.0,3.2,6.2,8.0,14.1,1.0};
         instance.setSolution(testSolution);
         double expResult = 11.6253394463;
@@ -82,7 +82,7 @@ public class CpsoSuite {
         int index = 0;
         double[] position = {0.0};
         int k = 6;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         double[] testSolution = {0.0,0.0,0.0,0.0,0.0,0.0};
         instance.setSolution(testSolution);
         double expResult = Double.NEGATIVE_INFINITY;
@@ -99,7 +99,7 @@ public class CpsoSuite {
         int index = 0;
         double[] position = {-50.0};
         int k = 6;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         double[] testSolution = {-12.0,-3.2,-6.2,-8.0,-14.1,-12.7};
         instance.setSolution(testSolution);
         double expResult = Double.NaN;
@@ -115,7 +115,7 @@ public class CpsoSuite {
         System.out.println("getSwarms");
         double[] position = {50.0, 1.0};
         int k = 2;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         int expResult = k;
         Swarm[] result = instance.getSwarms();
         assertEquals(expResult, result.length);
@@ -135,7 +135,7 @@ public class CpsoSuite {
         int expectedDimensions = 6;
         double[] position = {50.0, 1.0};
         int k = 2;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         
         double[] result = instance.getSolution();
         
@@ -161,7 +161,7 @@ public class CpsoSuite {
         double[] solution = {1.0,2.0,3.0,4.0,5.0};
         double[] position = {50.0, 1.0};
         int k = 2;
-        CPSO instance = new CPSO(5, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(5, 5, 20, 0.5, 0.3, 0.2, k, true);
         
         // test setting a correct size solution
         instance.setSolution(solution);
@@ -191,7 +191,7 @@ public class CpsoSuite {
         System.out.println("start");
         double[] position = {50.0, 1.0};
         int k = 2;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         //instance.start();
         //TODO need to add a test for this
     }
@@ -205,7 +205,7 @@ public class CpsoSuite {
         int index = 0;
         double[] position = {1.0, 1.0};
         int k = 2;
-        CPSO instance = new CPSO(5, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(5, 5, 20, 0.5, 0.3, 0.2, k, true);
         double[] testSolution = {1.0,1.0,1.0,1.0,1.0};
         instance.setSolution(testSolution);
         double expResult = 0.0;

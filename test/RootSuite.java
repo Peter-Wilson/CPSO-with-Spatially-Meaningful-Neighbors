@@ -22,7 +22,7 @@ import org.junit.runners.Suite;
  * @author pw12nb
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({GUISuite.class, Cpso_s_kSuite.class, Cpso_r_kSuite.class, Cpso_sSuite.class, CpsoSuite.class, Cpso_h_kSuite.class})
+@Suite.SuiteClasses({GUISuite.class, Cpso_s_kSuite.class, Cpso_r_kSuite.class, Cpso_sSuite.class, MainTest.class, CpsoSuite.class, Cpso_h_kSuite.class})
 public class RootSuite {
 
     @BeforeClass

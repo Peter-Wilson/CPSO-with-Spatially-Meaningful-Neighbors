@@ -5,6 +5,7 @@
  */
 package cpso_s;
 import cpso.*;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -12,9 +13,15 @@ import cpso.*;
  */
 public class CPSO_S extends CPSO {    
     
-        public CPSO_S(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k)
+        public CPSO_S(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT)
         {
-            super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k);
+            super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT);
+            InitializeSwarms(false);
+        }
+        
+        public CPSO_S(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, JTextArea op)
+        {
+            super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, op);
             InitializeSwarms(false);
         }
         

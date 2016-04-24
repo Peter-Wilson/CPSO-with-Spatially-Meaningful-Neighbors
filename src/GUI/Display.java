@@ -1,5 +1,7 @@
 package GUI;
 
+import cpso_s_k.CPSO_S_k;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -48,8 +50,8 @@ public class Display extends javax.swing.JPanel {
         tfC1 = new javax.swing.JTextField();
         tfC2 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rbDT = new javax.swing.JRadioButton();
+        rbNoDT = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         taOutput = new javax.swing.JTextArea();
 
@@ -111,10 +113,10 @@ public class Display extends javax.swing.JPanel {
 
         jLabel8.setText("# of Swarms to divide into:");
 
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Yes");
+        rbDT.setSelected(true);
+        rbDT.setText("Yes");
 
-        jRadioButton2.setText("No");
+        rbNoDT.setText("No");
 
         taOutput.setColumns(20);
         taOutput.setRows(5);
@@ -170,9 +172,9 @@ public class Display extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tfNumSwarms)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jRadioButton1)
+                                        .addComponent(rbDT)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jRadioButton2)
+                                        .addComponent(rbNoDT)
                                         .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addContainerGap())
         );
@@ -212,8 +214,8 @@ public class Display extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))))
+                            .addComponent(rbDT)
+                            .addComponent(rbNoDT))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -230,6 +232,18 @@ public class Display extends javax.swing.JPanel {
 
     private void btnCPSOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCPSOSActionPerformed
         // TODO add your handling code here:
+        int dimensionSize = Integer.parseInt(this.tfDimensionSize.getText());
+        int maxLoops = Integer.parseInt(this.tfMaxLoops.getText());
+        int swarmSize = Integer.parseInt(this.tfNumParticles.getText());
+        double Inertia = Double.parseDouble(this.tfInertia.getText());
+        double C1 = Double.parseDouble(this.tfC1.getText());
+        double C2 = Double.parseDouble(this.tfC2.getText());
+        int numSwarms = Integer.parseInt(this.tfNumSwarms.getText());
+        boolean DT = this.rbDT.isSelected();
+        //boolean Delaunay = this.rbDT
+        CPSO_S_k cpso = new CPSO_S_k(dimensionSize, maxLoops, swarmSize, 
+                                Inertia, C1, C2, numSwarms, DT, this.taOutput);
+        cpso.start();
     }//GEN-LAST:event_btnCPSOSActionPerformed
 
     private void btnCPSOSKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCPSOSKActionPerformed
@@ -258,9 +272,9 @@ public class Display extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton rbDT;
+    private javax.swing.JRadioButton rbNoDT;
     private javax.swing.JTextArea taOutput;
     private javax.swing.JTextField tfC1;
     private javax.swing.JTextField tfC2;

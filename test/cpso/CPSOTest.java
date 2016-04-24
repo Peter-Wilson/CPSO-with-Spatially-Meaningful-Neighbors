@@ -38,7 +38,7 @@ public class CPSOTest {
     }
     
     @Test
-    public void testCPSO(){
+    public void testCPSO_withDT(){
         System.out.println("CPSO_S");
         CPSO instance = null;
         int expectedDimensions = 6;
@@ -48,7 +48,31 @@ public class CPSOTest {
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 2;
-        instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2, k);
+        boolean DT = true;
+        instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2, k, DT);
+        
+        //test the values are set properly
+        assertEquals(expectedDimensions, instance.dimensionSize);
+        assertEquals(expectedMaxLoops, instance.maxLoops);
+        assertEquals(expectedSwarmSize, instance.swarmSize);
+        assertEquals(expectedInertia, instance.INERTIA, 0.0);
+        assertEquals(expectedC1, instance.C1, 0.0);
+        assertEquals(expectedC2, instance.C2, 0.0);        
+    }
+    
+    @Test
+    public void testCPSO_withoutDT(){
+        System.out.println("CPSO_S");
+        CPSO instance = null;
+        int expectedDimensions = 6;
+        int expectedMaxLoops = 10;
+        int expectedSwarmSize = 20;
+        double expectedInertia = 0.5;
+        double expectedC1 = 0.3;
+        double expectedC2 = 0.2;
+        int k = 2;
+        boolean DT = false;
+        instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2, k, DT);
         
         //test the values are set properly
         assertEquals(expectedDimensions, instance.dimensionSize);
@@ -72,7 +96,7 @@ public class CPSOTest {
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 2;
-        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k);
+        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k, true);
         instance.InitializeSwarms(false);
         
         Swarm[] swarms = instance.getSwarms();
@@ -116,7 +140,7 @@ public class CPSOTest {
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 1;
-        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k);
+        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k, true);
         instance.InitializeSwarms(false);
         
         Swarm[] swarms = instance.getSwarms();
@@ -160,7 +184,7 @@ public class CPSOTest {
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 3;
-        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k);
+        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k, true);
         instance.InitializeSwarms(true);
         
         Swarm[] swarms = instance.getSwarms();
@@ -204,7 +228,7 @@ public class CPSOTest {
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 2;
-        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k);
+        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k, true);
         instance.InitializeSwarms(false);
         
         Swarm[] swarms = instance.getSwarms();
@@ -248,7 +272,7 @@ public class CPSOTest {
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 4;
-        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k);
+        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k, true);
         instance.InitializeSwarms(false);
         
         Swarm[] swarms = instance.getSwarms();
@@ -287,7 +311,7 @@ public class CPSOTest {
         System.out.println("CalculateFitness");
         int index = 0;
         int k = 6;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         instance.InitializeSwarms(false);
         double[] testSolution = {1.0,1.0,1.0,1.0,1.0,1.0};
         instance.setSolution(testSolution);
@@ -307,7 +331,7 @@ public class CPSOTest {
         int index = 0;
         double[] position = {50.0};
         int k = 6;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         instance.InitializeSwarms(false);
         double[] testSolution = {12.0,3.2,6.2,8.0,14.1,1.0};
         instance.setSolution(testSolution);
@@ -325,7 +349,7 @@ public class CPSOTest {
         int index = 0;
         double[] position = {0.0};
         int k = 6;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         instance.InitializeSwarms(false);
         double[] testSolution = {0.0,0.0,0.0,0.0,0.0,0.0};
         instance.setSolution(testSolution);
@@ -343,7 +367,7 @@ public class CPSOTest {
         int index = 0;
         double[] position = {-50.0};
         int k = 6;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         instance.InitializeSwarms(false);
         double[] testSolution = {-12.0,-3.2,-6.2,-8.0,-14.1,-12.7};
         instance.setSolution(testSolution);
@@ -360,7 +384,7 @@ public class CPSOTest {
         System.out.println("CalculateFitness - multidimensional");
         int index = 0;
         int k = 3;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         instance.InitializeSwarms(false);
         double[] testSolution = {1.0,1.0,1.0,1.0,1.0,1.0};
         instance.setSolution(testSolution);
@@ -378,7 +402,7 @@ public class CPSOTest {
         System.out.println("CalculateFitness - multidimensional");
         int index = 0;
         int k = 3;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         instance.InitializeSwarms(false);
         double[] testSolution = {1.0,1.0,1.0,1.0,1.0,1.0};
         instance.setSolution(testSolution);
@@ -398,7 +422,7 @@ public class CPSOTest {
         int index = 0;
         double[] position = {50.0, 3.2};
         int k = 3;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         instance.InitializeSwarms(false);
         double[] testSolution = {12.0,3.2,6.2,8.0,14.1,1.0};
         instance.setSolution(testSolution);
@@ -416,7 +440,7 @@ public class CPSOTest {
         int index = 0;
         double[] position = {0.0, 0.0};
         int k = 3;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         instance.InitializeSwarms(false);
         double[] testSolution = {0.0,0.0,0.0,0.0,0.0,0.0};
         instance.setSolution(testSolution);
@@ -434,7 +458,7 @@ public class CPSOTest {
         int index = 0;
         double[] position = {-50.0,-3.2};
         int k = 3;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         instance.InitializeSwarms(false);
         double[] testSolution = {-12.0,-3.2,-6.2,-8.0,-14.1,-12.7};
         instance.setSolution(testSolution);
@@ -452,7 +476,7 @@ public class CPSOTest {
         int index = 0;
         double[] position = {1.0, 1.0};
         int k = 2;
-        CPSO instance = new CPSO(5, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(5, 5, 20, 0.5, 0.3, 0.2, k, true);
         instance.InitializeSwarms(false);
         double[] testSolution = {1.0,1.0,1.0,1.0,1.0};
         instance.setSolution(testSolution);
@@ -469,7 +493,7 @@ public class CPSOTest {
         System.out.println("getSwarms");
         double[] position = {50.0, 1.0};
         int k = 2;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         instance.InitializeSwarms(false);
         int expResult = k;
         Swarm[] result = instance.getSwarms();
@@ -490,7 +514,7 @@ public class CPSOTest {
         int expectedDimensions = 6;
         double[] position = {50.0, 1.0};
         int k = 2;
-        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, k, true);
         instance.InitializeSwarms(false);
         
         double[] result = instance.getSolution();
@@ -517,7 +541,7 @@ public class CPSOTest {
         double[] solution = {1.0,2.0,3.0,4.0,5.0};
         double[] position = {50.0, 1.0};
         int k = 2;
-        CPSO instance = new CPSO(5, 5, 20, 0.5, 0.3, 0.2, k);
+        CPSO instance = new CPSO(5, 5, 20, 0.5, 0.3, 0.2, k, true);
         instance.InitializeSwarms(false);
         
         // test setting a correct size solution
