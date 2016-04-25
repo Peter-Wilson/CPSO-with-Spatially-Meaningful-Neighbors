@@ -175,7 +175,7 @@ public class Swarm
          * @param item the item that is looking to swap
          * @return the item that is best to swap with
          */
-        public Point_dt chooseBestNeighbour(Point_dt item)
+        public Point_dt chooseBestNeighbour(Point_dt item, double velocityDistance)
         {
             boolean hasConnectedNeighbours = false;
             Triangle_dt neighbours = dt.find(item);
@@ -183,6 +183,7 @@ public class Swarm
             
             //Pf = min(Nk)
             Point_dt point = closestNeighbour(item, connected);
+            Point_dt temp = null;
             
             //for k = 1 to neighbourset_size do
             for(int i = 0; i < 3; i++)
@@ -192,23 +193,31 @@ public class Swarm
                 //if working_together(Pi, Pk)and
                 if(working_together(item, connected[i]))
                 {
-                    //dist(Xi − Pc) < dist(Xi − Pk)and
-                    //f(Pk) < f(Xi) then
-                    //Pc = Pk
-                    //hasConnectedNeighbours = true
+                    
+                    //if dist(Xi − Pc) < dist(Xi − Pk)and fitness(Pk) < fitness(Xi) then
+                    if(item.distance3D(point) < item.distance3D(connected[i]) &&
+                        getParticle(connected[i]).getFitness() < getParticle(item).getFitness())
+                    {
+                        temp = connected[i];
+                        hasConnectedNeighbours = true;
+                    }
                 }
             }
             
             //localExploitationRatio = swarm.diameter/200
-            //if hasConnectedNeighbours and
-                //distance(Xi − Pc)/distance(Xi − Pf ) >
-                //localExploitationRatio and
-                //Vi < 2 # distance(Xi − Pc) then
-                //Pn = Pc
-            //else
-                //Pn = Pf
-            //Return Pn
-            return null;            
+            double localExploitationRatio = swarm.diameter/200;
+            
+            if(hasConnectedNeighbours &&
+                    item.distance3D(temp)/ item.distance3D(point) >
+                    localExploitationRatio &&
+                    velocityDistance < 2*item.distance3D(temp))
+            {
+                return temp;
+            }
+            else
+            {
+                return point;
+            }           
         }
 
     private Point_dt closestNeighbour(Point_dt item, Point_dt[] neighbours) {
@@ -245,6 +254,29 @@ public class Swarm
      */
     private boolean working_together(Point_dt item, Point_dt connected) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private Particle getParticle(Point_dt connected) {
+        for(Particle p : particles)
+        {
+            double[] position = p.getPosition();
+            //check if first digit is wrong
+            if(position[0] != connected.x()) continue;
+            
+            //check if second digit is wrong
+            if((position.length > 1 && position[1] != connected.y()) ||
+                    (position.length <= 1 && position[1] != 0))
+                    continue;
+            
+            //check if third digit is wrong
+            if((position.length > 2 && position[2] != connected.y()) ||
+                    (position.length <= 2 && position[2] != 0))
+                    continue;
+            
+            return p;
+        }
+        
+        return null;
     }
 
     }
