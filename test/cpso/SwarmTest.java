@@ -43,11 +43,22 @@ public class SwarmTest {
     @Test
     public void testInitializeParticles() {
         System.out.println("Particle Initialization");
-        Swarm instance = new Swarm(20, 0.1, 0.1, 0.1, true, 1);
+        Swarm instance = new Swarm(20, 0.1, 0.1, 0.1, true, 1, 0);
         for(Particle i : instance.getParticles())
         {
             assertNotNull(i);
         }
+    }
+    
+     /**
+     * Test of initializing Particles of different functions
+     */
+    @Test
+    public void testGetRandomNumber() {
+        System.out.println("testGetRandomNumber");
+        Swarm instance = null;
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
     
     /**
@@ -58,7 +69,7 @@ public class SwarmTest {
         System.out.println("Velocity update");
         //calculate a test velocity
         //calculate a test velocity
-        Swarm instance = new Swarm(20, 0.2, 0.3, 0.5, true, 1);
+        Swarm instance = new Swarm(20, 0.2, 0.3, 0.5, true, 1, 0);
         Particle p = instance.getParticles()[0];
         double[] velocity = {5.0};
         double[] position = {2.0};
@@ -79,7 +90,7 @@ public class SwarmTest {
     public void testUpdatePosition() {
         System.out.println("Velocity update");
         //calculate a test velocity
-        Swarm instance = new Swarm(20, 0.2, 0.3, 0.5, true, 5);
+        Swarm instance = new Swarm(20, 0.2, 0.3, 0.5, true, 5, 0);
         Particle p = instance.getParticles()[0];
         double[] velocity = {5, 76.5, -2, 43, 8.65};
         double[] position = {6, 32.1, 11, 235, 103};
@@ -101,7 +112,7 @@ public class SwarmTest {
     public void testGetParticles() {
         System.out.println("getParticles");
         int expSize = 20;
-        Swarm instance = new Swarm(expSize, 0.5, 0.2, 0.3, true, 5);
+        Swarm instance = new Swarm(expSize, 0.5, 0.2, 0.3, true, 5, 0);
         Particle[] result = instance.getParticles();
         
         //check if correct size

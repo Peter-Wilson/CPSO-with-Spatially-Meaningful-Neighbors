@@ -25,8 +25,9 @@ public class Swarm
         double INERTIA = 1;
         Delaunay_Triangulation dt;
         int k = 0;
+        int function = 0;
 
-        public Swarm(int swarmSize, double C1, double C2, double INERTIA, boolean min, int k)
+        public Swarm(int swarmSize, double C1, double C2, double INERTIA, boolean min, int k, int function)
         {
             this.min = min;
             this.swarmSize = swarmSize;
@@ -34,6 +35,7 @@ public class Swarm
             this.C2 = C2;
             this.k = k;
             this.INERTIA = INERTIA;
+            this.function = function;
             InitializeParticles();
         }
 
@@ -47,9 +49,24 @@ public class Swarm
             {
                 double[] position = new double[k];
                 for(int j = 0; j < k; j++)
-                    position[j] = (rand.nextDouble()* 50)+1;
+                    
+                    position[j] = getRandomNumber(rand,function);
                 
                 particles[i] = new Particle(position);
+            }
+        }
+        
+        public double getRandomNumber(Random rand, int function)
+        {
+            switch(function)
+            {
+                case 0: return (rand.nextDouble()*50)+1;
+                case 1: return (rand.nextDouble()*200)-100;
+                case 2: return (rand.nextDouble()*10.24)-5.12;
+                case 3: return (rand.nextDouble()*60)-30;
+                case 4: return (rand.nextDouble()*1200)-600;
+                case 5: return (rand.nextDouble()*64)-32;
+                default: return 0;
             }
         }
         
