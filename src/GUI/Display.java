@@ -390,6 +390,11 @@ public class Display extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private int getSelectedFunction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(rbSchaffer.isSelected()) return 1;
+        if(rbRastrigin.isSelected()) return 2;
+        if(rbRosenbrock.isSelected()) return 3;
+        if(rbGriewanck.isSelected()) return 4;
+        if(rbAckley.isSelected()) return 5;
+        return 0;
     }
 }

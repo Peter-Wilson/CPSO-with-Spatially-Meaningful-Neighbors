@@ -37,9 +37,17 @@ public class DisplayTest {
     public void tearDown() {
     }
 
+    /**
+     * Test of getSelectedFunction method, of class CPSO.
+     */
     @Test
-    public void testSomeMethod() {
-        //replace this
+    public void testgetSelectedFunction() {
+        System.out.println("getSelectedFunction");
+        String output = "";
+        //CPSO instance = null;
+        //instance.writeOutput(output);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
     
 }
