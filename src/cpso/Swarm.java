@@ -8,6 +8,7 @@ package cpso;
 import java.util.Random;
 import org.jzy3d.plot3d.builder.delaunay.jdt.Delaunay_Triangulation;
 import org.jzy3d.plot3d.builder.delaunay.jdt.Point_dt;
+import org.jzy3d.plot3d.builder.delaunay.jdt.Triangle_dt;
 
 
 /**
@@ -176,7 +177,74 @@ public class Swarm
          */
         public Point_dt chooseBestNeighbour(Point_dt item)
         {
+            boolean hasConnectedNeighbours = false;
+            Triangle_dt neighbours = dt.find(item);
+            Point_dt[] connected = {neighbours.p1(),neighbours.p2(),neighbours.p3()};
+            
+            //Pf = min(Nk)
+            Point_dt point = closestNeighbour(item, connected);
+            
+            //for k = 1 to neighbourset_size do
+            for(int i = 0; i < 3; i++)
+            {
+                if(connected[i] == item) continue;
+                
+                //if working_together(Pi, Pk)and
+                if(working_together(item, connected[i]))
+                {
+                    //dist(Xi − Pc) < dist(Xi − Pk)and
+                    //f(Pk) < f(Xi) then
+                    //Pc = Pk
+                    //hasConnectedNeighbours = true
+                }
+            }
+            
+            //localExploitationRatio = swarm.diameter/200
+            //if hasConnectedNeighbours and
+                //distance(Xi − Pc)/distance(Xi − Pf ) >
+                //localExploitationRatio and
+                //Vi < 2 # distance(Xi − Pc) then
+                //Pn = Pc
+            //else
+                //Pn = Pf
+            //Return Pn
             return null;            
         }
+
+    private Point_dt closestNeighbour(Point_dt item, Point_dt[] neighbours) {
+        double minDistance = Double.MAX_VALUE;
+        Point_dt closest = null;
+        for(int i = 0; i < 3; i++)
+        {
+            if(neighbours[i] == item) continue;
+            
+            double distance = item.distance3D(neighbours[i]);
+            if(distance < minDistance)
+            {
+                closest = neighbours[i];
+                minDistance = distance;
+            }
+        }
+        return closest;
+    }
+
+    /**
+     * 2 particles are working together if:
+           1) if a particle P1 is following behind another particle
+           P2 then a directed connection is made from P1 to P2.
+           This represents particles heading in the same general
+           direction for which the trailing particle is connected to
+           the leading one. Figure 6(left) illustrates this case.
+           2) If two particles, P1 and P2, are heading towards each
+           other (but not past one another) they are considered to
+           be cooperating and an undirected connection is made
+           between the two. This case is shown in Figure 6 (right).
+     * @param item
+     * @param connected
+     * @return 
+     */
+    private boolean working_together(Point_dt item, Point_dt connected) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     }
