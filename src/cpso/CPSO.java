@@ -16,6 +16,7 @@ public class CPSO {
     public boolean min = true;
     public Swarm[] swarms; 
     public double[] solution;
+    public double[] testSolution;
     public int dimensionSize;
     public int swarmSize;
     public double C1 = 0.5;
@@ -156,7 +157,7 @@ public class CPSO {
         {
             for(int i = 0; i < position.length; i++)
             {
-                fitness += Math.log(position[i]);
+                testSolution[i] = position[i];
             }
         }
         else
@@ -166,29 +167,136 @@ public class CPSO {
                 if(i == index)
                     for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
                     {
-                        fitness += Math.log(position[j]);
+                        testSolution[count] = position[j];
                         count++;
                     }
                 else
                     for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
-                        fitness += Math.log(solution[count++]);
+                    {
+                        testSolution[count] = solution[count];
+                        count++;
+                    }
             }
         }
-        return fitness;   
+        return CalculateFinalFitness(testSolution);   
     }
 
     /**
      * Returns the final fitness based on the solution function
      * @return fitness
      */
-    public double CalculateFinalFitness()
+    public double CalculateFinalFitness(double[] values)
+    {
+        switch(function)
+        {
+            case 0: //sum of logs
+            {
+                return SumOfLogs(values);
+            }
+            case 1: //Schaffer
+            {
+                return Schaffer(values);
+            }
+            case 2: //Rastrigin
+            {
+                 return Rastrigin(values);
+            }
+            case 3: //Rosenbrock
+            {
+                return Rosenbrock(values);
+            }
+            case 4: //Griewanck
+            {
+                return Griewanck(values);
+            }
+            case 5: //Ackley
+            {
+                return Ackley(values);
+            }
+            default:
+                return 0;     
+        }
+    }
+    
+    public double SumOfLogs(double[] values)
     {
         double fitness = 0;
         for(int i = 0; i < dimensionSize; i++)
         {
-            fitness += Math.log(solution[i]);
+            fitness += Math.log(values[i]);
         }
-        return fitness; 
+        return fitness;
+    }
+    
+    public double Schaffer(double[] values)
+    {
+        double fitness = 0.5;
+        fitness += ((Math.pow(Math.sin(Math.pow(values[0],2)+Math.pow(values[1],2)),2)-0.5)/
+                    Math.pow(1+0.001*(Math.pow(values[0],2)+Math.pow(values[1],2)),2));
+        return fitness;
+    }
+    
+    public double Rastrigin(double[] values)
+    {
+        double fitness = 0;
+        for(int i = 0; i < dimensionSize; i++)
+        {
+            fitness += Math.pow(values[i],2) + 10 - 10*Math.cos(2*Math.PI*values[i]);
+        }
+        return fitness;
+    }
+    
+    public double Rosenbrock(double[] values)
+    {
+        double fitness = 0;
+        for(int i = 0; i < dimensionSize-1; i++)
+        {
+            fitness += 100*Math.pow(values[i+1] - Math.pow(values[i], 2),2)+
+                    Math.pow(values[i] - 1,2);
+        }
+        return fitness;
+    }
+    
+    public double Griewanck(double[] values)
+    {
+        double fitness = 0;
+        double summation = 0;
+        double multiplication = 1;
+
+        for(int i = 0; i < dimensionSize; i++)
+        {
+            summation += Math.pow(values[i],2);
+        }
+
+        for(int i = 0; i < dimensionSize; i++)
+        {
+            multiplication *= Math.cos(values[i]/Math.sqrt(i));
+        }
+
+        fitness = 1+ (summation/4000)-multiplication;
+        return fitness;
+    }
+    
+    public double Ackley(double[] values)
+    {
+        double fitness = 0;
+        double a = 0;
+        double b = 0;
+
+        for(int i = 0; i < dimensionSize; i++)
+        {
+            a += Math.pow(values[i],2);
+        }
+
+        for(int i = 0; i < dimensionSize; i++)
+        {
+            b += Math.cos(2*Math.PI*values[i]);
+        }
+
+        fitness = 20 + Math.E - 20*Math.pow(Math.E, -0.2*Math.sqrt(a/dimensionSize)) -
+                Math.pow(Math.E, Math.sqrt(b)/dimensionSize);
+
+       return fitness;
     }
 
     public void writeOutput(String output)

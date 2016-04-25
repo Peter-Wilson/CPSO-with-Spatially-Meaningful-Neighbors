@@ -492,7 +492,7 @@ public class CPSOTest {
         double[] testSolution = {1.0,1.0,1.0,1.0,1.0};
         instance.setSolution(testSolution);
         double expResult = 0.0;
-        double result = instance.CalculateFinalFitness();
+        double result = instance.CalculateFinalFitness(instance.getSolution());
         assertEquals(expResult, result, 0.0);
     }
     
@@ -511,7 +511,7 @@ public class CPSOTest {
         double[] testSolution = {1.0,1.0,1.0,1.0,1.0};
         instance.setSolution(testSolution);
         double expResult = 0.0;
-        double result = instance.CalculateFinalFitness();
+        double result = instance.CalculateFinalFitness(instance.getSolution());
         assertEquals(expResult, result, 0.0);
     }
 
@@ -592,6 +592,99 @@ public class CPSOTest {
         {
             System.out.println("incorrect solution size not alowed to be set: SUCCESS");
         }
+    }
+
+    /**
+     * Test of InitializeSwarms method, of class CPSO.
+     */
+    @Test
+    public void testInitializeSwarms() {
+        System.out.println("InitializeSwarms");
+        boolean random = false;
+        CPSO instance = null;
+        instance.InitializeSwarms(random);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of SumOfLogs method, of class CPSO.
+     */
+    @Test
+    public void testSumOfLogs() {
+        System.out.println("SumOfLogs");
+        double fitness = 0.0;
+        Particle p = null;
+        Swarm swarm = null;
+        CPSO instance = null;
+        instance.UpdateBests(fitness, p, swarm);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of Schaffer method, of class CPSO.
+     */
+    @Test
+    public void testSchaffer() {
+        System.out.println("Schaffer");
+        CPSO instance = null;
+        instance.UpdateSolution();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of Rastrigin method, of class CPSO.
+     */
+    @Test
+    public void testRastrigin() {
+        System.out.println("Rastrigin");
+        String output = "";
+        CPSO instance = null;
+        instance.writeOutput(output);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+    
+    /**
+     * Test of Rosenbrock method, of class CPSO.
+     */
+    @Test
+    public void testRosenbrock() {
+        System.out.println("Rosenbrock");
+        double fitness = 0.0;
+        Particle p = null;
+        Swarm swarm = null;
+        CPSO instance = null;
+        instance.UpdateBests(fitness, p, swarm);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of Griewanck method, of class CPSO.
+     */
+    @Test
+    public void testGriewanck() {
+        System.out.println("Griewanck");
+        CPSO instance = null;
+        instance.UpdateSolution();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of Ackley method, of class CPSO.
+     */
+    @Test
+    public void testAckley() {
+        System.out.println("Ackley");
+        String output = "";
+        CPSO instance = null;
+        instance.writeOutput(output);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
     
     

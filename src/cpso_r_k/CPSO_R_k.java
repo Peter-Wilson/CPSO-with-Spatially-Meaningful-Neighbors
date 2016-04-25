@@ -71,6 +71,6 @@ public class CPSO_R_k extends CPSO {
         {
             writeOutput("Solution "+(i+1)+": "+ solution[i]);
         }
-        writeOutput("The final fitness value is: "+ CalculateFinalFitness());
+        writeOutput("The final fitness value is: "+ CalculateFinalFitness(solution));
     }
 }
