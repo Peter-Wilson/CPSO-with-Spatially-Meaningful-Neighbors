@@ -41,6 +41,7 @@ public class CPSO {
         this.Delaunay = Delaunay;
         this.function = function;
         solution = new double[dimensionSize];
+        testSolution = new double[dimensionSize];
         screen = null;
     }
     
@@ -57,6 +58,7 @@ public class CPSO {
         this.Delaunay = Delaunay;          
         this.function = function;  
         solution = new double[dimensionSize];
+        testSolution = new double[dimensionSize];
         screen = op;
     }
 
