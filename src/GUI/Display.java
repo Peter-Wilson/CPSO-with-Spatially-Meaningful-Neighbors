@@ -102,7 +102,7 @@ public class Display extends javax.swing.JPanel {
 
         tfDimensionSize.setText("6");
 
-        tfMaxLoops.setText("200");
+        tfMaxLoops.setText("10000");
 
         jLabel3.setText("# of Particles:");
 
