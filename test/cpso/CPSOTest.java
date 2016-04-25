@@ -320,18 +320,6 @@ public class CPSOTest {
         double result = instance.CalculateFitness(3, position, k);
         assertEquals(expResult, result, 0.0);
     }
-
-    /**
-     * Test of CalculateDelaunatTriangulation3D method, of class Swarm.
-     */
-    @Test
-    public void testCalculateFitnessOther() throws Exception {
-        System.out.println("CalculateDelaunatTriangulation3D");
-        Swarm instance = null;
-        instance.CalculateDelaunatTriangulation3D();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
     
     /**
      * Test of CalculateFitness method, of class CPSO_S.
@@ -594,33 +582,6 @@ public class CPSOTest {
         }
     }
 
-    /**
-     * Test of InitializeSwarms method, of class CPSO.
-     */
-    @Test
-    public void testInitializeSwarms() {
-        System.out.println("InitializeSwarms");
-        boolean random = false;
-        CPSO instance = null;
-        instance.InitializeSwarms(random);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of SumOfLogs method, of class CPSO.
-     */
-    @Test
-    public void testSumOfLogs() {
-        System.out.println("SumOfLogs");
-        double fitness = 0.0;
-        Particle p = null;
-        Swarm swarm = null;
-        CPSO instance = null;
-        instance.UpdateBests(fitness, p, swarm);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of Schaffer method, of class CPSO.
@@ -628,10 +589,11 @@ public class CPSOTest {
     @Test
     public void testSchaffer() {
         System.out.println("Schaffer");
-        CPSO instance = null;
-        instance.UpdateSolution();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        CPSO instance = new CPSO(2, 5, 20, 0.5, 0.3, 0.2, 2, true, 1);
+        double[] solution = {0,0};
+        double expectedValue = 0;
+        double actualValue = instance.Schaffer(solution);
+        assertEquals(expectedValue, actualValue, 0.0);
     }
 
     /**
@@ -640,11 +602,11 @@ public class CPSOTest {
     @Test
     public void testRastrigin() {
         System.out.println("Rastrigin");
-        String output = "";
-        CPSO instance = null;
-        instance.writeOutput(output);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        CPSO instance = new CPSO(15, 5, 20, 0.5, 0.3, 0.2, 2, true, 2);
+        double[] solution = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        double expectedValue = 0;
+        double actualValue = instance.Rastrigin(solution);
+        assertEquals(expectedValue, actualValue, 0.0);
     }
     
     /**
@@ -653,25 +615,24 @@ public class CPSOTest {
     @Test
     public void testRosenbrock() {
         System.out.println("Rosenbrock");
-        double fitness = 0.0;
-        Particle p = null;
-        Swarm swarm = null;
-        CPSO instance = null;
-        instance.UpdateBests(fitness, p, swarm);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        CPSO instance = new CPSO(7, 5, 20, 0.5, 0.3, 0.2, 2, true, 3);
+        double[] solution = {1,1,1,1,1,1,1};
+        double expectedValue = 0;
+        double actualValue = instance.Rosenbrock(solution);
+        assertEquals(expectedValue, actualValue, 0.0);
     }
-
+    
     /**
      * Test of Griewanck method, of class CPSO.
      */
     @Test
     public void testGriewanck() {
         System.out.println("Griewanck");
-        CPSO instance = null;
-        instance.UpdateSolution();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        CPSO instance = new CPSO(10, 5, 20, 0.5, 0.3, 0.2, 2, true, 4);
+        double[] solution = {0,0,0,0,0,0,0,0,0,0};
+        double expectedValue = 0;
+        double actualValue = instance.Griewanck(solution);
+        assertEquals(expectedValue, actualValue, 0.0);
     }
 
     /**
@@ -680,11 +641,11 @@ public class CPSOTest {
     @Test
     public void testAckley() {
         System.out.println("Ackley");
-        String output = "";
-        CPSO instance = null;
-        instance.writeOutput(output);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        CPSO instance = new CPSO(10, 5, 20, 0.5, 0.3, 0.2, 2, true, 5);
+        double[] solution = {0,0,0,0,0,0,0,0,0,0};
+        double expectedValue = 0;
+        double actualValue = instance.Ackley(solution);
+        assertEquals(expectedValue, actualValue, 0.001);
     }
     
     

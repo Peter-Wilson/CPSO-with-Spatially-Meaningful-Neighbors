@@ -168,5 +168,15 @@ public class Swarm
             
            dt = new Delaunay_Triangulation(points);
         }
+        
+        /**
+         * Returns the best item to swap with based on the criteria noted
+         * @param item the item that is looking to swap
+         * @return the item that is best to swap with
+         */
+        public Point_dt chooseBestNeighbour(Point_dt item)
+        {
+            return null;            
+        }
 
     }

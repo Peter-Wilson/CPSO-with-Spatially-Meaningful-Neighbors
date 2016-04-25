@@ -272,9 +272,8 @@ public class CPSO {
 
         for(int i = 0; i < dimensionSize; i++)
         {
-            multiplication *= Math.cos(values[i]/Math.sqrt(i));
+            multiplication *= Math.cos(values[i]/Math.sqrt(i+1));
         }
-
         fitness = 1+ (summation/4000)-multiplication;
         return fitness;
     }
@@ -296,7 +295,7 @@ public class CPSO {
         }
 
         fitness = 20 + Math.E - 20*Math.pow(Math.E, -0.2*Math.sqrt(a/dimensionSize)) -
-                Math.pow(Math.E, Math.sqrt(b)/dimensionSize);
+                Math.pow(Math.E, b/dimensionSize);
 
        return fitness;
     }

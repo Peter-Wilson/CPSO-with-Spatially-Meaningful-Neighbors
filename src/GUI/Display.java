@@ -371,14 +371,14 @@ public class Display extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JRadioButton rbAckley;
+    public javax.swing.JRadioButton rbAckley;
     private javax.swing.JRadioButton rbDT;
-    private javax.swing.JRadioButton rbGriewanck;
-    private javax.swing.JRadioButton rbLog;
+    public javax.swing.JRadioButton rbGriewanck;
+    public javax.swing.JRadioButton rbLog;
     private javax.swing.JRadioButton rbNoDT;
-    private javax.swing.JRadioButton rbRastrigin;
-    private javax.swing.JRadioButton rbRosenbrock;
-    private javax.swing.JRadioButton rbSchaffer;
+    public javax.swing.JRadioButton rbRastrigin;
+    public javax.swing.JRadioButton rbRosenbrock;
+    public javax.swing.JRadioButton rbSchaffer;
     private javax.swing.JTextArea taOutput;
     private javax.swing.JTextField tfC1;
     private javax.swing.JTextField tfC2;
@@ -389,7 +389,7 @@ public class Display extends javax.swing.JPanel {
     private javax.swing.JTextField tfNumSwarms;
     // End of variables declaration//GEN-END:variables
 
-    private int getSelectedFunction() {
+    public int getSelectedFunction() {
         if(rbSchaffer.isSelected()) return 1;
         if(rbRastrigin.isSelected()) return 2;
         if(rbRosenbrock.isSelected()) return 3;

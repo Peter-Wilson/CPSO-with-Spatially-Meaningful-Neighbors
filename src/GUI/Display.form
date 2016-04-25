@@ -340,6 +340,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Schaffer"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
@@ -353,6 +356,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Rastrigin"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbRosenbrock">
       <Properties>
@@ -361,6 +367,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Rosenbrock"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbGriewanck">
       <Properties>
@@ -369,6 +378,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Griewanck"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbAckley">
       <Properties>
@@ -377,6 +389,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Ackley"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbLog">
       <Properties>
@@ -386,6 +401,9 @@
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Sum of Log"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

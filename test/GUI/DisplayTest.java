@@ -44,10 +44,38 @@ public class DisplayTest {
     public void testgetSelectedFunction() {
         System.out.println("getSelectedFunction");
         String output = "";
-        //CPSO instance = null;
-        //instance.writeOutput(output);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Display test = new Display();
+        int value = 0;
+        
+        //test schaffer
+        test.rbSchaffer.setSelected(true);
+        value = test.getSelectedFunction();
+        assertEquals(value, 1);
+        
+        //test schaffer
+        test.rbLog.setSelected(true);
+        value = test.getSelectedFunction();
+        assertEquals(value, 0);
+        
+        //test Rastrigin
+        test.rbRastrigin.setSelected(true);
+        value = test.getSelectedFunction();
+        assertEquals(value, 2);
+        
+        //test Rosenbrock
+        test.rbRosenbrock.setSelected(true);
+        value = test.getSelectedFunction();
+        assertEquals(value, 3);
+        
+        //test Griewanck
+        test.rbGriewanck.setSelected(true);
+        value = test.getSelectedFunction();
+        assertEquals(value, 4);
+        
+        //test Ackley
+        test.rbAckley.setSelected(true);
+        value = test.getSelectedFunction();
+        assertEquals(value, 5);
     }
     
 }
