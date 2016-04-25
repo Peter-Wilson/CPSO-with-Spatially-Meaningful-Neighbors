@@ -27,6 +27,7 @@ public class Swarm
         Delaunay_Triangulation dt;
         int k = 0;
         int function = 0;
+        double diameter = 0;
 
         public Swarm(int swarmSize, double C1, double C2, double INERTIA, boolean min, int k, int function)
         {
@@ -37,6 +38,7 @@ public class Swarm
             this.k = k;
             this.INERTIA = INERTIA;
             this.function = function;
+            setDiameter(function);
             InitializeParticles();
         }
 
@@ -59,15 +61,19 @@ public class Swarm
         
         public double getRandomNumber(Random rand, int function)
         {
+            return (rand.nextDouble()*diameter)-(diameter/2);
+        }
+        
+        public void setDiameter(int function)
+        {
             switch(function)
             {
-                case 0: return (rand.nextDouble()*50)+1;
-                case 1: return (rand.nextDouble()*200)-100;
-                case 2: return (rand.nextDouble()*10.24)-5.12;
-                case 3: return (rand.nextDouble()*60)-30;
-                case 4: return (rand.nextDouble()*1200)-600;
-                case 5: return (rand.nextDouble()*64)-32;
-                default: return 0;
+                case 0: diameter = 50;
+                case 1: diameter = 200;
+                case 2: diameter = 10.24;
+                case 3: diameter = 60;
+                case 4: diameter = 1200;
+                case 5: diameter = 64;
             }
         }
         
