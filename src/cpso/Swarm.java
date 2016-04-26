@@ -157,10 +157,15 @@ public class Swarm
             int dimensions = particles[0].getPosition().length;
             for(int i = 0; i < particles.length; i++)
             {
+                if(dimensions == 1)
+                {
+                    double[] part = particles[i].getPosition();
+                    points[i] = new Point_dt(part[0], 0, 0);
+                }
                 if(dimensions == 2)
                 {
                     double[] part = particles[i].getPosition();
-                    points[i] = new Point_dt(part[0], part[1]);
+                    points[i] = new Point_dt(part[0], part[1], 0);
                 }
                 else if(dimensions == 3)
                 {
@@ -169,7 +174,7 @@ public class Swarm
                 }
                 else
                 {
-                    throw new Exception("Only works for 2D and 3D swarms");
+                    throw new Exception("Only works for up to 3D swarms");
                 }                
             }
             
