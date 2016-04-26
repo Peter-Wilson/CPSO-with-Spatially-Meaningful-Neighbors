@@ -244,6 +244,7 @@ public class Swarm
     }
 
     /**
+     * returns if 2 particles are working together
      * 2 particles are working together if:
            1) if a particle P1 is following behind another particle
            P2 then a directed connection is made from P1 to P2.
@@ -259,7 +260,54 @@ public class Swarm
      * @return 
      */
     private boolean working_together(Point_dt item, Point_dt connected) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Particle a = getParticle(item);
+        Particle b = getParticle(connected);
+        
+        double[] v1 = a.getVelocity();
+        double[] n1 = add(a.getPosition(), v1);
+        double[] n2 = add(b.getPosition(), b.getVelocity());
+        
+        double[] u1to2 = subtract(n2,n1);
+        
+        return dot(v1,u1to2) > 0;
+    }
+    
+    private double[] add(double[] a, double[] b)
+    {
+        double[] temp = new double[a.length];
+        for(int i = 0; i < a.length; i++)
+        {
+            temp[i] = a[i] + b[i];
+        }
+        return temp;
+    }
+    
+    private double[] subtract(double[] a, double[] b)
+    {
+        double[] temp = new double[a.length];
+        for(int i = 0; i < a.length; i++)
+        {
+            temp[i] = a[i] - b[i];
+        }
+        return temp;
+    }
+    
+    /**
+     * Dot Product of 2 points
+     * @param a the first point
+     * @param b the second point
+     * @return the resulting value
+     */
+    static double dot(double[] a, double[] b)
+    {
+        int result = 0;
+        
+        for(int i = 0; i < a.length; i++)
+        {
+            result+= (a[i]*b[i]);
+        }
+        
+        return result;        
     }
 
     /**
