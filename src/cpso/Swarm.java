@@ -151,34 +151,40 @@ public class Swarm
          * Creates the Delaunay Triangulation
          * @throws Exception if the dimensions are incorrect
          */
-        public void CalculateDelaunatTriangulation3D() throws Exception
+        public void CalculateDelaunatTriangulation()
         {
             Point_dt[] points = new Point_dt[particles.length];
-            int dimensions = particles[0].getPosition().length;
             for(int i = 0; i < particles.length; i++)
             {
-                if(dimensions == 1)
-                {
-                    double[] part = particles[i].getPosition();
-                    points[i] = new Point_dt(part[0], 0, 0);
-                }
-                if(dimensions == 2)
-                {
-                    double[] part = particles[i].getPosition();
-                    points[i] = new Point_dt(part[0], part[1], 0);
-                }
-                else if(dimensions == 3)
-                {
-                    double[] part = particles[i].getPosition();
-                    points[i] = new Point_dt(part[0], part[1], part[2]);
-                }
-                else
-                {
-                    throw new Exception("Only works for up to 3D swarms");
-                }                
+               points[i] =  convertParticletoPoint(particles[i]);          
             }
             
            dt = new Delaunay_Triangulation(points);
+        }
+        
+        /**
+         * Note only works for up to 3 dimensions
+         * @param p
+         * @return 
+         */
+        private Point_dt convertParticletoPoint(Particle p)
+        {
+            int dimensions = p.getPosition().length;
+            if(dimensions == 1)
+            {
+                double[] part = p.getPosition();
+                return new Point_dt(part[0], 0, 0);
+            }
+            if(dimensions == 2)
+            {
+                double[] part = p.getPosition();
+                return new Point_dt(part[0], part[1], 0);
+            }
+            else 
+            {
+                double[] part = p.getPosition();
+                return new Point_dt(part[0], part[1], part[2]);
+            }  
         }
         
         /**
@@ -186,28 +192,29 @@ public class Swarm
          * @param item the item that is looking to swap
          * @return the item that is best to swap with
          */
-        public Point_dt chooseBestNeighbour(Point_dt item, double velocityDistance)
+        public Point_dt chooseBestNeighbour(Particle item)
         {
             boolean hasConnectedNeighbours = false;
-            Triangle_dt neighbours = dt.find(item);
+            Point_dt particlePoint = convertParticletoPoint(item);
+            Triangle_dt neighbours = dt.find(particlePoint);
             Point_dt[] connected = {neighbours.p1(),neighbours.p2(),neighbours.p3()};
             
             //Pf = min(Nk)
-            Point_dt point = closestNeighbour(item, connected);
+            Point_dt point = closestNeighbour(particlePoint, connected);
             Point_dt temp = null;
             
             //for k = 1 to neighbourset_size do
             for(int i = 0; i < 3; i++)
             {
-                if(connected[i] == item) continue;
+                if(connected[i] == particlePoint) continue;
                 
                 //if working_together(Pi, Pk)and
-                if(working_together(item, connected[i]))
+                if(working_together(particlePoint, connected[i]))
                 {
                     
                     //if dist(Xi − Pc) < dist(Xi − Pk)and fitness(Pk) < fitness(Xi) then
-                    if(item.distance3D(point) < item.distance3D(connected[i]) &&
-                        getParticle(connected[i]).getFitness() < getParticle(item).getFitness())
+                    if(particlePoint.distance3D(point) < particlePoint.distance3D(connected[i]) &&
+                        getParticle(connected[i]).getFitness() < getParticle(particlePoint).getFitness())
                     {
                         temp = connected[i];
                         hasConnectedNeighbours = true;
@@ -219,9 +226,9 @@ public class Swarm
             double localExploitationRatio = diameter/200;
             
             if(hasConnectedNeighbours &&
-                    item.distance3D(temp)/ item.distance3D(point) >
+                    particlePoint.distance3D(temp)/ particlePoint.distance3D(point) >
                     localExploitationRatio &&
-                    velocityDistance < 2*item.distance3D(temp))
+                    lengthVector(item.getVelocity()) < 2*particlePoint.distance3D(temp))
             {
                 return temp;
             }
@@ -246,6 +253,14 @@ public class Swarm
             }
         }
         return closest;
+    }
+    
+    private double lengthVector(double[] v)
+    {
+        int length = 0;
+        for(int i = 0; i < v.length; i++)
+            length += Math.pow(v[i],2);
+        return Math.sqrt(length);
     }
 
     /**

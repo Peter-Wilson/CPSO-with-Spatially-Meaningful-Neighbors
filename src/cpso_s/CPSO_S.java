@@ -32,10 +32,14 @@ public class CPSO_S extends CPSO {
             {
                 for (int s = 0; s < swarms.length; s++) //iterate through swarms
                 {
+                    try{ swarms[s].CalculateDelaunatTriangulation(); }
+                    catch(Exception e) {return;}
+                    
                     for(Particle p : swarms[s].getParticles()){ //for each particle
                         
                         double fitness = CalculateFitness(s, p.getPosition(), numSwarms); //calculate the new fitness
                         UpdateBests(fitness, p, swarms[s]); 
+                        swarms[s].chooseBestNeighbour(p);
                     }
                     
                     for (Particle p : swarms[s].getParticles()) //move the particles
