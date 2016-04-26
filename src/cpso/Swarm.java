@@ -196,6 +196,7 @@ public class Swarm
         {
             boolean hasConnectedNeighbours = false;
             Point_dt particlePoint = convertParticletoPoint(item);
+            
             Triangle_dt neighbours = dt.find(particlePoint);
             Point_dt[] connected = {neighbours.p1(),neighbours.p2(),neighbours.p3()};
             
@@ -235,7 +236,8 @@ public class Swarm
             else
             {
                 return getParticle(point);
-            }           
+            }  
+            
         }
 
     private Point_dt closestNeighbour(Point_dt item, Point_dt[] neighbours) {

@@ -49,10 +49,18 @@ public class CPSO_R_k extends CPSO {
                 /////////////////////////////////////////
             for (int s = 0; s < swarms.length; s++) //iterate through swarms
             {                    
+                //perform the delaunay triangulation
+                if(Delaunay)
+                {
+                    try{ swarms[s].CalculateDelaunayTriangulation(); }
+                    catch(Exception e) {System.out.println("error creating delaunay");}
+                }
+                    
                 for(Particle p : swarms[s].getParticles()){ //for each particle
 
                     double fitness = CalculateFitness(s, p.getPosition(), numSwarms); //calculate the new fitness
                     UpdateBests(fitness, p, swarms[s]);   
+                    if(Delaunay) p.setpBest(swarms[s].chooseBestNeighbour(p).getpBest());
                 }
 
                 for (Particle p : swarms[s].getParticles()) //move the particles
