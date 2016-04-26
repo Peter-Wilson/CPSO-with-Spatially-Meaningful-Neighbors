@@ -151,7 +151,7 @@ public class Swarm
          * Creates the Delaunay Triangulation
          * @throws Exception if the dimensions are incorrect
          */
-        public void CalculateDelaunatTriangulation()
+        public void CalculateDelaunayTriangulation()
         {
             Point_dt[] points = new Point_dt[particles.length];
             for(int i = 0; i < particles.length; i++)
