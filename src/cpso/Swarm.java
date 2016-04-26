@@ -192,7 +192,7 @@ public class Swarm
          * @param item the item that is looking to swap
          * @return the item that is best to swap with
          */
-        public Point_dt chooseBestNeighbour(Particle item)
+        public Particle chooseBestNeighbour(Particle item)
         {
             boolean hasConnectedNeighbours = false;
             Point_dt particlePoint = convertParticletoPoint(item);
@@ -230,11 +230,11 @@ public class Swarm
                     localExploitationRatio &&
                     lengthVector(item.getVelocity()) < 2*particlePoint.distance3D(temp))
             {
-                return temp;
+                return getParticle(temp);
             }
             else
             {
-                return point;
+                return getParticle(point);
             }           
         }
 

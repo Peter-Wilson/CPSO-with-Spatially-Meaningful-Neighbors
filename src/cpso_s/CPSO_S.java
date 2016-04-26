@@ -39,7 +39,7 @@ public class CPSO_S extends CPSO {
                         
                         double fitness = CalculateFitness(s, p.getPosition(), numSwarms); //calculate the new fitness
                         UpdateBests(fitness, p, swarms[s]); 
-                        swarms[s].chooseBestNeighbour(p);
+                        p.setpBest(swarms[s].chooseBestNeighbour(p).getpBest());
                     }
                     
                     for (Particle p : swarms[s].getParticles()) //move the particles
