@@ -211,7 +211,7 @@ public class Swarm
             }
             
             //localExploitationRatio = swarm.diameter/200
-            double localExploitationRatio = swarm.diameter/200;
+            double localExploitationRatio = diameter/200;
             
             if(hasConnectedNeighbours &&
                     item.distance3D(temp)/ item.distance3D(point) >
@@ -262,6 +262,11 @@ public class Swarm
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Returns the particle at the specific position
+     * @param connected the point that you are looking for
+     * @return  the particle
+     */
     private Particle getParticle(Point_dt connected) {
         for(Particle p : particles)
         {
