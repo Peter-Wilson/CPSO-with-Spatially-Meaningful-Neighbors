@@ -39,6 +39,7 @@ public class CPSO {
         if(numSwarms > dimensionSize) numSwarms = dimensionSize;
         this.numSwarms = numSwarms;   
         this.Delaunay = Delaunay;
+        if(numSwarms == dimensionSize) this.Delaunay = false;
         this.function = function;
         solution = new double[dimensionSize];
         testSolution = new double[dimensionSize];
@@ -56,6 +57,7 @@ public class CPSO {
         if(numSwarms > dimensionSize) numSwarms = dimensionSize;
         this.numSwarms = numSwarms;  
         this.Delaunay = Delaunay;          
+        if(numSwarms == dimensionSize) this.Delaunay = false;
         this.function = function;  
         solution = new double[dimensionSize];
         testSolution = new double[dimensionSize];

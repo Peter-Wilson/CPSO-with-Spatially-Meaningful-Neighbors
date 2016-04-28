@@ -346,12 +346,12 @@ public class Swarm
             
             //check if second digit is wrong
             if((position.length > 1 && position[1] != connected.y()) ||
-                    (position.length <= 1 && position[1] != 0))
+                    (position.length <= 1 && connected.y() != 0))
                     continue;
             
             //check if third digit is wrong
-            if((position.length > 2 && position[2] != connected.y()) ||
-                    (position.length <= 2 && position[2] != 0))
+            if((position.length > 2 && position[2] != connected.z()) ||
+                    (position.length <= 2 && connected.z() != 0))
                     continue;
             
             return p;
