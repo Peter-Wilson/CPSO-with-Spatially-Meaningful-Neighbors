@@ -65,7 +65,7 @@ public class Swarm
             return (rand.nextDouble()*diameter)-(diameter/2);
         }
         
-        public void setDiameter(int function)
+        public final void setDiameter(int function)
         {
             switch(function)
             {

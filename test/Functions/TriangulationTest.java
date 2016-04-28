@@ -45,13 +45,14 @@ public class TriangulationTest {
     @Test
     public void testClosestNeighbour() {
         System.out.println("closestNeighbour");
-        Point_dt item = null;
-        Point_dt[] neighbours = null;
-        Point_dt expResult = null;
+        Point_dt item = new Point_dt(1,1,0);
+        Point_dt[] neighbours = new Point_dt[3];
+        neighbours[0] = new Point_dt(3,3,0);
+        neighbours[1] = new Point_dt(1,4,0);
+        neighbours[1] = item;
+        Point_dt expResult = neighbours[1];
         Point_dt result = Triangulation.closestNeighbour(item, neighbours);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -60,12 +61,10 @@ public class TriangulationTest {
     @Test
     public void testLengthVector() {
         System.out.println("lengthVector");
-        double[] v = null;
-        double expResult = 0.0;
+        double[] v = {8.0, 0, 0};
+        double expResult = 8.0;
         double result = Triangulation.lengthVector(v);
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
