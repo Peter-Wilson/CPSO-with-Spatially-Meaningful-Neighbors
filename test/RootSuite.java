@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import Functions.FunctionsSuite;
 import GUI.GUISuite;
 import cpso.CpsoSuite;
 import cpso_h_k.Cpso_h_kSuite;
@@ -22,7 +23,7 @@ import org.junit.runners.Suite;
  * @author pw12nb
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({GUISuite.class, Cpso_s_kSuite.class, Cpso_r_kSuite.class, Cpso_sSuite.class, MainTest.class, CpsoSuite.class, Cpso_h_kSuite.class})
+@Suite.SuiteClasses({GUISuite.class, Cpso_s_kSuite.class, Cpso_r_kSuite.class, Cpso_sSuite.class, MainTest.class, CpsoSuite.class, Cpso_h_kSuite.class, FunctionsSuite.class})
 public class RootSuite {
 
     @BeforeClass
