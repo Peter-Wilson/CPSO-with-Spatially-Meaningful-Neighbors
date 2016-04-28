@@ -263,7 +263,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="tfInertia">
       <Properties>
-        <Property name="text" type="java.lang.String" value="0.5"/>
+        <Property name="text" type="java.lang.String" value="0.729844"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
@@ -288,12 +288,15 @@
     </Component>
     <Component class="javax.swing.JTextField" name="tfC1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="0.3"/>
+        <Property name="text" type="java.lang.String" value="1.49618"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfC1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfC2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="0.2"/>
+        <Property name="text" type="java.lang.String" value="1.49618"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">

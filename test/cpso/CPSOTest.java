@@ -583,70 +583,7 @@ public class CPSOTest {
     }
 
 
-    /**
-     * Test of Schaffer method, of class CPSO.
-     */
-    @Test
-    public void testSchaffer() {
-        System.out.println("Schaffer");
-        CPSO instance = new CPSO(2, 5, 20, 0.5, 0.3, 0.2, 2, true, 1);
-        double[] solution = {0,0};
-        double expectedValue = 0;
-        double actualValue = instance.Schaffer(solution);
-        assertEquals(expectedValue, actualValue, 0.0);
-    }
-
-    /**
-     * Test of Rastrigin method, of class CPSO.
-     */
-    @Test
-    public void testRastrigin() {
-        System.out.println("Rastrigin");
-        CPSO instance = new CPSO(15, 5, 20, 0.5, 0.3, 0.2, 2, true, 2);
-        double[] solution = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-        double expectedValue = 0;
-        double actualValue = instance.Rastrigin(solution);
-        assertEquals(expectedValue, actualValue, 0.0);
-    }
     
-    /**
-     * Test of Rosenbrock method, of class CPSO.
-     */
-    @Test
-    public void testRosenbrock() {
-        System.out.println("Rosenbrock");
-        CPSO instance = new CPSO(7, 5, 20, 0.5, 0.3, 0.2, 2, true, 3);
-        double[] solution = {1,1,1,1,1,1,1};
-        double expectedValue = 0;
-        double actualValue = instance.Rosenbrock(solution);
-        assertEquals(expectedValue, actualValue, 0.0);
-    }
-    
-    /**
-     * Test of Griewanck method, of class CPSO.
-     */
-    @Test
-    public void testGriewanck() {
-        System.out.println("Griewanck");
-        CPSO instance = new CPSO(10, 5, 20, 0.5, 0.3, 0.2, 2, true, 4);
-        double[] solution = {0,0,0,0,0,0,0,0,0,0};
-        double expectedValue = 0;
-        double actualValue = instance.Griewanck(solution);
-        assertEquals(expectedValue, actualValue, 0.0);
-    }
-
-    /**
-     * Test of Ackley method, of class CPSO.
-     */
-    @Test
-    public void testAckley() {
-        System.out.println("Ackley");
-        CPSO instance = new CPSO(10, 5, 20, 0.5, 0.3, 0.2, 2, true, 5);
-        double[] solution = {0,0,0,0,0,0,0,0,0,0};
-        double expectedValue = 0;
-        double actualValue = instance.Ackley(solution);
-        assertEquals(expectedValue, actualValue, 0.001);
-    }
     
     
     
