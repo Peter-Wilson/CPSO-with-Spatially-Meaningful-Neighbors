@@ -123,7 +123,7 @@ public class SwarmTest {
         p.setPosition(position);
         p.setpBest(position);
         instance.setGlobalBest(new Particle(pBest));
-        instance.UpdateVelocity(p, true);
+        instance.UpdateVelocity(p, 0, true);
         
         double[] expectedVelocity = {1.9};
         assertArrayEquals(expectedVelocity, p.getVelocity(), 0.0);
@@ -132,7 +132,7 @@ public class SwarmTest {
         
         double[] velocity2 = {1000};
         p.setVelocity(velocity2);
-        instance.UpdateVelocity(p, true);
+        instance.UpdateVelocity(p, 0, true);
         double[] newValue = Triangulation.add(p.getPosition(), p.getVelocity());
         
         for(int i = 0; i < newValue.length; i++)

@@ -110,7 +110,7 @@ public class Display extends javax.swing.JPanel {
 
         tfNumParticles.setText("20");
 
-        tfInertia.setText("0.729844");
+        tfInertia.setText("1.0");
 
         jLabel5.setText("Delaunay Traingulate?");
 

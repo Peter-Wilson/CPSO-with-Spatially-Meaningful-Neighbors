@@ -81,12 +81,18 @@ public class Swarm
         //Update the velocity of the points based on the velocity solution
         public void UpdateVelocity(Particle p)
         {
-            UpdateVelocity(p, false);
+            UpdateVelocity(p, 0, false);
+        }
+        
+        //Update the velocity of the points based on the velocity solution
+        public void UpdateVelocity(Particle p, double loop)
+        {
+            UpdateVelocity(p, loop, false);
         }
         
 
         //Update the velocity of the points based on the velocity solution
-        public void UpdateVelocity(Particle p, boolean test)
+        public void UpdateVelocity(Particle p, double loop, boolean test)
         {
             Random random = new Random();
             double R1 = random.nextDouble();
@@ -98,7 +104,7 @@ public class Swarm
 
             for(int i = 0; i < k; i ++)
             {
-                velocity = ((INERTIA * p.getVelocity()[i]) +
+                velocity = (((INERTIA - loop) * p.getVelocity()[i]) +
                              C1 * R1 * (p.getpBest()[i] - p.getPosition()[i]) +
                              C2 * R2 * (getGlobalBest().getPosition()[i] - p.getPosition()[i]));
                 
