@@ -27,6 +27,7 @@ public class CPSO {
     public int numSwarms;
     public boolean Delaunay;
     public int function;
+    public double criterion;
     JTextArea screen;
     
     public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay, int function)
@@ -41,6 +42,7 @@ public class CPSO {
         this.numSwarms = numSwarms;   
         this.Delaunay = Delaunay;
         this.function = function;
+        criterion = getCriterion(function);
         solution = new double[dimensionSize];
         testSolution = new double[dimensionSize];
         screen = null;
@@ -58,6 +60,7 @@ public class CPSO {
         this.numSwarms = numSwarms;  
         this.Delaunay = Delaunay;          
         this.function = function;  
+        criterion = getCriterion(function);
         solution = new double[dimensionSize];
         testSolution = new double[dimensionSize];
         screen = op;
@@ -141,10 +144,20 @@ public class CPSO {
             else{
                 for(int j = 0; j < best.getPosition().length; j++)
                 {
-                    solution[index++] = best.getPosition()[j];
+                    testSolution[index++] = best.getPosition()[j];
                 }
             }
         }
+    }
+    
+    /**
+     * Adds the best solutions into temp and calculate the fitness
+     * @return the fitness of the global best values
+     */
+    public double getSolutionFitness()
+    {
+        UpdateSolution();
+        return this.CalculateFinalFitness(testSolution);
     }
 
     /**
@@ -255,5 +268,20 @@ public class CPSO {
             this.solution = solution;
         }
         else throw new Exception("Incorrect solution size");
+    }
+
+    private double getCriterion(int function) {
+        switch(function)
+        {
+            case 0: return 0.5; //sum of logs                 
+            case 1: return 0.00001; //Schaffer                
+            case 2: return 0.01; //Rastrigin                 
+            case 3: return 100; //Rosenbrock                
+            case 4: return 0.05; //Griewanck                
+            case 5: return 0.01; //Ackley
+                
+            default: return 0;
+                     
+        }
     }
 }

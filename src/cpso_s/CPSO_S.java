@@ -58,6 +58,13 @@ public class CPSO_S extends CPSO {
                     } 
                     
                 }
+                
+                if(this.getSolutionFitness() < this.criterion)
+                {
+                    writeOutput("Criterion Met after "+i+" iterations");
+                    solution = this.testSolution;
+                    break;
+                } 
             }
             
             for(int i = 0; i < solution.length; i++) //loop to print off solution

@@ -71,6 +71,13 @@ public class CPSO_H_k extends CPSO {
                 }                       
             }
             // </editor-fold>
+            
+            if(this.getSolutionFitness() < this.criterion)
+            {
+                writeOutput("Criterion Met after "+i+" iterations");
+                solution = this.testSolution;
+                break;
+            }
 
             //transfer knowledge from CPSO to PSO
             if(swarms[0].getGlobalBest() != null && swarms[0].getGlobalBest().getVelocity() != null)

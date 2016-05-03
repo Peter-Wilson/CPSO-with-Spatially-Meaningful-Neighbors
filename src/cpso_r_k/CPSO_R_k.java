@@ -74,6 +74,13 @@ public class CPSO_R_k extends CPSO {
                     swarms[s].UpdatePosition(p);
                 }                       
             }
+            
+            if(this.getSolutionFitness() < this.criterion)
+            {
+                writeOutput("Criterion Met after "+i+" iterations");
+                    solution = this.testSolution;
+                break;
+            }
             // </editor-fold>
 
         }
