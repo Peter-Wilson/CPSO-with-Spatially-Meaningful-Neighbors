@@ -91,14 +91,29 @@ public class Swarm
             Random random = new Random();
             double R1 = random.nextDouble();
             double R2 = random.nextDouble();
+            double velocity = 0;
             
             //for testing purposes remove the randomness
             if(test){ R1 = 1; R2 = 1; }
 
             for(int i = 0; i < k; i ++)
-            p.setVelocity((INERTIA * p.getVelocity()[i]) +
-                         C1 * R1 * (p.getpBest()[i] - p.getPosition()[i]) +
-                         C2 * R2 * (getGlobalBest().getPosition()[i] - p.getPosition()[i]), i);
+            {
+                velocity = ((INERTIA * p.getVelocity()[i]) +
+                             C1 * R1 * (p.getpBest()[i] - p.getPosition()[i]) +
+                             C2 * R2 * (getGlobalBest().getPosition()[i] - p.getPosition()[i]));
+                
+                //This limits the velocity from going beyond the diameter
+                if((velocity+p.getPosition()[i]) >  (diameter/2))
+                {
+                    velocity = (diameter/2) - p.getPosition()[i];
+                }
+                else if((velocity+p.getPosition()[i]) <  -(diameter/2))
+                {
+                    velocity = -(diameter/2) - p.getPosition()[i];
+                }
+                
+                p.setVelocity(velocity, i);
+            }
         }
 
         //Use the velocity to update the position
