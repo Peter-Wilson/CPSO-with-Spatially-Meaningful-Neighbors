@@ -5,6 +5,7 @@
  */
 package cpso_s_k;
 import cpso.*;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -12,9 +13,15 @@ import cpso.*;
  */
 public class CPSO_S_k extends CPSO {    
 
-    public CPSO_S_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k)
+    public CPSO_S_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function)
     {
-        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k);
+        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function);
+        super.InitializeSwarms(false);
+    }
+    
+    public CPSO_S_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function, JTextArea op)
+    {
+        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, op);
         super.InitializeSwarms(false);
     }
 
@@ -25,10 +32,23 @@ public class CPSO_S_k extends CPSO {
         {
             for (int s = 0; s < swarms.length; s++) //iterate through swarms
             {
+                //perform the delaunay triangulation
+                if(Delaunay)
+                {
+                    try{ swarms[s].CalculateDelaunayTriangulation(); }
+                    catch(Exception e) {System.out.println("error creating delaunay");}
+                }
+                
                 for(Particle p : swarms[s].getParticles()){ //for each particle
 
                     double fitness = CalculateFitness(s, p.getPosition(), numSwarms); //calculate the new fitness
                     UpdateBests(fitness, p, swarms[s]);  
+                    if(Delaunay) 
+                    {
+                        Particle neighbour = swarms[s].chooseBestNeighbour(p);
+                        if(neighbour != null)
+                            p.setpBest(neighbour.getpBest());
+                    }
                 }
 
                 for (Particle p : swarms[s].getParticles()) //move the particles
@@ -44,6 +64,6 @@ public class CPSO_S_k extends CPSO {
         {
             writeOutput("Solution "+(i+1)+": "+ solution[i]);
         }
-        writeOutput("The final fitness value is: "+ CalculateFinalFitness());
+        writeOutput("The final fitness value is: "+ CalculateFinalFitness(solution));
     }
 }

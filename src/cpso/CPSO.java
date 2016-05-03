@@ -4,6 +4,9 @@
  */
 package cpso;
 
+import Functions.Fitness;
+import javax.swing.JTextArea;
+
 /**
  *
  * @author Peter
@@ -14,6 +17,7 @@ public class CPSO {
     public boolean min = true;
     public Swarm[] swarms; 
     public double[] solution;
+    public double[] testSolution;
     public int dimensionSize;
     public int swarmSize;
     public double C1 = 0.5;
@@ -21,8 +25,11 @@ public class CPSO {
     public double INERTIA = 0.3;
     public int maxLoops;
     public int numSwarms;
+    public boolean Delaunay;
+    public int function;
+    JTextArea screen;
     
-    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms)
+    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay, int function)
     {
         this.dimensionSize = dimensionSize;
         this.maxLoops = maxLoops;
@@ -31,8 +38,29 @@ public class CPSO {
         this.C1 = c1;
         this.C2 = c2;
         if(numSwarms > dimensionSize) numSwarms = dimensionSize;
-        this.numSwarms = numSwarms;            
+        this.numSwarms = numSwarms;   
+        this.Delaunay = Delaunay;
+        this.function = function;
         solution = new double[dimensionSize];
+        testSolution = new double[dimensionSize];
+        screen = null;
+    }
+    
+    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay, int function, JTextArea op)
+    {
+        this.dimensionSize = dimensionSize;
+        this.maxLoops = maxLoops;
+        this.swarmSize = swarmSize;
+        this.INERTIA = Inertia;
+        this.C1 = c1;
+        this.C2 = c2;
+        if(numSwarms > dimensionSize) numSwarms = dimensionSize;
+        this.numSwarms = numSwarms;  
+        this.Delaunay = Delaunay;          
+        this.function = function;  
+        solution = new double[dimensionSize];
+        testSolution = new double[dimensionSize];
+        screen = op;
     }
 
     /**
@@ -67,7 +95,7 @@ public class CPSO {
                 }
             }
             
-            swarms[i] = new Swarm(swarmSize, C1, C2, INERTIA, min, width);
+            swarms[i] = new Swarm(swarmSize, C1, C2, INERTIA, min, width, function);
 
             for(int j = 0; j < width; j++)
             {
@@ -102,6 +130,8 @@ public class CPSO {
      */
     public void UpdateSolution()
     {
+        //dont need to update the solution
+        /*
         int index = 0;
         for(int i = 0; i < swarms.length; i++)
         {
@@ -116,7 +146,7 @@ public class CPSO {
                     solution[index++] = best.getPosition()[j];
                 }
             }
-        }
+        }*/
     }
 
     /**
@@ -132,7 +162,7 @@ public class CPSO {
         {
             for(int i = 0; i < position.length; i++)
             {
-                fitness += Math.log(position[i]);
+                testSolution[i] = position[i];
             }
         }
         else
@@ -142,34 +172,65 @@ public class CPSO {
                 if(i == index)
                     for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
                     {
-                        fitness += Math.log(position[j]);
+                        testSolution[count] = position[j];
                         count++;
                     }
                 else
                     for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
-                        fitness += Math.log(solution[count++]);
+                    {
+                        testSolution[count] = solution[count];
+                        count++;
+                    }
             }
         }
-        return fitness;   
+        return CalculateFinalFitness(testSolution);   
     }
 
     /**
      * Returns the final fitness based on the solution function
      * @return fitness
      */
-    public double CalculateFinalFitness()
+    public double CalculateFinalFitness(double[] values)
     {
-        double fitness = 0;
-        for(int i = 0; i < dimensionSize; i++)
+        switch(function)
         {
-            fitness += Math.log(solution[i]);
+            case 0: //sum of logs
+            {
+                return Fitness.SumOfLogs(values, dimensionSize);
+            }
+            case 1: //Schaffer
+            {
+                return Fitness.Schaffer(values);
+            }
+            case 2: //Rastrigin
+            {
+                 return Fitness.Rastrigin(values, dimensionSize);
+            }
+            case 3: //Rosenbrock
+            {
+                return Fitness.Rosenbrock(values, dimensionSize);
+            }
+            case 4: //Griewanck
+            {
+                return Fitness.Griewanck(values, dimensionSize);
+            }
+            case 5: //Ackley
+            {
+                return Fitness.Ackley(values, dimensionSize);
+            }
+            default:
+                return 0;     
         }
-        return fitness; 
     }
+    
+    
 
     public void writeOutput(String output)
     {
-        System.out.println(output);
+        if(screen == null)
+            System.out.println(output);
+        else
+            screen.append("\n "+output);
     }
        
     /**

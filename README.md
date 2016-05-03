@@ -15,3 +15,5 @@ Currently has 53 tests
 ![ui mockup](https://github.com/Peter-Wilson/CPSO/blob/develop/UI%20Mockup/UI%20mockup.png)
 
 ## Wiki detailing the algorithms: https://github.com/Peter-Wilson/CPSO/wiki
+
+##The thesis report can be found here: https://www.sharelatex.com/project/5702e5ae672d0ba1270b6e93

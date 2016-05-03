@@ -37,9 +37,45 @@ public class DisplayTest {
     public void tearDown() {
     }
 
+    /**
+     * Test of getSelectedFunction method, of class CPSO.
+     */
     @Test
-    public void testSomeMethod() {
-        //replace this
+    public void testgetSelectedFunction() {
+        System.out.println("getSelectedFunction");
+        String output = "";
+        Display test = new Display();
+        int value = 0;
+        
+        //test schaffer
+        test.rbSchaffer.setSelected(true);
+        value = test.getSelectedFunction();
+        assertEquals(value, 1);
+        
+        //test schaffer
+        test.rbLog.setSelected(true);
+        value = test.getSelectedFunction();
+        assertEquals(value, 0);
+        
+        //test Rastrigin
+        test.rbRastrigin.setSelected(true);
+        value = test.getSelectedFunction();
+        assertEquals(value, 2);
+        
+        //test Rosenbrock
+        test.rbRosenbrock.setSelected(true);
+        value = test.getSelectedFunction();
+        assertEquals(value, 3);
+        
+        //test Griewanck
+        test.rbGriewanck.setSelected(true);
+        value = test.getSelectedFunction();
+        assertEquals(value, 4);
+        
+        //test Ackley
+        test.rbAckley.setSelected(true);
+        value = test.getSelectedFunction();
+        assertEquals(value, 5);
     }
     
 }

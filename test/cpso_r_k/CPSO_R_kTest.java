@@ -52,7 +52,7 @@ public class CPSO_R_kTest {
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 2;
-        instance = new CPSO_R_k(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2, k);
+        instance = new CPSO_R_k(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2, k, true, 0);
         
         //test the values are set properly
         assertEquals(expectedDimensions, instance.dimensionSize);
@@ -76,7 +76,7 @@ public class CPSO_R_kTest {
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 2;
-        CPSO_R_k instance = new CPSO_R_k(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k);
+        CPSO_R_k instance = new CPSO_R_k(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k, true, 0);
         
         Swarm[] swarms = instance.getSwarms();
         

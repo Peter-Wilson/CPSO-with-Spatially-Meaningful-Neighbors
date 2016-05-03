@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cpso_s;
+package Functions;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,11 +14,11 @@ import org.junit.runners.Suite;
 
 /**
  *
- * @author Peter
+ * @author pw12nb
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({CPSO_STest.class})
-public class Cpso_sSuite {
+@Suite.SuiteClasses({Functions.FitnessTest.class, Functions.TriangulationTest.class})
+public class FunctionsSuite {
 
     @BeforeClass
     public static void setUpClass() throws Exception {

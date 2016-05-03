@@ -17,7 +17,7 @@ import org.junit.runners.Suite;
  * @author pw12nb
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({CPSO_R_kTest.class, MainTest.class})
+@Suite.SuiteClasses({CPSO_R_kTest.class})
 public class Cpso_r_kSuite {
 
     @BeforeClass

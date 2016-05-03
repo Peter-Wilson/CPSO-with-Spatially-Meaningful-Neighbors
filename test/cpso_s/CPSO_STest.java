@@ -51,7 +51,7 @@ public class CPSO_STest {
         double expectedInertia = 0.5;
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
-        instance = new CPSO_S(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2, 1);
+        instance = new CPSO_S(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2, 1, true, 0);
         
         //test the values are set properly
         assertEquals(expectedDimensions, instance.dimensionSize);
