@@ -76,8 +76,6 @@ public class CPSO_R_k extends CPSO {
             }
             // </editor-fold>
 
-            UpdateSolution();
-
         }
 
         for(int i = 0; i < solution.length; i++) //loop to print off solution

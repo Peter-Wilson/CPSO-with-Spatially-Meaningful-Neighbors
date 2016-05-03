@@ -130,8 +130,6 @@ public class CPSO {
      */
     public void UpdateSolution()
     {
-        //dont need to update the solution
-        /*
         int index = 0;
         for(int i = 0; i < swarms.length; i++)
         {
@@ -146,7 +144,7 @@ public class CPSO {
                     solution[index++] = best.getPosition()[j];
                 }
             }
-        }*/
+        }
     }
 
     /**

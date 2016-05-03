@@ -58,7 +58,6 @@ public class CPSO_S extends CPSO {
                     } 
                     
                 }
-                    UpdateSolution();
             }
             
             for(int i = 0; i < solution.length; i++) //loop to print off solution
