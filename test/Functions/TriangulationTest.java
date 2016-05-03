@@ -49,8 +49,8 @@ public class TriangulationTest {
         Point_dt[] neighbours = new Point_dt[3];
         neighbours[0] = new Point_dt(3,3,0);
         neighbours[1] = new Point_dt(1,4,0);
-        neighbours[1] = item;
-        Point_dt expResult = neighbours[1];
+        neighbours[2] = item;
+        Point_dt expResult = neighbours[0];
         Point_dt result = Triangulation.closestNeighbour(item, neighbours);
         assertEquals(expResult, result);
     }
@@ -72,30 +72,83 @@ public class TriangulationTest {
      */
     @Test
     public void testWorking_together() {
-        System.out.println("working_together");
-        Point_dt item = null;
-        Point_dt connected = null;
-        Particle[] p = null;
+        System.out.println("working_together following");
+        Point_dt item = new Point_dt(1,1,1);
+        Point_dt connected = new Point_dt(2,2,2);
+        double[] initialPosition1 = {1,1,1};
+        double[] velocity = {1,1,1};
+        Particle expected1 = new Particle(initialPosition1);
+        expected1.setVelocity(velocity);
+        
+        
+        double[] initialPosition2 = {2,2,2};
+        Particle expected2 = new Particle(initialPosition2);
+        expected2.setVelocity(velocity);
+        Particle[] p = {expected1, expected2};
+        boolean expResult = true;
+        boolean result = Triangulation.working_together(item, connected, p);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of working_together method, of class Triangulation.
+     */
+    @Test
+    public void testWorking_together2() {
+        System.out.println("working_together heading towards eachother");
+        Point_dt item = new Point_dt(1,1,1);
+        Point_dt connected = new Point_dt(4,1,1);
+        double[] initialPosition1 = {1,1,1};
+        double[] velocity = {1,0,0};
+        Particle expected1 = new Particle(initialPosition1);
+        expected1.setVelocity(velocity);
+        
+        
+        double[] velocity2 = {-1,0,0};
+        double[] initialPosition2 = {4,1,1};
+        Particle expected2 = new Particle(initialPosition2);
+        expected2.setVelocity(velocity2);
+        Particle[] p = {expected1, expected2};
+        boolean expResult = true;
+        boolean result = Triangulation.working_together(item, connected, p);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of working_together method, of class Triangulation.
+     */
+    @Test
+    public void testWorking_together3() {
+        System.out.println("not working_together");
+        Point_dt item = new Point_dt(1,1,1);
+        Point_dt connected = new Point_dt(2,2,2);
+        double[] initialPosition1 = {1,1,1};
+        double[] velocity = {1,1,1};
+        Particle expected1 = new Particle(initialPosition1);
+        expected1.setVelocity(velocity);
+        
+        
+        double[] velocity2 = {-1,-1,-1};
+        double[] initialPosition2 = {2,2,2};
+        Particle expected2 = new Particle(initialPosition2);
+        expected2.setVelocity(velocity2);
+        Particle[] p = {expected1, expected2};
         boolean expResult = false;
         boolean result = Triangulation.working_together(item, connected, p);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-
+    
     /**
      * Test of add method, of class Triangulation.
      */
     @Test
     public void testAdd() {
         System.out.println("add");
-        double[] a = null;
-        double[] b = null;
-        double[] expResult = null;
+        double[] a = {3,4};
+        double[] b = {5,-1};
+        double[] expResult = {8,3};
         double[] result = Triangulation.add(a, b);
         assertArrayEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -104,13 +157,11 @@ public class TriangulationTest {
     @Test
     public void testSubtract() {
         System.out.println("subtract");
-        double[] a = null;
-        double[] b = null;
-        double[] expResult = null;
+        double[] a = {3,4};
+        double[] b = {5,-1};
+        double[] expResult = {-2,5};
         double[] result = Triangulation.subtract(a, b);
         assertArrayEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -119,13 +170,11 @@ public class TriangulationTest {
     @Test
     public void testDot() {
         System.out.println("dot");
-        double[] a = null;
-        double[] b = null;
-        double expResult = 0.0;
+        double[] a = {0,3,-7};
+        double[] b = {2,3,1};
+        double expResult = 2.0;
         double result = Triangulation.dot(a, b);
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -134,13 +183,14 @@ public class TriangulationTest {
     @Test
     public void testGetParticle() {
         System.out.println("getParticle");
-        Point_dt connected = null;
-        Particle[] particles = null;
-        Particle expResult = null;
+        Point_dt connected = new Point_dt(1,2,3);
+        double[] initialPosition = {1,2,3};
+        Particle expResult = new Particle(initialPosition);
+        double[] initialPosition2 = {3,2,1};
+        Particle expResult2 = new Particle(initialPosition2);
+        Particle[] particles = {expResult2, expResult};
         Particle result = Triangulation.getParticle(connected, particles);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -149,12 +199,13 @@ public class TriangulationTest {
     @Test
     public void testConvertParticletoPoint() {
         System.out.println("convertParticletoPoint");
-        Particle p = null;
-        Point_dt expResult = null;
+        double[] initialPosition = {1.0,2.0,3.0};
+        Particle p = new Particle(initialPosition);
+        Point_dt expResult = new Point_dt(1.0,2.0,3.0);
         Point_dt result = Triangulation.convertParticletoPoint(p);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(expResult.x(), result.x(), 0.0);
+        assertEquals(expResult.y(), result.y(), 0.0);
+        assertEquals(expResult.z(), result.z(), 0.0);
     }
     
 }

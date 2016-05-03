@@ -57,7 +57,6 @@ public class CPSO_S_k extends CPSO {
                     swarms[s].UpdatePosition(p);
                 }                       
             }
-            UpdateSolution();
         }
 
         for(int i = 0; i < solution.length; i++) //loop to print off solution

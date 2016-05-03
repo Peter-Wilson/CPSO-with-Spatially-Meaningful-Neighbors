@@ -72,8 +72,6 @@ public class CPSO_H_k extends CPSO {
             }
             // </editor-fold>
 
-            UpdateSolution();
-
             //transfer knowledge from CPSO to PSO
             if(swarms[0].getGlobalBest() != null && swarms[0].getGlobalBest().getVelocity() != null)
             {
