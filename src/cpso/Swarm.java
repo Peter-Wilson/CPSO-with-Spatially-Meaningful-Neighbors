@@ -69,12 +69,12 @@ public class Swarm
         {
             switch(function)
             {
-                case 0: diameter = 50;
-                case 1: diameter = 200;
-                case 2: diameter = 10.24;
-                case 3: diameter = 60;
-                case 4: diameter = 1200;
-                case 5: diameter = 64;
+                case 0: diameter = 50; break;
+                case 1: diameter = 200; break;
+                case 2: diameter = 10.24; break;
+                case 3: diameter = 60; break;
+                case 4: diameter = 1200; break;
+                case 5: diameter = 64; break;
             }
         }
         
