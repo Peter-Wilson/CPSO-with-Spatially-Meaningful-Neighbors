@@ -16,4 +16,4 @@ Currently has 53 tests
 
 ## Wiki detailing the algorithms: https://github.com/Peter-Wilson/CPSO/wiki
 
-##The thesis report can be found here: https://www.sharelatex.com/project/5702e5ae672d0ba1270b6e93
+## The thesis report can be found here: https://www.sharelatex.com/project/5702e5ae672d0ba1270b6e93
