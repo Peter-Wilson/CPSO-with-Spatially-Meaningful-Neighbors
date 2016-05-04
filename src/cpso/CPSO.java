@@ -117,14 +117,14 @@ public class CPSO {
     public void UpdateBests(double fitness, Particle p, Swarm swarm)
     {
         if (p.UpdatePersonalBest(fitness, p.getPosition(), min))  //update the personal best
-            writeOutput("New Personal best for " + p + ": x=" + p.getPosition());
+            writeOutput("New Personal best for " + p + ": x=" + p.getFitness());
 
         if ((swarm.getGlobalBest() == null) ||
             (p.getFitness() < swarm.getGlobalBest().getFitness() && min) ||
             (swarm.getGlobalBest().getFitness() < p.getFitness() && !min))      //update the global best
         {
             swarm.setGlobalBest(p);
-            writeOutput("New Global Best for Swarm " + swarm + ": x=" + p.getPosition());
+            writeOutput("New Global Best for Swarm " + swarm + ": x=" + p.getFitness());
         }
     }
 
