@@ -6,6 +6,8 @@
 package cpso;
 
 import Functions.Triangulation;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import org.jzy3d.plot3d.builder.delaunay.jdt.Delaunay_Triangulation;
 import org.jzy3d.plot3d.builder.delaunay.jdt.Point_dt;
@@ -197,27 +199,38 @@ public class Swarm
             boolean hasConnectedNeighbours = false;
             Point_dt particlePoint = Triangulation.convertParticletoPoint(item);
             
-            Triangle_dt neighbours = dt.find(particlePoint);
-            Point_dt[] connected = {neighbours.p1(),neighbours.p2(),neighbours.p3()};
+            ArrayList<Point_dt> connected = new ArrayList<Point_dt>();
+            
+            Iterator<Triangle_dt> iterator = dt.trianglesIterator();
+            while(iterator.hasNext())
+            {
+                Triangle_dt triangles = iterator.next();                
+                if(triangles.contains(particlePoint))
+                {
+                    connected.add(triangles.p1());
+                    connected.add(triangles.p2());
+                    connected.add(triangles.p3());
+                }
+            }
             
             //Pf = min(Nk)
             Point_dt point = Triangulation.closestNeighbour(particlePoint, connected);
             Point_dt temp = null;
             
             //for k = 1 to neighbourset_size do
-            for(int i = 0; i < 3; i++)
+            for(int i = 0; i < connected.size(); i++)
             {
-                if(connected[i] == particlePoint) continue;
+                if(connected.get(i) == particlePoint) continue;
                 
                 //if working_together(Pi, Pk)and
-                if(Triangulation.working_together(particlePoint, connected[i], particles))
+                if(Triangulation.working_together(particlePoint, connected.get(i), particles))
                 {
                     
                     //if dist(Xi − Pc) < dist(Xi − Pk)and fitness(Pk) < fitness(Xi) then
-                    if(particlePoint.distance3D(point) < particlePoint.distance3D(connected[i]) &&
-                        Triangulation.getParticle(connected[i], particles).getFitness() < Triangulation.getParticle(particlePoint, particles).getFitness())
+                    if(particlePoint.distance3D(point) < particlePoint.distance3D(connected.get(i)) &&
+                        Triangulation.getParticle(connected.get(i), particles).getFitness() < Triangulation.getParticle(particlePoint, particles).getFitness())
                     {
-                        temp = connected[i];
+                        temp = connected.get(i);
                         hasConnectedNeighbours = true;
                     }
                 }

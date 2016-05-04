@@ -6,6 +6,7 @@
 package Functions;
 
 import cpso.Particle;
+import java.util.ArrayList;
 import org.jzy3d.plot3d.builder.delaunay.jdt.Point_dt;
 
 /**
@@ -13,17 +14,17 @@ import org.jzy3d.plot3d.builder.delaunay.jdt.Point_dt;
  * @author pw12nb
  */
 public class Triangulation {
-    public static Point_dt closestNeighbour(Point_dt item, Point_dt[] neighbours) {
+    public static Point_dt closestNeighbour(Point_dt item, ArrayList<Point_dt> neighbours) {
         double minDistance = Double.MAX_VALUE;
         Point_dt closest = null;
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < neighbours.size(); i++)
         {
-            if(neighbours[i] == item) continue;
+            if(neighbours.get(i) == item) continue;
             
-            double distance = item.distance3D(neighbours[i]);
+            double distance = item.distance3D(neighbours.get(i));
             if(distance < minDistance)
             {
-                closest = neighbours[i];
+                closest = neighbours.get(i);
                 minDistance = distance;
             }
         }
