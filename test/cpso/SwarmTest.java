@@ -5,6 +5,7 @@
  */
 package cpso;
 
+import Functions.Triangulation;
 import java.util.Random;
 import org.hamcrest.core.Is;
 import org.junit.After;
@@ -122,9 +123,26 @@ public class SwarmTest {
         p.setPosition(position);
         p.setpBest(position);
         instance.setGlobalBest(new Particle(pBest));
-        instance.UpdateVelocity(p, true);
+        instance.UpdateVelocity(p, 0, true);
         
         double[] expectedVelocity = {1.9};
+        assertArrayEquals(expectedVelocity, p.getVelocity(), 0.0);
+        
+        System.out.println("Gets correct value");
+        
+        double[] velocity2 = {1000};
+        p.setVelocity(velocity2);
+        instance.UpdateVelocity(p, 0, true);
+        double[] newValue = Triangulation.add(p.getPosition(), p.getVelocity());
+        
+        for(int i = 0; i < newValue.length; i++)
+        {
+            assertTrue(newValue[i] >= -(instance.diameter/2));
+            assertTrue(newValue[i] <= (instance.diameter/2));
+        }
+        
+        System.out.println("Is successfully clamped");
+        
     }
     
     /**

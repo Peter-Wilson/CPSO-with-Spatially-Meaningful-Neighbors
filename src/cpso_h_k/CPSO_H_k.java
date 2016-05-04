@@ -66,11 +66,18 @@ public class CPSO_H_k extends CPSO {
                 
                 for (Particle p : swarms[s].getParticles()) //move the particles
                 {
-                    swarms[s].UpdateVelocity(p);
+                    swarms[s].UpdateVelocity(p, i/(double)maxLoops);
                     swarms[s].UpdatePosition(p);
                 }                       
             }
             // </editor-fold>
+            
+            if(this.getSolutionFitness() < this.criterion)
+            {
+                writeOutput("Criterion Met after "+i+" iterations");
+                solution = this.testSolution;
+                break;
+            }
 
             //transfer knowledge from CPSO to PSO
             if(swarms[0].getGlobalBest() != null && swarms[0].getGlobalBest().getVelocity() != null)
@@ -122,11 +129,12 @@ public class CPSO_H_k extends CPSO {
 
         }
 
-        for(int i = 0; i < solution.length; i++) //loop to print off solution
+        this.getSolutionFitness();
+        for(int i = 0; i < testSolution.length; i++) //loop to print off solution
         {
-            writeOutput("Solution "+(i+1)+": "+ solution[i]);
+            writeOutput("Solution "+(i+1)+": "+ testSolution[i]);
         }
-        writeOutput("The final fitness value is: "+ CalculateFinalFitness(solution));
+        writeOutput("The final fitness value is: "+ CalculateFinalFitness(testSolution));
     }
 
 }
