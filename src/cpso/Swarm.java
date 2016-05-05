@@ -64,6 +64,9 @@ public class Swarm
         
         public static double getRandomNumber(Random rand, int function)
         {
+            if(function == 0)
+                return (rand.nextDouble()*getDiameter(function))+1;
+            
             return (rand.nextDouble()*getDiameter(function))-(getDiameter(function)/2);
         }
         
@@ -112,13 +115,22 @@ public class Swarm
                              C2 * R2 * (getGlobalBest().getpBest()[i] - p.getPosition()[i]));
                 
                 //This limits the velocity from going beyond the diameter
-                if((velocity+p.getPosition()[i]) >  (diameter/2))
+                double upperBound =  (diameter/2);
+                double lowerBound = -(diameter/2);
+                
+                if(function == 0)
                 {
-                    velocity = (diameter/2) - p.getPosition()[i];
+                    lowerBound = 1;
+                    upperBound = diameter+1;
                 }
-                else if((velocity+p.getPosition()[i]) <  -(diameter/2))
+                
+                if((velocity+p.getPosition()[i]) > upperBound)
                 {
-                    velocity = -(diameter/2) - p.getPosition()[i];
+                    velocity = upperBound - p.getPosition()[i];
+                }
+                else if((velocity+p.getPosition()[i]) <  lowerBound)
+                {
+                    velocity = lowerBound - p.getPosition()[i];
                 }
                 
                 p.setVelocity(velocity, i);
