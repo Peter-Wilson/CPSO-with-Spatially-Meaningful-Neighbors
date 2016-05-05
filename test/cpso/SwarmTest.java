@@ -6,6 +6,7 @@
 package cpso;
 
 import Functions.Triangulation;
+import java.util.ArrayList;
 import java.util.Random;
 import org.hamcrest.core.Is;
 import org.junit.After;
@@ -14,6 +15,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.jzy3d.plot3d.builder.delaunay.jdt.Point_dt;
 
 /**
  *
@@ -104,6 +106,35 @@ public class SwarmTest {
         random = instance.getRandomNumber(rand, instance.function);
         assertTrue(random >= -expected);
         assertTrue(random <= expected);
+    }
+    
+    /**
+     * Test for Updating the Velocity.
+     */
+    @Test
+    public void testaddClosestParticles1D(){
+        System.out.println("Get 2 closest particles in 1D");
+        double[] position1 = {0};
+        double[] position2 = {1};
+        double[] position3 = {-1.5};
+        double[] position4 = {8};
+        double[] position5 = {1.2};
+        double[] position6 = {-1};
+        Swarm s = new Swarm(6, 0.2, 0.3, 0.5, true, 1, 5);
+        s.getParticles()[0] = new Particle(position1);
+        s.getParticles()[1] = new Particle(position2);
+        s.getParticles()[2] = new Particle(position3);
+        s.getParticles()[3] = new Particle(position4);
+        s.getParticles()[4] = new Particle(position5);
+        s.getParticles()[5] = new Particle(position6);
+        ArrayList<Point_dt> connected = new ArrayList<Point_dt>();
+        
+        s.addClosestParticles1D(s.getParticles()[0], connected);
+        
+        int expected1 = 2;
+        assertEquals(expected1, connected.size());
+        assertEquals(1, connected.get(0).x(), 0.0);
+        assertEquals(-1, connected.get(1).x(), 0.0);
     }
     
     /**

@@ -200,21 +200,28 @@ public class Swarm
          */
         public Particle chooseBestNeighbour(Particle item)
         {
-            if(particles[0].getPosition().length == 1) return null;
+            
             boolean hasConnectedNeighbours = false;
             Point_dt particlePoint = Triangulation.convertParticletoPoint(item);
             
             ArrayList<Point_dt> connected = new ArrayList<Point_dt>();
             
-            Iterator<Triangle_dt> iterator = dt.trianglesIterator();
-            while(iterator.hasNext())
+            if(particles[0].getPosition().length == 1)
             {
-                Triangle_dt triangles = iterator.next();                
-                if(triangles.contains(particlePoint))
+                addClosestParticles1D(item, connected);
+            }
+            else
+            {
+                Iterator<Triangle_dt> iterator = dt.trianglesIterator();
+                while(iterator.hasNext())
                 {
-                    connected.add(triangles.p1());
-                    connected.add(triangles.p2());
-                    connected.add(triangles.p3());
+                    Triangle_dt triangles = iterator.next();                
+                    if(triangles.contains(particlePoint))
+                    {
+                        connected.add(triangles.p1());
+                        connected.add(triangles.p2());
+                        connected.add(triangles.p3());
+                    }
                 }
             }
             
@@ -257,6 +264,31 @@ public class Swarm
             }  
             
         }
+
+    public void addClosestParticles1D(Particle item, ArrayList<Point_dt> connected) {
+        double closestAbove = Integer.MIN_VALUE;
+        Particle above = null;
+        double closestBelow = Integer.MAX_VALUE;
+        Particle below = null;
+        if(item.getPosition().length > 1) return;
+        
+        for(Particle p : particles)
+        {
+            if(p == item) continue;
+            double difference =  item.getPosition()[0] - p.getPosition()[0];
+            if(difference < 0 && difference > closestAbove){
+                closestAbove = difference;
+                above = p;
+            }
+            else if(difference > 0 && difference < closestBelow){
+                closestBelow = difference;
+                below = p;
+            }
+        }
+        
+        connected.add(Triangulation.convertParticletoPoint(above));
+        connected.add(Triangulation.convertParticletoPoint(below));
+    }
 
     
 
