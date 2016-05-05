@@ -321,7 +321,7 @@ public class Display extends javax.swing.JPanel {
         int numSwarms = Integer.parseInt(this.tfNumSwarms.getText());
         boolean DT = this.rbDT.isSelected();
         //boolean Delaunay = this.rbDT
-        if(Math.ceil(dimensionSize/numSwarms) > 3 && DT)
+        if(Math.ceil((double)dimensionSize/numSwarms) > 3 && DT)
         {
             this.taOutput.append("WARNING: CANNOT PERFORM DT ON SWARMS LARGER THAN 3. CHANGE THE SWARM OR DIMENSION SIZE\n");
             return;
@@ -340,7 +340,7 @@ public class Display extends javax.swing.JPanel {
         double C2 = Double.parseDouble(this.tfC2.getText());
         int numSwarms = Integer.parseInt(this.tfNumSwarms.getText());
         boolean DT = this.rbDT.isSelected();
-        if(Math.ceil(dimensionSize/numSwarms) > 3 && DT)
+        if(Math.ceil((double)dimensionSize/numSwarms) > 3 && DT)
         {
             this.taOutput.append("WARNING: CANNOT PERFORM DT ON SWARMS LARGER THAN 3. CHANGE THE SWARM OR DIMENSION SIZE\n");
             return;
@@ -360,7 +360,7 @@ public class Display extends javax.swing.JPanel {
         double C2 = Double.parseDouble(this.tfC2.getText());
         int numSwarms = Integer.parseInt(this.tfNumSwarms.getText());
         boolean DT = this.rbDT.isSelected();
-        if(Math.ceil(dimensionSize/numSwarms) > 2 && DT)
+        if(Math.ceil((double)dimensionSize/numSwarms) > 2 && DT)
         {
             this.taOutput.append("WARNING: CANNOT PERFORM DT ON SWARMS LARGER THAN 3 which is possible with the current number of swarms\n");
             return;
