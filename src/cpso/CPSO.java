@@ -284,4 +284,9 @@ public class CPSO {
                      
         }
     }
+
+    public double[] getGlobalBestSolution() {        
+        UpdateSolution();
+        return this.testSolution;
+    }
 }

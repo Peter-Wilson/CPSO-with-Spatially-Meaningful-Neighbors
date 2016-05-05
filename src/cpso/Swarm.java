@@ -109,7 +109,7 @@ public class Swarm
             {
                 velocity = (((INERTIA - loop) * p.getVelocity()[i]) +
                              C1 * R1 * (p.getpBest()[i] - p.getPosition()[i]) +
-                             C2 * R2 * (getGlobalBest().getPosition()[i] - p.getPosition()[i]));
+                             C2 * R2 * (getGlobalBest().getpBest()[i] - p.getPosition()[i]));
                 
                 //This limits the velocity from going beyond the diameter
                 if((velocity+p.getPosition()[i]) >  (diameter/2))
@@ -159,15 +159,19 @@ public class Swarm
          * Sets the value of a random particle to the supplied value
          * @param value 
          */
-        public boolean setRandomParticle(double[] position, double[] velocity)
+        public boolean setRandomParticle(double[] position)
         {
-            if(position.length != k || velocity.length != k)
+            if(position.length != k)
                 return false;
             else
             {
-                int randomIndex = (int)(Math.random()*k);
+                int randomIndex = 0;
+                do{
+                    randomIndex = (int)(Math.random()*k);
+                }
+                while(particles[randomIndex] == this.globalBest);
+                
                 particles[randomIndex].setPosition(position);
-                particles[randomIndex].setVelocity(velocity);
                 return true;
             }
         }

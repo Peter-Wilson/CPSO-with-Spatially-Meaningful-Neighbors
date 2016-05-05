@@ -323,7 +323,7 @@ public class Display extends javax.swing.JPanel {
         //boolean Delaunay = this.rbDT
         if(Math.ceil(dimensionSize/numSwarms) > 3 && DT)
         {
-            this.taOutput.append("WARNING: CANNOT PERFORM DT ON SWARMS LARGER THAN 3. CHANGE THE SWARM OR DIMENSION SIZE");
+            this.taOutput.append("WARNING: CANNOT PERFORM DT ON SWARMS LARGER THAN 3. CHANGE THE SWARM OR DIMENSION SIZE\n");
             return;
         }
         CPSO_S_k cpso = new CPSO_S_k(dimensionSize, maxLoops, swarmSize, 
@@ -342,7 +342,7 @@ public class Display extends javax.swing.JPanel {
         boolean DT = this.rbDT.isSelected();
         if(Math.ceil(dimensionSize/numSwarms) > 3 && DT)
         {
-            this.taOutput.append("WARNING: CANNOT PERFORM DT ON SWARMS LARGER THAN 3. CHANGE THE SWARM OR DIMENSION SIZE");
+            this.taOutput.append("WARNING: CANNOT PERFORM DT ON SWARMS LARGER THAN 3. CHANGE THE SWARM OR DIMENSION SIZE\n");
             return;
         }
         //boolean Delaunay = this.rbDT
@@ -362,7 +362,7 @@ public class Display extends javax.swing.JPanel {
         boolean DT = this.rbDT.isSelected();
         if(Math.ceil(dimensionSize/numSwarms) > 2 && DT)
         {
-            this.taOutput.append("WARNING: CANNOT PERFORM DT ON SWARMS LARGER THAN 3 which is possible with the current number of swarms");
+            this.taOutput.append("WARNING: CANNOT PERFORM DT ON SWARMS LARGER THAN 3 which is possible with the current number of swarms\n");
             return;
         }
         //boolean Delaunay = this.rbDT
