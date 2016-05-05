@@ -80,7 +80,7 @@ public class CPSO {
             
             if(!random)
             {
-                if(i%numSwarms == 0)
+                if(i < dimensionSize%numSwarms)
                     width = (int)(Math.ceil(((double)dimensionSize/numSwarms)));
                 else
                     width = (int)(Math.floor(((double)dimensionSize/numSwarms)));

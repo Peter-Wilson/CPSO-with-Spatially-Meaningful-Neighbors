@@ -69,7 +69,7 @@ public class MainTest {
     public void testCPSOS() {
         System.out.println("testing: S variant");
         int dimensionSize = 5;
-        CPSO_S cpso = new CPSO_S(dimensionSize, 200, 20, 0.5, 0.3, 0.2, dimensionSize, false, 0);
+        CPSO_S cpso = new CPSO_S(dimensionSize, 200, 20, 0.5, 0.3, 0.2, false, 0);
         //cpso.start();
     }
     

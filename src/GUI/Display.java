@@ -304,11 +304,10 @@ public class Display extends javax.swing.JPanel {
         double Inertia = Double.parseDouble(this.tfInertia.getText());
         double C1 = Double.parseDouble(this.tfC1.getText());
         double C2 = Double.parseDouble(this.tfC2.getText());
-        int numSwarms = Integer.parseInt(this.tfNumSwarms.getText());
         boolean DT = this.rbDT.isSelected();
         //boolean Delaunay = this.rbDT
         CPSO_S cpso = new CPSO_S(dimensionSize, maxLoops, swarmSize, 
-                                Inertia, C1, C2, numSwarms, DT, getSelectedFunction(), this.taOutput);
+                                Inertia, C1, C2, DT, getSelectedFunction(), this.taOutput);
         cpso.start();
     }//GEN-LAST:event_btnCPSOSActionPerformed
 
