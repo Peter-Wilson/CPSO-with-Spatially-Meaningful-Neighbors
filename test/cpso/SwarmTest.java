@@ -145,7 +145,7 @@ public class SwarmTest {
         System.out.println("Velocity update");
         //calculate a test velocity
         //calculate a test velocity
-        Swarm instance = new Swarm(20, 0.2, 0.3, 0.5, true, 1, 0);
+        Swarm instance = new Swarm(20, 0.2, 0.3, 0.5, true, 1, 1);
         Particle p = instance.getParticles()[0];
         double[] velocity = {5.0};
         double[] position = {2.0};
