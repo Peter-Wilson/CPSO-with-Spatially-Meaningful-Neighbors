@@ -6,6 +6,7 @@
 package Functions;
 
 import cpso.Particle;
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -46,11 +47,11 @@ public class TriangulationTest {
     public void testClosestNeighbour() {
         System.out.println("closestNeighbour");
         Point_dt item = new Point_dt(1,1,0);
-        Point_dt[] neighbours = new Point_dt[3];
-        neighbours[0] = new Point_dt(3,3,0);
-        neighbours[1] = new Point_dt(1,4,0);
-        neighbours[2] = item;
-        Point_dt expResult = neighbours[0];
+        ArrayList<Point_dt> neighbours = new ArrayList<Point_dt>();
+        neighbours.add(new Point_dt(3,3,0));
+        neighbours.add(new Point_dt(1,4,0));
+        neighbours.add(item);
+        Point_dt expResult = neighbours.get(0);
         Point_dt result = Triangulation.closestNeighbour(item, neighbours);
         assertEquals(expResult, result);
     }

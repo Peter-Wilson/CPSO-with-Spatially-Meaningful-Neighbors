@@ -82,17 +82,7 @@ public class CPSO_H_k extends CPSO {
             //transfer knowledge from CPSO to PSO
             if(swarms[0].getGlobalBest() != null && swarms[0].getGlobalBest().getVelocity() != null)
             {
-                int count = 0;
-                double[] velocity = new double[dimensionSize];
-                for(int s = 0; s < numSwarms; s++)
-                {
-                    for(int j = 0; j < swarms[s].getParticles()[0].getPosition().length; j++)
-                    {
-                        velocity[count] = swarms[s].getGlobalBest().getVelocity()[j];
-                        count++;
-                    }
-                }
-                pso_swarm.setRandomParticle(super.getSolution(), velocity);
+                pso_swarm.setRandomParticle(super.getGlobalBestSolution());
             }
             
             for(Particle p : pso_swarm.getParticles()){ //for each particle
@@ -112,18 +102,17 @@ public class CPSO_H_k extends CPSO {
             if(pso_swarm.getGlobalBest() != null)
             {
                 //for each swarm
+                int count = 0;
                 for(int s = 0; s < swarms.length; s++)
                 {
                     //select a random particle to replace with the pso global best
                     int size = swarms[s].getParticles()[0].getPosition().length;
                     double[] value = new double[size];
-                    double[] velocity = new double[size];
                     for(int j = 0; j < size; j++)
                     {
-                        value[j] = pso_swarm.getGlobalBest().getPosition()[(s*size)+j];
-                        velocity[j] = pso_swarm.getGlobalBest().getVelocity()[(s*size)+j];
+                        value[j] = pso_swarm.getGlobalBest().getpBest()[count++];
                     }
-                    swarms[s].setRandomParticle(value, velocity);
+                    swarms[s].setRandomParticle(value);
                 }
             }
 

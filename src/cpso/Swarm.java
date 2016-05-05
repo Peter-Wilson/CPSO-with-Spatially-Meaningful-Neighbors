@@ -6,6 +6,8 @@
 package cpso;
 
 import Functions.Triangulation;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import org.jzy3d.plot3d.builder.delaunay.jdt.Delaunay_Triangulation;
 import org.jzy3d.plot3d.builder.delaunay.jdt.Point_dt;
@@ -39,7 +41,7 @@ public class Swarm
             this.k = k;
             this.INERTIA = INERTIA;
             this.function = function;
-            setDiameter(function);
+            this.diameter = getDiameter(function);
             InitializeParticles();
         }
 
@@ -54,27 +56,28 @@ public class Swarm
                 double[] position = new double[k];
                 for(int j = 0; j < k; j++)
                     
-                    position[j] = getRandomNumber(rand,function);
+                    position[j] = getRandomNumber(rand, function);
                 
                 particles[i] = new Particle(position);
             }
         }
         
-        public double getRandomNumber(Random rand, int function)
+        public static double getRandomNumber(Random rand, int function)
         {
-            return (rand.nextDouble()*diameter)-(diameter/2);
+            return (rand.nextDouble()*getDiameter(function))-(getDiameter(function)/2);
         }
         
-        public final void setDiameter(int function)
+        public static final double getDiameter(int function)
         {
             switch(function)
             {
-                case 0: diameter = 50; break;
-                case 1: diameter = 200; break;
-                case 2: diameter = 10.24; break;
-                case 3: diameter = 60; break;
-                case 4: diameter = 1200; break;
-                case 5: diameter = 64; break;
+                case 0: return 50;
+                case 1: return 200;
+                case 2: return 10.24;
+                case 3: return 60;
+                case 4: return 1200; 
+                case 5: return 64;
+                default: return -1;
             }
         }
         
@@ -106,7 +109,7 @@ public class Swarm
             {
                 velocity = (((INERTIA - loop) * p.getVelocity()[i]) +
                              C1 * R1 * (p.getpBest()[i] - p.getPosition()[i]) +
-                             C2 * R2 * (getGlobalBest().getPosition()[i] - p.getPosition()[i]));
+                             C2 * R2 * (getGlobalBest().getpBest()[i] - p.getPosition()[i]));
                 
                 //This limits the velocity from going beyond the diameter
                 if((velocity+p.getPosition()[i]) >  (diameter/2))
@@ -156,15 +159,19 @@ public class Swarm
          * Sets the value of a random particle to the supplied value
          * @param value 
          */
-        public boolean setRandomParticle(double[] position, double[] velocity)
+        public boolean setRandomParticle(double[] position)
         {
-            if(position.length != k || velocity.length != k)
+            if(position.length != k)
                 return false;
             else
             {
-                int randomIndex = (int)(Math.random()*k);
+                int randomIndex = 0;
+                do{
+                    randomIndex = (int)(Math.random()*k);
+                }
+                while(particles[randomIndex] == this.globalBest);
+                
                 particles[randomIndex].setPosition(position);
-                particles[randomIndex].setVelocity(velocity);
                 return true;
             }
         }
@@ -193,31 +200,49 @@ public class Swarm
          */
         public Particle chooseBestNeighbour(Particle item)
         {
-            if(particles[0].getPosition().length == 1) return null;
+            
             boolean hasConnectedNeighbours = false;
             Point_dt particlePoint = Triangulation.convertParticletoPoint(item);
             
-            Triangle_dt neighbours = dt.find(particlePoint);
-            Point_dt[] connected = {neighbours.p1(),neighbours.p2(),neighbours.p3()};
+            ArrayList<Point_dt> connected = new ArrayList<Point_dt>();
+            
+            if(particles[0].getPosition().length == 1)
+            {
+                addClosestParticles1D(item, connected);
+            }
+            else
+            {
+                Iterator<Triangle_dt> iterator = dt.trianglesIterator();
+                while(iterator.hasNext())
+                {
+                    Triangle_dt triangles = iterator.next();                
+                    if(triangles.contains(particlePoint))
+                    {
+                        connected.add(triangles.p1());
+                        connected.add(triangles.p2());
+                        connected.add(triangles.p3());
+                    }
+                }
+            }
             
             //Pf = min(Nk)
             Point_dt point = Triangulation.closestNeighbour(particlePoint, connected);
             Point_dt temp = null;
             
             //for k = 1 to neighbourset_size do
-            for(int i = 0; i < 3; i++)
+            for(int i = 0; i < connected.size(); i++)
             {
-                if(connected[i] == particlePoint) continue;
+                if(connected.get(i) == particlePoint) continue;
                 
                 //if working_together(Pi, Pk)and
-                if(Triangulation.working_together(particlePoint, connected[i], particles))
+                if(Triangulation.working_together(particlePoint, connected.get(i), particles))
                 {
                     
                     //if dist(Xi − Pc) < dist(Xi − Pk)and fitness(Pk) < fitness(Xi) then
-                    if(particlePoint.distance3D(point) < particlePoint.distance3D(connected[i]) &&
-                        Triangulation.getParticle(connected[i], particles).getFitness() < Triangulation.getParticle(particlePoint, particles).getFitness())
+                    if(particlePoint.distance3D(point) < particlePoint.distance3D(connected.get(i)) &&
+                        Triangulation.getParticle(connected.get(i), particles).getFitness() < Triangulation.getParticle(particlePoint, particles).getFitness())
                     {
-                        temp = connected[i];
+                        temp = connected.get(i);
                         hasConnectedNeighbours = true;
                     }
                 }
@@ -239,6 +264,31 @@ public class Swarm
             }  
             
         }
+
+    public void addClosestParticles1D(Particle item, ArrayList<Point_dt> connected) {
+        double closestAbove = Integer.MIN_VALUE;
+        Particle above = item;
+        double closestBelow = Integer.MAX_VALUE;
+        Particle below = item;
+        if(item.getPosition().length > 1) return;
+        
+        for(Particle p : particles)
+        {
+            if(p == item) continue;
+            double difference =  item.getPosition()[0] - p.getPosition()[0];
+            if(difference < 0 && difference > closestAbove){
+                closestAbove = difference;
+                above = p;
+            }
+            else if(difference > 0 && difference < closestBelow){
+                closestBelow = difference;
+                below = p;
+            }
+        }
+        
+        connected.add(Triangulation.convertParticletoPoint(above));
+        connected.add(Triangulation.convertParticletoPoint(below));
+    }
 
     
 

@@ -5,6 +5,7 @@
 package cpso;
 
 import Functions.Fitness;
+import java.util.Random;
 import javax.swing.JTextArea;
 
 /**
@@ -80,7 +81,7 @@ public class CPSO {
             
             if(!random)
             {
-                if(i%numSwarms == 0)
+                if(i < dimensionSize%numSwarms)
                     width = (int)(Math.ceil(((double)dimensionSize/numSwarms)));
                 else
                     width = (int)(Math.floor(((double)dimensionSize/numSwarms)));
@@ -120,8 +121,8 @@ public class CPSO {
             writeOutput("New Personal best for " + p + ": x=" + p.getFitness());
 
         if ((swarm.getGlobalBest() == null) ||
-            (p.getFitness() < swarm.getGlobalBest().getFitness() && min) ||
-            (swarm.getGlobalBest().getFitness() < p.getFitness() && !min))      //update the global best
+            (p.getFitness() < swarm.getGlobalBest().getpBestFitness() && min) ||
+            (swarm.getGlobalBest().getpBestFitness() < p.getFitness() && !min))      //update the global best
         {
             swarm.setGlobalBest(p);
             writeOutput("New Global Best for Swarm " + swarm + ": x=" + p.getFitness());
@@ -183,8 +184,7 @@ public class CPSO {
                 if(i == index)
                     for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
                     {
-                        testSolution[count] = position[j];
-                        count++;
+                        testSolution[count++] = position[j];
                     }
                 else
                     for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
@@ -283,5 +283,10 @@ public class CPSO {
             default: return 0;
                      
         }
+    }
+
+    public double[] getGlobalBestSolution() {        
+        UpdateSolution();
+        return this.testSolution;
     }
 }

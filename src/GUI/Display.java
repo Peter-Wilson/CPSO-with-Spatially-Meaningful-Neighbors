@@ -304,11 +304,10 @@ public class Display extends javax.swing.JPanel {
         double Inertia = Double.parseDouble(this.tfInertia.getText());
         double C1 = Double.parseDouble(this.tfC1.getText());
         double C2 = Double.parseDouble(this.tfC2.getText());
-        int numSwarms = Integer.parseInt(this.tfNumSwarms.getText());
         boolean DT = this.rbDT.isSelected();
         //boolean Delaunay = this.rbDT
         CPSO_S cpso = new CPSO_S(dimensionSize, maxLoops, swarmSize, 
-                                Inertia, C1, C2, numSwarms, DT, getSelectedFunction(), this.taOutput);
+                                Inertia, C1, C2, DT, getSelectedFunction(), this.taOutput);
         cpso.start();
     }//GEN-LAST:event_btnCPSOSActionPerformed
 
@@ -322,6 +321,11 @@ public class Display extends javax.swing.JPanel {
         int numSwarms = Integer.parseInt(this.tfNumSwarms.getText());
         boolean DT = this.rbDT.isSelected();
         //boolean Delaunay = this.rbDT
+        if(Math.ceil(dimensionSize/numSwarms) > 3 && DT)
+        {
+            this.taOutput.append("WARNING: CANNOT PERFORM DT ON SWARMS LARGER THAN 3. CHANGE THE SWARM OR DIMENSION SIZE\n");
+            return;
+        }
         CPSO_S_k cpso = new CPSO_S_k(dimensionSize, maxLoops, swarmSize, 
                                 Inertia, C1, C2, numSwarms, DT, getSelectedFunction(), this.taOutput);
         cpso.start();
@@ -336,6 +340,11 @@ public class Display extends javax.swing.JPanel {
         double C2 = Double.parseDouble(this.tfC2.getText());
         int numSwarms = Integer.parseInt(this.tfNumSwarms.getText());
         boolean DT = this.rbDT.isSelected();
+        if(Math.ceil(dimensionSize/numSwarms) > 3 && DT)
+        {
+            this.taOutput.append("WARNING: CANNOT PERFORM DT ON SWARMS LARGER THAN 3. CHANGE THE SWARM OR DIMENSION SIZE\n");
+            return;
+        }
         //boolean Delaunay = this.rbDT
         CPSO_H_k cpso = new CPSO_H_k(dimensionSize, maxLoops, swarmSize, 
                                 Inertia, C1, C2, numSwarms, DT, getSelectedFunction(), this.taOutput);
@@ -351,6 +360,11 @@ public class Display extends javax.swing.JPanel {
         double C2 = Double.parseDouble(this.tfC2.getText());
         int numSwarms = Integer.parseInt(this.tfNumSwarms.getText());
         boolean DT = this.rbDT.isSelected();
+        if(Math.ceil(dimensionSize/numSwarms) > 2 && DT)
+        {
+            this.taOutput.append("WARNING: CANNOT PERFORM DT ON SWARMS LARGER THAN 3 which is possible with the current number of swarms\n");
+            return;
+        }
         //boolean Delaunay = this.rbDT
         CPSO_R_k cpso = new CPSO_R_k(dimensionSize, maxLoops, swarmSize, 
                                 Inertia, C1, C2, numSwarms, DT, getSelectedFunction(), this.taOutput);

@@ -15,10 +15,12 @@ public class Particle {
     private double[] velocity;
     private double[] pBest;
     private double fitness;
+    private double pBestFitness = Integer.MAX_VALUE;
     
     public Particle(double[] initialPosition)
     {
         setPosition(initialPosition);
+        setpBest(initialPosition);
         double[] value = new double[initialPosition.length];
         setVelocity(value);        
     }
@@ -83,6 +85,13 @@ public class Particle {
     }
     
     /**
+     * @return the fitness
+     */
+    public double getpBestFitness() {
+        return pBestFitness;
+    }
+    
+    /**
      * set the pBest based on the index
      * @param pBest the pBest to set
      */
@@ -103,6 +112,8 @@ public class Particle {
      */
     public void setFitness(double fitness) {
         this.fitness = fitness;
+        if(this.pBestFitness == Integer.MAX_VALUE) 
+            pBestFitness = fitness;
     }
     
     /**
@@ -114,17 +125,20 @@ public class Particle {
      */
     public boolean UpdatePersonalBest(double newFitness, double[] newPosition, boolean min)
     {
+        boolean value = false;
         //if the pBest hasn't been set or the new position is better
             //update the pBest value
             if ((fitness == 0.0 || pBest == null) ||
                 (newFitness < fitness && min) ||
                 (newFitness > fitness && !min))
             {
-                fitness = newFitness;
+                pBestFitness = newFitness;
                 pBest = newPosition;
-                return true;
+                value = true;
             }
-            return false;
+            
+            fitness = newFitness;
+            return value;
     }
     
     public boolean inside(Particle a, Particle b, Particle c)
