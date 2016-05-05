@@ -267,9 +267,9 @@ public class Swarm
 
     public void addClosestParticles1D(Particle item, ArrayList<Point_dt> connected) {
         double closestAbove = Integer.MIN_VALUE;
-        Particle above = null;
+        Particle above = item;
         double closestBelow = Integer.MAX_VALUE;
-        Particle below = null;
+        Particle below = item;
         if(item.getPosition().length > 1) return;
         
         for(Particle p : particles)
