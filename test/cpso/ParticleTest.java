@@ -128,7 +128,8 @@ public class ParticleTest {
         Particle instance = new Particle(start_position);
         double[] expResult = {0.0, 0.0};
         double[] result = instance.getpBest();
-        assertNull(result);
+        assertNotNull(result);
+        assertArrayEquals(result, start_position, 0.0);
     }
 
     /**
@@ -219,7 +220,7 @@ public class ParticleTest {
         double[] expectedPosition = {6.0, 2.3};
         instance.UpdatePersonalBest(expectedFitness, expectedPosition, true);
         
-        assertNotEquals(instance.getFitness(), expectedFitness);
+        assertNotEquals(instance.getpBestFitness(), expectedFitness);
         assertNotEquals(instance.getpBest(), expectedPosition);
         
         //test when it should update
@@ -230,7 +231,7 @@ public class ParticleTest {
         double[] expectedPosition2 = {1.0, 5.0};
         instance.UpdatePersonalBest(expectedFitness, expectedPosition2, true);
         
-        assertEquals(instance.getFitness(), expectedFitness, 0.0);
+        assertEquals(instance.getpBestFitness(), expectedFitness, 0.0);
         assertArrayEquals(instance.getpBest(), expectedPosition2, 0.0);
     }
     
@@ -252,7 +253,7 @@ public class ParticleTest {
         double[] expectedPosition = {1.0, 5.0};
         instance.UpdatePersonalBest(expectedFitness, expectedPosition, false);
         
-        assertNotEquals(instance.getFitness(), expectedFitness);
+        assertNotEquals(instance.getpBestFitness(), expectedFitness);
         assertNotEquals(instance.getpBest(), expectedPosition);
         
         //test when it should update
@@ -263,7 +264,7 @@ public class ParticleTest {
         double[] expectedPosition2 = {6.0, 8.7};
         instance.UpdatePersonalBest(expectedFitness, expectedPosition2, false);
         
-        assertEquals(instance.getFitness(), expectedFitness, 0.0);
+        assertEquals(instance.getpBestFitness(), expectedFitness, 0.0);
         assertArrayEquals(instance.getpBest(), expectedPosition2, 0.0);
     }
 

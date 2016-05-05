@@ -110,7 +110,7 @@ public class CPSO_H_k extends CPSO {
                     double[] value = new double[size];
                     for(int j = 0; j < size; j++)
                     {
-                        value[j] = pso_swarm.getGlobalBest().getPosition()[count++];
+                        value[j] = pso_swarm.getGlobalBest().getpBest()[count++];
                     }
                     swarms[s].setRandomParticle(value);
                 }

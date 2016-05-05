@@ -121,8 +121,8 @@ public class CPSO {
             writeOutput("New Personal best for " + p + ": x=" + p.getFitness());
 
         if ((swarm.getGlobalBest() == null) ||
-            (p.getFitness() < swarm.getGlobalBest().getFitness() && min) ||
-            (swarm.getGlobalBest().getFitness() < p.getFitness() && !min))      //update the global best
+            (p.getFitness() < swarm.getGlobalBest().getpBestFitness() && min) ||
+            (swarm.getGlobalBest().getpBestFitness() < p.getFitness() && !min))      //update the global best
         {
             swarm.setGlobalBest(p);
             writeOutput("New Global Best for Swarm " + swarm + ": x=" + p.getFitness());
