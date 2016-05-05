@@ -41,7 +41,7 @@ public class Swarm
             this.k = k;
             this.INERTIA = INERTIA;
             this.function = function;
-            setDiameter(function);
+            this.diameter = getDiameter(function);
             InitializeParticles();
         }
 
@@ -56,27 +56,28 @@ public class Swarm
                 double[] position = new double[k];
                 for(int j = 0; j < k; j++)
                     
-                    position[j] = getRandomNumber(rand,function);
+                    position[j] = getRandomNumber(rand, function);
                 
                 particles[i] = new Particle(position);
             }
         }
         
-        public double getRandomNumber(Random rand, int function)
+        public static double getRandomNumber(Random rand, int function)
         {
-            return (rand.nextDouble()*diameter)-(diameter/2);
+            return (rand.nextDouble()*getDiameter(function))-(getDiameter(function)/2);
         }
         
-        public final void setDiameter(int function)
+        public static final double getDiameter(int function)
         {
             switch(function)
             {
-                case 0: diameter = 50; break;
-                case 1: diameter = 200; break;
-                case 2: diameter = 10.24; break;
-                case 3: diameter = 60; break;
-                case 4: diameter = 1200; break;
-                case 5: diameter = 64; break;
+                case 0: return 50;
+                case 1: return 200;
+                case 2: return 10.24;
+                case 3: return 60;
+                case 4: return 1200; 
+                case 5: return 64;
+                default: return -1;
             }
         }
         

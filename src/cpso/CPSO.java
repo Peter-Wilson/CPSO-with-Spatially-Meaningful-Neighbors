@@ -5,6 +5,7 @@
 package cpso;
 
 import Functions.Fitness;
+import java.util.Random;
 import javax.swing.JTextArea;
 
 /**
@@ -183,8 +184,7 @@ public class CPSO {
                 if(i == index)
                     for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
                     {
-                        testSolution[count] = position[j];
-                        count++;
+                        testSolution[count++] = position[j];
                     }
                 else
                     for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
