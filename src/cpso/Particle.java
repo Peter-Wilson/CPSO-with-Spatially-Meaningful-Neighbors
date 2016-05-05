@@ -17,12 +17,11 @@ public class Particle {
     private double fitness;
     private double pBestFitness = Integer.MAX_VALUE;
     
-    public Particle(double[] initialPosition)
+    public Particle(double[] initialPosition, int function)
     {
         setPosition(initialPosition);
         setpBest(initialPosition);
-        double[] value = new double[initialPosition.length];
-        setVelocity(value);        
+        setVelocity(randomizeVelocity(initialPosition, function));        
     }
 
     /**
@@ -145,5 +144,33 @@ public class Particle {
     {
         //TODO: finish
         return false;
+    }
+
+    private double[] randomizeVelocity(double[] position, int function) {
+        double[] velocity = new double[position.length];
+        double diameter = Swarm.getDiameter(function);
+        double upperBound =  (diameter/2);
+        double lowerBound = -(diameter/2);
+
+        if(function == 0)
+        {
+            lowerBound = 1;
+            upperBound = diameter+1;
+        }
+                
+        for(int i = 0; i < velocity.length; i++)
+        {
+            double randomNumber = 0;
+            do
+            {
+                if(function == 1)
+                    randomNumber = (Math.random()*diameter) + 1;
+                else
+                    randomNumber = (Math.random()*diameter) -(diameter/2);
+            }
+            while(position[i]+randomNumber < lowerBound || position[i]+randomNumber > upperBound);
+            velocity[i] = randomNumber;
+        }
+        return velocity;
     }
 }

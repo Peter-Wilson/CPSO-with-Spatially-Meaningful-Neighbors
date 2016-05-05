@@ -58,7 +58,7 @@ public class Swarm
                     
                     position[j] = getRandomNumber(rand, function);
                 
-                particles[i] = new Particle(position);
+                particles[i] = new Particle(position, function);
             }
         }
         

@@ -5,6 +5,8 @@
  */
 package cpso;
 
+import org.hamcrest.core.IsEqual;
+import org.hamcrest.core.IsNot;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -44,7 +46,7 @@ public class ParticleTest {
     public void testGetPosition() {
         System.out.println("getPosition");
         double[] position = { 2.0, 1.4 };
-        Particle instance = new Particle(position);
+        Particle instance = new Particle(position, 1);
         double[] result = instance.getPosition();
         assertArrayEquals(position, result, 0.0);
     }
@@ -57,7 +59,7 @@ public class ParticleTest {
         System.out.println("setPosition");
         double[] start_position = { 2.0, 1.4 };
         double[] new_position = { 6.2, 1.1 };
-        Particle instance = new Particle(start_position);
+        Particle instance = new Particle(start_position, 1);
         instance.setPosition(new_position);
         double[] result = instance.getPosition();
         assertArrayEquals(new_position, result, 0.0);
@@ -72,7 +74,7 @@ public class ParticleTest {
         System.out.println("setPositionByIndex");
         double[] start_position = { 2.0, 1.4 };
         double new_position = 8.2;
-        Particle instance = new Particle(start_position);
+        Particle instance = new Particle(start_position, 1);
         instance.setPosition(new_position,0);
         double[] result = instance.getPosition();
         assertEquals(new_position, result[0], 0.0);
@@ -86,10 +88,10 @@ public class ParticleTest {
     public void testGetVelocity() {
         System.out.println("getVelocity");
         double[] start_position = { 2.0, 1.4 };
-        Particle instance = new Particle(start_position);
+        Particle instance = new Particle(start_position, 1);
         double[] expResult = {0.0, 0.0};
         double[] result = instance.getVelocity();
-        assertArrayEquals(expResult, result, 0.0);
+        assertThat(expResult, IsNot.not(IsEqual.equalTo(result)));
     }
 
     /**
@@ -100,7 +102,7 @@ public class ParticleTest {
         System.out.println("setVelocity");
         double[] velocity = {8.1, 5.5};
         double[] start_position = { 2.0, 1.4 };
-        Particle instance = new Particle(start_position);
+        Particle instance = new Particle(start_position, 1);
         instance.setVelocity(velocity);
         assertArrayEquals(instance.getVelocity(), velocity, 0.0);
     }
@@ -113,7 +115,7 @@ public class ParticleTest {
         System.out.println("setVelocity by index");
         double velocity = 8.1;
         double[] start_position = { 2.0, 1.4 };
-        Particle instance = new Particle(start_position);
+        Particle instance = new Particle(start_position, 1);
         instance.setVelocity(velocity, 0);
         assertEquals(instance.getVelocity()[0], velocity, 0.0);
     }
@@ -125,7 +127,7 @@ public class ParticleTest {
     public void testGetpBest() {
         System.out.println("getpBest");
         double[] start_position = { 2.0, 1.4 };
-        Particle instance = new Particle(start_position);
+        Particle instance = new Particle(start_position, 1);
         double[] expResult = {0.0, 0.0};
         double[] result = instance.getpBest();
         assertNotNull(result);
@@ -140,7 +142,7 @@ public class ParticleTest {
         System.out.println("setpBest");
         double[] pBest = {2.2, 8.6};
         double[] start_position = { 2.0, 1.4 };
-        Particle instance = new Particle(start_position);
+        Particle instance = new Particle(start_position, 1);
         instance.setpBest(pBest);
         assertArrayEquals(instance.getpBest(), pBest, 0.0);
     }
@@ -154,7 +156,7 @@ public class ParticleTest {
         double pBest = 3.5;
         double[] start_position = { 2.0, 1.4 };
         double[] defaultpBest = {2.3,5.5};
-        Particle instance = new Particle(start_position);
+        Particle instance = new Particle(start_position, 1);
         instance.setpBest(defaultpBest);
         instance.setpBest(pBest, 0);
         assertEquals(instance.getpBest()[0], pBest, 0.0);
@@ -167,7 +169,7 @@ public class ParticleTest {
     public void testGetFitness() {
         System.out.println("getFitness");
         double[] start_position = { 2.0, 1.4 };
-        Particle instance = new Particle(start_position);
+        Particle instance = new Particle(start_position, 1);
         double expResult = 0.0;
         double result = instance.getFitness();
         assertEquals(expResult, result, 0.0);
@@ -181,7 +183,7 @@ public class ParticleTest {
         System.out.println("setFitness");
         double fitness = 0.0;
         double[] start_position = { 2.0, 1.4 };
-        Particle instance = new Particle(start_position);
+        Particle instance = new Particle(start_position, 1);
         instance.setFitness(fitness);
         assertEquals(instance.getFitness(), fitness, 0.0);
     }
@@ -193,7 +195,7 @@ public class ParticleTest {
     public void testUpdatePersonalBestA() {
         System.out.println("Update Personal Best for values not yet set");
         double[] start_position = { 2.0, 1.4 };
-        Particle instance = new Particle(start_position);
+        Particle instance = new Particle(start_position, 1);
         double expectedFitness = 5.0;
         double[] expectedPosition = {6.0, 8.0};
         instance.UpdatePersonalBest(expectedFitness, expectedPosition, true);
@@ -210,7 +212,7 @@ public class ParticleTest {
         System.out.println("Update Personal Best for min values");
         
         double[] start_position = { 2.0, 1.4 };
-        Particle instance = new Particle(start_position);
+        Particle instance = new Particle(start_position, 1);
         
         //test when it shouldn't update
         instance.setFitness(3.0);
@@ -243,7 +245,7 @@ public class ParticleTest {
         System.out.println("Update Personal Best for max values");
         
         double[] start_position = { 2.0, 1.4 };
-        Particle instance = new Particle(start_position);
+        Particle instance = new Particle(start_position, 1);
         
         //test when it shouldn't update
         instance.setFitness(3.0);
@@ -274,9 +276,9 @@ public class ParticleTest {
     @Test
     public void testSetPosition_doubleArr() {
         System.out.println("setPosition");
-        double[] position = {50, 100, 27, 18};
-        double[] position_new = {80, 12, 12, 100};
-        Particle instance = new Particle(position);
+        double[] position = {50, 2, 27, 18};
+        double[] position_new = {3, 12, 12, 2};
+        Particle instance = new Particle(position, 1);
         instance.setPosition(position_new);
         assertArrayEquals(instance.getPosition(), position_new, 0.0);
     }
@@ -290,7 +292,7 @@ public class ParticleTest {
         double position = 56.12;
         int index = 3;
         double[] initialPosition = {4.3, 5.22, 43.3,88.7,2,56,8};
-        Particle instance = new Particle(initialPosition);
+        Particle instance = new Particle(initialPosition, 1);
         instance.setPosition(position, index);
         assertEquals(instance.getPosition()[index], position, 0.0);
     }
@@ -301,9 +303,9 @@ public class ParticleTest {
     @Test
     public void testSetVelocity_doubleArr() {
         System.out.println("setVelocity");
-        double[] velocity = {50, 100, 27, 18};
-        double[] position = {80, 12, 12, 100};
-        Particle instance = new Particle(position);
+        double[] velocity = {4, 2, 27, 18};
+        double[] position = {6, 12, 12, 2};
+        Particle instance = new Particle(position, 0);
         instance.setVelocity(velocity);
         assertArrayEquals(instance.getVelocity(), velocity, 0.0);
     }
@@ -316,8 +318,8 @@ public class ParticleTest {
         System.out.println("setVelocity");
         double velocity = 3.456;
         int index = 3;
-        double[] position = {50, 34, 12, 56, 89, 12};
-        Particle instance = new Particle(position);
+        double[] position = {6, 34, 12, 3, 2, 12};
+        Particle instance = new Particle(position, 0);
         instance.setVelocity(velocity, index);
         assertEquals(instance.getVelocity()[index], velocity, 0.0);
     }
@@ -330,7 +332,7 @@ public class ParticleTest {
         System.out.println("setpBest");
         double[] pBest = {5.5,2.2,4};
         double[] startPosition = {4,2,6};
-        Particle instance = new Particle(startPosition);
+        Particle instance = new Particle(startPosition, 1);
         instance.setpBest(pBest);
         assertArrayEquals(instance.getpBest(), pBest, 0.0);
     }
@@ -345,7 +347,7 @@ public class ParticleTest {
         double[] pBest_Default = {5.5,2.2,4};
         int index = 1;
         double[] startPosition = {4,2,6};
-        Particle instance = new Particle(startPosition);
+        Particle instance = new Particle(startPosition, 1);
         instance.setpBest(pBest_Default);
         instance.setpBest(pBest, index);
         assertEquals(instance.getpBest()[index], pBest, 0.0);

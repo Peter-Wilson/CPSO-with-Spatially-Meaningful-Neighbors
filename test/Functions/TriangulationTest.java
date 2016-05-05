@@ -78,12 +78,12 @@ public class TriangulationTest {
         Point_dt connected = new Point_dt(2,2,2);
         double[] initialPosition1 = {1,1,1};
         double[] velocity = {1,1,1};
-        Particle expected1 = new Particle(initialPosition1);
+        Particle expected1 = new Particle(initialPosition1, 1);
         expected1.setVelocity(velocity);
         
         
         double[] initialPosition2 = {2,2,2};
-        Particle expected2 = new Particle(initialPosition2);
+        Particle expected2 = new Particle(initialPosition2, 1);
         expected2.setVelocity(velocity);
         Particle[] p = {expected1, expected2};
         boolean expResult = true;
@@ -101,13 +101,13 @@ public class TriangulationTest {
         Point_dt connected = new Point_dt(4,1,1);
         double[] initialPosition1 = {1,1,1};
         double[] velocity = {1,0,0};
-        Particle expected1 = new Particle(initialPosition1);
+        Particle expected1 = new Particle(initialPosition1, 1);
         expected1.setVelocity(velocity);
         
         
         double[] velocity2 = {-1,0,0};
         double[] initialPosition2 = {4,1,1};
-        Particle expected2 = new Particle(initialPosition2);
+        Particle expected2 = new Particle(initialPosition2, 1);
         expected2.setVelocity(velocity2);
         Particle[] p = {expected1, expected2};
         boolean expResult = true;
@@ -125,13 +125,13 @@ public class TriangulationTest {
         Point_dt connected = new Point_dt(2,2,2);
         double[] initialPosition1 = {1,1,1};
         double[] velocity = {1,1,1};
-        Particle expected1 = new Particle(initialPosition1);
+        Particle expected1 = new Particle(initialPosition1, 1);
         expected1.setVelocity(velocity);
         
         
         double[] velocity2 = {-1,-1,-1};
         double[] initialPosition2 = {2,2,2};
-        Particle expected2 = new Particle(initialPosition2);
+        Particle expected2 = new Particle(initialPosition2, 1);
         expected2.setVelocity(velocity2);
         Particle[] p = {expected1, expected2};
         boolean expResult = false;
@@ -186,9 +186,9 @@ public class TriangulationTest {
         System.out.println("getParticle");
         Point_dt connected = new Point_dt(1,2,3);
         double[] initialPosition = {1,2,3};
-        Particle expResult = new Particle(initialPosition);
+        Particle expResult = new Particle(initialPosition, 1);
         double[] initialPosition2 = {3,2,1};
-        Particle expResult2 = new Particle(initialPosition2);
+        Particle expResult2 = new Particle(initialPosition2, 1);
         Particle[] particles = {expResult2, expResult};
         Particle result = Triangulation.getParticle(connected, particles);
         assertEquals(expResult, result);
@@ -201,7 +201,7 @@ public class TriangulationTest {
     public void testConvertParticletoPoint() {
         System.out.println("convertParticletoPoint");
         double[] initialPosition = {1.0,2.0,3.0};
-        Particle p = new Particle(initialPosition);
+        Particle p = new Particle(initialPosition, 1);
         Point_dt expResult = new Point_dt(1.0,2.0,3.0);
         Point_dt result = Triangulation.convertParticletoPoint(p);
         assertEquals(expResult.x(), result.x(), 0.0);
