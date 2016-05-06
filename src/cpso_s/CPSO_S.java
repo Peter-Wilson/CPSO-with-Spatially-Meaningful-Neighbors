@@ -47,7 +47,7 @@ public class CPSO_S extends CPSO {
                         {
                             Particle neighbour = swarms[s].chooseBestNeighbour(p);
                             if(neighbour != null)
-                                p.setpBest(neighbour.getpBest());
+                                p.setpBest(neighbour.getpBest().clone());
                         }
                     }
                     

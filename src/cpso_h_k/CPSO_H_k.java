@@ -60,7 +60,7 @@ public class CPSO_H_k extends CPSO {
                     {
                         Particle neighbour = swarms[s].chooseBestNeighbour(p);
                         if(neighbour != null)
-                            p.setpBest(neighbour.getpBest());
+                            p.setpBest(neighbour.getpBest().clone());
                     }
                 }
                 
@@ -92,7 +92,7 @@ public class CPSO_H_k extends CPSO {
                         count++;		
                     }		
                 }
-                pso_swarm.setRandomParticle(super.getGlobalBestSolution(), velocity);
+                pso_swarm.setRandomParticle(super.getGlobalBestSolution().clone(), velocity);
             }
             
             for(Particle p : pso_swarm.getParticles()){ //for each particle
