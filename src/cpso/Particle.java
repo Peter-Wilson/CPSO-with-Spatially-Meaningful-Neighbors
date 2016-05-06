@@ -23,6 +23,14 @@ public class Particle {
         setpBest(initialPosition);
         setVelocity(randomizeVelocity(initialPosition, function));        
     }
+    
+    public Particle(double[] initialPosition)
+    {
+        setPosition(initialPosition);
+        setpBest(initialPosition);
+        double[] velocity = new double[initialPosition.length];
+        setVelocity(velocity);        
+    }
 
     /**
      * @return the position
@@ -163,10 +171,7 @@ public class Particle {
             double randomNumber = 0;
             do
             {
-                if(function == 1)
-                    randomNumber = (Math.random()*diameter) + 1;
-                else
-                    randomNumber = (Math.random()*diameter) -(diameter/2);
+                randomNumber = (Math.random()*diameter)-(diameter/2);
             }
             while(position[i]+randomNumber < lowerBound || position[i]+randomNumber > upperBound);
             velocity[i] = randomNumber;

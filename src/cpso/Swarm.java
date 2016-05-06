@@ -171,7 +171,7 @@ public class Swarm
          * Sets the value of a random particle to the supplied value
          * @param value 
          */
-        public boolean setRandomParticle(double[] position)
+        public boolean setRandomParticle(double[] position, double[] velocity)
         {
             if(position.length != k)
                 return false;
@@ -179,11 +179,12 @@ public class Swarm
             {
                 int randomIndex = 0;
                 do{
-                    randomIndex = (int)(Math.random()*k);
+                    randomIndex = (int)(Math.random()*swarmSize);
                 }
                 while(particles[randomIndex] == this.globalBest);
                 
                 particles[randomIndex].setPosition(position);
+                particles[randomIndex].setVelocity(velocity);
                 return true;
             }
         }
