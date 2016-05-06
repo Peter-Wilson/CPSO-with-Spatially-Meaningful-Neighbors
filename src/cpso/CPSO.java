@@ -117,8 +117,9 @@ public class CPSO {
      */
     public void UpdateBests(double fitness, Particle p, Swarm swarm)
     {
+        double pBestFitness = p.getpBestFitness();
         if (p.UpdatePersonalBest(fitness, p.getPosition(), min))  //update the personal best
-            writeOutput("New Personal best for " + p + ": x=" + p.getFitness());
+            writeOutput("New Personal best for " + p + ": old:"+ pBestFitness + "..... new:" + p.getFitness() + " Position: "+p.getPosition()[0]);
 
         if ((swarm.getGlobalBest() == null) ||
             (p.getFitness() < swarm.getGlobalBest().getpBestFitness() && min) ||
@@ -139,13 +140,13 @@ public class CPSO {
         {
             Particle best = swarms[i].getGlobalBest();
             if(best == null){
-                index+= swarms[i].getParticles()[0].getPosition().length;
+                index+= swarms[i].getParticles()[0].getpBest().length;
                 continue;
             }
             else{
                 for(int j = 0; j < best.getPosition().length; j++)
                 {
-                    testSolution[index++] = best.getPosition()[j];
+                    testSolution[index++] = best.getpBest()[j];
                 }
             }
         }

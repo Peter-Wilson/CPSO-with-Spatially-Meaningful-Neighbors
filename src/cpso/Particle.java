@@ -14,7 +14,7 @@ public class Particle {
     private double[] position;
     private double[] velocity;
     private double[] pBest;
-    private double fitness;
+    private double fitness = Integer.MAX_VALUE;
     private double pBestFitness = Integer.MAX_VALUE;
     
     public Particle(double[] initialPosition, int function)
@@ -135,12 +135,12 @@ public class Particle {
         boolean value = false;
         //if the pBest hasn't been set or the new position is better
             //update the pBest value
-            if ((fitness == 0.0 || pBest == null) ||
-                (newFitness < fitness && min) ||
-                (newFitness > fitness && !min))
+            if ((pBestFitness == Integer.MAX_VALUE || pBest == null) ||
+                (newFitness < pBestFitness && min) ||
+                (newFitness > pBestFitness && !min))
             {
                 pBestFitness = newFitness;
-                pBest = newPosition;
+                pBest = newPosition.clone();
                 value = true;
             }
             
