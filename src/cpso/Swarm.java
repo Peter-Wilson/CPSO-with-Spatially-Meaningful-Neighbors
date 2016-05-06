@@ -110,9 +110,18 @@ public class Swarm
 
             for(int i = 0; i < k; i ++)
             {
-                velocity = (((INERTIA - loop) * p.getVelocity()[i]) +
-                             C1 * R1 * (p.getpBest()[i] - p.getPosition()[i]) +
-                             C2 * R2 * (getGlobalBest().getpBest()[i] - p.getPosition()[i]));
+                if(dt ==null || p.getSocialNeighbour() == null)
+                {
+                    velocity = (((INERTIA - loop) * p.getVelocity()[i]) +
+                                 C1 * R1 * (p.getpBest()[i] - p.getPosition()[i]) +
+                                 C2 * R2 * (getGlobalBest().getpBest()[i] - p.getPosition()[i]));
+                }
+                else
+                {
+                    velocity = (((INERTIA - loop) * p.getVelocity()[i]) +
+                                 C1 * R1 * (p.getpBest()[i] - p.getPosition()[i]) +
+                                 C2 * R2 * (p.getSocialNeighbour().getpBest()[i] - p.getPosition()[i]));
+                }
                 
                 //This limits the velocity from going beyond the diameter
                 double upperBound =  (diameter/2);

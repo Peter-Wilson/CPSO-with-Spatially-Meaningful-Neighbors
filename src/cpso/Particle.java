@@ -16,6 +16,7 @@ public class Particle {
     private double[] pBest;
     private double fitness = 0;
     private double pBestFitness = Integer.MAX_VALUE;
+    private Particle socialNeighbour = null;
     
     public Particle(double[] initialPosition, int function)
     {
@@ -177,5 +178,19 @@ public class Particle {
             velocity[i] = randomNumber;
         }
         return velocity;
+    }
+
+    /**
+     * @return the socialNeighbour
+     */
+    public Particle getSocialNeighbour() {
+        return socialNeighbour;
+    }
+
+    /**
+     * @param socialNeighbour the socialNeighbour to set
+     */
+    public void setSocialNeighbour(Particle socialNeighbour) {
+        this.socialNeighbour = socialNeighbour;
     }
 }

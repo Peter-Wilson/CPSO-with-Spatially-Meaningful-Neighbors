@@ -19,13 +19,13 @@ public class ReportMain {
     
     public static void getAverageSolveRate()
     {
-        testCPSO_S(10, 6, false); // no dt        
+        testCPSO_S(40, 6, false); // no dt        
         testCPSO_S(10, 6, true); // dt
-        testCPSO_Sk(10, 2, 6, false);
+        testCPSO_Sk(40, 2, 6, false);
         testCPSO_Sk(10, 2, 6, true);
-        testCPSO_Hk(10, 2, 6, false);
+        testCPSO_Hk(40, 2, 6, false);
         testCPSO_Hk(10, 2, 6, true);
-        testCPSO_Rk(10, 2, 6, false);
+        testCPSO_Rk(40, 2, 6, false);
         testCPSO_Rk(10, 2, 6, true);
     }
     
@@ -119,7 +119,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 2);
+                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 1);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -201,7 +201,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 2);
+                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 1);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -283,7 +283,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 2);
+                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 1);
                 Result r = cpso.start();
                 if(r.solved)
                 {

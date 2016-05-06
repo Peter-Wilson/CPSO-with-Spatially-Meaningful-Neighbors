@@ -44,11 +44,15 @@ public class CPSO_S_k extends CPSO {
 
                     double fitness = CalculateFitness(s, p.getPosition(), numSwarms); //calculate the new fitness
                     UpdateBests(fitness, p, swarms[s]);  
-                    if(Delaunay) 
+                }
+                
+                if(Delaunay) 
+                {
+                    for(Particle p: swarms[s].getParticles())
                     {
-                        Particle neighbour = swarms[s].chooseBestNeighbour(p);
-                        if(neighbour != null)
-                            p.setpBest(neighbour.getpBest().clone());
+                            Particle neighbour = swarms[s].chooseBestNeighbour(p);
+                            if(neighbour != null)
+                                p.setSocialNeighbour(neighbour);
                     }
                 }
 
