@@ -14,7 +14,7 @@ public class Particle {
     private double[] position;
     private double[] velocity;
     private double[] pBest;
-    private double fitness = Integer.MAX_VALUE;
+    private double fitness = 0;
     private double pBestFitness = Integer.MAX_VALUE;
     
     public Particle(double[] initialPosition, int function)
