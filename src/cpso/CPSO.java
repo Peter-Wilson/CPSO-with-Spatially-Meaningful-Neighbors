@@ -240,7 +240,8 @@ public class CPSO {
     public void writeOutput(String output)
     {
         if(screen == null)
-            System.out.println(output);
+            //System.out.println(output);
+            return;
         else
             screen.append("\n "+output);
     }

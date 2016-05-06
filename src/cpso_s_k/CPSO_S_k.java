@@ -26,8 +26,9 @@ public class CPSO_S_k extends CPSO {
     }
 
     //calculate the fitness of the PSO
-    public void start()
+    public Result start()
     {
+        Result result = new Result();
         for(int i = 0; i < maxLoops; i++)
         {
             for (int s = 0; s < swarms.length; s++) //iterate through swarms
@@ -58,9 +59,13 @@ public class CPSO_S_k extends CPSO {
                 }                       
             }
             
-            if(this.getSolutionFitness() < this.criterion)
+            result.globalBestPerIteration.add(this.getSolutionFitness());
+            if(result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1) < this.criterion)
             {
                 writeOutput("Criterion Met after "+i+" iterations");
+                result.solved = true;
+                result.iterationsToSolve = i+1;
+                result.finalFitness = result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1);
                 solution = this.testSolution;
                 break;
             }
@@ -73,5 +78,6 @@ public class CPSO_S_k extends CPSO {
             writeOutput("Solution "+(i+1)+": "+ testSolution[i]);
         }
         writeOutput("The final fitness value is: "+ CalculateFinalFitness(testSolution));
+        return result;
     }
 }
