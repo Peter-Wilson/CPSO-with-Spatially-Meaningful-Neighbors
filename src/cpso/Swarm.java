@@ -205,12 +205,11 @@ public class Swarm
         public void CalculateDelaunayTriangulation()
         {
             Point_dt[] points = new Point_dt[particles.length];
+            dt = new Delaunay_Triangulation();
             for(int i = 0; i < particles.length; i++)
             {
-               points[i] =  Triangulation.convertParticletoPoint(particles[i]);          
+               dt.insertPoint(Triangulation.convertParticletoPoint(particles[i]));          
             }
-            
-           dt = new Delaunay_Triangulation(points);
         }
         
         

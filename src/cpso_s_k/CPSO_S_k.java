@@ -36,8 +36,7 @@ public class CPSO_S_k extends CPSO {
                 //perform the delaunay triangulation
                 if(Delaunay)
                 {
-                    try{ swarms[s].CalculateDelaunayTriangulation(); }
-                    catch(Exception e) {System.out.println("error creating delaunay");}
+                    swarms[s].CalculateDelaunayTriangulation(); 
                 }
                 
                 for(Particle p : swarms[s].getParticles()){ //for each particle
@@ -50,9 +49,9 @@ public class CPSO_S_k extends CPSO {
                 {
                     for(Particle p: swarms[s].getParticles())
                     {
-                            Particle neighbour = swarms[s].chooseBestNeighbour(p);
-                            if(neighbour != null)
-                                p.setSocialNeighbour(neighbour);
+                            //Particle neighbour = swarms[s].chooseBestNeighbour(p);
+                            //if(neighbour != null)
+                            //    p.setSocialNeighbour(neighbour);
                     }
                 }
 

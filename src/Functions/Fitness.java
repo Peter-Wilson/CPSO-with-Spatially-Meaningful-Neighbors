@@ -62,7 +62,7 @@ public class Fitness {
 
         for(int i = 0; i < dimensionSize; i++)
         {
-            multiplication *= Math.cos(values[i]/Math.sqrt(i));
+            multiplication *= Math.cos(values[i]/Math.sqrt(i+1));
         }
         fitness = 1+ (summation/4000)-multiplication;
         return fitness;
