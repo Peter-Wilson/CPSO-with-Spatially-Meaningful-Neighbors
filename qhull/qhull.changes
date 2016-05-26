@@ -1,0 +1,23 @@
+/* change log for qhull version 1.0 */
+
+10-21-93
+   - changed initialvertices() to use gram_schmidt() instead of gausselim()
+   - changed 1600 to 80 in calculating NEARzero
+   - changed FLT_MIN to DBL_MIN in calculating MINdenom
+
+10-5-93
+   - added force output ('o') flag, FORCEoutput, in case of degenerate data
+   - added skipA to vertexintersect(), will be used in version 2.0
+   - evaluatediagonal() pivots around point instead first vertex, cleaner
+     evaluatediagonal() returns signed value, math consistency
+   - setin() performs linear search, needed for version 2.0
+   - printhashtable() added for trace output
+   - printdegeneratehelp() added to inform users how to force output
+   - report current furthest point and new facet on errors
+   - DELTAvalue == DISTround instead 0.0 in the exact case   
+
+10-4-93
+   - added skipindex to hashtable entry
+     this could have caused non-empty hash table error when long hash chains
+
+

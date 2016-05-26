@@ -1,25 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso_s/CPSO_S.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso/Swarm.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso/Particle.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso_s_k/CPSO_S_k.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso_r_k/CPSO_R_k.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/GUI/Display.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso/CPSO.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/cpso_h_k/CPSO_H_k.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/Main/ReportMain.java</file>
-            <file>file:/Z:/git/GitPortable/Data/home/CPSO/src/Functions/Fitness.java</file>
-=======
-            <file>file:/C:/Users/Peter/Desktop/School/Brock%20University/Year%203/COSC%203F90%20-%20Research%20Project/CPSO/src/cpso_s_k/CPSO_S_k.java</file>
-            <file>file:/C:/Users/Peter/Desktop/School/Brock%20University/Year%203/COSC%203F90%20-%20Research%20Project/CPSO/src/GUI/Display.java</file>
             <file>file:/C:/Users/Peter/Desktop/School/Brock%20University/Year%203/COSC%203F90%20-%20Research%20Project/CPSO/src/Main/ReportMain.java</file>
             <file>file:/C:/Users/Peter/Desktop/School/Brock%20University/Year%203/COSC%203F90%20-%20Research%20Project/CPSO/src/cpso/CPSO.java</file>
->>>>>>> 2d2085d11219a44ec22b6cfb10cea35ac91fdfd6
         </group>
     </open-files>
 </project-private>
