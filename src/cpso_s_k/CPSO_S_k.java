@@ -15,8 +15,7 @@ public class CPSO_S_k extends CPSO {
 
     public CPSO_S_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function)
     {
-        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function);
-        super.InitializeSwarms(false);
+        this(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, null);
     }
     
     public CPSO_S_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function, JTextArea op)

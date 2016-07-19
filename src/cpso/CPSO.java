@@ -31,24 +31,6 @@ public class CPSO {
     public double criterion;
     JTextArea screen;
     
-    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay, int function)
-    {
-        this.dimensionSize = dimensionSize;
-        this.maxLoops = maxLoops;
-        this.swarmSize = swarmSize;
-        this.INERTIA = Inertia;
-        this.C1 = c1;
-        this.C2 = c2;
-        if(numSwarms > dimensionSize) numSwarms = dimensionSize;
-        this.numSwarms = numSwarms;   
-        this.Delaunay = Delaunay;
-        this.function = function;
-        criterion = getCriterion(function);
-        solution = new double[dimensionSize];
-        testSolution = new double[dimensionSize];
-        screen = null;
-    }
-    
     public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay, int function, JTextArea op)
     {
         this.dimensionSize = dimensionSize;
@@ -66,6 +48,12 @@ public class CPSO {
         testSolution = new double[dimensionSize];
         screen = op;
     }
+    
+    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay, int function)
+    {
+        this(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, numSwarms, Delaunay, function, null);
+    }
+       
 
     /**
      * Creates the swarms
