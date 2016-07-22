@@ -58,7 +58,7 @@ public class Swarm
                     
                     position[j] = getRandomNumber(rand, function);
                 
-                particles[i] = new Particle(position);
+                particles[i] = new Particle(position, function);
             }
         }
         
@@ -110,9 +110,18 @@ public class Swarm
 
             for(int i = 0; i < k; i ++)
             {
-                velocity = (((INERTIA - loop) * p.getVelocity()[i]) +
-                             C1 * R1 * (p.getpBest()[i] - p.getPosition()[i]) +
-                             C2 * R2 * (getGlobalBest().getpBest()[i] - p.getPosition()[i]));
+                if(dt ==null || p.getSocialNeighbour() == null)
+                {
+                    velocity = (((INERTIA - loop) * p.getVelocity()[i]) +
+                                 C1 * R1 * (p.getpBest()[i] - p.getPosition()[i]) +
+                                 C2 * R2 * (getGlobalBest().getpBest()[i] - p.getPosition()[i]));
+                }
+                else
+                {
+                    velocity = (((INERTIA - loop) * p.getVelocity()[i]) +
+                                 C1 * R1 * (p.getpBest()[i] - p.getPosition()[i]) +
+                                 C2 * R2 * (p.getSocialNeighbour().getpBest()[i] - p.getPosition()[i]));
+                }
                 
                 //This limits the velocity from going beyond the diameter
                 double upperBound =  (diameter/2);
@@ -171,7 +180,7 @@ public class Swarm
          * Sets the value of a random particle to the supplied value
          * @param value 
          */
-        public boolean setRandomParticle(double[] position)
+        public boolean setRandomParticle(double[] position, double[] velocity)
         {
             if(position.length != k)
                 return false;
@@ -179,11 +188,12 @@ public class Swarm
             {
                 int randomIndex = 0;
                 do{
-                    randomIndex = (int)(Math.random()*k);
+                    randomIndex = (int)(Math.random()*swarmSize);
                 }
                 while(particles[randomIndex] == this.globalBest);
                 
                 particles[randomIndex].setPosition(position);
+                particles[randomIndex].setVelocity(velocity);
                 return true;
             }
         }
@@ -195,12 +205,11 @@ public class Swarm
         public void CalculateDelaunayTriangulation()
         {
             Point_dt[] points = new Point_dt[particles.length];
+            dt = new Delaunay_Triangulation();
             for(int i = 0; i < particles.length; i++)
             {
-               points[i] =  Triangulation.convertParticletoPoint(particles[i]);          
+               dt.insertPoint(Triangulation.convertParticletoPoint(particles[i]));          
             }
-            
-           dt = new Delaunay_Triangulation(points);
         }
         
         

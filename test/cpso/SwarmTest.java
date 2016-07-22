@@ -121,12 +121,12 @@ public class SwarmTest {
         double[] position5 = {1.2};
         double[] position6 = {-1};
         Swarm s = new Swarm(6, 0.2, 0.3, 0.5, true, 1, 5);
-        s.getParticles()[0] = new Particle(position1);
-        s.getParticles()[1] = new Particle(position2);
-        s.getParticles()[2] = new Particle(position3);
-        s.getParticles()[3] = new Particle(position4);
-        s.getParticles()[4] = new Particle(position5);
-        s.getParticles()[5] = new Particle(position6);
+        s.getParticles()[0] = new Particle(position1, 5);
+        s.getParticles()[1] = new Particle(position2, 5);
+        s.getParticles()[2] = new Particle(position3, 5);
+        s.getParticles()[3] = new Particle(position4, 5);
+        s.getParticles()[4] = new Particle(position5, 5);
+        s.getParticles()[5] = new Particle(position6, 5);
         ArrayList<Point_dt> connected = new ArrayList<Point_dt>();
         
         s.addClosestParticles1D(s.getParticles()[0], connected);
@@ -153,7 +153,7 @@ public class SwarmTest {
         p.setVelocity(velocity);
         p.setPosition(position);
         p.setpBest(position);
-        instance.setGlobalBest(new Particle(pBest));
+        instance.setGlobalBest(new Particle(pBest, 1));
         instance.UpdateVelocity(p, 0, true);
         
         double[] expectedVelocity = {1.9};
@@ -161,7 +161,7 @@ public class SwarmTest {
         
         System.out.println("Gets correct value");
         
-        double[] velocity2 = {1000};
+        double[] velocity2 = {5};
         p.setVelocity(velocity2);
         instance.UpdateVelocity(p, 0, true);
         double[] newValue = Triangulation.add(p.getPosition(), p.getVelocity());
@@ -185,14 +185,14 @@ public class SwarmTest {
         //calculate a test velocity
         Swarm instance = new Swarm(20, 0.2, 0.3, 0.5, true, 5, 0);
         Particle p = instance.getParticles()[0];
-        double[] velocity = {5, 76.5, -2, 43, 8.65};
-        double[] position = {6, 32.1, 11, 235, 103};
+        double[] velocity = {5, 16.5, -2, 43, 8.65};
+        double[] position = {6, 32.1, 11, 15, 13};
         p.setVelocity(velocity);
         p.setPosition(position);
-        instance.setGlobalBest(new Particle(position));
+        instance.setGlobalBest(new Particle(position, 0));
         instance.UpdatePosition(p);
         
-        double[] expectedVelocity = {11, 108.6, 9, 278, 111.65};
+        double[] expectedVelocity = {11, 48.6, 9, 58, 21.65};
         
         //ensure the actual velocity is the same
         assertArrayEquals(p.getPosition(), expectedVelocity, 0.1);  

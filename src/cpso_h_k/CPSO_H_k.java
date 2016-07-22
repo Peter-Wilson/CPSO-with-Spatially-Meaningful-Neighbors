@@ -20,9 +20,7 @@ public class CPSO_H_k extends CPSO {
 
     public CPSO_H_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function)
     {
-        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function);
-        pso_swarm = new Swarm(dimensionSize, PSO_C1, PSO_C2, PSO_INTERTIA, min, dimensionSize, function);
-        InitializeSwarms(false);
+        this(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, null);
     }
     
     public CPSO_H_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function, JTextArea op)
@@ -33,8 +31,9 @@ public class CPSO_H_k extends CPSO {
     }
 
     //calculate the fitness of the PSO
-    public void start()
+    public Result start()
     {
+        Result result = new Result();
         for(int i = 0; i < maxLoops; i++)
         {
 
@@ -55,12 +54,16 @@ public class CPSO_H_k extends CPSO {
                 for(Particle p : swarms[s].getParticles()){ //for each particle
 
                     double fitness = CalculateFitness(s, p.getPosition(), numSwarms); //calculate the new fitness
-                    UpdateBests(fitness, p, swarms[s]);   
-                    if(Delaunay) 
+                    UpdateBests(fitness, p, swarms[s]); 
+                }
+                
+                //update the closest social neighbor
+                if(Delaunay) 
+                {
+                    for(Particle p: swarms[s].getParticles())
                     {
-                        Particle neighbour = swarms[s].chooseBestNeighbour(p);
-                        if(neighbour != null)
-                            p.setpBest(neighbour.getpBest());
+                           Particle neighbour = swarms[s].chooseBestNeighbour(p);
+                           p.setSocialNeighbour(neighbour);
                     }
                 }
                 
@@ -72,9 +75,13 @@ public class CPSO_H_k extends CPSO {
             }
             // </editor-fold>
             
-            if(this.getSolutionFitness() < this.criterion)
+            result.globalBestPerIteration.add(this.getSolutionFitness());
+            if(result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1) < this.criterion)
             {
                 writeOutput("Criterion Met after "+i+" iterations");
+                result.solved = true;
+                result.iterationsToSolve = i+1;
+                result.finalFitness = result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1);
                 solution = this.testSolution;
                 break;
             }
@@ -82,7 +89,17 @@ public class CPSO_H_k extends CPSO {
             //transfer knowledge from CPSO to PSO
             if(swarms[0].getGlobalBest() != null && swarms[0].getGlobalBest().getVelocity() != null)
             {
-                pso_swarm.setRandomParticle(super.getGlobalBestSolution());
+                int count = 0;
+                double[] velocity = new double[dimensionSize];		
+                for(int s = 0; s < numSwarms; s++)		
+                {		
+                    for(int j = 0; j < swarms[s].getParticles()[0].getPosition().length; j++)		
+                    {		
+                        velocity[count] = swarms[s].getGlobalBest().getVelocity()[j];		
+                        count++;		
+                    }		
+                }
+                pso_swarm.setRandomParticle(super.getGlobalBestSolution().clone(), velocity);
             }
             
             for(Particle p : pso_swarm.getParticles()){ //for each particle
@@ -108,11 +125,14 @@ public class CPSO_H_k extends CPSO {
                     //select a random particle to replace with the pso global best
                     int size = swarms[s].getParticles()[0].getPosition().length;
                     double[] value = new double[size];
+                    double[] velocity = new double[size];
                     for(int j = 0; j < size; j++)
                     {
-                        value[j] = pso_swarm.getGlobalBest().getpBest()[count++];
+                        value[j] = pso_swarm.getGlobalBest().getpBest()[count];
+                        velocity[j] = pso_swarm.getGlobalBest().getVelocity()[count++];
                     }
-                    swarms[s].setRandomParticle(value);
+                    
+                    swarms[s].setRandomParticle(value, velocity);
                 }
             }
 
@@ -124,6 +144,7 @@ public class CPSO_H_k extends CPSO {
             writeOutput("Solution "+(i+1)+": "+ testSolution[i]);
         }
         writeOutput("The final fitness value is: "+ CalculateFinalFitness(testSolution));
+        return result;
     }
 
 }

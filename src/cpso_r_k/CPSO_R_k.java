@@ -27,8 +27,7 @@ public class CPSO_R_k extends CPSO {
      */
     public CPSO_R_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function)
     {
-        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function);
-        InitializeSwarms(true);
+        this(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, null);
     }
     
     public CPSO_R_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function, JTextArea op)
@@ -38,8 +37,9 @@ public class CPSO_R_k extends CPSO {
     }
 
     //calculate the fitness of the PSO
-    public void start()
+    public Result start()
     {
+        Result result = new Result();
         for(int i = 0; i < maxLoops; i++)
         {
 
@@ -59,12 +59,16 @@ public class CPSO_R_k extends CPSO {
                 for(Particle p : swarms[s].getParticles()){ //for each particle
 
                     double fitness = CalculateFitness(s, p.getPosition(), numSwarms); //calculate the new fitness
-                    UpdateBests(fitness, p, swarms[s]);   
-                    if(Delaunay) 
+                    UpdateBests(fitness, p, swarms[s]);  
+                }
+                
+                //update the closest social neighbor
+                if(Delaunay) 
+                {
+                    for(Particle p: swarms[s].getParticles())
                     {
-                        Particle neighbour = swarms[s].chooseBestNeighbour(p);
-                        if(neighbour != null)
-                            p.setpBest(neighbour.getpBest());
+                          Particle neighbour = swarms[s].chooseBestNeighbour(p);
+                          p.setSocialNeighbour(neighbour);
                     }
                 }
 
@@ -75,10 +79,14 @@ public class CPSO_R_k extends CPSO {
                 }                       
             }
             
-            if(this.getSolutionFitness() < this.criterion)
+            result.globalBestPerIteration.add(this.getSolutionFitness());
+            if(result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1) < this.criterion)
             {
                 writeOutput("Criterion Met after "+i+" iterations");
-                    solution = this.testSolution;
+                result.solved = true;
+                result.iterationsToSolve = i+1;
+                result.finalFitness = result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1);
+                solution = this.testSolution;
                 break;
             }
             // </editor-fold>
@@ -91,5 +99,6 @@ public class CPSO_R_k extends CPSO {
             writeOutput("Solution "+(i+1)+": "+ testSolution[i]);
         }
         writeOutput("The final fitness value is: "+ CalculateFinalFitness(testSolution));
+        return result;
     }
 }

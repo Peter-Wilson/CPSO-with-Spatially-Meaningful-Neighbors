@@ -308,6 +308,7 @@ public class Display extends javax.swing.JPanel {
         //boolean Delaunay = this.rbDT
         CPSO_S cpso = new CPSO_S(dimensionSize, maxLoops, swarmSize, 
                                 Inertia, C1, C2, DT, getSelectedFunction(), this.taOutput);
+        this.taOutput.setText("");
         cpso.start();
     }//GEN-LAST:event_btnCPSOSActionPerformed
 
@@ -328,6 +329,7 @@ public class Display extends javax.swing.JPanel {
         }
         CPSO_S_k cpso = new CPSO_S_k(dimensionSize, maxLoops, swarmSize, 
                                 Inertia, C1, C2, numSwarms, DT, getSelectedFunction(), this.taOutput);
+        this.taOutput.setText("");
         cpso.start();
     }//GEN-LAST:event_btnCPSOSKActionPerformed
 
@@ -348,6 +350,7 @@ public class Display extends javax.swing.JPanel {
         //boolean Delaunay = this.rbDT
         CPSO_H_k cpso = new CPSO_H_k(dimensionSize, maxLoops, swarmSize, 
                                 Inertia, C1, C2, numSwarms, DT, getSelectedFunction(), this.taOutput);
+        this.taOutput.setText("");
         cpso.start();
     }//GEN-LAST:event_btnCPSOHKActionPerformed
 
@@ -368,6 +371,7 @@ public class Display extends javax.swing.JPanel {
         //boolean Delaunay = this.rbDT
         CPSO_R_k cpso = new CPSO_R_k(dimensionSize, maxLoops, swarmSize, 
                                 Inertia, C1, C2, numSwarms, DT, getSelectedFunction(), this.taOutput);
+        this.taOutput.setText("");
         cpso.start();
     }//GEN-LAST:event_btnCPSORKActionPerformed
 

@@ -31,24 +31,6 @@ public class CPSO {
     public double criterion;
     JTextArea screen;
     
-    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay, int function)
-    {
-        this.dimensionSize = dimensionSize;
-        this.maxLoops = maxLoops;
-        this.swarmSize = swarmSize;
-        this.INERTIA = Inertia;
-        this.C1 = c1;
-        this.C2 = c2;
-        if(numSwarms > dimensionSize) numSwarms = dimensionSize;
-        this.numSwarms = numSwarms;   
-        this.Delaunay = Delaunay;
-        this.function = function;
-        criterion = getCriterion(function);
-        solution = new double[dimensionSize];
-        testSolution = new double[dimensionSize];
-        screen = null;
-    }
-    
     public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay, int function, JTextArea op)
     {
         this.dimensionSize = dimensionSize;
@@ -66,6 +48,12 @@ public class CPSO {
         testSolution = new double[dimensionSize];
         screen = op;
     }
+    
+    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay, int function)
+    {
+        this(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, numSwarms, Delaunay, function, null);
+    }
+       
 
     /**
      * Creates the swarms
@@ -117,8 +105,9 @@ public class CPSO {
      */
     public void UpdateBests(double fitness, Particle p, Swarm swarm)
     {
+        double pBestFitness = p.getpBestFitness();
         if (p.UpdatePersonalBest(fitness, p.getPosition(), min))  //update the personal best
-            writeOutput("New Personal best for " + p + ": x=" + p.getFitness());
+            writeOutput("New Personal best for " + p + ": old:"+ pBestFitness + "..... new:" + p.getFitness() + " Position: "+p.getPosition()[0]);
 
         if ((swarm.getGlobalBest() == null) ||
             (p.getFitness() < swarm.getGlobalBest().getpBestFitness() && min) ||
@@ -139,13 +128,13 @@ public class CPSO {
         {
             Particle best = swarms[i].getGlobalBest();
             if(best == null){
-                index+= swarms[i].getParticles()[0].getPosition().length;
+                index+= swarms[i].getParticles()[0].getpBest().length;
                 continue;
             }
             else{
                 for(int j = 0; j < best.getPosition().length; j++)
                 {
-                    testSolution[index++] = best.getPosition()[j];
+                    testSolution[index++] = best.getpBest()[j];
                 }
             }
         }
@@ -239,7 +228,8 @@ public class CPSO {
     public void writeOutput(String output)
     {
         if(screen == null)
-            System.out.println(output);
+            //System.out.println(output);
+            return;
         else
             screen.append("\n "+output);
     }

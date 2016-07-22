@@ -23,7 +23,7 @@ public class Fitness {
     public static double Schaffer(double[] values)
     {
         double fitness = 0.5;
-        fitness += ((Math.pow(Math.sin(Math.pow(values[0],2)+Math.pow(values[1],2)),2)-0.5)/
+        fitness += ((Math.pow(Math.sin(Math.pow(values[0],2)-Math.pow(values[1],2)),2)-0.5)/
                     Math.pow(1+0.001*(Math.pow(values[0],2)+Math.pow(values[1],2)),2));
         return fitness;
     }
@@ -33,7 +33,7 @@ public class Fitness {
         double fitness = 0;
         for(int i = 0; i < dimensionSize; i++)
         {
-            fitness += Math.pow(values[i],2) + 10 - 10*Math.cos(2*Math.PI*values[i]);
+            fitness += (Math.pow(values[i],2) + 10 - 10*Math.cos(2*Math.PI*values[i]));
         }
         return fitness;
     }
@@ -84,7 +84,7 @@ public class Fitness {
             b += Math.cos(2*Math.PI*values[i]);
         }
 
-        fitness = 20 + Math.E - 20*Math.pow(Math.E, -0.2*Math.sqrt(a/dimensionSize)) -
+        fitness = 20 + Math.E - 20*Math.pow(Math.E, (-0.2*Math.sqrt(a/dimensionSize))) -
                 Math.pow(Math.E, b/dimensionSize);
 
        return fitness;

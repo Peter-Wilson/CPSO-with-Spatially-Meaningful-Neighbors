@@ -14,15 +14,23 @@ public class Particle {
     private double[] position;
     private double[] velocity;
     private double[] pBest;
-    private double fitness;
+    private double fitness = 0;
     private double pBestFitness = Integer.MAX_VALUE;
+    private Particle socialNeighbour = null;
+    
+    public Particle(double[] initialPosition, int function)
+    {
+        setPosition(initialPosition);
+        setpBest(initialPosition);
+        setVelocity(randomizeVelocity(initialPosition, function));        
+    }
     
     public Particle(double[] initialPosition)
     {
         setPosition(initialPosition);
         setpBest(initialPosition);
-        double[] value = new double[initialPosition.length];
-        setVelocity(value);        
+        double[] velocity = new double[initialPosition.length];
+        setVelocity(velocity);        
     }
 
     /**
@@ -128,12 +136,12 @@ public class Particle {
         boolean value = false;
         //if the pBest hasn't been set or the new position is better
             //update the pBest value
-            if ((fitness == 0.0 || pBest == null) ||
-                (newFitness < fitness && min) ||
-                (newFitness > fitness && !min))
+            if ((pBestFitness == Integer.MAX_VALUE || pBest == null) ||
+                (newFitness < pBestFitness && min) ||
+                (newFitness > pBestFitness && !min))
             {
                 pBestFitness = newFitness;
-                pBest = newPosition;
+                pBest = newPosition.clone();
                 value = true;
             }
             
@@ -145,5 +153,44 @@ public class Particle {
     {
         //TODO: finish
         return false;
+    }
+
+    private double[] randomizeVelocity(double[] position, int function) {
+        double[] velocity = new double[position.length];
+        double diameter = Swarm.getDiameter(function);
+        double upperBound =  (diameter/2);
+        double lowerBound = -(diameter/2);
+
+        if(function == 0)
+        {
+            lowerBound = 1;
+            upperBound = diameter+1;
+        }
+                
+        for(int i = 0; i < velocity.length; i++)
+        {
+            double randomNumber = 0;
+            do
+            {
+                randomNumber = (Math.random()*diameter)-(diameter/2);
+            }
+            while(position[i]+randomNumber < lowerBound || position[i]+randomNumber > upperBound);
+            velocity[i] = randomNumber;
+        }
+        return velocity;
+    }
+
+    /**
+     * @return the socialNeighbour
+     */
+    public Particle getSocialNeighbour() {
+        return socialNeighbour;
+    }
+
+    /**
+     * @param socialNeighbour the socialNeighbour to set
+     */
+    public void setSocialNeighbour(Particle socialNeighbour) {
+        this.socialNeighbour = socialNeighbour;
     }
 }
