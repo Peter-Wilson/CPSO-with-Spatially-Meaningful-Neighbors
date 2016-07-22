@@ -57,13 +57,13 @@ public class CPSO_H_k extends CPSO {
                     UpdateBests(fitness, p, swarms[s]); 
                 }
                 
+                //update the closest social neighbor
                 if(Delaunay) 
                 {
                     for(Particle p: swarms[s].getParticles())
                     {
-                           // Particle neighbour = swarms[s].chooseBestNeighbour(p);
-                           // if(neighbour != null)
-                           //     p.setSocialNeighbour(neighbour);
+                           Particle neighbour = swarms[s].chooseBestNeighbour(p);
+                           p.setSocialNeighbour(neighbour);
                     }
                 }
                 
