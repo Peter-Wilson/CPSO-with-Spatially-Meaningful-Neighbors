@@ -17,11 +17,12 @@
 
 #include <stdio.h>
 #include <memory.h>
+#include "set.h"
+#include "poly.h"
 #include <stdlib.h>
-#include "qHullJNI_QHullDelaunay.h"
 #include <qhull.h>
-#include <qset.h>
-#include <poly.h>
+#include <jni.h>
+#include "qHullJNI_QHullDelaunay.h"
 
 
 //this is a string of letters
