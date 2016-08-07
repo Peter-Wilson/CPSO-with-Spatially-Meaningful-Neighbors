@@ -7,16 +7,16 @@ package Functions;
 
 import cpso.Particle;
 import java.util.ArrayList;
-import org.jzy3d.plot3d.builder.delaunay.jdt.Point_dt;
+import quickhull3d.Point3d;
 
 /**
  *
  * @author pw12nb
  */
 public class Triangulation {
-    public static Point_dt closestNeighbour(Point_dt item, ArrayList<Point_dt> neighbours) {
+    public static Point3d closestNeighbour(Point3d item, ArrayList<Point3d> neighbours) {
         double minDistance = Double.MAX_VALUE;
-        Point_dt closest = null;
+        Point3d closest = null;
         for(int i = 0; i < neighbours.size(); i++)
         {
             if(neighbours.get(i) == item) continue;
@@ -55,7 +55,7 @@ public class Triangulation {
      * @param connected
      * @return 
      */
-    public static boolean working_together(Point_dt item, Point_dt connected, Particle[] p) {
+    public static boolean working_together(Point3d item, Point3d connected, Particle[] p) {
         Particle a = getParticle(item, p);
         Particle b = getParticle(connected, p);
         
@@ -111,7 +111,7 @@ public class Triangulation {
      * @param connected the point that you are looking for
      * @return  the particle
      */
-    public static Particle getParticle(Point_dt connected, Particle[] particles) {
+    public static Particle getParticle(Point3d connected, Particle[] particles) {
         for(Particle p : particles)
         {
             double[] position = p.getPosition();
@@ -139,23 +139,23 @@ public class Triangulation {
          * @param p
          * @return 
          */
-        public static Point_dt convertParticletoPoint(Particle p)
+        public static Point3d convertParticletoPoint(Particle p)
         {
             int dimensions = p.getPosition().length;
             if(dimensions == 1)
             {
                 double[] part = p.getPosition();
-                return new Point_dt(part[0], 0, 0);
+                return new Point3d(part[0], 0, 0);
             }
             if(dimensions == 2)
             {
                 double[] part = p.getPosition();
-                return new Point_dt(part[0], part[1], 0);
+                return new Point3d(part[0], part[1], 0);
             }
             else 
             {
                 double[] part = p.getPosition();
-                return new Point_dt(part[0], part[1], part[2]);
+                return new Point3d(part[0], part[1], part[2]);
             }  
         }
 }

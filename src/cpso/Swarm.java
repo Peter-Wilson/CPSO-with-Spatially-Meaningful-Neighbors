@@ -12,6 +12,7 @@ import java.util.Random;
 import org.jzy3d.plot3d.builder.delaunay.jdt.Delaunay_Triangulation;
 import org.jzy3d.plot3d.builder.delaunay.jdt.Point_dt;
 import org.jzy3d.plot3d.builder.delaunay.jdt.Triangle_dt;
+import quickhull3d.Point3d;
 
 
 /**
@@ -204,11 +205,10 @@ public class Swarm
          */
         public void CalculateDelaunayTriangulation()
         {
-            Point_dt[] points = new Point_dt[particles.length];
-            dt = new Delaunay_Triangulation();
+            Point3d[] points = new Point3d[particles.length];
             for(int i = 0; i < particles.length; i++)
             {
-               dt.insertPoint(Triangulation.convertParticletoPoint(particles[i]));          
+               points[i] = Triangulation.convertParticletoPoint(particles[i]);          
             }
         }
         
