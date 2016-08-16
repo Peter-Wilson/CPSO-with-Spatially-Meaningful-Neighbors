@@ -7,6 +7,7 @@ package cpso;
 
 import Functions.Triangulation;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import org.hamcrest.core.Is;
 import org.junit.After;
@@ -15,7 +16,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.jzy3d.plot3d.builder.delaunay.jdt.Delaunay_Triangulation;
 import org.jzy3d.plot3d.builder.delaunay.jdt.Point_dt;
+import org.jzy3d.plot3d.builder.delaunay.jdt.Triangle_dt;
 
 /**
  *
@@ -216,6 +219,32 @@ public class SwarmTest {
         {
             assertNotNull(result[i]);
         }
+    }
+    
+    /**
+     * 
+     */
+    @Test
+    public void testCalculateDelaunayTriangulation()
+    {
+        System.out.println("test calculate delaunay triangulation");
+        Swarm instance = new Swarm(20, 0.5, 0.2, 0.3, true, 5, 0);
+        instance.CalculateDelaunayTriangulation();
+        Delaunay_Triangulation dt = instance.dt;
+        
+        //test that there is more than one 
+        assertNotEquals(dt.trianglesSize(), 0);
+        
+        System.out.println("getting the triangles");
+        Iterator<Triangle_dt> iterator = dt.trianglesIterator();
+        int count = 1;
+        
+        while(iterator.hasNext())
+        {            
+            System.out.println("testing triangle: "+count++);
+            Triangle_dt triangles = iterator.next(); 
+        }
+        
     }
     
 }
