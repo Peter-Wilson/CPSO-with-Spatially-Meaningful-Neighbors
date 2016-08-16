@@ -115,6 +115,47 @@ public class SwarmTest {
      * Test for Updating the Velocity.
      */
     @Test
+    public void testGetDiameter(){
+        //function 1
+        double result = Swarm.getDiameter(0);
+        double expResult = 50;
+        assertEquals(result, expResult, 0.0);
+        
+        //function 2
+        result = Swarm.getDiameter(1);
+        expResult = 200;
+        assertEquals(result, expResult, 0.0);
+        
+        //function 3
+        result = Swarm.getDiameter(2);
+        expResult = 10.24;
+        assertEquals(result, expResult, 0.0);
+        
+        //function 4
+        result = Swarm.getDiameter(3);
+        expResult = 60;
+        assertEquals(result, expResult, 0.0);
+        
+        //function 5
+        result = Swarm.getDiameter(4);
+        expResult = 1200; 
+        assertEquals(result, expResult, 0.0);
+        
+        //function 6
+        result = Swarm.getDiameter(5);
+        expResult = 64;
+        assertEquals(result, expResult, 0.0);
+        
+        //function 6
+        result = Swarm.getDiameter(-1);
+        expResult = -1;
+        assertEquals(result, expResult, 0.0);
+    }
+    
+    /**
+     * Test for Updating the Velocity.
+     */
+    @Test
     public void testaddClosestParticles1D(){
         System.out.println("Get 2 closest particles in 1D");
         double[] position1 = {0};
