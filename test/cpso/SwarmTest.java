@@ -7,6 +7,7 @@ package cpso;
 
 import Functions.Triangulation;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import org.hamcrest.core.Is;
 import org.junit.After;
@@ -15,7 +16,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.jzy3d.plot3d.builder.delaunay.jdt.Delaunay_Triangulation;
 import org.jzy3d.plot3d.builder.delaunay.jdt.Point_dt;
+import org.jzy3d.plot3d.builder.delaunay.jdt.Triangle_dt;
 
 /**
  *
@@ -106,6 +109,47 @@ public class SwarmTest {
         random = instance.getRandomNumber(rand, instance.function);
         assertTrue(random >= -expected);
         assertTrue(random <= expected);
+    }
+    
+    /**
+     * Test for Updating the Velocity.
+     */
+    @Test
+    public void testGetDiameter(){
+        //function 1
+        double result = Swarm.getDiameter(0);
+        double expResult = 50;
+        assertEquals(result, expResult, 0.0);
+        
+        //function 2
+        result = Swarm.getDiameter(1);
+        expResult = 200;
+        assertEquals(result, expResult, 0.0);
+        
+        //function 3
+        result = Swarm.getDiameter(2);
+        expResult = 10.24;
+        assertEquals(result, expResult, 0.0);
+        
+        //function 4
+        result = Swarm.getDiameter(3);
+        expResult = 60;
+        assertEquals(result, expResult, 0.0);
+        
+        //function 5
+        result = Swarm.getDiameter(4);
+        expResult = 1200; 
+        assertEquals(result, expResult, 0.0);
+        
+        //function 6
+        result = Swarm.getDiameter(5);
+        expResult = 64;
+        assertEquals(result, expResult, 0.0);
+        
+        //function 6
+        result = Swarm.getDiameter(-1);
+        expResult = -1;
+        assertEquals(result, expResult, 0.0);
     }
     
     /**
@@ -216,6 +260,32 @@ public class SwarmTest {
         {
             assertNotNull(result[i]);
         }
+    }
+    
+    /**
+     * 
+     */
+    @Test
+    public void testCalculateDelaunayTriangulation()
+    {
+        System.out.println("test calculate delaunay triangulation");
+        Swarm instance = new Swarm(20, 0.5, 0.2, 0.3, true, 5, 0);
+        instance.CalculateDelaunayTriangulation();
+        Delaunay_Triangulation dt = instance.dt;
+        
+        //test that there is more than one 
+        assertNotEquals(dt.trianglesSize(), 0);
+        
+        System.out.println("getting the triangles");
+        Iterator<Triangle_dt> iterator = dt.trianglesIterator();
+        int count = 1;
+        
+        while(iterator.hasNext())
+        {            
+            System.out.println("testing triangle: "+count++);
+            Triangle_dt triangles = iterator.next(); 
+        }
+        
     }
     
 }
