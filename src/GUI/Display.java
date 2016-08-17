@@ -121,11 +121,6 @@ public class Display extends javax.swing.JPanel {
         jLabel7.setText("GBest Influence (0-1):");
 
         tfC1.setText("1.49618");
-        tfC1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfC1ActionPerformed(evt);
-            }
-        });
 
         tfC2.setText("1.49618");
 
@@ -374,10 +369,6 @@ public class Display extends javax.swing.JPanel {
         this.taOutput.setText("");
         cpso.start();
     }//GEN-LAST:event_btnCPSORKActionPerformed
-
-    private void tfC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfC1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfC1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

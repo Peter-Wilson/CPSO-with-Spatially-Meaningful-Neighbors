@@ -151,12 +151,6 @@ public class Particle {
             fitness = newFitness;
             return value;
     }
-    
-    public boolean inside(Particle a, Particle b, Particle c)
-    {
-        //TODO: finish
-        return false;
-    }
 
     private double[] randomizeVelocity(double[] position, int function) {
         double[] velocity = new double[position.length];

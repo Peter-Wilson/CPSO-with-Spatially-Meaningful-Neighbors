@@ -106,19 +106,18 @@ public class CPSO_R_k extends CPSO {
                 result.solved = true;
                 result.iterationsToSolve = i+1;
                 result.finalFitness = result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1);
-                solution = this.testSolution;
                 break;
             }
             // </editor-fold>
 
         }
 
-        this.getSolutionFitness();
-        for(int i = 0; i < testSolution.length; i++) //loop to print off solution
+        double[] bestSolution = getGlobalBestSolution();
+        for(int i = 0; i < bestSolution.length; i++) //loop to print off startSolution
         {
-            writeOutput("Solution "+(i+1)+": "+ testSolution[i]);
+            writeOutput("Solution "+(i+1)+": "+ bestSolution[i]);
         }
-        writeOutput("The final fitness value is: "+ CalculateFinalFitness(testSolution));
+        writeOutput("The final fitness value is: "+ CalculateFinalFitness(bestSolution));
         return result;
     }
 }
