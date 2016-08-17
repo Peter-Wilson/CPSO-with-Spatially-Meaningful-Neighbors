@@ -8,23 +8,53 @@ import cpso.*;
 import javax.swing.JTextArea;
 
 /**
- *
+ * A CPSO variant:
+ * solves the multi-dimensional problem by dividing it evenly into k subswarms 
+ * and solving those separately
  * @author Peter
  */
 public class CPSO_S_k extends CPSO {    
 
+    /**
+     * Create a CPSO_S_k
+     * @param dimensionSize the overall dimension size
+     * @param maxLoops the max loops to perform
+     * @param swarmSize the number of particles in each swarm
+     * @param Inertia the effect the current velocity has on its next (0-1)
+     * @param c1 the effect the personal best has on the next velocity
+     * @param c2 the effect that the global (or network) best has on the future velocity
+     * @param k the number of swarms
+     * @param DT determines if you are using delaunay triangulation or not
+     * @param function determines which function it is optimizing
+     */
     public CPSO_S_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function)
     {
         this(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, null);
     }
     
+    /**
+     * Create a CPSO_S_k with output
+     * @param dimensionSize the overall dimension size
+     * @param maxLoops the max loops to perform
+     * @param swarmSize the number of particles in each swarm
+     * @param Inertia the effect the current velocity has on its next (0-1)
+     * @param c1 the effect the personal best has on the next velocity
+     * @param c2 the effect that the global (or network) best has on the future velocity
+     * @param k the number of swarms
+     * @param DT determines if you are using delaunay triangulation or not
+     * @param function determines which function it is optimizing
+     * @param op the text area to output the i/o
+     */
     public CPSO_S_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function, JTextArea op)
     {
         super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, op);
         super.InitializeSwarms(false);
     }
 
-    //calculate the fitness of the PSO
+    /**
+     * Begin calculating the CPSO
+     * @return the final best result
+     */
     public Result start()
     {
         Result result = new Result();

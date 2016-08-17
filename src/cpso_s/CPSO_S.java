@@ -8,23 +8,50 @@ import cpso.*;
 import javax.swing.JTextArea;
 
 /**
- *
+ * CPSO variant:
+ * divides the multi-dimensional problem into n subproblems of size 1
  * @author Peter
  */
 public class CPSO_S extends CPSO {    
     
+    /**
+     * Create a CPSO_S
+     * @param dimensionSize the overall dimension size
+     * @param maxLoops the max loops to perform
+     * @param swarmSize the number of particles in each swarm
+     * @param Inertia the effect the current velocity has on its next (0-1)
+     * @param c1 the effect the personal best has on the next velocity
+     * @param c2 the effect that the global (or network) best has on the future velocity
+     * @param DT determines if you are using delaunay triangulation or not
+     * @param function determines which function it is optimizing
+     */
         public CPSO_S(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, boolean DT, int function)
         {
             this(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, DT, function, null);
         }
         
+     /**
+     * Create a CPSO_S with output
+     * @param dimensionSize the overall dimension size
+     * @param maxLoops the max loops to perform
+     * @param swarmSize the number of particles in each swarm
+     * @param Inertia the effect the current velocity has on its next (0-1)
+     * @param c1 the effect the personal best has on the next velocity
+     * @param c2 the effect that the global (or network) best has on the future velocity
+     * @param DT determines if you are using delaunay triangulation or not
+     * @param function determines which function it is optimizing
+     * @param op the text area to output the i/o
+     */
         public CPSO_S(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, boolean DT, int function, JTextArea op)
         {
             super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, dimensionSize, DT, function, op);
             InitializeSwarms(false);
         }
         
-        //calculate the fitness of the PSO
+        /**
+     * Begin calculating the CPSO
+     * @return the final best result
+     */
         public Result start()
         {
             Result result = new Result();
@@ -40,7 +67,6 @@ public class CPSO_S extends CPSO {
                     }
                     
                     for(Particle p : swarms[s].getParticles()){ //for each particle
-                        
                         double fitness = CalculateFitness(s, p.getPosition(), numSwarms); //calculate the new fitness
                         UpdateBests(fitness, p, swarms[s]); 
                     }

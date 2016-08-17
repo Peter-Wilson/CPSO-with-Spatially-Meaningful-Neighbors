@@ -178,7 +178,9 @@ public class Swarm
         
         /**
          * Sets the value of a random particle to the supplied value
-         * @param value 
+         * @param position the position to set at the random index
+         * @param velocity the velocity to set at the ransom index
+         * @return true or false if the change was completed
          */
         public boolean setRandomParticle(double[] position, double[] velocity)
         {
@@ -200,7 +202,6 @@ public class Swarm
         
         /**
          * Creates the Delaunay Triangulation
-         * @throws Exception if the dimensions are incorrect
          */
         public void CalculateDelaunayTriangulation()
         {

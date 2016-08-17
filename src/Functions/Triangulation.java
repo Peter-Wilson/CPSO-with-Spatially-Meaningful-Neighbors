@@ -51,9 +51,10 @@ public class Triangulation {
            other (but not past one another) they are considered to
            be cooperating and an undirected connection is made
            between the two. This case is shown in Figure 6 (right).
-     * @param item
-     * @param connected
-     * @return 
+     * @param item the first item to check
+     * @param connected the connected item to test 
+     * @param p the list of all the particles in the swarm
+     * @return true or false if the two particles are working together
      */
     public static boolean working_together(Point_dt item, Point_dt connected, Particle[] p) {
         Particle a = getParticle(item, p);
@@ -109,6 +110,7 @@ public class Triangulation {
     /**
      * Returns the particle at the specific position
      * @param connected the point that you are looking for
+     * @param particles the list of particles that the point will be looked for in
      * @return  the particle
      */
     public static Particle getParticle(Point_dt connected, Particle[] particles) {
@@ -136,8 +138,8 @@ public class Triangulation {
     
     /**
          * Note only works for up to 3 dimensions
-         * @param p
-         * @return 
+         * @param p the particle to convert
+         * @return the new Point_dt containing the particles position
          */
         public static Point_dt convertParticletoPoint(Particle p)
         {

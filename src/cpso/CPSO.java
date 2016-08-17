@@ -31,6 +31,19 @@ public class CPSO {
     public double criterion;
     JTextArea screen;
     
+    /**
+     * Create a CPSO
+     * @param dimensionSize the overall dimension size
+     * @param maxLoops the max loops to perform
+     * @param swarmSize the number of particles in each swarm
+     * @param Inertia the effect the current velocity has on its next (0-1)
+     * @param c1 the effect the personal best has on the next velocity
+     * @param c2 the effect that the global (or network) best has on the future velocity
+     * @param numSwarms the number of swarms to create
+     * @param Delaunay determines if you are using delaunay triangulation or not
+     * @param function determines which function it is optimizing
+     * @param op the output to push the i/o to
+     */
     public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay, int function, JTextArea op)
     {
         this.dimensionSize = dimensionSize;
@@ -49,6 +62,18 @@ public class CPSO {
         screen = op;
     }
     
+    /**
+     * Create a CPSO
+     * @param dimensionSize the overall dimension size
+     * @param maxLoops the max loops to perform
+     * @param swarmSize the number of particles in each swarm
+     * @param Inertia the effect the current velocity has on its next (0-1)
+     * @param c1 the effect the personal best has on the next velocity
+     * @param c2 the effect that the global (or network) best has on the future velocity
+     * @param numSwarms the number of swarms to create
+     * @param Delaunay determines if you are using delaunay triangulation or not
+     * @param function determines which function it is optimizing
+     */
     public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay, int function)
     {
         this(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, numSwarms, Delaunay, function, null);
@@ -57,6 +82,8 @@ public class CPSO {
 
     /**
      * Creates the swarms
+     * @param random notes if the swarm should be built with random sizes or 
+     * with identical swarm sizes
      */
     public void InitializeSwarms(boolean random)
     {
@@ -153,7 +180,9 @@ public class CPSO {
     /**
      * Calculate the fitness of the current swarm
      * @param position the current position
-     * @return 
+     * @param index the index the position starts from
+     * @param numSwarms the number of swarms in the cpso
+     * @return the fitness of after the new value
      */
     public double CalculateFitness(int index, double[] position, int numSwarms)
     {
@@ -182,12 +211,15 @@ public class CPSO {
                         count++;
                     }
             }
+            if(count != solution.length)
+                throw new IllegalArgumentException("Incorrect number of swarms provided since solution not filled: "+count+" != "+solution.length);
         }
         return CalculateFinalFitness(testSolution);   
     }
 
     /**
      * Returns the final fitness based on the solution function
+     * @param values the values to pass into the fitness function
      * @return fitness
      */
     public double CalculateFinalFitness(double[] values)
@@ -224,7 +256,11 @@ public class CPSO {
     }
     
     
-
+    /**
+     * Outputs the value to either the console or the ui depending on if
+     * a screen output has been entered
+     * @param output the value to output
+     */
     public void writeOutput(String output)
     {
         if(screen == null)
@@ -249,8 +285,9 @@ public class CPSO {
     }
 
     /**
+     * Sets the default solution
      * @param solution the solution to set
-     * @throws exception incorrect solution size
+     * @throws java.lang.Exception incorrect solution size
      */
     public void setSolution(double[] solution) throws Exception {
         if(solution.length == dimensionSize)
@@ -260,6 +297,11 @@ public class CPSO {
         else throw new Exception("Incorrect solution size");
     }
 
+    /**
+     * Returns the criterion dependent on the function testing
+     * @param function the function being run
+     * @return the criterion
+     */
     private double getCriterion(int function) {
         switch(function)
         {
@@ -275,6 +317,10 @@ public class CPSO {
         }
     }
 
+    /**
+     * Updates the temp solution and then return that value
+     * @return the overall best solution
+     */
     public double[] getGlobalBestSolution() {        
         UpdateSolution();
         return this.testSolution;
