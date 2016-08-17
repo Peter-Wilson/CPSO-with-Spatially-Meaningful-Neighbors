@@ -8,7 +8,10 @@ package cpso_h_k;
 import cpso.*;
 import javax.swing.JTextArea;
 /**
- *
+ * CPSO Variant:
+ * solves the multi-dimensional problem by dividing the problem evenly into k 
+ * subswarms and solving them alongside a standard PSO to allow them to work
+ * together to get the best result
  * @author Peter
  */
 public class CPSO_H_k extends CPSO {    
@@ -18,11 +21,36 @@ public class CPSO_H_k extends CPSO {
     double PSO_C2 = 0.3;
     double PSO_INTERTIA = 0.3;
 
+    /**
+     * Create a CPSO_H_k
+     * @param dimensionSize the overall dimension size
+     * @param maxLoops the max loops to perform
+     * @param swarmSize the number of particles in each swarm
+     * @param Inertia the effect the current velocity has on its next (0-1)
+     * @param c1 the effect the personal best has on the next velocity
+     * @param c2 the effect that the global (or network) best has on the future velocity
+     * @param k the number of swarms
+     * @param DT determines if you are using delaunay triangulation or not
+     * @param function determines which function it is optimizing
+     */
     public CPSO_H_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function)
     {
         this(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, null);
     }
     
+    /**
+     * Create a CPSO_H_k with output
+     * @param dimensionSize the overall dimension size
+     * @param maxLoops the max loops to perform
+     * @param swarmSize the number of particles in each swarm
+     * @param Inertia the effect the current velocity has on its next (0-1)
+     * @param c1 the effect the personal best has on the next velocity
+     * @param c2 the effect that the global (or network) best has on the future velocity
+     * @param k the number of swarms
+     * @param DT determines if you are using delaunay triangulation or not
+     * @param function determines which function it is optimizing
+     * @param op the text area to output the i/o
+     */
     public CPSO_H_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function, JTextArea op)
     {
         super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, op);
@@ -30,7 +58,10 @@ public class CPSO_H_k extends CPSO {
         InitializeSwarms(false);
     }
 
-    //calculate the fitness of the PSO
+    /**
+     * Begin calculating the CPSO
+     * @return the final best result
+     */
     public Result start()
     {
         Result result = new Result();

@@ -50,6 +50,7 @@ public class Particle {
     /**
      * Set the position based on the index dimension
      * @param position the position to set 
+     * @param index set the value at that specific index
      */
     public void setPosition(double position, int index) {
         this.position[index] = position;
@@ -73,6 +74,7 @@ public class Particle {
     /**
      * set the velocity based on the index
      * @param velocity the velocity to set
+     * @param index set the index value at that specific index
      */
     public void setVelocity(double velocity, int index) {
         this.velocity[index] = velocity;
@@ -102,6 +104,7 @@ public class Particle {
     /**
      * set the pBest based on the index
      * @param pBest the pBest to set
+     * @param index set the pBest value at the specific index
      */
     public void setpBest(double pBest, int index) {
         this.pBest[index] = pBest;
