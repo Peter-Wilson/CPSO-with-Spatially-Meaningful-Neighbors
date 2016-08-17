@@ -211,6 +211,8 @@ public class CPSO {
                         count++;
                     }
             }
+            if(count != solution.length)
+                throw new IllegalArgumentException("Incorrect number of swarms provided since solution not filled: "+count+" != "+solution.length);
         }
         return CalculateFinalFitness(testSolution);   
     }
