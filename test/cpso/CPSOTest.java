@@ -656,6 +656,36 @@ public class CPSOTest {
         instance.UpdateBests(instance.getSwarms()[0].getParticles()[0], 0);
         assertArrayEquals(instance.getSwarms()[0].getParticles()[0].getpBest(), good_position, 0.0);
     }
+    
+    /**
+     * Tests to see if it updates the initial solution correctly
+     */
+    @Test
+    public void testUpdateSoltuion()
+    {
+        CPSO instance = new CPSO(6, 5, 20, 0.5, 0.3, 0.2, 3, false, 0, false);       
+        instance.InitializeSwarms(false);
+        
+        double[] positionA = {1.0,1.0};
+        double[] positionB = {1.0,1.0};
+        double[] positionC = {1.0,1.0};
+        double[] expectedSolution = {1.0,1.0,1.0,1.0,1.0,1.0};
+        
+        //Set the global bests
+        instance.swarms[0].getParticles()[0].setPosition(positionA);
+        instance.swarms[0].setGlobalBest(instance.swarms[0].getParticles()[0]);
+        
+        instance.swarms[1].getParticles()[0].setPosition(positionB);
+        instance.swarms[1].setGlobalBest(instance.swarms[1].getParticles()[0]);
+        
+        instance.swarms[2].getParticles()[0].setPosition(positionC);
+        instance.swarms[2].setGlobalBest(instance.swarms[2].getParticles()[0]);
+        
+        //run update solution
+        instance.UpdateSolution();
+        
+        assertArrayEquals(expectedSolution, instance.startSolution, 0.0);
+    }
 
 
     

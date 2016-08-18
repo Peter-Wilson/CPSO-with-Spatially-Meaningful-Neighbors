@@ -221,7 +221,7 @@ public class Swarm
          * @param item the item that is looking to swap
          * @return the item that is best to swap with
          */
-        public Particle chooseBestNeighbour(Particle item)
+        public Particle chooseBestNeighbour(Particle item, CPSO cpso, int index)
         {
             
             boolean hasConnectedNeighbours = false;
@@ -263,7 +263,8 @@ public class Swarm
                     //TODO: find a way to calculate fitness in this class
                     //if dist(Xi − Pc) < dist(Xi − Pk)and fitness(Pk) < fitness(Xi) then
                     if(particlePoint.distance3D(point) < particlePoint.distance3D(connected.get(i)) &&
-                        Triangulation.getParticle(connected.get(i), particles).getFitness() < Triangulation.getParticle(particlePoint, particles).getFitness())
+                        cpso.CalculateFitness(index, Triangulation.getParticle(connected.get(i), particles).getPosition()) < 
+                        cpso.CalculateFitness(index, Triangulation.getParticle(particlePoint, particles).getPosition()))
                     {
                         temp = connected.get(i);
                         hasConnectedNeighbours = true;

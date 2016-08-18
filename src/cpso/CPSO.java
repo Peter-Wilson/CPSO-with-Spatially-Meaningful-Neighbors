@@ -160,6 +160,7 @@ public class CPSO {
             (!min && CalculateFitness(index, swarm.getGlobalBest().getpBest()) < pBestFitness))      //update the global best
         {
             swarm.setGlobalBest(p);
+            UpdateSolution();
             writeOutput("New Global Best for Swarm " + swarm + ": x=" + particleFitness);
         }
     }
@@ -330,9 +331,14 @@ public class CPSO {
 
         for(int i = 0; i < swarms.length; i++)
         {
-            for(int j = 0; j < swarms[i].getGlobalBest().getPosition().length; j++)
+            //pull from the global best only if it exists
+            //otherwise pull from the first
+            Particle best = (swarms[i].getGlobalBest() != null)? swarms[i].getGlobalBest() : swarms[i].getParticles()[i];
+            
+            
+            for(int j = 0; j < best.getPosition().length; j++)
             {
-                startSolution[count] = swarms[i].getGlobalBest().getPosition()[j];
+                startSolution[count] = best.getPosition()[j];
                 count++;
             }
         }

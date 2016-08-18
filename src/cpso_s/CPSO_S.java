@@ -77,7 +77,7 @@ public class CPSO_S extends CPSO {
                     {
                         for(Particle p: swarms[s].getParticles())
                         {
-                                Particle neighbour = swarms[s].chooseBestNeighbour(p);
+                                Particle neighbour = swarms[s].chooseBestNeighbour(p, this, s);
                                 p.setSocialNeighbour(neighbour);
                         }
                     }
