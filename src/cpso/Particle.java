@@ -132,11 +132,11 @@ public class Particle {
      * @param newFitness the newly changes fitness
      * @param newPosition the newly changed position
      * @param min whether or not it is checking for minimum or max value
-     * @return true/false if the value is updated
+     * @return true/false if the pBest is updated
      */
     public boolean UpdatePersonalBest(double newFitness, double[] newPosition, boolean min)
     {
-        boolean value = false;
+        boolean pBestChanged = false;
         //if the pBest hasn't been set or the new position is better
             //update the pBest value
             if ((pBestFitness == Integer.MAX_VALUE || pBest == null) ||
@@ -144,12 +144,12 @@ public class Particle {
                 (newFitness > pBestFitness && !min))
             {
                 pBestFitness = newFitness;
-                pBest = newPosition.clone();
-                value = true;
+                pBest = newPosition.clone(); //TODO: ensure clone is doing a deep clone
+                pBestChanged = true;
             }
             
             fitness = newFitness;
-            return value;
+            return pBestChanged;
     }
 
     private double[] randomizeVelocity(double[] position, int function) {

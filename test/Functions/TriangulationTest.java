@@ -209,4 +209,25 @@ public class TriangulationTest {
         assertEquals(expResult.z(), result.z(), 0.0);
     }
     
+    /**
+     * Tests if clone leads to a deep clone of the array
+     */
+    @Test
+    public void testDeepClone()
+    {
+        
+        System.out.println("test deep clone");
+        
+        double[] test1 = {0.0,1.0,2.0,3.0,4.0};
+        double[] test2 = test1.clone();
+        
+        assertArrayEquals(test1, test2, 0.0);        
+        System.out.println("arrays the same after clone");
+        
+        test1[0]++;
+        
+        assertNotEquals(test1, test2);
+        System.out.println("change to a doesnt affect b");
+    }
+    
 }

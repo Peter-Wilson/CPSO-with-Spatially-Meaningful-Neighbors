@@ -91,18 +91,19 @@ public class Swarm
         }
         
         //Update the velocity of the points based on the velocity solution
-        public void UpdateVelocity(Particle p, double loop)
+        public void UpdateVelocity(Particle p, double loopPercent)
         {
-            UpdateVelocity(p, loop, false);
+            UpdateVelocity(p, loopPercent, false);
         }
         
 
         //Update the velocity of the points based on the velocity solution
-        public void UpdateVelocity(Particle p, double loop, boolean test)
+        public void UpdateVelocity(Particle p, double loopPercent, boolean test)
         {
             Random random = new Random();
             double R1 = random.nextDouble();
             double R2 = random.nextDouble();
+            double interia = INERTIA - (INERTIA*loopPercent); //inertia should decrease consistently as the cpso continues
             double velocity = 0;
             
             //for testing purposes remove the randomness
@@ -112,13 +113,13 @@ public class Swarm
             {
                 if(dt ==null || p.getSocialNeighbour() == null)
                 {
-                    velocity = (((INERTIA - loop) * p.getVelocity()[i]) +
+                    velocity = ((interia * p.getVelocity()[i]) +
                                  C1 * R1 * (p.getpBest()[i] - p.getPosition()[i]) +
                                  C2 * R2 * (getGlobalBest().getpBest()[i] - p.getPosition()[i]));
                 }
                 else
                 {
-                    velocity = (((INERTIA - loop) * p.getVelocity()[i]) +
+                    velocity = ((interia * p.getVelocity()[i]) +
                                  C1 * R1 * (p.getpBest()[i] - p.getPosition()[i]) +
                                  C2 * R2 * (p.getSocialNeighbour().getpBest()[i] - p.getPosition()[i]));
                 }
