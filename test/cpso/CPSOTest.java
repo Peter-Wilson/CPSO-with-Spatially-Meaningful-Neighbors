@@ -562,7 +562,7 @@ public class CPSOTest {
         CPSO instance = new CPSO(5, 5, 20, 0.5, 0.3, 0.2, k, true, 0);
         instance.InitializeSwarms(false);
         
-        // test setting a correct size solution
+        // test setting a correct size startSolution
         instance.setSolution(solution);
         double[] result = instance.getSolution();
         for(int i = 0; i < result.length; i++)
@@ -570,7 +570,7 @@ public class CPSOTest {
             assertEquals(solution[i], result[i], 0.0);
         }
         
-        //test setting an incorrect size solution
+        //test setting an incorrect size startSolution
         try{
             double[] solution2 = {0.0};
             instance.setSolution(solution2);

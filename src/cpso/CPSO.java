@@ -17,8 +17,7 @@ public class CPSO {
     public int loops;
     public boolean min = true;
     public Swarm[] swarms; 
-    public double[] solution;
-    public double[] testSolution;
+    public double[] startSolution;
     public int dimensionSize;
     public int swarmSize;
     public double C1 = 0.5;
@@ -57,8 +56,7 @@ public class CPSO {
         this.Delaunay = Delaunay;          
         this.function = function;  
         criterion = getCriterion(function);
-        solution = new double[dimensionSize];
-        testSolution = new double[dimensionSize];
+        startSolution = new double[dimensionSize];
         screen = op;
     }
     
@@ -118,7 +116,7 @@ public class CPSO {
 
             for(int j = 0; j < width; j++)
             {
-                solution[count++] = swarms[i].getParticles()[0].getPosition()[j];
+                startSolution[count++] = swarms[i].getParticles()[0].getPosition()[j];
             }
         }
     }
@@ -146,25 +144,30 @@ public class CPSO {
     }
 
      /**
-     * Update to the best current solution by taking the global best values
+     * Update to the best current startSolution by taking the global best values
      */
-    public void UpdateSolution()
+    public double[] getGlobalBestSolution()
     {
         int index = 0;
+        double[] bestPosition = new double[startSolution.length];
+        
         for(int i = 0; i < swarms.length; i++)
         {
             Particle best = swarms[i].getGlobalBest();
             if(best == null){
-                index+= swarms[i].getParticles()[0].getpBest().length;
-                continue;
+                for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
+                {
+                    bestPosition[index++] = swarms[i].getParticles()[0].getPosition()[j];
+                }
             }
             else{
                 for(int j = 0; j < best.getPosition().length; j++)
                 {
-                    testSolution[index++] = best.getpBest()[j];
+                    bestPosition[index++] = best.getpBest()[j];
                 }
             }
-        }
+        }        
+        return bestPosition;
     }
     
     /**
@@ -173,8 +176,7 @@ public class CPSO {
      */
     public double getSolutionFitness()
     {
-        UpdateSolution();
-        return this.CalculateFinalFitness(testSolution);
+        return this.CalculateFinalFitness(getGlobalBestSolution());
     }
 
     /**
@@ -188,11 +190,13 @@ public class CPSO {
     {
         double fitness = 0;
         int count = 0;
+        //TODO: change to update the entire context vector on each change
+        double[] tempSolution = new double[startSolution.length];
         if(numSwarms == 1)
         {
             for(int i = 0; i < position.length; i++)
             {
-                testSolution[i] = position[i];
+                tempSolution[i] = position[i];
             }
         }
         else
@@ -202,23 +206,23 @@ public class CPSO {
                 if(i == index)
                     for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
                     {
-                        testSolution[count++] = position[j];
+                        tempSolution[count++] = position[j];
                     }
                 else
                     for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
                     {
-                        testSolution[count] = solution[count];
+                        tempSolution[count] = startSolution[count];
                         count++;
                     }
             }
-            if(count != solution.length)
-                throw new IllegalArgumentException("Incorrect number of swarms provided since solution not filled: "+count+" != "+solution.length);
+            if(count != startSolution.length)
+                throw new IllegalArgumentException("Incorrect number of swarms provided since solution not filled: "+count+" != "+startSolution.length);
         }
-        return CalculateFinalFitness(testSolution);   
+        return CalculateFinalFitness(tempSolution);   
     }
 
     /**
-     * Returns the final fitness based on the solution function
+     * Returns the final fitness based on the startSolution function
      * @param values the values to pass into the fitness function
      * @return fitness
      */
@@ -278,21 +282,21 @@ public class CPSO {
     }
 
     /**
-     * @return the solution
+     * @return the startSolution
      */
     public double[] getSolution() {
-        return solution;
+        return startSolution;
     }
 
     /**
-     * Sets the default solution
-     * @param solution the solution to set
-     * @throws java.lang.Exception incorrect solution size
+     * Sets the default startSolution
+     * @param solution the startSolution to set
+     * @throws java.lang.Exception incorrect startSolution size
      */
     public void setSolution(double[] solution) throws Exception {
         if(solution.length == dimensionSize)
         {
-            this.solution = solution;
+            this.startSolution = solution;
         }
         else throw new Exception("Incorrect solution size");
     }
@@ -315,14 +319,5 @@ public class CPSO {
             default: return 0;
                      
         }
-    }
-
-    /**
-     * Updates the temp solution and then return that value
-     * @return the overall best solution
-     */
-    public double[] getGlobalBestSolution() {        
-        UpdateSolution();
-        return this.testSolution;
     }
 }

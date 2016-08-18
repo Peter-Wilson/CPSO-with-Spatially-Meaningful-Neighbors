@@ -90,23 +90,22 @@ public class CPSO_S extends CPSO {
                 }
                 
                 result.globalBestPerIteration.add(this.getSolutionFitness());
-                if(result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1) < this.criterion)
+                if(result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1) <= this.criterion)
                 {
                     writeOutput("Criterion Met after "+i+" iterations");
                     result.solved = true;
                     result.iterationsToSolve = i+1;
                     result.finalFitness = result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1);
-                    solution = this.testSolution;
                     break;
                 }
             }
             
-            this.getSolutionFitness();
-            for(int i = 0; i < testSolution.length; i++) //loop to print off solution
+            double[] bestSolution = getGlobalBestSolution();
+            for(int i = 0; i < bestSolution.length; i++) //loop to print off startSolution
             {
-                writeOutput("Solution "+(i+1)+": "+ testSolution[i]);
+                writeOutput("Solution "+(i+1)+": "+ bestSolution[i]);
             }
-            writeOutput("The final fitness value is: "+ CalculateFinalFitness(testSolution));
+            writeOutput("The final fitness value is: "+ CalculateFinalFitness(bestSolution));
             return result;
         }
 }
