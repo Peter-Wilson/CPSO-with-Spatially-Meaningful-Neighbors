@@ -45,7 +45,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_S cpso = new CPSO_S(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, dt, 1);
+                CPSO_S cpso = new CPSO_S(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, dt, 1, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -61,7 +61,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_S cpso = new CPSO_S(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, dt, 2);
+                CPSO_S cpso = new CPSO_S(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, dt, 2, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -76,7 +76,7 @@ public class ReportMain {
             iteration = 0;            
             for(int i = 0; i < 50; i++)
             {
-                CPSO_S cpso = new CPSO_S(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, dt, 3);
+                CPSO_S cpso = new CPSO_S(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, dt, 3, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -92,7 +92,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_S cpso = new CPSO_S(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, dt, 4);
+                CPSO_S cpso = new CPSO_S(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, dt, 4, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -108,7 +108,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_S cpso = new CPSO_S(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, dt, 5);
+                CPSO_S cpso = new CPSO_S(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, dt, 5, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -127,7 +127,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 1);
+                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 1, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -143,7 +143,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618,numSwarms, dt, 2);
+                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618,numSwarms, dt, 2, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -158,7 +158,7 @@ public class ReportMain {
             iteration = 0;            
             for(int i = 0; i < 50; i++)
             {
-                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 3);
+                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 3, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -174,7 +174,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 4);
+                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 4, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -190,7 +190,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 5);
+                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 5, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -209,7 +209,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 1);
+                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 1, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -225,7 +225,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618,numSwarms, dt, 2);
+                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618,numSwarms, dt, 2, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -240,7 +240,7 @@ public class ReportMain {
             iteration = 0;            
             for(int i = 0; i < 50; i++)
             {
-                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 3);
+                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 3, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -256,7 +256,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 4);
+                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 4, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -272,7 +272,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 5);
+                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 5, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -291,7 +291,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 1);
+                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 1, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -307,7 +307,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618,numSwarms, dt, 2);
+                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618,numSwarms, dt, 2, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -322,7 +322,7 @@ public class ReportMain {
             iteration = 0;            
             for(int i = 0; i < 50; i++)
             {
-                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 3);
+                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 3, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -338,7 +338,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 4);
+                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 4, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {
@@ -354,7 +354,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
-                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 5);
+                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 10000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 5, true);
                 Result r = cpso.start();
                 if(r.solved)
                 {

@@ -15,7 +15,7 @@ import javax.swing.JTextArea;
 public class CPSO {
     
     public int loops;
-    public boolean min = true;
+    public boolean min;
     public Swarm[] swarms; 
     public double[] startSolution;
     public int dimensionSize;
@@ -41,9 +41,10 @@ public class CPSO {
      * @param numSwarms the number of swarms to create
      * @param Delaunay determines if you are using delaunay triangulation or not
      * @param function determines which function it is optimizing
+     * @param min determines if it is a minimum or maximum problem (true is minimum)
      * @param op the output to push the i/o to
      */
-    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay, int function, JTextArea op)
+    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay, int function, boolean min,  JTextArea op)
     {
         this.dimensionSize = dimensionSize;
         this.maxLoops = maxLoops;
@@ -56,6 +57,7 @@ public class CPSO {
         this.Delaunay = Delaunay;          
         this.function = function;  
         criterion = getCriterion(function);
+        this.min = min;
         startSolution = new double[dimensionSize];
         screen = op;
     }
@@ -70,11 +72,12 @@ public class CPSO {
      * @param c2 the effect that the global (or network) best has on the future velocity
      * @param numSwarms the number of swarms to create
      * @param Delaunay determines if you are using delaunay triangulation or not
+     * @param min determines if it is a minimum or maximum problem (true is minimum)
      * @param function determines which function it is optimizing
      */
-    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay, int function)
+    public CPSO(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int numSwarms, boolean Delaunay, int function, boolean min)
     {
-        this(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, numSwarms, Delaunay, function, null);
+        this(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, numSwarms, Delaunay, function, min, null);
     }
        
 
@@ -120,26 +123,44 @@ public class CPSO {
             }
         }
     }
+    
+    public void UpdateBests(Particle p, int index)
+    {
+        UpdateBests(p, swarms[index], index);
+    }
+    
+    public void UpdateBests(Particle p, Swarm s)
+    {
+        UpdateBests(p, s, 0);
+    }
 
     /**
      * Takes the new fitness and particle and determine if it is the new 
      * global best and or personal best
-     * @param fitness the new fitness value
      * @param p the particle that is being updated
-     * @param swarm the swarm that particle is from
+     * @param index the index the swarm appears in the swarm array
      */
-    public void UpdateBests(double fitness, Particle p, Swarm swarm)
+    public void UpdateBests(Particle p, Swarm swarm, int index)
     {
-        double pBestFitness = p.getpBestFitness();
-        if (p.UpdatePersonalBest(fitness, p.getPosition(), min))  //update the personal best
-            writeOutput("New Personal best for " + p + ": old:"+ pBestFitness + "..... new:" + p.getFitness() + " Position: "+p.getPosition()[0]);
+        double pBestFitness = CalculateFitness(index, p.getpBest());
+        double particleFitness = CalculateFitness(index, p.getPosition());
+        
+        //update the personal best of the particle
+        if (p.getpBest() == null || 
+                (particleFitness < pBestFitness && min) ||
+                (particleFitness > pBestFitness && !min)) 
+        {
+            p.setpBest(p.getPosition());
+            pBestFitness = particleFitness;
+            writeOutput("New Personal best for " + p + ": old:"+ pBestFitness + "..... new:" + particleFitness + " Position: "+p.getPosition()[0]);
+        }
 
         if ((swarm.getGlobalBest() == null) ||
-            (p.getFitness() < swarm.getGlobalBest().getpBestFitness() && min) ||
-            (swarm.getGlobalBest().getpBestFitness() < p.getFitness() && !min))      //update the global best
+            (min && pBestFitness < CalculateFitness(index, swarm.getGlobalBest().getpBest())) ||
+            (!min && CalculateFitness(index, swarm.getGlobalBest().getpBest()) < pBestFitness))      //update the global best
         {
             swarm.setGlobalBest(p);
-            writeOutput("New Global Best for Swarm " + swarm + ": x=" + p.getFitness());
+            writeOutput("New Global Best for Swarm " + swarm + ": x=" + particleFitness);
         }
     }
 
@@ -186,13 +207,13 @@ public class CPSO {
      * @param numSwarms the number of swarms in the cpso
      * @return the fitness of after the new value
      */
-    public double CalculateFitness(int index, double[] position, int numSwarms)
+    public double CalculateFitness(int index, double[] position)
     {
         double fitness = 0;
         int count = 0;
         //TODO: change to update the entire context vector on each change
         double[] tempSolution = new double[startSolution.length];
-        if(numSwarms == 1)
+        if(swarms.length == 1)
         {
             for(int i = 0; i < position.length; i++)
             {
@@ -201,7 +222,7 @@ public class CPSO {
         }
         else
         {
-            for(int i = 0; i < numSwarms; i++)
+            for(int i = 0; i < swarms.length; i++)
             {
                 if(i == index)
                     for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
@@ -215,8 +236,6 @@ public class CPSO {
                         count++;
                     }
             }
-            if(count != startSolution.length)
-                throw new IllegalArgumentException("Incorrect number of swarms provided since solution not filled: "+count+" != "+startSolution.length);
         }
         return CalculateFinalFitness(tempSolution);   
     }
@@ -299,6 +318,24 @@ public class CPSO {
             this.startSolution = solution;
         }
         else throw new Exception("Incorrect solution size");
+    }
+    
+    /**
+     * Updates the overall solution (which is used in fitness calculations) 
+     * to have the global best values from each swarm
+     */
+    public void UpdateSolution()
+    {
+        int count = 0;
+
+        for(int i = 0; i < swarms.length; i++)
+        {
+            for(int j = 0; j < swarms[i].getGlobalBest().getPosition().length; j++)
+            {
+                startSolution[count] = swarms[i].getGlobalBest().getPosition()[j];
+                count++;
+            }
+        }
     }
 
     /**

@@ -47,7 +47,7 @@ public class MainTest {
     public void testCPSOHK() {
         System.out.println("testing: Hk variant");
         int dimensionSize = 6;
-        CPSO_H_k cpso = new CPSO_H_k(dimensionSize, 200, 20, 0.5, 0.3, 0.2,2,false, 0);
+        CPSO_H_k cpso = new CPSO_H_k(dimensionSize, 200, 20, 0.5, 0.3, 0.2,2,false, 0, true);
         //cpso.start();
     }
     
@@ -58,7 +58,7 @@ public class MainTest {
     public void testCPSORK() {
         System.out.println("testing: Rk variant");
         int dimensionSize = 6;
-        CPSO_R_k cpso = new CPSO_R_k(dimensionSize, 200, 20, 0.5, 0.3, 0.2,2,false, 0);
+        CPSO_R_k cpso = new CPSO_R_k(dimensionSize, 200, 20, 0.5, 0.3, 0.2,2,false, 0, true);
         //cpso.start();
     }
     
@@ -69,7 +69,7 @@ public class MainTest {
     public void testCPSOS() {
         System.out.println("testing: S variant");
         int dimensionSize = 5;
-        CPSO_S cpso = new CPSO_S(dimensionSize, 200, 20, 0.5, 0.3, 0.2, false, 0);
+        CPSO_S cpso = new CPSO_S(dimensionSize, 200, 20, 0.5, 0.3, 0.2, false, 0, true);
         //cpso.start();
     }
     
@@ -80,7 +80,7 @@ public class MainTest {
     public void testCPSOSK() {
         System.out.println("testing: Sk variant");
         int dimensionSize = 6;
-        CPSO_S_k cpso = new CPSO_S_k(dimensionSize, 200, 20, 0.5, 0.3, 0.2,3, false, 0);
+        CPSO_S_k cpso = new CPSO_S_k(dimensionSize, 200, 20, 0.5, 0.3, 0.2,3, false, 0, true);
         //cpso.start();
     }
     
