@@ -14,8 +14,6 @@ public class Particle {
     private double[] position;
     private double[] velocity;
     private double[] pBest;
-    private double fitness = 0;
-    private double pBestFitness = Integer.MAX_VALUE;
     private Particle socialNeighbour = null;
     
     public Particle(double[] initialPosition, int function)
@@ -91,14 +89,7 @@ public class Particle {
      * @param pBest the pBest to set
      */
     public void setpBest(double[] pBest) {
-        this.pBest = pBest;
-    }
-    
-    /**
-     * @return the fitness
-     */
-    public double getpBestFitness() {
-        return pBestFitness;
+        this.pBest = pBest.clone();
     }
     
     /**
@@ -108,48 +99,6 @@ public class Particle {
      */
     public void setpBest(double pBest, int index) {
         this.pBest[index] = pBest;
-    }
-
-
-    /**
-     * @return the fitness
-     */
-    public double getFitness() {
-        return fitness;
-    }
-
-    /**
-     * @param fitness the fitness to set
-     */
-    public void setFitness(double fitness) {
-        this.fitness = fitness;
-        if(this.pBestFitness == Integer.MAX_VALUE) 
-            pBestFitness = fitness;
-    }
-    
-    /**
-     * Updates the personal best value if the new value is better
-     * @param newFitness the newly changes fitness
-     * @param newPosition the newly changed position
-     * @param min whether or not it is checking for minimum or max value
-     * @return true/false if the pBest is updated
-     */
-    public boolean UpdatePersonalBest(double newFitness, double[] newPosition, boolean min)
-    {
-        boolean pBestChanged = false;
-        //if the pBest hasn't been set or the new position is better
-            //update the pBest value
-            if ((pBestFitness == Integer.MAX_VALUE || pBest == null) ||
-                (newFitness < pBestFitness && min) ||
-                (newFitness > pBestFitness && !min))
-            {
-                pBestFitness = newFitness;
-                pBest = newPosition.clone();
-                pBestChanged = true;
-            }
-            
-            fitness = newFitness;
-            return pBestChanged;
     }
 
     private double[] randomizeVelocity(double[] position, int function) {
