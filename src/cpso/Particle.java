@@ -144,7 +144,7 @@ public class Particle {
                 (newFitness > pBestFitness && !min))
             {
                 pBestFitness = newFitness;
-                pBest = newPosition.clone(); //TODO: ensure clone is doing a deep clone
+                pBest = newPosition.clone();
                 pBestChanged = true;
             }
             

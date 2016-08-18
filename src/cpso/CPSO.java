@@ -151,7 +151,6 @@ public class CPSO {
         int index = 0;
         double[] bestPosition = new double[startSolution.length];
         
-        //TODO: check if I am testing against all the pbest
         for(int i = 0; i < swarms.length; i++)
         {
             Particle best = swarms[i].getGlobalBest();
@@ -191,6 +190,7 @@ public class CPSO {
     {
         double fitness = 0;
         int count = 0;
+        //TODO: change to update the entire context vector on each change
         double[] tempSolution = new double[startSolution.length];
         if(numSwarms == 1)
         {
