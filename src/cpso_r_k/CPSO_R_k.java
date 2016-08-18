@@ -27,11 +27,13 @@ public class CPSO_R_k extends CPSO {
      * @param c2 the effect that the global (or network) best has on the future velocity
      * @param k the number of swarms
      * @param DT determines if you are using delaunay triangulation or not
+     * @param min determines if it is a minimum or maximum problem (true is minimum)
      * @param function determines which function it is optimizing
+     * @param min determines if it is a minimum or maximum problem (true is minimum)
      */
-    public CPSO_R_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function)
+    public CPSO_R_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function, boolean min)
     {
-        this(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, null);
+        this(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, min, null);
     }
     
     /**
@@ -45,11 +47,13 @@ public class CPSO_R_k extends CPSO {
      * @param k the number of swarms
      * @param DT determines if you are using delaunay triangulation or not
      * @param function determines which function it is optimizing
+     * @param min determines if it is a minimum or maximum problem (true is minimum)
+     * @param min determines if it is a minimum or maximum problem (true is minimum)
      * @param op the text area to output the i/o
      */
-    public CPSO_R_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function, JTextArea op)
+    public CPSO_R_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function, boolean min, JTextArea op)
     {
-        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, op);
+        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, min, op);
         InitializeSwarms(true);
     }
 
@@ -78,8 +82,7 @@ public class CPSO_R_k extends CPSO {
                     
                 for(Particle p : swarms[s].getParticles()){ //for each particle
 
-                    double fitness = CalculateFitness(s, p.getPosition(), numSwarms); //calculate the new fitness
-                    UpdateBests(fitness, p, swarms[s]);  
+                    UpdateBests(p, s);  
                 }
                 
                 //update the closest social neighbor
@@ -87,7 +90,7 @@ public class CPSO_R_k extends CPSO {
                 {
                     for(Particle p: swarms[s].getParticles())
                     {
-                          Particle neighbour = swarms[s].chooseBestNeighbour(p);
+                          Particle neighbour = swarms[s].chooseBestNeighbour(p, this, s);
                           p.setSocialNeighbour(neighbour);
                     }
                 }
