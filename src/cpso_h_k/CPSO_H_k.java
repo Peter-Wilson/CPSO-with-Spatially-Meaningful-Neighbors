@@ -66,6 +66,7 @@ public class CPSO_H_k extends CPSO {
      */
     public Result start()
     {
+        //TODO: see why not converging as successfully as others
         Result result = new Result();
         for(int i = 0; i < maxLoops; i++)
         {

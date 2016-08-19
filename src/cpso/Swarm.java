@@ -260,7 +260,6 @@ public class Swarm
                 //if working_together(Pi, Pk)and
                 if(Triangulation.working_together(particlePoint, connected.get(i), particles))
                 {
-                    //TODO: find a way to calculate fitness in this class
                     //if dist(Xi − Pc) < dist(Xi − Pk)and fitness(Pk) < fitness(Xi) then
                     if(particlePoint.distance3D(point) < particlePoint.distance3D(connected.get(i)) &&
                         cpso.CalculateFitness(index, Triangulation.getParticle(connected.get(i), particles).getPosition()) < 

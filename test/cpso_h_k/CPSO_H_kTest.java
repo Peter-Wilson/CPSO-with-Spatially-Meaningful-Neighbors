@@ -47,7 +47,7 @@ public class CPSO_H_kTest {
         CPSO_H_k instance = null;
         int expectedDimensions = 6;
         int expectedMaxLoops = 10;
-        int expectedSwarmSize = 20;
+        int expectedSwarmSize = 20/2;
         double expectedInertia = 0.5;
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;

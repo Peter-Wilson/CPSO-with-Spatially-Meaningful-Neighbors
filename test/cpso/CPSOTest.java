@@ -91,7 +91,7 @@ public class CPSOTest {
         System.out.println("Initialize Swarms");
         int expectedDimensions = 6;
         int expectedMaxLoops = 10;
-        int expectedSwarmSize = 20;
+        int expectedSwarmSize = 20/2;
         double expectedInertia = 0.5;
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
@@ -179,7 +179,7 @@ public class CPSOTest {
         System.out.println("Initialize Swarms for random sizes");
         int expectedDimensions = 6;
         int expectedMaxLoops = 10;
-        int expectedSwarmSize = 20;
+        int expectedSwarmSize = 20/3;
         double expectedInertia = 0.5;
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
@@ -223,7 +223,7 @@ public class CPSOTest {
         System.out.println("Initialize Swarms of uneven size");
         int expectedDimensions = 5;
         int expectedMaxLoops = 10;
-        int expectedSwarmSize = 20;
+        int expectedSwarmSize = 20/2;
         double expectedInertia = 0.5;
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
@@ -267,7 +267,7 @@ public class CPSOTest {
         System.out.println("Initialize Swarms of less even size");
         int expectedDimensions = 5;
         int expectedMaxLoops = 10;
-        int expectedSwarmSize = 20;
+        int expectedSwarmSize = 20/4;
         double expectedInertia = 0.5;
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;

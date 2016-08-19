@@ -71,7 +71,7 @@ public class CPSO_R_kTest {
         System.out.println("Initialize Swarms");
         int expectedDimensions = 6;
         int expectedMaxLoops = 10;
-        int expectedSwarmSize = 20;
+        int expectedSwarmSize = 20/2;
         double expectedInertia = 0.5;
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
