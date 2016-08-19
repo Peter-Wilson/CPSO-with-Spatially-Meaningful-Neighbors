@@ -47,12 +47,13 @@ public class CPSO_H_kTest {
         CPSO_H_k instance = null;
         int expectedDimensions = 6;
         int expectedMaxLoops = 10;
-        int expectedSwarmSize = 20/2;
+        int swarmSize = 20;
+        int expectedSwarmSize = swarmSize/2;
         double expectedInertia = 0.5;
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 2;
-        instance = new CPSO_H_k(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2, k, true,0, true);
+        instance = new CPSO_H_k(expectedDimensions, expectedMaxLoops, swarmSize, expectedInertia, expectedC1, expectedC2, k, true,0, true);
         
         //test the values are set properly
         assertEquals(expectedDimensions, instance.dimensionSize);
