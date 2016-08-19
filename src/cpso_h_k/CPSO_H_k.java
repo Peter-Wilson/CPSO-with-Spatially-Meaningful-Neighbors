@@ -5,6 +5,7 @@
  */
 package cpso_h_k;
 
+import Functions.Triangulation;
 import cpso.*;
 import javax.swing.JTextArea;
 /**
@@ -86,7 +87,6 @@ public class CPSO_H_k extends CPSO {
                 
                 // calculate delaunay neighbours
                 for(Particle p : swarms[s].getParticles()){ //for each particle
-
                     UpdateBests(p, s); 
                 }
                 
@@ -96,7 +96,9 @@ public class CPSO_H_k extends CPSO {
                     for(Particle p: swarms[s].getParticles())
                     {
                            Particle neighbour = swarms[s].chooseBestNeighbour(p, this, s);
-                           p.setSocialNeighbour(neighbour);
+                           //TODO:check if you should be able to swap with those not working together
+                           if(Triangulation.working_together(Triangulation.convertParticletoPoint(p), Triangulation.convertParticletoPoint(neighbour), swarms[s].getParticles()))
+                            p.setSocialNeighbour(neighbour);
                     }
                 }
                 
