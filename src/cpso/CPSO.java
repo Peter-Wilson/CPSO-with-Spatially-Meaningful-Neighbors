@@ -115,7 +115,7 @@ public class CPSO {
                 }
             }
             
-            swarms[i] = new Swarm(swarmSize, C1, C2, INERTIA, min, width, function);
+            swarms[i] = new Swarm(swarmSize/numSwarms, C1, C2, INERTIA, min, width, function);
 
             for(int j = 0; j < width; j++)
             {
@@ -333,7 +333,7 @@ public class CPSO {
         {
             //pull from the global best only if it exists
             //otherwise pull from the first
-            Particle best = (swarms[i].getGlobalBest() != null)? swarms[i].getGlobalBest() : swarms[i].getParticles()[i];
+            Particle best = (swarms[i].getGlobalBest() != null)? swarms[i].getGlobalBest() : swarms[i].getParticles()[0];
             
             
             for(int j = 0; j < best.getPosition().length; j++)

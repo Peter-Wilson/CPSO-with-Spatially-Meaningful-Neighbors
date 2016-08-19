@@ -339,7 +339,7 @@ public class Display extends javax.swing.JPanel {
         boolean DT = this.rbDT.isSelected();
         if(Math.ceil((double)dimensionSize/numSwarms) > 3 && DT)
         {
-            this.taOutput.append("WARNING: CANNOT PERFORM DT ON SWARMS LARGER THAN 3. CHANGE THE SWARM OR DIMENSION SIZE\n");
+            this.taOutput.append("WARNING: CANNOT PERFORM DT ON SWARMS LARGER THAN 3. CHANGE THE DIMENSION SIZE OR K VALUE\n");
             return;
         }
         //boolean Delaunay = this.rbDT

@@ -55,8 +55,8 @@ public class CPSO_H_k extends CPSO {
      */
     public CPSO_H_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function, boolean min, JTextArea op)
     {
-        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, min, op);
-        pso_swarm = new Swarm(dimensionSize, PSO_C1, PSO_C2, PSO_INTERTIA, min, dimensionSize, function);
+        super(dimensionSize, maxLoops, swarmSize/2, Inertia, c1, c2, k, DT, function, min, op);
+        pso_swarm = new Swarm(swarmSize/2, PSO_C1, PSO_C2, PSO_INTERTIA, min, dimensionSize, function);
         InitializeSwarms(false);
     }
 
@@ -130,7 +130,7 @@ public class CPSO_H_k extends CPSO {
                         count++;		
                     }		
                 }
-                pso_swarm.setRandomParticle(super.getGlobalBestSolution().clone(), velocity);
+                pso_swarm.setRandomParticle(startSolution, velocity);
             }
             
             for(Particle p : pso_swarm.getParticles()){ //for each particle
