@@ -21,18 +21,18 @@ public class ReportMain {
     {
         testCPSO_S(100, 6, false); // no dt        
             System.out.println("\br");
-        //testCPSO_S(10, 6, true); // dt
-        //    System.out.println("\br");
-        testCPSO_Sk(100, 3, 6, false);
+        testCPSO_S(100, 6, true); // dt
             System.out.println("\br");
+        //testCPSO_Sk(100, 3, 6, false);
+        //    System.out.println("\br");
         //testCPSO_Sk(10, 3, 6, true);
         //    System.out.println("\br");
-        testCPSO_Hk(100, 3, 6, false);
+        //testCPSO_Hk(100, 3, 6, false);
             System.out.println("\br");
         //testCPSO_Hk(10, 2, 6, true);
         //    System.out.println("\br");
-        testCPSO_Rk(100, 3, 6, false);
-            System.out.println("\br");
+        //testCPSO_Rk(100, 3, 6, false);
+        //    System.out.println("\br");
         //testCPSO_Rk(10, 2, 6, true);
         //    System.out.println("\br");
     }
