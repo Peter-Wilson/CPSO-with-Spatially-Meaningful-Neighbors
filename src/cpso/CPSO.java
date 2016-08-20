@@ -164,6 +164,11 @@ public class CPSO {
             writeOutput("New Global Best for Swarm " + swarm + ": x=" + particleFitness);
         }
     }
+    
+    public Result start()
+    {
+        return null;
+    }
 
      /**
      * Update to the best current startSolution by taking the global best values

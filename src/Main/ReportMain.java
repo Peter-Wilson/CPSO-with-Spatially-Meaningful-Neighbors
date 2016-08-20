@@ -5,6 +5,7 @@
  */
 package Main;
 
+import cpso.CPSO;
 import cpso.Result;
 import cpso_h_k.CPSO_H_k;
 import cpso_r_k.CPSO_R_k;
@@ -19,14 +20,14 @@ public class ReportMain {
     
     public static void getAverageSolveRate()
     {
-        //testCPSO_S(20, 6, false); // no dt        
-        //    System.out.println("\br");
+        testCPSO_S(20, 6, false); // no dt        
+            System.out.println("\br");
         testCPSO_S(20, 6, true); // dt
-        //    System.out.println("\br");
-        //testCPSO_Sk(20, 3, 6, false);
-        //    System.out.println("\br");
-        //testCPSO_Sk(20, 3, 6, true);
-        //    System.out.println("\br");
+            System.out.println("\br");
+        testCPSO_Sk(20, 3, 6, false);
+            System.out.println("\br");
+        testCPSO_Sk(20, 3, 6, true);
+            System.out.println("\br");
         //testCPSO_Hk(20, 3, 6, false);
         //    System.out.println("\br");
         //testCPSO_Hk(20, 2, 6, true);
@@ -37,332 +38,78 @@ public class ReportMain {
         //    System.out.println("\br");
     }
     
+    public static void runTest(int numParticles, int Dimensions, boolean dt, int function, int numSwarms, int type)
+    {
+        int completed = 0;
+            int iteration = 0;
+            boolean worked = false;
+            
+            for(int i = 0; i < 50; i++)
+            {
+                worked = false;
+                try{
+                        CPSO cpso;
+                        switch(type)
+                        {
+                            case 2:
+                                cpso = new CPSO_S_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, function, true);
+                                break;
+                            case 3:
+                                cpso = new CPSO_H_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, function, true);
+                                break;
+                            case 4:
+                                cpso = new CPSO_R_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, function, true);
+                                break;
+                            default:
+                                cpso = new CPSO_S(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, dt, function, true);
+                                break;
+                        }
+                        Result r = cpso.start();
+                        if(r.solved)
+                        {
+                            completed++;
+                            iteration += r.iterationsToSolve;
+                        }
+                        worked = true;
+                    }
+                    catch(StackOverflowError soe)
+                    {
+                        worked = false;
+                    }
+            }
+            System.out.println("Function?"+ function + " type?"+type+" DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
+    }
+    
     public static void testCPSO_S(int numParticles, int Dimensions, boolean dt)
     {
-        //2D Schaffer
-            int completed = 0;
-            int iteration = 0;
-            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_S cpso = new CPSO_S(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, dt, 1, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO-S Schaffer DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
-            
-            //Rastrigin
-            completed = 0;
-            iteration = 0;
-            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_S cpso = new CPSO_S(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, dt, 2, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO-S Rastrigin DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
-            
-            //Rosenbrock            
-            completed = 0;
-            iteration = 0;            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_S cpso = new CPSO_S(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, dt, 3, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO-S Rosenbrock DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
-            
-            //Greiwanck
-            completed = 0;
-            iteration = 0;
-            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_S cpso = new CPSO_S(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, dt, 4, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO-S reiwanck DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
-            
-            //Ackley
-            completed = 0;
-            iteration = 0;
-            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_S cpso = new CPSO_S(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, dt, 5, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO-S Ackley DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
+        runTest(numParticles, Dimensions, dt, 1, 1, 1);
+        runTest(numParticles, Dimensions, dt, 2, 1, 1);
+        runTest(numParticles, Dimensions, dt, 3, 1, 1);
+        runTest(numParticles, Dimensions, dt, 4, 1, 1);
     }
 
     public static void testCPSO_Sk(int numParticles, int numSwarms, int Dimensions, boolean dt)
     {
-        //2D Schaffer
-            int completed = 0;
-            int iteration = 0;
-            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 1, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO-S-k Schaffer DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
-            
-            //Rastrigin
-            completed = 0;
-            iteration = 0;
-            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618,numSwarms, dt, 2, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO-S-k Rastrigin DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
-            
-            //Rosenbrock            
-            completed = 0;
-            iteration = 0;            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 3, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO-S-k Rosenbrock DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
-            
-            //Greiwanck
-            completed = 0;
-            iteration = 0;
-            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 4, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO-S-k reiwanck DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
-            
-            //Ackley
-            completed = 0;
-            iteration = 0;
-            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_S_k cpso = new CPSO_S_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 5, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO-S_k Ackley DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
+        runTest(numParticles, Dimensions, dt, 1, numSwarms, 2);
+        runTest(numParticles, Dimensions, dt, 2, numSwarms, 2);
+        runTest(numParticles, Dimensions, dt, 3, numSwarms, 2);
+        runTest(numParticles, Dimensions, dt, 4, numSwarms, 2);
     }
 
     public static void testCPSO_Hk(int numParticles, int numSwarms, int Dimensions, boolean dt)
     {
-        //2D Schaffer
-            int completed = 0;
-            int iteration = 0;
-            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 1, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO-h-k Schaffer DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
-            
-            //Rastrigin
-            completed = 0;
-            iteration = 0;
-            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618,numSwarms, dt, 2, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO-h-k Rastrigin DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
-            
-            //Rosenbrock            
-            completed = 0;
-            iteration = 0;            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 3, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO-h-k Rosenbrock DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
-            
-            //Greiwanck
-            completed = 0;
-            iteration = 0;
-            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 4, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO-h-k reiwanck DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
-            
-            //Ackley
-            completed = 0;
-            iteration = 0;
-            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_H_k cpso = new CPSO_H_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 5, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO-h_k Ackley DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
+        runTest(numParticles, Dimensions, dt, 1, numSwarms, 3);
+        runTest(numParticles, Dimensions, dt, 2, numSwarms, 3);
+        runTest(numParticles, Dimensions, dt, 3, numSwarms, 3);
+        runTest(numParticles, Dimensions, dt, 4, numSwarms, 3);
     }
 
      public static void testCPSO_Rk(int numParticles, int numSwarms, int Dimensions, boolean dt)
     {
-        //2D Schaffer
-            int completed = 0;
-            int iteration = 0;
-            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 1, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO_R_k Schaffer DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
-            
-            //Rastrigin
-            completed = 0;
-            iteration = 0;
-            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618,numSwarms, dt, 2, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO_R_k Rastrigin DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
-            
-            //Rosenbrock            
-            completed = 0;
-            iteration = 0;            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 3, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO_R_k Rosenbrock DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
-            
-            //Greiwanck
-            completed = 0;
-            iteration = 0;
-            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 4, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO_R_k reiwanck DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
-            
-            //Ackley
-            completed = 0;
-            iteration = 0;
-            
-            for(int i = 0; i < 50; i++)
-            {
-                CPSO_R_k cpso = new CPSO_R_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, 5, true);
-                Result r = cpso.start();
-                if(r.solved)
-                {
-                    completed++;
-                    iteration += r.iterationsToSolve;
-                }
-            }
-            System.out.println("CPSO_R_k Ackley DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
+        runTest(numParticles, Dimensions, dt, 1, numSwarms, 4);
+        runTest(numParticles, Dimensions, dt, 2, numSwarms, 4);
+        runTest(numParticles, Dimensions, dt, 3, numSwarms, 4);
+        runTest(numParticles, Dimensions, dt, 4, numSwarms, 4);
     }
     /**
      * @param args the command line arguments
