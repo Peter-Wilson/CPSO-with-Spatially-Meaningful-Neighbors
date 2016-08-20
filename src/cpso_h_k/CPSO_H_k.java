@@ -97,8 +97,11 @@ public class CPSO_H_k extends CPSO {
                     {
                            Particle neighbour = swarms[s].chooseBestNeighbour(p, this, s);
                            //TODO:check if you should be able to swap with those not working together
-                           if(Triangulation.working_together(Triangulation.convertParticletoPoint(p), Triangulation.convertParticletoPoint(neighbour), swarms[s].getParticles()))
-                            p.setSocialNeighbour(neighbour);
+                           if(Triangulation.working_together(Triangulation.convertParticletoPoint(p), 
+                                    Triangulation.convertParticletoPoint(neighbour), swarms[s].getParticles()))
+                                p.setSocialNeighbour(neighbour);
+                            else
+                                p.setSocialNeighbour(null);
                     }
                 }
                 

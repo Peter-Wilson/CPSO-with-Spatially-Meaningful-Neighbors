@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package cpso_s_k;
+import Functions.Triangulation;
 import cpso.*;
 import javax.swing.JTextArea;
 
@@ -80,7 +81,11 @@ public class CPSO_S_k extends CPSO {
                     for(Particle p: swarms[s].getParticles())
                     {
                             Particle neighbour = swarms[s].chooseBestNeighbour(p, this, s);
-                            p.setSocialNeighbour(neighbour);
+                            if(Triangulation.working_together(Triangulation.convertParticletoPoint(p), 
+                                    Triangulation.convertParticletoPoint(neighbour), swarms[s].getParticles()))
+                                p.setSocialNeighbour(neighbour);
+                            else
+                                p.setSocialNeighbour(null);
                     }
                 }
 

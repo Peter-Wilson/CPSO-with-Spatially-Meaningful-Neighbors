@@ -65,8 +65,7 @@ public class CPSO_S extends CPSO {
                     //perform the delaunay triangulation
                     if(Delaunay)
                     {
-                        try{ swarms[s].CalculateDelaunayTriangulation(); }
-                        catch(Exception e) {System.out.println("error creating delaunay");}
+                        swarms[s].CalculateDelaunayTriangulation(); 
                     }
                     
                     for(Particle p : swarms[s].getParticles()){ //for each particle

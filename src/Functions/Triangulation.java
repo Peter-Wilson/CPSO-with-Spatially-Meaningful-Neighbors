@@ -57,6 +57,7 @@ public class Triangulation {
      * @return true or false if the two particles are working together
      */
     public static boolean working_together(Point_dt item, Point_dt connected, Particle[] p) {
+               
         Particle a = getParticle(item, p);
         Particle b = getParticle(connected, p);
         
@@ -114,11 +115,17 @@ public class Triangulation {
      * @return  the particle
      */
     public static Particle getParticle(Point_dt connected, Particle[] particles) {
+        //remove the new dimension to be able to find the point
+        if(particles[0].getPosition().length == 1)
+        {
+            connected = new Point_dt(connected.x(), 0, 0);
+        }
+        
         for(Particle p : particles)
         {
             double[] position = p.getPosition();
             //check if first digit is wrong
-            if(position[0] != connected.x()) continue;
+            if(position == null || position[0] != connected.x()) continue;
             
             //check if second digit is wrong
             if((position.length > 1 && position[1] != connected.y()) ||
@@ -147,7 +154,9 @@ public class Triangulation {
             if(dimensions == 1)
             {
                 double[] part = p.getPosition();
-                return new Point_dt(part[0], 0, 0);
+                // make sure the points are not all on the same line so
+                //you can make a triangle out of it
+                return new Point_dt(part[0], Math.pow(part[0],2), 0);
             }
             if(dimensions == 2)
             {
