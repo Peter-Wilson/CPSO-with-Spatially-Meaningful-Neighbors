@@ -20,22 +20,22 @@ public class ReportMain {
     
     public static void getAverageSolveRate()
     {
-        testCPSO_S(20, 6, false); // no dt        
-            System.out.println("\br");
-        testCPSO_S(20, 6, true); // dt
-            System.out.println("\br");
-        testCPSO_Sk(20, 3, 6, false);
-            System.out.println("\br");
-        testCPSO_Sk(20, 3, 6, true);
-            System.out.println("\br");
+        //testCPSO_S(20, 6, false); // no dt        
+        //    System.out.println("\br");
+        //testCPSO_S(20, 6, true); // dt
+        //    System.out.println("\br");
+        //testCPSO_Sk(20, 3, 6, false);
+        //    System.out.println("\br");
+        //testCPSO_Sk(20, 3, 6, true);
+        //    System.out.println("\br")
         //testCPSO_Hk(20, 3, 6, false);
         //    System.out.println("\br");
         //testCPSO_Hk(20, 2, 6, true);
         //    System.out.println("\br");
         //testCPSO_Rk(20, 3, 6, false);
         //    System.out.println("\br");
-        //testCPSO_Rk(20, 2, 6, true);
-        //    System.out.println("\br");
+        testCPSO_Rk(20, 2, 6, true);
+            System.out.println("\br");
     }
     
     public static void runTest(int numParticles, int Dimensions, boolean dt, int function, int numSwarms, int type)
@@ -46,6 +46,7 @@ public class ReportMain {
             
             for(int i = 0; i < 50; i++)
             {
+                System.out.println("Starting"+(i+1));
                 worked = false;
                 try{
                         CPSO cpso;
@@ -74,6 +75,7 @@ public class ReportMain {
                     }
                     catch(StackOverflowError soe)
                     {
+                        System.out.println("Restarting...");
                         worked = false;
                     }
             }

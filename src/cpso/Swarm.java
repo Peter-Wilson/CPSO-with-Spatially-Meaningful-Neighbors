@@ -55,7 +55,6 @@ public class Swarm
             {
                 double[] position = new double[k];
                 for(int j = 0; j < k; j++)
-                    
                     position[j] = getRandomNumber(rand, function);
                 
                 particles[i] = new Particle(position, function);
@@ -206,14 +205,32 @@ public class Swarm
          */
         public void CalculateDelaunayTriangulation()
         {
+            System.out.print("Starting DT creation...");
             Point_dt[] points = new Point_dt[particles.length];
             dt = new Delaunay_Triangulation();
             for(int i = 0; i < particles.length; i++)
             {
-               dt.insertPoint(Triangulation.convertParticletoPoint(particles[i]));          
+                Point_dt a = Triangulation.convertParticletoPoint(particles[i]);
+                System.out.print("Adding point: "+i+"...["+a.x()+","+a.y()+","+a.z()+"]");
+                dt.insertPoint(a); 
+                System.out.println("...Point added");
             }
+            System.out.println("...Ending DT");
         }
         
+          // Implementing Fisher–Yates shuffle
+          static void shuffleArray(Point_dt[] ar)
+          {
+            Random rnd = new Random();
+            for (int i = ar.length - 1; i > 0; i--)
+            {
+              int index = rnd.nextInt(i + 1);
+              // Simple swap
+              Point_dt a = ar[index];
+              ar[index] = ar[i];
+              ar[i] = a;
+            }
+          }
         
         
         /**
@@ -235,7 +252,18 @@ public class Swarm
             }
             else
             {
-                Iterator<Triangle_dt> iterator = dt.trianglesIterator();
+                Iterator<Triangle_dt> iterator;
+                
+                //Get the triangles
+                try
+                {
+                    iterator = dt.trianglesIterator();
+                }catch(NullPointerException e)
+                {
+                    System.out.println("Delaunay Triangulation cannot be created");
+                    return null;
+                }
+                
                 while(iterator.hasNext())
                 {
                     Triangle_dt triangles = iterator.next();                

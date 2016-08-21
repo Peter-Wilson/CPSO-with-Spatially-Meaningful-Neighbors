@@ -116,6 +116,8 @@ public class Triangulation {
      */
     public static Particle getParticle(Point_dt connected, Particle[] particles) {
         //remove the new dimension to be able to find the point
+        if(connected == null) return null;
+        
         if(particles[0].getPosition().length == 1)
         {
             connected = new Point_dt(connected.x(), 0, 0);
