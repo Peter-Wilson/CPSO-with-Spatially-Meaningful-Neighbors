@@ -158,7 +158,7 @@ public class Triangulation {
                 double[] part = p.getPosition();
                 // make sure the points are not all on the same line so
                 //you can make a triangle out of it
-                return new Point_dt(part[0], Math.pow(part[0],2), 0);
+                return new Point_dt(part[0], Math.pow(part[0],3), 0);
             }
             if(dimensions == 2)
             {

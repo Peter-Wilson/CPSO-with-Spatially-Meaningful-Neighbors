@@ -205,17 +205,20 @@ public class Swarm
          */
         public void CalculateDelaunayTriangulation()
         {
-            System.out.print("Starting DT creation...");
             Point_dt[] points = new Point_dt[particles.length];
             dt = new Delaunay_Triangulation();
-            for(int i = 0; i < particles.length; i++)
-            {
-                Point_dt a = Triangulation.convertParticletoPoint(particles[i]);
-                System.out.print("Adding point: "+i+"...["+a.x()+","+a.y()+","+a.z()+"]");
-                dt.insertPoint(a); 
-                System.out.println("...Point added");
+            try{
+                for(int i = 0; i < particles.length; i++)
+                {
+                    dt.insertPoint(Triangulation.convertParticletoPoint(particles[i])); 
+                }
             }
-            System.out.println("...Ending DT");
+            catch(Exception e)
+            {
+                //if the delaunay triangulation cannot be created, default it to
+                //null, which will be handled in the other function
+                dt = new Delaunay_Triangulation();
+            }
         }
         
           // Implementing Fisher–Yates shuffle
