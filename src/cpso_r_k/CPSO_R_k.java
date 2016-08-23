@@ -78,6 +78,10 @@ public class CPSO_R_k extends CPSO {
                 if(Delaunay)
                 {
                     swarms[s].CalculateDelaunayTriangulation(); 
+                    if(swarms[s].isDTNull()) 
+                        this.unsuccessfulDTs++;
+                    else
+                        this.successfulDTs++;
                 }
                     
                 for(Particle p : swarms[s].getParticles()){ //for each particle
@@ -111,6 +115,8 @@ public class CPSO_R_k extends CPSO {
             {
                 writeOutput("Criterion Met after "+i+" iterations");
                 result.solved = true;
+                result.successfulDTs = this.successfulDTs;
+                result.unsuccessfulDTs = this.unsuccessfulDTs;
                 result.iterationsToSolve = i+1;
                 result.finalFitness = result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1);
                 break;

@@ -22,6 +22,8 @@ public class CPSO {
     public int swarmSize;
     public double C1 = 0.5;
     public double C2 = 0.3;
+    public int successfulDTs;
+    public int unsuccessfulDTs;
     public double INERTIA = 0.3;
     public int maxLoops;
     public int numSwarms;

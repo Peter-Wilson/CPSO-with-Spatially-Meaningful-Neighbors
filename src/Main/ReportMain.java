@@ -43,6 +43,8 @@ public class ReportMain {
         int completed = 0;
             int iteration = 0;
             boolean worked = false;
+            int successDT = 0;
+            int unsuccessDT = 0;
             
             for(int i = 0; i < 50; i++)
             {
@@ -71,6 +73,8 @@ public class ReportMain {
                             completed++;
                             iteration += r.iterationsToSolve;
                         }
+                        successDT += r.successfulDTs;
+                        unsuccessDT = r.unsuccessfulDTs;
                         worked = true;
                     }
                     catch(StackOverflowError soe)
@@ -79,7 +83,8 @@ public class ReportMain {
                         worked = false;
                     }
             }
-            System.out.println("Function?"+ function + " type?"+type+" DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed)));
+            int successAverage = (successDT+unsuccessDT <= 0)?0:(successDT/(successDT+unsuccessDT))*100;
+            System.out.println("Function?"+ function + " type?"+type+" DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed))+"\tDT Success rate:"+successAverage+"%");
     }
     
     public static void testCPSO_S(int numParticles, int Dimensions, boolean dt)

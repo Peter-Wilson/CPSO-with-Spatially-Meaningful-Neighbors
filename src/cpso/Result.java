@@ -14,6 +14,8 @@ import java.util.ArrayList;
 public class Result {
     public boolean solved;
     public int iterationsToSolve;
+    public int successfulDTs;
+    public int unsuccessfulDTs;
     public double finalFitness;
     public ArrayList<Double> globalBestPerIteration;
     

@@ -82,6 +82,10 @@ public class CPSO_H_k extends CPSO {
                 if(Delaunay)
                 {
                     swarms[s].CalculateDelaunayTriangulation();
+                    if(swarms[s].isDTNull()) 
+                        this.unsuccessfulDTs++;
+                    else
+                        this.successfulDTs++;
                 }
                 
                 // calculate delaunay neighbours
@@ -118,6 +122,8 @@ public class CPSO_H_k extends CPSO {
                 writeOutput("Criterion Met after "+i+" iterations");
                 result.solved = true;
                 result.iterationsToSolve = i+1;
+                result.successfulDTs = this.successfulDTs;
+                result.unsuccessfulDTs = this.unsuccessfulDTs;
                 result.finalFitness = result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1);
                 break;
             }
