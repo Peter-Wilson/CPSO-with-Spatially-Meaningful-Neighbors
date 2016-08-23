@@ -55,7 +55,6 @@ public class Swarm
             {
                 double[] position = new double[k];
                 for(int j = 0; j < k; j++)
-                    
                     position[j] = getRandomNumber(rand, function);
                 
                 particles[i] = new Particle(position, function);
@@ -208,12 +207,39 @@ public class Swarm
         {
             Point_dt[] points = new Point_dt[particles.length];
             dt = new Delaunay_Triangulation();
-            for(int i = 0; i < particles.length; i++)
-            {
-               dt.insertPoint(Triangulation.convertParticletoPoint(particles[i]));          
+            //System.out.println("Creating DT....");
+            try{
+                for(int i = 0; i < particles.length; i++)
+                {
+                    Point_dt a = Triangulation.convertParticletoPoint(particles[i]);
+                    //System.out.print("Adding point: "+i+"...["+a.x()+","+a.y()+","+a.z()+"]");
+                    dt.insertPoint(a); 
+                    //System.out.println("...Point added");
+                    dt.insertPoint(Triangulation.convertParticletoPoint(particles[i])); 
+                }
             }
+            catch(Exception e)
+            {
+                //if the delaunay triangulation cannot be created, default it to
+                //null, which will be handled in the other function
+                dt = new Delaunay_Triangulation();
+            }
+            //System.out.println("...DT Created");
         }
         
+          // Implementing Fisher–Yates shuffle
+          static void shuffleArray(Point_dt[] ar)
+          {
+            Random rnd = new Random();
+            for (int i = ar.length - 1; i > 0; i--)
+            {
+              int index = rnd.nextInt(i + 1);
+              // Simple swap
+              Point_dt a = ar[index];
+              ar[index] = ar[i];
+              ar[i] = a;
+            }
+          }
         
         
         /**
@@ -235,7 +261,18 @@ public class Swarm
             }
             else
             {
-                Iterator<Triangle_dt> iterator = dt.trianglesIterator();
+                Iterator<Triangle_dt> iterator;
+                
+                //Get the triangles
+                try
+                {
+                    iterator = dt.trianglesIterator();
+                }catch(NullPointerException e)
+                {
+                    //System.out.println("Delaunay Triangulation cannot be created");
+                    return null;
+                }
+                
                 while(iterator.hasNext())
                 {
                     Triangle_dt triangles = iterator.next();                
@@ -260,7 +297,6 @@ public class Swarm
                 //if working_together(Pi, Pk)and
                 if(Triangulation.working_together(particlePoint, connected.get(i), particles))
                 {
-                    //TODO: find a way to calculate fitness in this class
                     //if dist(Xi − Pc) < dist(Xi − Pk)and fitness(Pk) < fitness(Xi) then
                     if(particlePoint.distance3D(point) < particlePoint.distance3D(connected.get(i)) &&
                         cpso.CalculateFitness(index, Triangulation.getParticle(connected.get(i), particles).getPosition()) < 

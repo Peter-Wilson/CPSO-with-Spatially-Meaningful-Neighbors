@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package cpso_s;
+import Functions.Triangulation;
 import cpso.*;
 import javax.swing.JTextArea;
 
@@ -64,8 +65,7 @@ public class CPSO_S extends CPSO {
                     //perform the delaunay triangulation
                     if(Delaunay)
                     {
-                        try{ swarms[s].CalculateDelaunayTriangulation(); }
-                        catch(Exception e) {System.out.println("error creating delaunay");}
+                        swarms[s].CalculateDelaunayTriangulation(); 
                     }
                     
                     for(Particle p : swarms[s].getParticles()){ //for each particle
@@ -78,7 +78,11 @@ public class CPSO_S extends CPSO {
                         for(Particle p: swarms[s].getParticles())
                         {
                                 Particle neighbour = swarms[s].chooseBestNeighbour(p, this, s);
+                            if(neighbour != null && Triangulation.working_together(Triangulation.convertParticletoPoint(p), 
+                                    Triangulation.convertParticletoPoint(neighbour), swarms[s].getParticles()))
                                 p.setSocialNeighbour(neighbour);
+                            else
+                                p.setSocialNeighbour(null);
                         }
                     }
                     

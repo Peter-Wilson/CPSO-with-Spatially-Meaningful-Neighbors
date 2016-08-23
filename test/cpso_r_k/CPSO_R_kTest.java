@@ -71,12 +71,13 @@ public class CPSO_R_kTest {
         System.out.println("Initialize Swarms");
         int expectedDimensions = 6;
         int expectedMaxLoops = 10;
-        int expectedSwarmSize = 20;
+        int swarmSize = 20;
+        int expectedSwarmSize = swarmSize/2;
         double expectedInertia = 0.5;
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 2;
-        CPSO_R_k instance = new CPSO_R_k(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k, true, 0, true);
+        CPSO_R_k instance = new CPSO_R_k(expectedDimensions, expectedMaxLoops, swarmSize, expectedInertia, expectedC1, expectedC2,k, true, 0, true);
         
         Swarm[] swarms = instance.getSwarms();
         

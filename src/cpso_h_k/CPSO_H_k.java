@@ -5,6 +5,7 @@
  */
 package cpso_h_k;
 
+import Functions.Triangulation;
 import cpso.*;
 import javax.swing.JTextArea;
 /**
@@ -55,8 +56,8 @@ public class CPSO_H_k extends CPSO {
      */
     public CPSO_H_k(int dimensionSize, int maxLoops, int swarmSize, double Inertia, double c1, double c2, int k, boolean DT, int function, boolean min, JTextArea op)
     {
-        super(dimensionSize, maxLoops, swarmSize, Inertia, c1, c2, k, DT, function, min, op);
-        pso_swarm = new Swarm(dimensionSize, PSO_C1, PSO_C2, PSO_INTERTIA, min, dimensionSize, function);
+        super(dimensionSize, maxLoops, swarmSize/2, Inertia, c1, c2, k, DT, function, min, op);
+        pso_swarm = new Swarm(swarmSize/2, PSO_C1, PSO_C2, PSO_INTERTIA, min, dimensionSize, function);
         InitializeSwarms(false);
     }
 
@@ -66,6 +67,7 @@ public class CPSO_H_k extends CPSO {
      */
     public Result start()
     {
+        //TODO: see why not converging as successfully as others
         Result result = new Result();
         for(int i = 0; i < maxLoops; i++)
         {
@@ -79,13 +81,11 @@ public class CPSO_H_k extends CPSO {
                 //perform the delaunay triangulation
                 if(Delaunay)
                 {
-                    try{ swarms[s].CalculateDelaunayTriangulation(); }
-                    catch(Exception e) {System.out.println("error creating delaunay");}
+                    swarms[s].CalculateDelaunayTriangulation();
                 }
                 
                 // calculate delaunay neighbours
                 for(Particle p : swarms[s].getParticles()){ //for each particle
-
                     UpdateBests(p, s); 
                 }
                 
@@ -95,7 +95,12 @@ public class CPSO_H_k extends CPSO {
                     for(Particle p: swarms[s].getParticles())
                     {
                            Particle neighbour = swarms[s].chooseBestNeighbour(p, this, s);
-                           p.setSocialNeighbour(neighbour);
+                           //TODO:check if you should be able to swap with those not working together
+                           if(neighbour != null && Triangulation.working_together(Triangulation.convertParticletoPoint(p), 
+                                    Triangulation.convertParticletoPoint(neighbour), swarms[s].getParticles()))
+                                p.setSocialNeighbour(neighbour);
+                            else
+                                p.setSocialNeighbour(null);
                     }
                 }
                 
@@ -130,7 +135,7 @@ public class CPSO_H_k extends CPSO {
                         count++;		
                     }		
                 }
-                pso_swarm.setRandomParticle(super.getGlobalBestSolution().clone(), velocity);
+                pso_swarm.setRandomParticle(startSolution, velocity);
             }
             
             for(Particle p : pso_swarm.getParticles()){ //for each particle

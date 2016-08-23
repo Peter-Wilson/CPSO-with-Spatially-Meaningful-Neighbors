@@ -115,7 +115,7 @@ public class CPSO {
                 }
             }
             
-            swarms[i] = new Swarm(swarmSize, C1, C2, INERTIA, min, width, function);
+            swarms[i] = new Swarm(swarmSize/numSwarms, C1, C2, INERTIA, min, width, function);
 
             for(int j = 0; j < width; j++)
             {
@@ -160,9 +160,14 @@ public class CPSO {
             (!min && CalculateFitness(index, swarm.getGlobalBest().getpBest()) < pBestFitness))      //update the global best
         {
             swarm.setGlobalBest(p);
-            UpdateSolution();
+            if(swarm == swarms[index]) UpdateSolution(); //update the solution if it is the main cpso
             writeOutput("New Global Best for Swarm " + swarm + ": x=" + particleFitness);
         }
+    }
+    
+    public Result start()
+    {
+        return null;
     }
 
      /**
@@ -212,7 +217,7 @@ public class CPSO {
     {
         double fitness = 0;
         int count = 0;
-        //TODO: change to update the entire context vector on each change
+        
         double[] tempSolution = new double[startSolution.length];
         if(swarms.length == 1)
         {
@@ -333,7 +338,7 @@ public class CPSO {
         {
             //pull from the global best only if it exists
             //otherwise pull from the first
-            Particle best = (swarms[i].getGlobalBest() != null)? swarms[i].getGlobalBest() : swarms[i].getParticles()[i];
+            Particle best = (swarms[i].getGlobalBest() != null)? swarms[i].getGlobalBest() : swarms[i].getParticles()[0];
             
             
             for(int j = 0; j < best.getPosition().length; j++)

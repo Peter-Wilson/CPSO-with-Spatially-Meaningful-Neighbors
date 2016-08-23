@@ -91,12 +91,13 @@ public class CPSOTest {
         System.out.println("Initialize Swarms");
         int expectedDimensions = 6;
         int expectedMaxLoops = 10;
-        int expectedSwarmSize = 20;
+        int swarmSize = 20;
+        int expectedSwarmSize = swarmSize/2;
         double expectedInertia = 0.5;
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 2;
-        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k, true, 0, true);
+        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, swarmSize, expectedInertia, expectedC1, expectedC2,k, true, 0, true);
         instance.InitializeSwarms(false);
         
         Swarm[] swarms = instance.getSwarms();
@@ -179,12 +180,13 @@ public class CPSOTest {
         System.out.println("Initialize Swarms for random sizes");
         int expectedDimensions = 6;
         int expectedMaxLoops = 10;
-        int expectedSwarmSize = 20;
+        int swarmSize = 20;
+        int expectedSwarmSize = swarmSize/3;
         double expectedInertia = 0.5;
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 3;
-        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k, true, 0, true);
+        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, swarmSize, expectedInertia, expectedC1, expectedC2,k, true, 0, true);
         instance.InitializeSwarms(true);
         
         Swarm[] swarms = instance.getSwarms();
@@ -223,12 +225,13 @@ public class CPSOTest {
         System.out.println("Initialize Swarms of uneven size");
         int expectedDimensions = 5;
         int expectedMaxLoops = 10;
-        int expectedSwarmSize = 20;
+        int swarmSize = 20;
+        int expectedSwarmSize = swarmSize/2;
         double expectedInertia = 0.5;
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 2;
-        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k, true, 0, true);
+        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, swarmSize, expectedInertia, expectedC1, expectedC2,k, true, 0, true);
         instance.InitializeSwarms(false);
         
         Swarm[] swarms = instance.getSwarms();
@@ -267,12 +270,13 @@ public class CPSOTest {
         System.out.println("Initialize Swarms of less even size");
         int expectedDimensions = 5;
         int expectedMaxLoops = 10;
-        int expectedSwarmSize = 20;
+        int swarmSize = 20;
+        int expectedSwarmSize = swarmSize/4;
         double expectedInertia = 0.5;
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
         int k = 4;
-        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, expectedSwarmSize, expectedInertia, expectedC1, expectedC2,k, true, 0, true);
+        CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, swarmSize, expectedInertia, expectedC1, expectedC2,k, true, 0, true);
         instance.InitializeSwarms(false);
         
         Swarm[] swarms = instance.getSwarms();
