@@ -207,9 +207,14 @@ public class Swarm
         {
             Point_dt[] points = new Point_dt[particles.length];
             dt = new Delaunay_Triangulation();
+            //System.out.println("Creating DT....");
             try{
                 for(int i = 0; i < particles.length; i++)
                 {
+                    Point_dt a = Triangulation.convertParticletoPoint(particles[i]);
+                    //System.out.print("Adding point: "+i+"...["+a.x()+","+a.y()+","+a.z()+"]");
+                    dt.insertPoint(a); 
+                    //System.out.println("...Point added");
                     dt.insertPoint(Triangulation.convertParticletoPoint(particles[i])); 
                 }
             }
@@ -219,6 +224,7 @@ public class Swarm
                 //null, which will be handled in the other function
                 dt = new Delaunay_Triangulation();
             }
+            //System.out.println("...DT Created");
         }
         
           // Implementing Fisher–Yates shuffle
@@ -263,7 +269,7 @@ public class Swarm
                     iterator = dt.trianglesIterator();
                 }catch(NullPointerException e)
                 {
-                    System.out.println("Delaunay Triangulation cannot be created");
+                    //System.out.println("Delaunay Triangulation cannot be created");
                     return null;
                 }
                 
