@@ -266,10 +266,62 @@ public class SwarmTest {
      * 
      */
     @Test
-    public void testCalculateDelaunayTriangulation()
+    public void testCalculateDelaunayTriangulation3D()
     {
-        System.out.println("test calculate delaunay triangulation");
-        Swarm instance = new Swarm(20, 0.5, 0.2, 0.3, true, 5, 0);
+        System.out.println("test calculate delaunay triangulation 3D");
+        Swarm instance = new Swarm(20, 0.5, 0.2, 0.3, true, 3, 0);
+        instance.CalculateDelaunayTriangulation();
+        Delaunay_Triangulation dt = instance.dt;
+        
+        //test that there is more than one 
+        assertNotEquals(dt.trianglesSize(), 0);
+        
+        System.out.println("getting the triangles");
+        Iterator<Triangle_dt> iterator = dt.trianglesIterator();
+        int count = 1;
+        
+        while(iterator.hasNext())
+        {            
+            System.out.println("testing triangle: "+count++);
+            Triangle_dt triangles = iterator.next(); 
+        }
+        
+    }
+    
+    /**
+     * 
+     */
+    @Test
+    public void testCalculateDelaunayTriangulation2D()
+    {
+        System.out.println("test calculate delaunay triangulation 2D");
+        Swarm instance = new Swarm(20, 0.5, 0.2, 0.3, true, 2, 0);
+        instance.CalculateDelaunayTriangulation();
+        Delaunay_Triangulation dt = instance.dt;
+        
+        //test that there is more than one 
+        assertNotEquals(dt.trianglesSize(), 0);
+        
+        System.out.println("getting the triangles");
+        Iterator<Triangle_dt> iterator = dt.trianglesIterator();
+        int count = 1;
+        
+        while(iterator.hasNext())
+        {            
+            System.out.println("testing triangle: "+count++);
+            Triangle_dt triangles = iterator.next(); 
+        }
+        
+    }
+    
+    /**
+     * 
+     */
+    @Test
+    public void testCalculateDelaunayTriangulation1D()
+    {
+        System.out.println("test calculate delaunay triangulation 1D");
+        Swarm instance = new Swarm(20, 0.5, 0.2, 0.3, true, 1, 0);
         instance.CalculateDelaunayTriangulation();
         Delaunay_Triangulation dt = instance.dt;
         
