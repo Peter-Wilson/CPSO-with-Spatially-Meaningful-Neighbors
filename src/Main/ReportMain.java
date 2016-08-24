@@ -20,21 +20,25 @@ public class ReportMain {
     
     public static void getAverageSolveRate()
     {
-        testCPSO_S(20, 6, false); // no dt        
+        testPSO(10, 4, false); // no dt        
             System.out.println("\br");
-        testCPSO_S(20, 6, true); // dt
+        testPSO(10, 4, true); // dt
             System.out.println("\br");
-        testCPSO_Sk(20, 3, 6, false);
+        testCPSO_S(10, 4, false); // no dt        
             System.out.println("\br");
-        testCPSO_Sk(20, 3, 6, true);
+        testCPSO_S(10, 4, true); // dt
             System.out.println("\br");
-        testCPSO_Hk(20, 3, 6, false);
+        testCPSO_Sk(10, 2, 4, false);
             System.out.println("\br");
-        testCPSO_Hk(20, 2, 6, true);
+        testCPSO_Sk(10, 2, 4, true);
             System.out.println("\br");
-        testCPSO_Rk(20, 3, 6, false);
+        testCPSO_Hk(10, 2, 4, false);
             System.out.println("\br");
-        testCPSO_Rk(20, 2, 6, true);
+        testCPSO_Hk(10, 2, 4, true);
+            System.out.println("\br");
+        testCPSO_Rk(10, 2, 4, false);
+            System.out.println("\br");
+        testCPSO_Rk(10, 2, 4, true);
             System.out.println("\br");
     }
     
@@ -45,6 +49,8 @@ public class ReportMain {
             boolean worked = false;
             int successDT = 0;
             int unsuccessDT = 0;
+            int numIterations = 1000;
+            double[] averageBest = new double[numIterations];
             
             for(int i = 0; i < 50; i++)
             {
@@ -54,27 +60,35 @@ public class ReportMain {
                         CPSO cpso;
                         switch(type)
                         {
+                            case 0:
+                                //PSO
+                                cpso = new CPSO_R_k(Dimensions, numIterations, numParticles, 1.0, 1.49618, 1.49618, 1, dt, function, true);
+                                break;
                             case 2:
-                                cpso = new CPSO_S_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, function, true);
+                                cpso = new CPSO_S_k(Dimensions, numIterations, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, function, true);
                                 break;
                             case 3:
-                                cpso = new CPSO_H_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, function, true);
+                                cpso = new CPSO_H_k(Dimensions, numIterations, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, function, true);
                                 break;
                             case 4:
-                                cpso = new CPSO_R_k(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, function, true);
+                                cpso = new CPSO_R_k(Dimensions, numIterations, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, function, true);
                                 break;
                             default:
-                                cpso = new CPSO_S(Dimensions, 3000, numParticles, 1.0, 1.49618, 1.49618, dt, function, true);
+                                cpso = new CPSO_S(Dimensions, numIterations, numParticles, 1.0, 1.49618, 1.49618, dt, function, true);
                                 break;
                         }
                         Result r = cpso.start();
                         if(r.solved)
                         {
                             completed++;
-                            iteration += r.iterationsToSolve;
                         }
+                        iteration += r.iterationsToSolve;
                         successDT += r.successfulDTs;
                         unsuccessDT = r.unsuccessfulDTs;
+                        for(int j = 0; j < r.globalBestPerIteration.size(); j++)
+                        {
+                            averageBest[j] += r.globalBestPerIteration.get(j);
+                        }
                         worked = true;
                     }
                     catch(StackOverflowError soe)
@@ -83,8 +97,23 @@ public class ReportMain {
                         worked = false;
                     }
             }
+            
             int successAverage = (successDT+unsuccessDT <= 0)?0:(successDT/(successDT+unsuccessDT))*100;
             System.out.println("Function?"+ function + " type?"+type+" DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed))+"\tDT Success rate:"+successAverage+"%");
+            
+            System.out.println("Print out the average values:");
+            for(int i = 0; i < averageBest.length; i++)
+            {
+                System.out.print(averageBest[i]/50 + ",");
+            }
+    }
+    
+    public static void testPSO(int numParticles, int Dimensions, boolean dt)
+    {
+        runTest(numParticles, Dimensions, dt, 1, 1, 0);
+        runTest(numParticles, Dimensions, dt, 2, 1, 0);
+        runTest(numParticles, Dimensions, dt, 3, 1, 0);
+        runTest(numParticles, Dimensions, dt, 4, 1, 0);
     }
     
     public static void testCPSO_S(int numParticles, int Dimensions, boolean dt)

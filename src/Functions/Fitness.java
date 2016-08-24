@@ -58,12 +58,9 @@ public class Fitness {
         for(int i = 0; i < dimensionSize; i++)
         {
             summation += Math.pow(values[i],2);
-        }
-
-        for(int i = 0; i < dimensionSize; i++)
-        {
             multiplication *= Math.cos(values[i]/Math.sqrt(i+1));
         }
+        
         fitness = 1+ (summation/4000)-multiplication;
         return fitness;
     }
@@ -77,15 +74,11 @@ public class Fitness {
         for(int i = 0; i < dimensionSize; i++)
         {
             a += Math.pow(values[i],2);
-        }
-
-        for(int i = 0; i < dimensionSize; i++)
-        {
             b += Math.cos(2*Math.PI*values[i]);
         }
 
-        fitness = 20 + Math.E - 20*Math.pow(Math.E, (-0.2*Math.sqrt(a/dimensionSize))) -
-                Math.pow(Math.E, b/dimensionSize);
+        fitness = 20 + Math.E - 20*Math.exp((-0.2*Math.sqrt(a/dimensionSize))) -
+                Math.exp(b/dimensionSize);
 
        return fitness;
     }
