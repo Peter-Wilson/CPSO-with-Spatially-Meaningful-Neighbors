@@ -676,13 +676,13 @@ public class CPSOTest {
         double[] expectedSolution = {1.0,1.0,1.0,1.0,1.0,1.0};
         
         //Set the global bests
-        instance.swarms[0].getParticles()[0].setPosition(positionA);
+        instance.swarms[0].getParticles()[0].setpBest(positionA);
         instance.swarms[0].setGlobalBest(instance.swarms[0].getParticles()[0]);
         
-        instance.swarms[1].getParticles()[0].setPosition(positionB);
+        instance.swarms[1].getParticles()[0].setpBest(positionB);
         instance.swarms[1].setGlobalBest(instance.swarms[1].getParticles()[0]);
         
-        instance.swarms[2].getParticles()[0].setPosition(positionC);
+        instance.swarms[2].getParticles()[0].setpBest(positionC);
         instance.swarms[2].setGlobalBest(instance.swarms[2].getParticles()[0]);
         
         //run update solution
