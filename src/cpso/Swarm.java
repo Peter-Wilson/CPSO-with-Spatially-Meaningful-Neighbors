@@ -44,6 +44,11 @@ public class Swarm
             this.diameter = getDiameter(function);
             InitializeParticles();
         }
+        
+        public boolean isDTNull()
+        {
+            return (this.dt == null);
+        }
 
         private void InitializeParticles()
         {
@@ -222,7 +227,7 @@ public class Swarm
             {
                 //if the delaunay triangulation cannot be created, default it to
                 //null, which will be handled in the other function
-                dt = new Delaunay_Triangulation();
+                dt = null;
             }
             //System.out.println("...DT Created");
         }
@@ -249,6 +254,7 @@ public class Swarm
          */
         public Particle chooseBestNeighbour(Particle item, CPSO cpso, int index)
         {
+            if(dt == null) return null;
             
             boolean hasConnectedNeighbours = false;
             Point_dt particlePoint = Triangulation.convertParticletoPoint(item);

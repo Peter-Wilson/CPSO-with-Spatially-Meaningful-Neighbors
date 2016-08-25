@@ -42,7 +42,7 @@ public class Particle {
      * @param position the position to set
      */
     public void setPosition(double[] position) {
-        this.position = position;
+        this.position = position.clone();
     }
     
     /**
@@ -66,7 +66,7 @@ public class Particle {
      * @param velocity the velocity to set
      */
     public void setVelocity(double[] velocity) {
-        this.velocity = velocity;
+        this.velocity = velocity.clone();
     }
     
     /**

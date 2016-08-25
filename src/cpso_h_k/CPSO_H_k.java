@@ -82,6 +82,10 @@ public class CPSO_H_k extends CPSO {
                 if(Delaunay)
                 {
                     swarms[s].CalculateDelaunayTriangulation();
+                    if(swarms[s].isDTNull()) 
+                        this.unsuccessfulDTs++;
+                    else
+                        this.successfulDTs++;
                 }
                 
                 // calculate delaunay neighbours
@@ -118,6 +122,8 @@ public class CPSO_H_k extends CPSO {
                 writeOutput("Criterion Met after "+i+" iterations");
                 result.solved = true;
                 result.iterationsToSolve = i+1;
+                result.successfulDTs = this.successfulDTs;
+                result.unsuccessfulDTs = this.unsuccessfulDTs;
                 result.finalFitness = result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1);
                 break;
             }
@@ -172,12 +178,11 @@ public class CPSO_H_k extends CPSO {
 
         }
 
-        double[] bestSolution = getGlobalBestSolution();
-        for(int i = 0; i < bestSolution.length; i++) //loop to print off startSolution
+        for(int i = 0; i < startSolution.length; i++) //loop to print off startSolution
         {
-            writeOutput("Solution "+(i+1)+": "+ bestSolution[i]);
+            writeOutput("Solution "+(i+1)+": "+ startSolution[i]);
         }
-        writeOutput("The final fitness value is: "+ CalculateFinalFitness(bestSolution));
+        writeOutput("The final fitness value is: "+ CalculateFinalFitness(startSolution));
         return result;
     }
 

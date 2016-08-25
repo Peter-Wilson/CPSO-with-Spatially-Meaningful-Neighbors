@@ -22,6 +22,8 @@ public class CPSO {
     public int swarmSize;
     public double C1 = 0.5;
     public double C2 = 0.3;
+    public int successfulDTs;
+    public int unsuccessfulDTs;
     public double INERTIA = 0.3;
     public int maxLoops;
     public int numSwarms;
@@ -160,7 +162,7 @@ public class CPSO {
             (!min && CalculateFitness(index, swarm.getGlobalBest().getpBest()) < pBestFitness))      //update the global best
         {
             swarm.setGlobalBest(p);
-            if(swarm == swarms[index]) UpdateSolution(); //update the solution if it is the main cpso
+            if(swarm == swarms[index]) UpdateSolution(); //update the solution if it is the main cpso (not the PSO)
             writeOutput("New Global Best for Swarm " + swarm + ": x=" + particleFitness);
         }
     }
@@ -169,33 +171,6 @@ public class CPSO {
     {
         return null;
     }
-
-     /**
-     * Update to the best current startSolution by taking the global best values
-     */
-    public double[] getGlobalBestSolution()
-    {
-        int index = 0;
-        double[] bestPosition = new double[startSolution.length];
-        
-        for(int i = 0; i < swarms.length; i++)
-        {
-            Particle best = swarms[i].getGlobalBest();
-            if(best == null){
-                for(int j = 0; j < swarms[i].getParticles()[0].getPosition().length; j++)
-                {
-                    bestPosition[index++] = swarms[i].getParticles()[0].getPosition()[j];
-                }
-            }
-            else{
-                for(int j = 0; j < best.getPosition().length; j++)
-                {
-                    bestPosition[index++] = best.getpBest()[j];
-                }
-            }
-        }        
-        return bestPosition;
-    }
     
     /**
      * Adds the best solutions into temp and calculate the fitness
@@ -203,7 +178,7 @@ public class CPSO {
      */
     public double getSolutionFitness()
     {
-        return this.CalculateFinalFitness(getGlobalBestSolution());
+        return this.CalculateFinalFitness(this.startSolution);
     }
 
     /**
@@ -341,9 +316,9 @@ public class CPSO {
             Particle best = (swarms[i].getGlobalBest() != null)? swarms[i].getGlobalBest() : swarms[i].getParticles()[0];
             
             
-            for(int j = 0; j < best.getPosition().length; j++)
+            for(int j = 0; j < best.getpBest().length; j++)
             {
-                startSolution[count] = best.getPosition()[j];
+                startSolution[count] = best.getpBest()[j];
                 count++;
             }
         }
