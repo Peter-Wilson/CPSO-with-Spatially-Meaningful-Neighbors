@@ -178,12 +178,11 @@ public class CPSO_H_k extends CPSO {
 
         }
 
-        double[] bestSolution = getGlobalBestSolution();
-        for(int i = 0; i < bestSolution.length; i++) //loop to print off startSolution
+        for(int i = 0; i < startSolution.length; i++) //loop to print off startSolution
         {
-            writeOutput("Solution "+(i+1)+": "+ bestSolution[i]);
+            writeOutput("Solution "+(i+1)+": "+ startSolution[i]);
         }
-        writeOutput("The final fitness value is: "+ CalculateFinalFitness(bestSolution));
+        writeOutput("The final fitness value is: "+ CalculateFinalFitness(startSolution));
         return result;
     }
 
