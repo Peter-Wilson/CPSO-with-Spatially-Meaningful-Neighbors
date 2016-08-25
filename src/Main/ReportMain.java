@@ -31,7 +31,7 @@ public class ReportMain {
         try {
             
             Date d = new Date();
-            File file = new File("reportOutput_"+d.getTime()+".csv");
+            File file = new File("Runtime_Reports/reportOutput_"+d.getTime()+".csv");
 
             // if file doesnt exists, then create it
             if (!file.exists()) {
@@ -125,6 +125,8 @@ public class ReportMain {
                 {
                     writer.write(averageBest[i]/50 + ",");
                 }
+                writer.newLine();
+                writer.flush();
             }
             }catch(IOException io)
             {
@@ -163,7 +165,6 @@ public class ReportMain {
     {
         //PSO
         runTest(numParticles, Dimensions, false, function, 1, 0);
-        runTest(numParticles, Dimensions, true, function, 1, 0);
         //CPSO-S
         runTest(numParticles, Dimensions, false, function, 1, 1);
         runTest(numParticles, Dimensions, true, function, 1, 1);
