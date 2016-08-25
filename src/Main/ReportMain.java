@@ -11,6 +11,12 @@ import cpso_h_k.CPSO_H_k;
 import cpso_r_k.CPSO_R_k;
 import cpso_s.CPSO_S;
 import cpso_s_k.CPSO_S_k;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
 
 /**
  *
@@ -18,28 +24,39 @@ import cpso_s_k.CPSO_S_k;
  */
 public class ReportMain {
     
+    static BufferedWriter writer;
+    
     public static void getAverageSolveRate()
     {
-        testPSO(10, 4, false); // no dt        
-            System.out.println("\br");
-        testPSO(10, 4, true); // dt
-            System.out.println("\br");
-        testCPSO_S(10, 4, false); // no dt        
-            System.out.println("\br");
-        testCPSO_S(10, 4, true); // dt
-            System.out.println("\br");
-        testCPSO_Sk(10, 2, 4, false);
-            System.out.println("\br");
-        testCPSO_Sk(10, 2, 4, true);
-            System.out.println("\br");
-        testCPSO_Hk(10, 2, 4, false);
-            System.out.println("\br");
-        testCPSO_Hk(10, 2, 4, true);
-            System.out.println("\br");
-        testCPSO_Rk(10, 2, 4, false);
-            System.out.println("\br");
-        testCPSO_Rk(10, 2, 4, true);
-            System.out.println("\br");
+        try {
+            
+            Date d = new Date();
+            File file = new File("reportOutput_"+d.getTime()+".csv");
+
+            // if file doesnt exists, then create it
+            if (!file.exists()) {
+                    file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            writer = new BufferedWriter(fw);
+
+        
+        
+        testSchaffer(10, 2, 4); // no dt        
+            System.out.println("\b");
+        testRastrigin(10, 2, 4); // dt
+            System.out.println("\b");
+        testRosenbrock(10, 2, 4); // no dt        
+            System.out.println("\b");
+        testGriewanck(10, 2, 4); // dt
+            System.out.println("\b");
+        testAckley(10, 2, 4);
+            
+            writer.close();
+            
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
     }
     
     public static void runTest(int numParticles, int Dimensions, boolean dt, int function, int numSwarms, int type)
@@ -100,12 +117,90 @@ public class ReportMain {
             
             int successAverage = (successDT+unsuccessDT <= 0)?0:(successDT/(successDT+unsuccessDT))*100;
             System.out.println("Function?"+ function + " type?"+type+" DT?"+dt+":\t\tCompleted: "+completed/0.5+"%\t\taverage iterations:"+((completed==0)? 0: (iteration/completed))+"\tDT Success rate:"+successAverage+"%");
-            
-            System.out.println("Print out the average values:");
-            for(int i = 0; i < averageBest.length; i++)
+            try{
+            if(writer != null)
             {
-                System.out.print(averageBest[i]/50 + ",");
+                writer.write(getPSOType(type)+"-"+getFunctionName(function)+",");
+                for(int i = 0; i < averageBest.length; i++)
+                {
+                    writer.write(averageBest[i]/50 + ",");
+                }
             }
+            }catch(IOException io)
+            {
+                
+            }
+    }
+    
+    public static String getFunctionName(int functionType)
+    {
+        switch(functionType)
+        {
+            case 0: return "Sum Of Logs";
+            case 1: return "Schaffer";
+            case 2: return "Rastrigin";
+            case 3: return "Rosenbrock";
+            case 4: return "Griewanck";
+            case 5: return "Ackley";
+            default: return "Unknown";
+        }
+    }
+    
+    public static String getPSOType(int PSOType)
+    {
+        switch(PSOType)
+        {
+            case 0: return "PSO";
+            case 1: return "CPSO-S";
+            case 2: return "CPSO-Sk";
+            case 3: return "CPSO-Hk";
+            case 4: return "CPSO-Rk";
+            default: return "Unknown";
+        }
+    }
+    
+    public static void testFunction(int numParticles, int numSwarms, int Dimensions, int function)
+    {
+        //PSO
+        runTest(numParticles, Dimensions, false, function, 1, 0);
+        runTest(numParticles, Dimensions, true, function, 1, 0);
+        //CPSO-S
+        runTest(numParticles, Dimensions, false, function, 1, 1);
+        runTest(numParticles, Dimensions, true, function, 1, 1);
+        //CPSO-Sk
+        runTest(numParticles, Dimensions, false, function, 1, 2);
+        runTest(numParticles, Dimensions, true, function, 1, 2);
+        //CPSO-Hk
+        runTest(numParticles, Dimensions, false, function, numSwarms, 3);
+        runTest(numParticles, Dimensions, true, function, numSwarms, 3);
+        //CPSO-Rk
+        runTest(numParticles, Dimensions, false, function, numSwarms, 4);
+        runTest(numParticles, Dimensions, true, function, numSwarms, 4);
+    }
+    
+    public static void testSchaffer(int numParticles, int numSwarms, int Dimensions)
+    {
+        testFunction(numParticles, numSwarms, Dimensions, 1);
+    }
+    
+    public static void testRastrigin(int numParticles, int numSwarms, int Dimensions)
+    {
+        testFunction(numParticles, numSwarms, Dimensions, 2);
+    }
+    
+    public static void testRosenbrock(int numParticles, int numSwarms, int Dimensions)
+    {
+        testFunction(numParticles, numSwarms, Dimensions, 3);
+    }
+    
+    public static void testGriewanck(int numParticles, int numSwarms, int Dimensions)
+    {
+        testFunction(numParticles, numSwarms, Dimensions, 4);
+    }
+    
+    public static void testAckley(int numParticles, int numSwarms, int Dimensions)
+    {
+        testFunction(numParticles, numSwarms, Dimensions, 5);
     }
     
     public static void testPSO(int numParticles, int Dimensions, boolean dt)
