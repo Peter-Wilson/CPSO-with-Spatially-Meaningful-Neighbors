@@ -18,17 +18,9 @@ public class Particle {
     
     public Particle(double[] initialPosition, int function)
     {
-        setPosition(initialPosition);
+        setPosition(initialPosition, function);
         setpBest(initialPosition);
-        setVelocity(randomizeVelocity(initialPosition, function));        
-    }
-    
-    public Particle(double[] initialPosition)
-    {
-        setPosition(initialPosition);
-        setpBest(initialPosition);
-        double[] velocity = new double[initialPosition.length];
-        setVelocity(velocity);        
+        setVelocity(randomizeVelocity(initialPosition, function), function);        
     }
 
     /**
@@ -40,8 +32,17 @@ public class Particle {
 
     /**
      * @param position the position to set
+     * @param function the function that is being tested (to see the bounds)
      */
-    public void setPosition(double[] position) {
+    public void setPosition(double[] position, int function) {
+        //force the new position to be a valid position
+        double diameter = Swarm.getDiameter(function);
+        for(int i = 0; i < position.length; i++)
+        {
+            if(position[i] < -diameter) position[i] = -diameter;
+            else if(position[i] > diameter) position[i] = diameter;
+        }
+        
         this.position = position.clone();
     }
     
@@ -49,8 +50,14 @@ public class Particle {
      * Set the position based on the index dimension
      * @param position the position to set 
      * @param index set the value at that specific index
+     * @param function the function that is being tested (to see the bounds)
      */
-    public void setPosition(double position, int index) {
+    public void setPosition(double position, int index, int function) {
+        //force the new position to be a valid position
+        double diameter = Swarm.getDiameter(function);
+        if(position < -diameter) position = -diameter;
+        else if(position > diameter) position = diameter;
+        
         this.position[index] = position;
     }
     
@@ -59,13 +66,23 @@ public class Particle {
      * @return the velocity
      */
     public double[] getVelocity() {
+        
         return velocity;
     }
 
     /**
      * @param velocity the velocity to set
+     * @param function the function that is being tested (to see the bounds)
      */
-    public void setVelocity(double[] velocity) {
+    public void setVelocity(double[] velocity, int function) {
+        double diameter = Swarm.getDiameter(function);
+        //ensure new velocity will lead to a valid solution
+        for(int i = 0; i < velocity.length; i++)
+        {
+            if((position[i]+velocity[i]) < -diameter) velocity[i] = -diameter-position[i];
+            else if((position[i]+velocity[i]) > diameter) velocity[i] = diameter-position[i];
+        }
+        
         this.velocity = velocity.clone();
     }
     
@@ -73,8 +90,14 @@ public class Particle {
      * set the velocity based on the index
      * @param velocity the velocity to set
      * @param index set the index value at that specific index
+     * @param function the function that is being tested (to see the bounds)
      */
-    public void setVelocity(double velocity, int index) {
+    public void setVelocity(double velocity, int index, int function) {
+        double diameter = Swarm.getDiameter(function);
+        //ensure new velocity will lead to a valid solution
+        if((position[index]+velocity) < -diameter) velocity = -diameter-position[index];
+        else if((position[index]+velocity) > diameter) velocity = diameter-position[index];
+        
         this.velocity[index] = velocity;
     }
 

@@ -78,12 +78,12 @@ public class Swarm
         {
             switch(function)
             {
-                case 0: return 50;
-                case 1: return 200;
-                case 2: return 10.24;
-                case 3: return 60;
-                case 4: return 1200; 
-                case 5: return 64;
+                case 0: return 25;
+                case 1: return 100;
+                case 2: return 5.12;
+                case 3: return 30;
+                case 4: return 600; 
+                case 5: return 32;
                 default: return -1;
             }
         }
@@ -147,7 +147,7 @@ public class Swarm
                     velocity = lowerBound - p.getPosition()[i];
                 }
                 
-                p.setVelocity(velocity, i);
+                p.setVelocity(velocity, i, function);
             }
         }
 
@@ -156,7 +156,7 @@ public class Swarm
         {
             for(int i = 0; i < k; i++)
             {
-                p.setPosition(p.getPosition()[i] + p.getVelocity()[i], i);
+                p.setPosition(p.getPosition()[i] + p.getVelocity()[i], i, function);
             }
         }
 
@@ -199,8 +199,8 @@ public class Swarm
                 }
                 while(particles[randomIndex] == this.globalBest);
                 
-                particles[randomIndex].setPosition(position);
-                particles[randomIndex].setVelocity(velocity);
+                particles[randomIndex].setPosition(position, function);
+                particles[randomIndex].setVelocity(velocity, function);
                 return true;
             }
         }
