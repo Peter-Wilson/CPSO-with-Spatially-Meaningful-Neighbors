@@ -79,12 +79,12 @@ public class TriangulationTest {
         double[] initialPosition1 = {1,1,1};
         double[] velocity = {1,1,1};
         Particle expected1 = new Particle(initialPosition1, 1);
-        expected1.setVelocity(velocity);
+        expected1.setVelocity(velocity, 1);
         
         
         double[] initialPosition2 = {2,2,2};
         Particle expected2 = new Particle(initialPosition2, 1);
-        expected2.setVelocity(velocity);
+        expected2.setVelocity(velocity, 1);
         Particle[] p = {expected1, expected2};
         boolean expResult = true;
         boolean result = Triangulation.working_together(item, connected, p);
@@ -102,13 +102,13 @@ public class TriangulationTest {
         double[] initialPosition1 = {1,1,1};
         double[] velocity = {1,0,0};
         Particle expected1 = new Particle(initialPosition1, 1);
-        expected1.setVelocity(velocity);
+        expected1.setVelocity(velocity, 1);
         
         
         double[] velocity2 = {-1,0,0};
         double[] initialPosition2 = {4,1,1};
         Particle expected2 = new Particle(initialPosition2, 1);
-        expected2.setVelocity(velocity2);
+        expected2.setVelocity(velocity2, 1);
         Particle[] p = {expected1, expected2};
         boolean expResult = true;
         boolean result = Triangulation.working_together(item, connected, p);
@@ -126,13 +126,13 @@ public class TriangulationTest {
         double[] initialPosition1 = {1,1,1};
         double[] velocity = {1,1,1};
         Particle expected1 = new Particle(initialPosition1, 1);
-        expected1.setVelocity(velocity);
+        expected1.setVelocity(velocity, 1);
         
         
         double[] velocity2 = {-1,-1,-1};
         double[] initialPosition2 = {2,2,2};
         Particle expected2 = new Particle(initialPosition2, 1);
-        expected2.setVelocity(velocity2);
+        expected2.setVelocity(velocity2, 1);
         Particle[] p = {expected1, expected2};
         boolean expResult = false;
         boolean result = Triangulation.working_together(item, connected, p);

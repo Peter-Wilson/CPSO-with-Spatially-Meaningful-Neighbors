@@ -172,8 +172,8 @@ public class ReportMain {
         runTest(numParticles, Dimensions, false, function, 1, 2);
         runTest(numParticles, Dimensions, true, function, 1, 2);
         //CPSO-Hk
-        runTest(numParticles, Dimensions, false, function, numSwarms, 3);
-        runTest(numParticles, Dimensions, true, function, numSwarms, 3);
+        //runTest(numParticles, Dimensions, false, function, numSwarms, 3);
+        //runTest(numParticles, Dimensions, true, function, numSwarms, 3);
         //CPSO-Rk
         runTest(numParticles, Dimensions, false, function, numSwarms, 4);
         runTest(numParticles, Dimensions, true, function, numSwarms, 4);

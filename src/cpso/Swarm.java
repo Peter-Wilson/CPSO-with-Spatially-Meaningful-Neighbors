@@ -78,7 +78,7 @@ public class Swarm
         {
             switch(function)
             {
-                case 0: return 25;
+                case 0: return 50;
                 case 1: return 100;
                 case 2: return 5.12;
                 case 3: return 30;

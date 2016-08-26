@@ -601,7 +601,7 @@ public class CPSOTest {
         CPSO instance = new CPSO(2, 5, 20, 0.5, 0.3, 0.2, k, true, 0, true);
         instance.InitializeSwarms(false);
         
-        instance.getSwarms()[0].getParticles()[0].setPosition(new_position);
+        instance.getSwarms()[0].getParticles()[0].setPosition(new_position, 0);
         
         instance.UpdateBests(instance.getSwarms()[0].getParticles()[0], 0);
         assertArrayEquals(instance.getSwarms()[0].getParticles()[0].getpBest(), new_position, 0.0);
@@ -621,14 +621,14 @@ public class CPSOTest {
         
         //test when it shouldn't update
         instance.getSwarms()[0].getParticles()[0].setpBest(good_position);
-        instance.getSwarms()[0].getParticles()[0].setPosition(bad_position);
+        instance.getSwarms()[0].getParticles()[0].setPosition(bad_position, 0);
         
         instance.UpdateBests(instance.getSwarms()[0].getParticles()[0], 0);
         assertArrayEquals(instance.getSwarms()[0].getParticles()[0].getpBest(), good_position, 0.0);
         
         //test when it should update
         instance.getSwarms()[0].getParticles()[0].setpBest(bad_position);
-        instance.getSwarms()[0].getParticles()[0].setPosition(good_position);
+        instance.getSwarms()[0].getParticles()[0].setPosition(good_position, 0);
         
         instance.UpdateBests(instance.getSwarms()[0].getParticles()[0], 0);
         assertArrayEquals(instance.getSwarms()[0].getParticles()[0].getpBest(), good_position, 0.0);
@@ -648,14 +648,14 @@ public class CPSOTest {
         
         //test when it shouldn't update
         instance.getSwarms()[0].getParticles()[0].setpBest(good_position);
-        instance.getSwarms()[0].getParticles()[0].setPosition(bad_position);
+        instance.getSwarms()[0].getParticles()[0].setPosition(bad_position, 0);
         
         instance.UpdateBests(instance.getSwarms()[0].getParticles()[0], 0);
         assertArrayEquals(instance.getSwarms()[0].getParticles()[0].getpBest(), good_position, 0.0);
         
         //test when it should update
         instance.getSwarms()[0].getParticles()[0].setpBest(bad_position);
-        instance.getSwarms()[0].getParticles()[0].setPosition(good_position);
+        instance.getSwarms()[0].getParticles()[0].setPosition(good_position, 0);
         
         instance.UpdateBests(instance.getSwarms()[0].getParticles()[0], 0);
         assertArrayEquals(instance.getSwarms()[0].getParticles()[0].getpBest(), good_position, 0.0);
