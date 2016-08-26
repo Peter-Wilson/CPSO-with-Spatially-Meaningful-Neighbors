@@ -69,7 +69,7 @@ public class SwarmTest {
         Random rand = new Random();
         
         //log function
-        expected = 50;
+        expected = 51;
         Swarm instance = new Swarm(20, 0.2, 0.3, 0.5, true, 1, 0);
         random = instance.getRandomNumber(rand, instance.function);
         assertTrue(random >= -expected);
