@@ -42,15 +42,15 @@ public class ReportMain {
 
         
         
-        testSchaffer(10, 2, 4); // no dt        
+        //testSchaffer(15, 2, 4); // no dt        
+        //    System.out.println("\b");
+        testRastrigin(20, 2, 4); // dt
             System.out.println("\b");
-        testRastrigin(10, 2, 4); // dt
+        testRosenbrock(20, 2, 4); // no dt        
             System.out.println("\b");
-        testRosenbrock(10, 2, 4); // no dt        
+        testGriewanck(20, 2, 4); // dt
             System.out.println("\b");
-        testGriewanck(10, 2, 4); // dt
-            System.out.println("\b");
-        testAckley(10, 2, 4);
+        testAckley(20, 2, 4);
             
             writer.close();
             

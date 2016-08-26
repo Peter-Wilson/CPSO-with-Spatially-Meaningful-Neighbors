@@ -20,7 +20,8 @@ public class Particle {
     {
         setPosition(initialPosition, function);
         setpBest(initialPosition);
-        setVelocity(randomizeVelocity(initialPosition, function), function);        
+        setVelocity(randomizeVelocity(initialPosition, function), function); 
+        //setVelocity(new double[initialPosition.length], function);        
     }
 
     /**

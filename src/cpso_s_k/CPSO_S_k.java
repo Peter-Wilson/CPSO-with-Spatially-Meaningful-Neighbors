@@ -84,12 +84,12 @@ public class CPSO_S_k extends CPSO {
                 {
                     for(Particle p: swarms[s].getParticles())
                     {
-                            Particle neighbour = swarms[s].chooseBestNeighbour(p, this, s);
-                            if(neighbour != null && Triangulation.working_together(Triangulation.convertParticletoPoint(p), 
-                                    Triangulation.convertParticletoPoint(neighbour), swarms[s].getParticles()))
-                                p.setSocialNeighbour(neighbour);
-                            else
-                                p.setSocialNeighbour(null);
+                        Particle neighbour = swarms[s].chooseBestNeighbour(p, this, s);
+                        if(neighbour != null && Triangulation.working_together(Triangulation.convertParticletoPoint(p), 
+                                Triangulation.convertParticletoPoint(neighbour), swarms[s].getParticles()))
+                            p.setSocialNeighbour(neighbour);
+                        else
+                            p.setSocialNeighbour(null);
                     }
                 }
 
