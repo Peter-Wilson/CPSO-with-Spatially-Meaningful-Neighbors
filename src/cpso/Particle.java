@@ -142,8 +142,8 @@ public class Particle {
     private double[] randomizeVelocity(double[] position) {
         double[] velocity = new double[position.length];
         double diameter = Swarm.getDiameter(function);
-        double upperBound =  (diameter/2);
-        double lowerBound = -(diameter/2);
+        double upperBound =  (diameter);
+        double lowerBound = -(diameter);
 
         if(function == 0)
         {
@@ -156,7 +156,7 @@ public class Particle {
             double randomNumber = 0;
             do
             {
-                randomNumber = (Math.random()*diameter)-(diameter/2);
+                randomNumber = (Math.random()*diameter*2)-(diameter);
             }
             while(position[i]+randomNumber < lowerBound || position[i]+randomNumber > upperBound);
             velocity[i] = randomNumber;
