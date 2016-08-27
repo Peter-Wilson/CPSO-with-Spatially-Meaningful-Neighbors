@@ -31,6 +31,7 @@ public class CPSO {
     public boolean Delaunay;
     public int function;
     public double criterion;
+    public int fitnessEvaluations;
     JTextArea screen;
     
     /**
@@ -59,6 +60,7 @@ public class CPSO {
         this.numSwarms = numSwarms;  
         this.Delaunay = Delaunay;          
         this.function = function;  
+        fitnessEvaluations = 0;
         criterion = getCriterion(function);
         this.min = min;
         startSolution = new double[dimensionSize];
@@ -347,8 +349,10 @@ public class CPSO {
     public Result start()
     {
         Result result = new Result();
-        for(int i = 0; i < maxLoops; i++)
+        fitnessEvaluations = 0;
+        while(fitnessEvaluations < maxLoops)
         {
+            mainLoop:
             for (int s = 0; s < swarms.length; s++) //iterate through swarms
             {
                 //perform the delaunay triangulation
@@ -363,6 +367,7 @@ public class CPSO {
                 
                 for(Particle p : swarms[s].getParticles()){ //for each particle
                     UpdateBests(p, s);  
+                    if(++fitnessEvaluations >= maxLoops) break mainLoop;
                 }
                 
                 //update the closest social neighbor
@@ -381,7 +386,7 @@ public class CPSO {
 
                 for (Particle p : swarms[s].getParticles()) //move the particles
                 {
-                    swarms[s].UpdateVelocity(p,i/(double)maxLoops);
+                    swarms[s].UpdateVelocity(p,fitnessEvaluations/(double)maxLoops);
                     swarms[s].UpdatePosition(p);
                 }                       
             }
@@ -389,11 +394,11 @@ public class CPSO {
             result.globalBestPerIteration.add(this.getSolutionFitness());
             if(result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1) <= this.criterion)
             {
-                writeOutput("Criterion Met after "+i+" iterations");
+                writeOutput("Criterion Met after "+fitnessEvaluations+" iterations");
                 result.solved = true;
                 result.successfulDTs = this.successfulDTs;
                 result.unsuccessfulDTs = this.unsuccessfulDTs;
-                result.iterationsToSolve = i+1;
+                result.iterationsToSolve = fitnessEvaluations;
                 result.finalFitness = result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1);
                 break;
             }
