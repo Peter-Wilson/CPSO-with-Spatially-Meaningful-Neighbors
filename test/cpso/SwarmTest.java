@@ -69,7 +69,7 @@ public class SwarmTest {
         Random rand = new Random();
         
         //log function
-        expected = 50;
+        expected = 51;
         Swarm instance = new Swarm(20, 0.2, 0.3, 0.5, true, 1, 0);
         random = instance.getRandomNumber(rand, instance.function);
         assertTrue(random >= -expected);
@@ -123,27 +123,27 @@ public class SwarmTest {
         
         //function 2
         result = Swarm.getDiameter(1);
-        expResult = 200;
+        expResult = 100;
         assertEquals(result, expResult, 0.0);
         
         //function 3
         result = Swarm.getDiameter(2);
-        expResult = 10.24;
+        expResult = 5.12;
         assertEquals(result, expResult, 0.0);
         
         //function 4
         result = Swarm.getDiameter(3);
-        expResult = 60;
+        expResult = 30;
         assertEquals(result, expResult, 0.0);
         
         //function 5
         result = Swarm.getDiameter(4);
-        expResult = 1200; 
+        expResult = 600; 
         assertEquals(result, expResult, 0.0);
         
         //function 6
         result = Swarm.getDiameter(5);
-        expResult = 64;
+        expResult = 32;
         assertEquals(result, expResult, 0.0);
         
         //function 6
@@ -194,13 +194,14 @@ public class SwarmTest {
         double[] velocity = {5.0};
         double[] position = {2.0};
         double[] pBest = {0.0};
-        p.setVelocity(velocity);
         p.setPosition(position);
-        p.setpBest(position);
-        instance.setGlobalBest(new Particle(pBest, 1));
+        p.setVelocity(velocity);
+        p.setpBest(pBest);
+        p.setSocialNeighbour(null);
+        instance.setGlobalBest(p);
         instance.UpdateVelocity(p, 0, true);
         
-        double[] expectedVelocity = {1.9};
+        double[] expectedVelocity = {1.5};
         assertArrayEquals(expectedVelocity, p.getVelocity(), 0.0);
         
         System.out.println("Gets correct value");
@@ -212,8 +213,8 @@ public class SwarmTest {
         
         for(int i = 0; i < newValue.length; i++)
         {
-            assertTrue(newValue[i] >= -(instance.diameter/2));
-            assertTrue(newValue[i] <= (instance.diameter/2));
+            assertTrue(newValue[i] >= -(instance.diameter));
+            assertTrue(newValue[i] <= (instance.diameter));
         }
         
         System.out.println("Is successfully clamped");
@@ -229,14 +230,14 @@ public class SwarmTest {
         //calculate a test velocity
         Swarm instance = new Swarm(20, 0.2, 0.3, 0.5, true, 5, 0);
         Particle p = instance.getParticles()[0];
-        double[] velocity = {5, 16.5, -2, 43, 8.65};
+        double[] velocity = {5, 16.5, -2, 22, 8.65};
         double[] position = {6, 32.1, 11, 15, 13};
-        p.setVelocity(velocity);
         p.setPosition(position);
+        p.setVelocity(velocity);
         instance.setGlobalBest(new Particle(position, 0));
         instance.UpdatePosition(p);
         
-        double[] expectedVelocity = {11, 48.6, 9, 58, 21.65};
+        double[] expectedVelocity = {11, 48.6, 9, 37, 21.65};
         
         //ensure the actual velocity is the same
         assertArrayEquals(p.getPosition(), expectedVelocity, 0.1);  

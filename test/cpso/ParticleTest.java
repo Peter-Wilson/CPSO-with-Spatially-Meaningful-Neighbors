@@ -181,7 +181,7 @@ public class ParticleTest {
     @Test
     public void testSetPosition_double_int() {
         System.out.println("setPosition");
-        double position = 56.12;
+        double position = 46.12;
         int index = 3;
         double[] initialPosition = {4.3, 5.22, 43.3,88.7,2,56,8};
         Particle instance = new Particle(initialPosition, 1);

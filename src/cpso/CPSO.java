@@ -5,6 +5,7 @@
 package cpso;
 
 import Functions.Fitness;
+import Functions.Triangulation;
 import java.util.Random;
 import javax.swing.JTextArea;
 
@@ -165,11 +166,6 @@ public class CPSO {
             if(swarm == swarms[index]) UpdateSolution(); //update the solution if it is the main cpso (not the PSO)
             writeOutput("New Global Best for Swarm " + swarm + ": x=" + particleFitness);
         }
-    }
-    
-    public Result start()
-    {
-        return null;
     }
     
     /**
@@ -342,5 +338,72 @@ public class CPSO {
             default: return 0;
                      
         }
+    }
+    
+    /**
+     * Begin calculating the CPSO
+     * @return the final best result
+     */
+    public Result start()
+    {
+        Result result = new Result();
+        for(int i = 0; i < maxLoops; i++)
+        {
+            for (int s = 0; s < swarms.length; s++) //iterate through swarms
+            {
+                //perform the delaunay triangulation
+                if(Delaunay)
+                {
+                    swarms[s].CalculateDelaunayTriangulation();                    
+                    if(swarms[s].isDTNull()) 
+                        this.unsuccessfulDTs++;
+                    else
+                        this.successfulDTs++;
+                }
+                
+                for(Particle p : swarms[s].getParticles()){ //for each particle
+                    UpdateBests(p, s);  
+                }
+                
+                //update the closest social neighbor
+                if(Delaunay) 
+                {
+                    for(Particle p: swarms[s].getParticles())
+                    {
+                        Particle neighbour = swarms[s].chooseBestNeighbour(p, this, s);
+                        if(neighbour != null && Triangulation.working_together(Triangulation.convertParticletoPoint(p), 
+                                Triangulation.convertParticletoPoint(neighbour), swarms[s].getParticles()))
+                            p.setSocialNeighbour(neighbour);
+                        else
+                            p.setSocialNeighbour(null);
+                    }
+                }
+
+                for (Particle p : swarms[s].getParticles()) //move the particles
+                {
+                    swarms[s].UpdateVelocity(p,i/(double)maxLoops);
+                    swarms[s].UpdatePosition(p);
+                }                       
+            }
+            
+            result.globalBestPerIteration.add(this.getSolutionFitness());
+            if(result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1) <= this.criterion)
+            {
+                writeOutput("Criterion Met after "+i+" iterations");
+                result.solved = true;
+                result.successfulDTs = this.successfulDTs;
+                result.unsuccessfulDTs = this.unsuccessfulDTs;
+                result.iterationsToSolve = i+1;
+                result.finalFitness = result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1);
+                break;
+            }
+        }
+
+        for(int i = 0; i < startSolution.length; i++) //loop to print off startSolution
+        {
+            writeOutput("Solution "+(i+1)+": "+ startSolution[i]);
+        }
+        writeOutput("The final fitness value is: "+ CalculateFinalFitness(startSolution));
+        return result;
     }
 }

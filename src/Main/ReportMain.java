@@ -42,15 +42,15 @@ public class ReportMain {
 
         
         
-        testSchaffer(10, 2, 4); // no dt        
+        //testSchaffer(15, 2, 4); // no dt        
+        //    System.out.println("\b");
+        testRastrigin(20, 3, 6); // dt
             System.out.println("\b");
-        testRastrigin(10, 2, 4); // dt
+        testRosenbrock(20, 3, 6); // no dt        
             System.out.println("\b");
-        testRosenbrock(10, 2, 4); // no dt        
+        testGriewanck(20, 3, 6); // dt
             System.out.println("\b");
-        testGriewanck(10, 2, 4); // dt
-            System.out.println("\b");
-        testAckley(10, 2, 4);
+        testAckley(20, 3, 6);
             
             writer.close();
             
@@ -172,8 +172,8 @@ public class ReportMain {
         runTest(numParticles, Dimensions, false, function, 1, 2);
         runTest(numParticles, Dimensions, true, function, 1, 2);
         //CPSO-Hk
-        runTest(numParticles, Dimensions, false, function, numSwarms, 3);
-        runTest(numParticles, Dimensions, true, function, numSwarms, 3);
+        //runTest(numParticles, Dimensions, false, function, numSwarms, 3);
+        //runTest(numParticles, Dimensions, true, function, numSwarms, 3);
         //CPSO-Rk
         runTest(numParticles, Dimensions, false, function, numSwarms, 4);
         runTest(numParticles, Dimensions, true, function, numSwarms, 4);

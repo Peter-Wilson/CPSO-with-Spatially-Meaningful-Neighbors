@@ -71,7 +71,7 @@ public class Swarm
             if(function == 0)
                 return (rand.nextDouble()*getDiameter(function))+1;
             
-            return (rand.nextDouble()*getDiameter(function))-(getDiameter(function)/2);
+            return (rand.nextDouble()*(getDiameter(function)*2))-(getDiameter(function));
         }
         
         public static final double getDiameter(int function)
@@ -79,11 +79,11 @@ public class Swarm
             switch(function)
             {
                 case 0: return 50;
-                case 1: return 200;
-                case 2: return 10.24;
-                case 3: return 60;
-                case 4: return 1200; 
-                case 5: return 64;
+                case 1: return 100;
+                case 2: return 5.12;
+                case 3: return 30;
+                case 4: return 600; 
+                case 5: return 32;
                 default: return -1;
             }
         }
@@ -107,7 +107,7 @@ public class Swarm
             Random random = new Random();
             double R1 = random.nextDouble();
             double R2 = random.nextDouble();
-            double interia = INERTIA - (INERTIA*loopPercent); //inertia should decrease consistently as the cpso continues
+            double inertia = INERTIA - (INERTIA*loopPercent); //inertia should decrease consistently as the cpso continues
             double velocity = 0;
             
             //for testing purposes remove the randomness
@@ -115,36 +115,18 @@ public class Swarm
 
             for(int i = 0; i < k; i ++)
             {
-                if(dt ==null || p.getSocialNeighbour() == null)
+            
+                if(dt == null || p.getSocialNeighbour() == null)
                 {
-                    velocity = ((interia * p.getVelocity()[i]) +
+                    velocity = ((inertia * p.getVelocity()[i]) +
                                  C1 * R1 * (p.getpBest()[i] - p.getPosition()[i]) +
                                  C2 * R2 * (getGlobalBest().getpBest()[i] - p.getPosition()[i]));
                 }
                 else
                 {
-                    velocity = ((interia * p.getVelocity()[i]) +
+                    velocity = ((inertia * p.getVelocity()[i]) +
                                  C1 * R1 * (p.getpBest()[i] - p.getPosition()[i]) +
                                  C2 * R2 * (p.getSocialNeighbour().getpBest()[i] - p.getPosition()[i]));
-                }
-                
-                //This limits the velocity from going beyond the diameter
-                double upperBound =  (diameter/2);
-                double lowerBound = -(diameter/2);
-                
-                if(function == 0)
-                {
-                    lowerBound = 1;
-                    upperBound = diameter+1;
-                }
-                
-                if((velocity+p.getPosition()[i]) > upperBound)
-                {
-                    velocity = upperBound - p.getPosition()[i];
-                }
-                else if((velocity+p.getPosition()[i]) <  lowerBound)
-                {
-                    velocity = lowerBound - p.getPosition()[i];
                 }
                 
                 p.setVelocity(velocity, i);
