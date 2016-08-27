@@ -44,13 +44,13 @@ public class ReportMain {
         
         //testSchaffer(15, 2, 4); // no dt        
         //    System.out.println("\b");
-        testRastrigin(20, 3, 6); // dt
+        testRastrigin(10, 15, 30); // dt
             System.out.println("\b");
-        testRosenbrock(20, 3, 6); // no dt        
+        testRosenbrock(10, 15, 30); // no dt        
             System.out.println("\b");
-        testGriewanck(20, 3, 6); // dt
+        testGriewanck(10, 15, 30); // dt
             System.out.println("\b");
-        testAckley(20, 3, 6);
+        testAckley(10, 15, 30);
             
             writer.close();
             
@@ -66,7 +66,7 @@ public class ReportMain {
             boolean worked = false;
             int successDT = 0;
             int unsuccessDT = 0;
-            int numIterations = 1000;
+            int numIterations = 200000;
             double[] averageBest = new double[numIterations];
             
             for(int i = 0; i < 50; i++)
@@ -79,7 +79,7 @@ public class ReportMain {
                         {
                             case 0:
                                 //PSO
-                                cpso = new CPSO_R_k(Dimensions, numIterations, numParticles, 1.0, 1.49618, 1.49618, 1, dt, function, true);
+                                cpso = new CPSO_S_k(Dimensions, numIterations, numParticles, 1.0, 1.49618, 1.49618, 1, dt, function, true);
                                 break;
                             case 2:
                                 cpso = new CPSO_S_k(Dimensions, numIterations, numParticles, 1.0, 1.49618, 1.49618, numSwarms, dt, function, true);

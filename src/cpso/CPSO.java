@@ -118,7 +118,7 @@ public class CPSO {
                 }
             }
             
-            swarms[i] = new Swarm(swarmSize/numSwarms, C1, C2, INERTIA, min, width, function);
+            swarms[i] = new Swarm(swarmSize, C1, C2, INERTIA, min, width, function);
 
             for(int j = 0; j < width; j++)
             {
