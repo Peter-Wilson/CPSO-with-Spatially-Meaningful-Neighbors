@@ -194,26 +194,27 @@ public class SwarmTest {
         double[] velocity = {5.0};
         double[] position = {2.0};
         double[] pBest = {0.0};
-        p.setVelocity(velocity,0);
-        p.setPosition(position,0);
-        p.setpBest(position);
-        instance.setGlobalBest(new Particle(pBest, 1));
+        p.setPosition(position);
+        p.setVelocity(velocity);
+        p.setpBest(pBest);
+        p.setSocialNeighbour(null);
+        instance.setGlobalBest(p);
         instance.UpdateVelocity(p, 0, true);
         
-        double[] expectedVelocity = {1.9};
+        double[] expectedVelocity = {1.5};
         assertArrayEquals(expectedVelocity, p.getVelocity(), 0.0);
         
         System.out.println("Gets correct value");
         
         double[] velocity2 = {5};
-        p.setVelocity(velocity2,0);
+        p.setVelocity(velocity2);
         instance.UpdateVelocity(p, 0, true);
         double[] newValue = Triangulation.add(p.getPosition(), p.getVelocity());
         
         for(int i = 0; i < newValue.length; i++)
         {
-            assertTrue(newValue[i] >= -(instance.diameter/2));
-            assertTrue(newValue[i] <= (instance.diameter/2));
+            assertTrue(newValue[i] >= -(instance.diameter));
+            assertTrue(newValue[i] <= (instance.diameter));
         }
         
         System.out.println("Is successfully clamped");
@@ -231,8 +232,8 @@ public class SwarmTest {
         Particle p = instance.getParticles()[0];
         double[] velocity = {5, 16.5, -2, 22, 8.65};
         double[] position = {6, 32.1, 11, 15, 13};
-        p.setPosition(position,0);
-        p.setVelocity(velocity,0);
+        p.setPosition(position);
+        p.setVelocity(velocity);
         instance.setGlobalBest(new Particle(position, 0));
         instance.UpdatePosition(p);
         

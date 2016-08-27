@@ -60,7 +60,7 @@ public class ParticleTest {
         double[] start_position = { 2.0, 1.4 };
         double[] new_position = { 6.2, 1.1 };
         Particle instance = new Particle(start_position, 1);
-        instance.setPosition(new_position, 0);
+        instance.setPosition(new_position);
         double[] result = instance.getPosition();
         assertArrayEquals(new_position, result, 0.0);
         
@@ -75,7 +75,7 @@ public class ParticleTest {
         double[] start_position = { 2.0, 1.4 };
         double new_position = 8.2;
         Particle instance = new Particle(start_position, 1);
-        instance.setPosition(new_position,0, 0);
+        instance.setPosition(new_position,0);
         double[] result = instance.getPosition();
         assertEquals(new_position, result[0], 0.0);
         
@@ -103,7 +103,7 @@ public class ParticleTest {
         double[] velocity = {8.1, 5.5};
         double[] start_position = { 2.0, 1.4 };
         Particle instance = new Particle(start_position, 1);
-        instance.setVelocity(velocity,0);
+        instance.setVelocity(velocity);
         assertArrayEquals(instance.getVelocity(), velocity, 0.0);
     }
     
@@ -116,7 +116,7 @@ public class ParticleTest {
         double velocity = 8.1;
         double[] start_position = { 2.0, 1.4 };
         Particle instance = new Particle(start_position, 1);
-        instance.setVelocity(velocity, 0,0);
+        instance.setVelocity(velocity, 0);
         assertEquals(instance.getVelocity()[0], velocity, 0.0);
     }
 
@@ -171,7 +171,7 @@ public class ParticleTest {
         double[] position = {50, 2, 27, 18};
         double[] position_new = {3, 12, 12, 2};
         Particle instance = new Particle(position, 1);
-        instance.setPosition(position_new,0);
+        instance.setPosition(position_new);
         assertArrayEquals(instance.getPosition(), position_new, 0.0);
     }
 
@@ -185,7 +185,7 @@ public class ParticleTest {
         int index = 3;
         double[] initialPosition = {4.3, 5.22, 43.3,88.7,2,56,8};
         Particle instance = new Particle(initialPosition, 1);
-        instance.setPosition(position, index, 0);
+        instance.setPosition(position, index);
         assertEquals(instance.getPosition()[index], position, 0.0);
     }
 
@@ -198,7 +198,7 @@ public class ParticleTest {
         double[] velocity = {4, 2, 27, 18};
         double[] position = {6, 12, 12, 2};
         Particle instance = new Particle(position, 0);
-        instance.setVelocity(velocity, 0);
+        instance.setVelocity(velocity);
         assertArrayEquals(instance.getVelocity(), velocity, 0.0);
     }
 
@@ -212,7 +212,7 @@ public class ParticleTest {
         int index = 3;
         double[] position = {6, 34, 12, 3, 2, 12};
         Particle instance = new Particle(position, 0);
-        instance.setVelocity(velocity, index, 0);
+        instance.setVelocity(velocity, index);
         assertEquals(instance.getVelocity()[index], velocity, 0.0);
     }
 

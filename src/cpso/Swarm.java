@@ -129,7 +129,7 @@ public class Swarm
                                  C2 * R2 * (p.getSocialNeighbour().getpBest()[i] - p.getPosition()[i]));
                 }
                 
-                p.setVelocity(velocity, i, function);
+                p.setVelocity(velocity, i);
             }
         }
 
@@ -138,7 +138,7 @@ public class Swarm
         {
             for(int i = 0; i < k; i++)
             {
-                p.setPosition(p.getPosition()[i] + p.getVelocity()[i], i, function);
+                p.setPosition(p.getPosition()[i] + p.getVelocity()[i], i);
             }
         }
 
@@ -181,8 +181,8 @@ public class Swarm
                 }
                 while(particles[randomIndex] == this.globalBest);
                 
-                particles[randomIndex].setPosition(position, function);
-                particles[randomIndex].setVelocity(velocity, function);
+                particles[randomIndex].setPosition(position);
+                particles[randomIndex].setVelocity(velocity);
                 return true;
             }
         }
