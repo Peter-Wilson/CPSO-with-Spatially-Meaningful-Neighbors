@@ -44,13 +44,13 @@ public class ReportMain {
         
         //testSchaffer(15, 2, 4); // no dt        
         //    System.out.println("\b");
-        testRastrigin(20, 2, 4); // dt
+        testRastrigin(20, 3, 6); // dt
             System.out.println("\b");
-        testRosenbrock(20, 2, 4); // no dt        
+        testRosenbrock(20, 3, 6); // no dt        
             System.out.println("\b");
-        testGriewanck(20, 2, 4); // dt
+        testGriewanck(20, 3, 6); // dt
             System.out.println("\b");
-        testAckley(20, 2, 4);
+        testAckley(20, 3, 6);
             
             writer.close();
             

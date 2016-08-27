@@ -387,7 +387,7 @@ public class CPSO {
             }
             
             result.globalBestPerIteration.add(this.getSolutionFitness());
-            if(result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1) < this.criterion)
+            if(result.globalBestPerIteration.get(result.globalBestPerIteration.size()-1) <= this.criterion)
             {
                 writeOutput("Criterion Met after "+i+" iterations");
                 result.solved = true;
