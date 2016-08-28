@@ -33,6 +33,7 @@ public class Delaunay_Triangulation
   private Vector<Triangle_dt> deletedTriangles;
   private Vector<Triangle_dt> addedTriangles;
   private int _modCount = 0;
+  private final static int breakCount = 100;
   private int _modCount2 = 0;
   private Point_dt _bb_min;
   private Point_dt _bb_max;
@@ -650,7 +651,7 @@ public class Delaunay_Triangulation
   
   private void insertCollinear(Point_dt p, int res)
   {
-      if(++flipCount >= 100) 
+      if(++flipCount >= breakCount) 
           throw new IllegalStateException();
     Triangle_dt t;
     Triangle_dt tp;
@@ -806,7 +807,7 @@ public class Delaunay_Triangulation
   
   private Triangle_dt extendcounterclock(Triangle_dt t, Point_dt p)
   {
-      if(++flipCount >= 100)
+      if(++flipCount >= breakCount)
       {
           throw new IllegalStateException("Insertion of Point resulting in too many counterclocks. Insertion aborted");
       }
@@ -830,7 +831,7 @@ public class Delaunay_Triangulation
   
   private Triangle_dt extendclock(Triangle_dt t, Point_dt p)
   {
-      if(++flipCount >= 100)
+      if(++flipCount >= breakCount)
       {
           throw new IllegalStateException("Insertion of Point resulting in too many clocks. Insertion aborted");
       }
@@ -853,7 +854,7 @@ public class Delaunay_Triangulation
   
   private void flip(Triangle_dt t, int mc)
   {
-      if(++flipCount >= 100)
+      if(++flipCount >= breakCount)
       {
           throw new IllegalStateException("Insertion of Point resulting in too many flips. Insertion aborted");
       }
@@ -1054,7 +1055,7 @@ public class Delaunay_Triangulation
   
   public Triangle_dt find(Point_dt p)
   {
-    if(++flipCount >= 100) 
+    if(++flipCount >= breakCount) 
         throw new IllegalStateException("Too many search errors, aborting search");
     Triangle_dt searchTriangle = this.startTriangle;
     if (this.gridIndex != null)
@@ -1069,7 +1070,7 @@ public class Delaunay_Triangulation
   
   public Triangle_dt find(Point_dt p, Triangle_dt start)
   {
-    if(++flipCount >= 100) 
+    if(++flipCount >= breakCount) 
         throw new IllegalStateException("Too many search errors, aborting search");
     if (start == null) {
       start = this.startTriangle;
@@ -1080,7 +1081,7 @@ public class Delaunay_Triangulation
   
   private static Triangle_dt find(Triangle_dt curr, Point_dt p)
   {
-    if(++flipCount >= 100)  
+    if(++flipCount >= breakCount)  
         throw new IllegalStateException("Too many search errors, aborting search");
     if (p == null) {
       return null;
@@ -1109,7 +1110,7 @@ public class Delaunay_Triangulation
   private static Triangle_dt findnext1(Point_dt p, Triangle_dt v)
   {
 
-      if(++flipCount >= 100)  
+      if(++flipCount >= breakCount)  
         throw new IllegalStateException("Too many search errors, aborting search");
     if ((p.pointLineTest(v.a, v.b) == 2) && (!v.abnext.halfplane)) {
       return v.abnext;
@@ -1134,7 +1135,7 @@ public class Delaunay_Triangulation
   
   private static Triangle_dt findnext2(Point_dt p, Triangle_dt v)
   {
-      if(++flipCount >= 100)  
+      if(++flipCount >= breakCount)  
         throw new IllegalStateException("Too many search errors, aborting search");
     if ((v.abnext != null) && (!v.abnext.halfplane)) {
       return v.abnext;
@@ -1155,7 +1156,7 @@ public class Delaunay_Triangulation
   
   private Vector<Point_dt> findConnectedVertices(Point_dt point, boolean saveTriangles)
   {
-      if(++flipCount >= 100)  
+      if(++flipCount >= breakCount)  
         throw new IllegalStateException("Too many search errors, aborting search");
     Set<Point_dt> pointsSet = new HashSet();
     Vector<Point_dt> pointsVec = new Vector();
@@ -1213,7 +1214,7 @@ public class Delaunay_Triangulation
   
   public Vector<Triangle_dt> findTriangleNeighborhood(Triangle_dt firstTriangle, Point_dt point)
   {
-      if(++flipCount >= 100)  
+      if(++flipCount >= breakCount)  
         throw new IllegalStateException("Too many search errors, aborting search");
     Vector<Triangle_dt> triangles = new Vector(30);
     triangles.add(firstTriangle);
@@ -1236,7 +1237,7 @@ public class Delaunay_Triangulation
   
   private Triangle_dt findTriangle(Vector<Point_dt> pointsVec, Point_dt p)
   {
-      if(++flipCount >= 100)  
+      if(++flipCount >= breakCount)  
         throw new IllegalStateException("Too many search errors, aborting search");
     Point_dt[] arrayPoints = new Point_dt[pointsVec.size()];
     pointsVec.toArray(arrayPoints);
