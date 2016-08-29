@@ -40,18 +40,77 @@ public class ReportMain {
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             writer = new BufferedWriter(fw);
 
+        System.out.println("");
+        System.out.println("-----------------------------------------------");
+        System.out.println("------------------ S=10  N=6 ------------------");
+        System.out.println("-----------------------------------------------");
+        testRastrigin(10, 3, 6); // dt
+            System.out.println("\b");
+        testRosenbrock(10, 3, 6); // no dt        
+            System.out.println("\b");
+        testGriewanck(10, 3, 6); // dt
+            System.out.println("\b");
+        testAckley(10, 3, 6);
         
+        System.out.println("");
+        System.out.println("-----------------------------------------------");
+        System.out.println("------------------ S=15  N=6 ------------------");
+        System.out.println("-----------------------------------------------");
+        testRastrigin(15, 3, 6); // dt
+            System.out.println("\b");
+        testRosenbrock(15, 3, 6); // no dt        
+            System.out.println("\b");
+        testGriewanck(15, 3, 6); // dt
+            System.out.println("\b");
+        testAckley(15, 3, 6);
         
-        //testSchaffer(15, 2, 4); // no dt        
-        //    System.out.println("\b");
-        testRastrigin(10, 2, 6); // dt
+        System.out.println("");
+        System.out.println("-----------------------------------------------");
+        System.out.println("------------------ S=20  N=6 ------------------");
+        System.out.println("-----------------------------------------------");
+        testRastrigin(20, 3, 6); // dt
             System.out.println("\b");
-        testRosenbrock(10, 2, 6); // no dt        
+        testRosenbrock(20, 3, 6); // no dt        
             System.out.println("\b");
-        testGriewanck(10, 2, 6); // dt
+        testGriewanck(20, 3, 6); // dt
             System.out.println("\b");
-        testAckley(10, 2, 6);
-            
+        testAckley(20, 3, 6);
+           
+        System.out.println("");
+        System.out.println("-----------------------------------------------");
+        System.out.println("------------------ S=100  N=60 ------------------");
+        System.out.println("-----------------------------------------------");
+        testRastrigin(100, 30, 60); // dt
+            System.out.println("\b");
+        testRosenbrock(100, 30, 60); // no dt        
+            System.out.println("\b");
+        testGriewanck(100, 30, 60); // dt
+            System.out.println("\b");
+        testAckley(100, 30, 60);
+        
+        System.out.println("");
+        System.out.println("-----------------------------------------------");
+        System.out.println("------------------ S=150  N=60 ------------------");
+        System.out.println("-----------------------------------------------");
+        testRastrigin(150, 30, 60); // dt
+            System.out.println("\b");
+        testRosenbrock(150, 30, 60); // no dt        
+            System.out.println("\b");
+        testGriewanck(150, 30, 60); // dt
+            System.out.println("\b");
+        testAckley(150, 30, 60);
+        
+        System.out.println("");
+        System.out.println("-----------------------------------------------");
+        System.out.println("------------------ S=200  N=60 ------------------");
+        System.out.println("-----------------------------------------------");
+        testRastrigin(200, 30, 60); // dt
+            System.out.println("\b");
+        testRosenbrock(200, 30, 60); // no dt        
+            System.out.println("\b");
+        testGriewanck(200, 30, 60); // dt
+            System.out.println("\b");
+        testAckley(200, 30, 60);
             writer.close();
             
         } catch (IOException e) {
@@ -66,7 +125,7 @@ public class ReportMain {
             boolean worked = false;
             int successDT = 0;
             int unsuccessDT = 0;
-            int numIterations = 1000;
+            int numIterations = 10000;
             int loops = 50;
             double[] averageBest = new double[numIterations];
             double[] finalResult = new double[loops];
@@ -130,7 +189,7 @@ public class ReportMain {
             try{
             if(writer != null)
             {
-                writer.write(getPSOType(type)+"-"+getFunctionName(function)+",");
+                writer.write("S="+numParticles+"-N="+Dimensions+"-Type="+getPSOType(type)+"-Function"+getFunctionName(function)+",");
                 for(int i = 0; i < averageBest.length; i++)
                 {
                     writer.write(averageBest[i]/loops + ",");
