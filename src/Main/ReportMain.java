@@ -42,77 +42,41 @@ public class ReportMain {
 
         System.out.println("");
         System.out.println("-----------------------------------------------");
-        System.out.println("------------------ S=10  N=6 ------------------");
+        System.out.println("------------------ S=75  N=30 ------------------");
         System.out.println("-----------------------------------------------");
-        testRastrigin(10, 3, 6); // dt
+        testRastrigin(75, 15, 30); // dt
             System.out.println("\b");
-        testRosenbrock(10, 3, 6); // no dt        
+        testRosenbrock(75, 15, 30); // no dt        
             System.out.println("\b");
-        testGriewanck(10, 3, 6); // dt
+        testGriewanck(75, 15, 30); // dt
             System.out.println("\b");
-        testAckley(10, 3, 6);
+        testAckley(75, 15, 30);
         
         System.out.println("");
         System.out.println("-----------------------------------------------");
-        System.out.println("------------------ S=15  N=6 ------------------");
+        System.out.println("------------------ S=100  N=30 ------------------");
         System.out.println("-----------------------------------------------");
-        testRastrigin(15, 3, 6); // dt
+        testRastrigin(100, 15, 30); // dt
             System.out.println("\b");
-        testRosenbrock(15, 3, 6); // no dt        
+        testRosenbrock(100, 15, 30); // no dt        
             System.out.println("\b");
-        testGriewanck(15, 3, 6); // dt
+        testGriewanck(100, 15, 30); // dt
             System.out.println("\b");
-        testAckley(15, 3, 6);
+        testAckley(100, 15, 30);
         
         System.out.println("");
         System.out.println("-----------------------------------------------");
-        System.out.println("------------------ S=20  N=6 ------------------");
+        System.out.println("------------------ S=125  N=30 ------------------");
         System.out.println("-----------------------------------------------");
-        testRastrigin(20, 3, 6); // dt
+        testRastrigin(125, 15, 30); // dt
             System.out.println("\b");
-        testRosenbrock(20, 3, 6); // no dt        
+        testRosenbrock(125, 15, 30); // no dt        
             System.out.println("\b");
-        testGriewanck(20, 3, 6); // dt
+        testGriewanck(125, 15, 30); // dt
             System.out.println("\b");
-        testAckley(20, 3, 6);
-           
-        System.out.println("");
-        System.out.println("-----------------------------------------------");
-        System.out.println("------------------ S=100  N=60 ------------------");
-        System.out.println("-----------------------------------------------");
-        testRastrigin(100, 30, 60); // dt
-            System.out.println("\b");
-        testRosenbrock(100, 30, 60); // no dt        
-            System.out.println("\b");
-        testGriewanck(100, 30, 60); // dt
-            System.out.println("\b");
-        testAckley(100, 30, 60);
-        
-        System.out.println("");
-        System.out.println("-----------------------------------------------");
-        System.out.println("------------------ S=150  N=60 ------------------");
-        System.out.println("-----------------------------------------------");
-        testRastrigin(150, 30, 60); // dt
-            System.out.println("\b");
-        testRosenbrock(150, 30, 60); // no dt        
-            System.out.println("\b");
-        testGriewanck(150, 30, 60); // dt
-            System.out.println("\b");
-        testAckley(150, 30, 60);
-        
-        System.out.println("");
-        System.out.println("-----------------------------------------------");
-        System.out.println("------------------ S=200  N=60 ------------------");
-        System.out.println("-----------------------------------------------");
-        testRastrigin(200, 30, 60); // dt
-            System.out.println("\b");
-        testRosenbrock(200, 30, 60); // no dt        
-            System.out.println("\b");
-        testGriewanck(200, 30, 60); // dt
-            System.out.println("\b");
-        testAckley(200, 30, 60);
+        testAckley(125, 15, 30);
             writer.close();
-            
+    
         } catch (IOException e) {
                 e.printStackTrace();
         }
