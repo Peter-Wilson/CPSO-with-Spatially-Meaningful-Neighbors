@@ -40,20 +40,43 @@ public class ReportMain {
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             writer = new BufferedWriter(fw);
 
+        System.out.println("");
+        System.out.println("-----------------------------------------------");
+        System.out.println("------------------ S=75  N=30 ------------------");
+        System.out.println("-----------------------------------------------");
+        testRastrigin(15, 2, 6); // dt
+            System.out.println("\b");
+        //testRosenbrock(15, 10, 6); // no dt        
+            System.out.println("\b");
+        //testGriewanck(15, 3, 6); // dt
+            System.out.println("\b");
+        //testAckley(15, 3, 6);
         
+        System.out.println("");
+        System.out.println("-----------------------------------------------");
+        System.out.println("------------------ S=100  N=30 ------------------");
+        System.out.println("-----------------------------------------------");
+        testRastrigin(20, 2, 6); // dt
+            System.out.println("\b");
+        //testRosenbrock(20, 3, 6); // no dt        
+            System.out.println("\b");
+        //testGriewanck(20, 3, 6); // dt
+            System.out.println("\b");
+        //testAckley(20, 3, 6);
         
-        //testSchaffer(15, 2, 4); // no dt        
-        //    System.out.println("\b");
-        testRastrigin(10, 2, 6); // dt
+        System.out.println("");
+        System.out.println("-----------------------------------------------");
+        System.out.println("------------------ S=125  N=30 ------------------");
+        System.out.println("-----------------------------------------------");
+        testRastrigin(25, 2, 6); // dt
             System.out.println("\b");
-        testRosenbrock(10, 2, 6); // no dt        
+        //testRosenbrock(100, 10, 20); // no dt        
             System.out.println("\b");
-        testGriewanck(10, 2, 6); // dt
+        //testGriewanck(100, 10, 20); // dt
             System.out.println("\b");
-        testAckley(10, 2, 6);
-            
+        //testAckley(100, 10, 20);
             writer.close();
-            
+    
         } catch (IOException e) {
                 e.printStackTrace();
         }
@@ -66,7 +89,7 @@ public class ReportMain {
             boolean worked = false;
             int successDT = 0;
             int unsuccessDT = 0;
-            int numIterations = 1000;
+            int numIterations = 10000;
             int loops = 50;
             double[] averageBest = new double[numIterations];
             double[] finalResult = new double[loops];
@@ -130,7 +153,7 @@ public class ReportMain {
             try{
             if(writer != null)
             {
-                writer.write(getPSOType(type)+"-"+getFunctionName(function)+",");
+                writer.write("S="+numParticles+"-N="+Dimensions+"-Type="+getPSOType(type)+"-Function"+getFunctionName(function)+",");
                 for(int i = 0; i < averageBest.length; i++)
                 {
                     writer.write(averageBest[i]/loops + ",");
@@ -205,19 +228,19 @@ public class ReportMain {
     public static void testFunction(int numParticles, int numSwarms, int Dimensions, int function)
     {
         //PSO
-        runTest(numParticles, Dimensions, false, function, 1, 0);
+        //runTest(numParticles, Dimensions, false, function, 1, 0);
         //CPSO-S
-        runTest(numParticles, Dimensions, false, function, 1, 1);
-        runTest(numParticles, Dimensions, true, function, 1, 1);
+        //runTest(numParticles, Dimensions, false, function, 1, 1);
+        //runTest(numParticles, Dimensions, true, function, 1, 1);
         //CPSO-Sk
-        runTest(numParticles, Dimensions, false, function, 1, 2);
+        //runTest(numParticles, Dimensions, false, function, 1, 2);
         runTest(numParticles, Dimensions, true, function, 1, 2);
         //CPSO-Hk
         //runTest(numParticles, Dimensions, false, function, numSwarms, 3);
         //runTest(numParticles, Dimensions, true, function, numSwarms, 3);
         //CPSO-Rk
-        runTest(numParticles, Dimensions, false, function, numSwarms, 4);
-        runTest(numParticles, Dimensions, true, function, numSwarms, 4);
+        //runTest(numParticles, Dimensions, false, function, numSwarms, 4);
+        //runTest(numParticles, Dimensions, true, function, numSwarms, 4);
     }
     
     public static void testSchaffer(int numParticles, int numSwarms, int Dimensions)
