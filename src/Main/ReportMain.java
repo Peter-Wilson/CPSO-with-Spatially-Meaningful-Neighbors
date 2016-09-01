@@ -42,42 +42,40 @@ public class ReportMain {
 
         System.out.println("");
         System.out.println("-----------------------------------------------");
-        System.out.println("------------------ S=75  N=30 ------------------");
+        System.out.println("------------------ S=50  N=20 ------------------");
         System.out.println("-----------------------------------------------");
-        testRastrigin(15, 2, 6); // dt
-        testRastrigin(15, 3, 6); // dt
-        /*
+        testRastrigin(50, 10, 20); // dt
             System.out.println("\b");
-        //testRosenbrock(15, 10, 6); // no dt        
+        testRosenbrock(50, 10, 20); // no dt      
             System.out.println("\b");
-        //testGriewanck(15, 3, 6); // dt
+        testGriewanck(50, 10, 20); // dt
             System.out.println("\b");
-        //testAckley(15, 3, 6);
+        testAckley(50, 10, 20);
         
         System.out.println("");
         System.out.println("-----------------------------------------------");
-        System.out.println("------------------ S=100  N=30 ------------------");
+        System.out.println("------------------ S=75  N=20 ------------------");
         System.out.println("-----------------------------------------------");
-        //testRastrigin(20, 2, 6); // dt
+        testRastrigin(75, 10, 20); // dt
             System.out.println("\b");
-        //testRosenbrock(20, 3, 6); // no dt        
+        testRosenbrock(75, 10, 20); // no dt      
             System.out.println("\b");
-        //testGriewanck(20, 3, 6); // dt
+        testGriewanck(75, 10, 20); // dt
             System.out.println("\b");
-        //testAckley(20, 3, 6);
+        testAckley(75, 10, 20);
         
         System.out.println("");
         System.out.println("-----------------------------------------------");
-        System.out.println("------------------ S=125  N=30 ------------------");
+        System.out.println("------------------ S=100  N=20 ------------------");
         System.out.println("-----------------------------------------------");
-        //testRastrigin(25, 2, 6); // dt
+        
+        testRastrigin(100, 10, 20); // dt
             System.out.println("\b");
-        //testRosenbrock(100, 10, 20); // no dt        
+        testRosenbrock(100, 10, 20);  // no dt      
             System.out.println("\b");
-        //testGriewanck(100, 10, 20); // dt
+        testGriewanck(100, 10, 20); // dt
             System.out.println("\b");
-        //testAckley(100, 10, 20);
-        */
+        testAckley(100, 10, 20); 
             writer.close();
     
         } catch (IOException e) {
@@ -92,7 +90,7 @@ public class ReportMain {
             boolean worked = false;
             int successDT = 0;
             int unsuccessDT = 0;
-            int numIterations = 1000;
+            int numIterations = 10000;
             int loops = 50;
             double[] averageBest = new double[numIterations];
             double[] finalResult = new double[loops];
