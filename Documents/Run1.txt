@@ -4,32 +4,32 @@
 Function?2 type?0 DT?false:		Completed: 54.0%		average iterations:1291	DT Success rate:0%	Confidence Interval = 0.5211454957828354 - 1.2798556362686297
 Function?2 type?1 DT?false:		Completed: 100.0%		average iterations:837	DT Success rate:0%	Confidence Interval = 0.004436065785206257 - 0.006176978940609
 Function?2 type?1 DT?true:		Completed: 100.0%		average iterations:771	DT Success rate:100%	Confidence Interval = 0.004408093258065645 - 0.006174016898495909
-Function?2 type?2 DT?false:		Completed: 38.0%		average iterations:1249	DT Success rate:0%	Confidence Interval = 0.9761171252789076 - 1.9748990033159468
-Function?2 type?2 DT?true:		Completed: 8.0%		average iterations:1534	DT Success rate:100%	Confidence Interval = 2.1270183016157764 - 3.129773303693664
+Function?2 type?2 DT?false:		Completed: 90.0%		average iterations:1091	DT Success rate:0%	Confidence Interval = 0.01727806765523894 - 0.23206971051038877
+Function?2 type?2 DT?true:		Completed: 92.0%		average iterations:1191	DT Success rate:100%	Confidence Interval = 0.00898946265549469 - 0.16143373052876606
 Function?2 type?4 DT?false:		Completed: 58.0%		average iterations:1173	DT Success rate:0%	Confidence Interval = 0.06680964242833265 - 2.076462769529554
 Function?2 type?4 DT?true:		Completed: 74.0%		average iterations:1295	DT Success rate:100%	Confidence Interval = -0.24557060448722312 - 1.7282318029641885
 
 Function?3 type?0 DT?false:		Completed: 98.0%		average iterations:346	DT Success rate:0%	Confidence Interval = 57.83414017069425 - 98.23053705753767
 Function?3 type?1 DT?false:		Completed: 100.0%		average iterations:287	DT Success rate:0%	Confidence Interval = 60.90242434772933 - 73.5305263472889
 Function?3 type?1 DT?true:		Completed: 100.0%		average iterations:356	DT Success rate:100%	Confidence Interval = 56.927187647855284 - 70.74794342191493
-Function?3 type?2 DT?false:		Completed: 96.0%		average iterations:423	DT Success rate:0%	Confidence Interval = 49.45184580829931 - 104.30971314440566
-Function?3 type?2 DT?true:		Completed: 100.0%		average iterations:577	DT Success rate:0%	Confidence Interval = 62.33070923745886 - 74.52183637861687
+Function?3 type?2 DT?false:		Completed: 100.0%		average iterations:284	DT Success rate:0%	Confidence Interval = 62.53061964830941 - 74.51907134762969
+Function?3 type?2 DT?true:		Completed: 100.0%		average iterations:316	DT Success rate:0%	Confidence Interval = 67.48459301251276 - 80.61525713083512
 Function?3 type?4 DT?false:		Completed: 94.0%		average iterations:301	DT Success rate:0%	Confidence Interval = -1696.7455065051008 - 5456.776751486582
 Function?3 type?4 DT?true:		Completed: 98.0%		average iterations:386	DT Success rate:100%	Confidence Interval = 69.61444035624497 - 82.6480997676344
 
 Function?4 type?0 DT?false:		Completed: 40.0%		average iterations:1323	DT Success rate:0%	Confidence Interval = 0.07613504741472732 - 0.11521109111782085
 Function?4 type?1 DT?false:		Completed: 98.0%		average iterations:980	DT Success rate:0%	Confidence Interval = 0.036523738533099044 - 0.04128668054295604
 Function?4 type?1 DT?true:		Completed: 100.0%		average iterations:976	DT Success rate:100%	Confidence Interval = 0.036592802469972464 - 0.04099457956660383
-Function?4 type?2 DT?false:		Completed: 24.0%		average iterations:1320	DT Success rate:0%	Confidence Interval = 0.0845606099913839 - 0.12282110162443269
-Function?4 type?2 DT?true:		Completed: 34.0%		average iterations:2031	DT Success rate:100%	Confidence Interval = 0.06307762715771277 - 0.08192002122950588
+Function?4 type?2 DT?false:		Completed: 82.0%		average iterations:1220	DT Success rate:0%	Confidence Interval = 0.042550231495980056 - 0.047501425024749286
+Function?4 type?2 DT?true:		Completed: 98.0%		average iterations:1465	DT Success rate:100%	Confidence Interval = 0.04030597399429179 - 0.04530573825293769
 Function?4 type?4 DT?false:		Completed: 62.0%		average iterations:1301	DT Success rate:0%	Confidence Interval = 0.050733538419540564 - 0.0760287070817943
 Function?4 type?4 DT?true:		Completed: 82.0%		average iterations:1531	DT Success rate:100%	Confidence Interval = 0.04423504452711058 - 0.054294532340489504
 
 Function?5 type?0 DT?false:		Completed: 100.0%		average iterations:1375	DT Success rate:0%	Confidence Interval = 0.008862541463074445 - 0.009412230042716851
 Function?5 type?1 DT?false:		Completed: 94.0%		average iterations:1223	DT Success rate:0%	Confidence Interval = -0.28376910583051673 - 1.779497636101409
 Function?5 type?1 DT?true:		Completed: 94.0%		average iterations:1272	DT Success rate:100%	Confidence Interval = -0.13832882420198067 - 2.4501417801511893
-Function?5 type?2 DT?false:		Completed: 100.0%		average iterations:1400	DT Success rate:0%	Confidence Interval = 0.009089338345839817 - 0.00962103533248209
-Function?5 type?2 DT?true:		Completed: 96.0%		average iterations:1478	DT Success rate:0%	Confidence Interval = -0.014180596282146976 - 0.15201378581574726
+Function?5 type?2 DT?false:		Completed: 100.0%		average iterations:1261	DT Success rate:0%	Confidence Interval = 0.0071306218471002165 - 0.008251092663415196
+Function?5 type?2 DT?true:		Completed: 100.0%		average iterations:1263	DT Success rate:100%	Confidence Interval = 0.00695998532725621 - 0.008253369325627261
 Function?5 type?4 DT?false:		Completed: 96.0%		average iterations:1351	DT Success rate:0%	Confidence Interval = 0.007706125363359625 - 0.009166615350153166
 Function?5 type?4 DT?true:		Completed: 94.0%		average iterations:1365	DT Success rate:0%	Confidence Interval = -0.3587016432677089 - 1.1182128840344299
 
@@ -39,32 +39,32 @@ Function?5 type?4 DT?true:		Completed: 94.0%		average iterations:1365	DT Success
 Function?2 type?0 DT?false:		Completed: 64.0%		average iterations:1264	DT Success rate:0%	Confidence Interval = 0.516065453830033 - 1.404367492278653
 Function?2 type?1 DT?false:		Completed: 100.0%		average iterations:597	DT Success rate:0%	Confidence Interval = 0.00482560087618674 - 0.0064856130617943685
 Function?2 type?1 DT?true:		Completed: 100.0%		average iterations:624	DT Success rate:100%	Confidence Interval = 0.005301780632626539 - 0.006809388832642177
-Function?2 type?2 DT?false:		Completed: 32.0%		average iterations:1194	DT Success rate:0%	Confidence Interval = 0.8017957737731338 - 1.3523197542143564
-Function?2 type?2 DT?true:		Completed: 0.0%		average iterations:0	DT Success rate:0%	Confidence Interval = 2.6477204406596155 - 3.541722858108671
+Function?2 type?2 DT?false:		Completed: 98.0%		average iterations:1033	DT Success rate:0%	Confidence Interval = -0.012523759053152627 - 0.06608304733816753
+Function?2 type?2 DT?true:		Completed: 100.0%		average iterations:1165	DT Success rate:0%	Confidence Interval = 0.004973367831561253 - 0.006619154507970999
 Function?2 type?4 DT?false:		Completed: 80.0%		average iterations:1110	DT Success rate:0%	Confidence Interval = -0.2876347793576337 - 1.6905613991302668
 Function?2 type?4 DT?true:		Completed: 80.0%		average iterations:1312	DT Success rate:100%	Confidence Interval = 0.10035117023083723 - 0.38847462896553214
 
 Function?3 type?0 DT?false:		Completed: 100.0%		average iterations:308	DT Success rate:0%	Confidence Interval = 56.719341089618 - 70.898790452813
 Function?3 type?1 DT?false:		Completed: 100.0%		average iterations:128	DT Success rate:0%	Confidence Interval = 64.95821185948354 - 77.12531531341791
 Function?3 type?1 DT?true:		Completed: 100.0%		average iterations:116	DT Success rate:100%	Confidence Interval = 64.96871957146992 - 77.1492494909594
-Function?3 type?2 DT?false:		Completed: 98.0%		average iterations:300	DT Success rate:0%	Confidence Interval = 56.71361670909756 - 73.62211240583827
-Function?3 type?2 DT?true:		Completed: 100.0%		average iterations:637	DT Success rate:100%	Confidence Interval = 61.54431175568551 - 75.35302117597324
+Function?3 type?2 DT?false:		Completed: 100.0%		average iterations:153	DT Success rate:0%	Confidence Interval = 67.0374639352672 - 78.69115605138532
+Function?3 type?2 DT?true:		Completed: 100.0%		average iterations:156	DT Success rate:100%	Confidence Interval = 68.48010454659713 - 79.11105418066866
 Function?3 type?4 DT?false:		Completed: 98.0%		average iterations:392	DT Success rate:0%	Confidence Interval = 49.20155408753568 - 91.62944047401452
 Function?3 type?4 DT?true:		Completed: 100.0%		average iterations:415	DT Success rate:0%	Confidence Interval = 63.03166162663517 - 76.8478885313885
 
 Function?4 type?0 DT?false:		Completed: 28.0%		average iterations:1269	DT Success rate:0%	Confidence Interval = 0.09235517634559688 - 0.13031405903010584
 Function?4 type?1 DT?false:		Completed: 100.0%		average iterations:724	DT Success rate:0%	Confidence Interval = 0.03923948652178933 - 0.04308712163006612
 Function?4 type?1 DT?true:		Completed: 96.0%		average iterations:759	DT Success rate:100%	Confidence Interval = 0.04007341172163505 - 0.04404002047306539
-Function?4 type?2 DT?false:		Completed: 28.0%		average iterations:1255	DT Success rate:0%	Confidence Interval = 0.08285248856068146 - 0.12352634139137476
-Function?4 type?2 DT?true:		Completed: 40.0%		average iterations:1912	DT Success rate:100%	Confidence Interval = 0.06337039265069795 - 0.0821289392448578
+Function?4 type?2 DT?false:		Completed: 84.0%		average iterations:1208	DT Success rate:0%	Confidence Interval = 0.04047575187595857 - 0.046638771636372776
+Function?4 type?2 DT?true:		Completed: 100.0%		average iterations:1440	DT Success rate:100%	Confidence Interval = 0.03916142399845637 - 0.04319115030291119
 Function?4 type?4 DT?false:		Completed: 66.0%		average iterations:1247	DT Success rate:0%	Confidence Interval = 0.04957220058954753 - 0.06320585067862106
 Function?4 type?4 DT?true:		Completed: 86.0%		average iterations:1581	DT Success rate:100%	Confidence Interval = 0.04211158330272374 - 0.05046130727694216
 
 Function?5 type?0 DT?false:		Completed: 100.0%		average iterations:1287	DT Success rate:0%	Confidence Interval = 0.008675784199069588 - 0.009317745497278285
 Function?5 type?1 DT?false:		Completed: 100.0%		average iterations:1115	DT Success rate:0%	Confidence Interval = 0.00547092983568591 - 0.006917026826575106
 Function?5 type?1 DT?true:		Completed: 100.0%		average iterations:1137	DT Success rate:100%	Confidence Interval = 0.005491770785971689 - 0.0071230910653399815
-Function?5 type?2 DT?false:		Completed: 100.0%		average iterations:1273	DT Success rate:0%	Confidence Interval = 0.008918820353711108 - 0.009444728459992951
-Function?5 type?2 DT?true:		Completed: 100.0%		average iterations:1386	DT Success rate:0%	Confidence Interval = 0.009058346570481393 - 0.0094861371304205
+Function?5 type?2 DT?false:		Completed: 100.0%		average iterations:1248	DT Success rate:0%	Confidence Interval = 0.008068908494060608 - 0.008854835571466838
+Function?5 type?2 DT?true:		Completed: 100.0%		average iterations:1282	DT Success rate:100%	Confidence Interval = 0.007850363862016251 - 0.008756687675708452
 Function?5 type?4 DT?false:		Completed: 100.0%		average iterations:1309	DT Success rate:0%	Confidence Interval = 0.007909320258387715 - 0.008833466833151438
 Function?5 type?4 DT?true:		Completed: 100.0%		average iterations:1299	DT Success rate:100%	Confidence Interval = 0.007461788276961561 - 0.008626674736102704
 
@@ -74,24 +74,24 @@ Function?5 type?4 DT?true:		Completed: 100.0%		average iterations:1299	DT Succes
 Function?2 type?0 DT?false:		Completed: 60.0%		average iterations:1185	DT Success rate:0%	Confidence Interval = 0.35236574698376927 - 0.8914899157686087
 Function?2 type?1 DT?false:		Completed: 100.0%		average iterations:462	DT Success rate:0%	Confidence Interval = 0.005095424283816933 - 0.006756926838561475
 Function?2 type?1 DT?true:		Completed: 100.0%		average iterations:465	DT Success rate:100%	Confidence Interval = 0.005329548021032381 - 0.006753872207749324
-Function?2 type?2 DT?false:		Completed: 62.0%		average iterations:1141	DT Success rate:0%	Confidence Interval = 0.39299887681447704 - 1.129059555891341
-Function?2 type?2 DT?true:		Completed: 10.0%		average iterations:1457	DT Success rate:100%	Confidence Interval = 2.0420604351040264 - 2.8655609040046275
+Function?2 type?2 DT?false:		Completed: 98.0%		average iterations:969	DT Success rate:0%	Confidence Interval = -0.013384881579842675 - 0.06528758238833421
+Function?2 type?2 DT?true:		Completed: 100.0%		average iterations:1145	DT Success rate:0%	Confidence Interval = 0.004832159587740794 - 0.006456180800478915
 Function?2 type?4 DT?false:		Completed: 88.0%		average iterations:1032	DT Success rate:0%	Confidence Interval = 0.021756132990367577 - 0.19015499214228715
 Function?2 type?4 DT?true:		Completed: 84.0%		average iterations:1314	DT Success rate:0%	Confidence Interval = 0.061354622774022136 - 0.26734827663056093
 
 Function?3 type?0 DT?false:		Completed: 100.0%		average iterations:350	DT Success rate:0%	Confidence Interval = 51.22681793586538 - 66.83489129953483
 Function?3 type?1 DT?false:		Completed: 100.0%		average iterations:106	DT Success rate:0%	Confidence Interval = 71.15366719884707 - 81.79791982837332
 Function?3 type?1 DT?true:		Completed: 100.0%		average iterations:96	DT Success rate:100%	Confidence Interval = 67.06510973111429 - 78.88822316921642
-Function?3 type?2 DT?false:		Completed: 100.0%		average iterations:321	DT Success rate:0%	Confidence Interval = 50.187214233814345 - 65.25695227410385
-Function?3 type?2 DT?true:		Completed: 100.0%		average iterations:491	DT Success rate:0%	Confidence Interval = 60.397803671011445 - 73.79174549115729
+Function?3 type?2 DT?false:		Completed: 100.0%		average iterations:90	DT Success rate:0%	Confidence Interval = 65.65748009368713 - 77.28648483730791
+Function?3 type?2 DT?true:		Completed: 100.0%		average iterations:85	DT Success rate:100%	Confidence Interval = 61.79305802562581 - 75.35338457364003
 Function?3 type?4 DT?false:		Completed: 100.0%		average iterations:260	DT Success rate:0%	Confidence Interval = 64.86064576506004 - 78.05820082060998
 Function?3 type?4 DT?true:		Completed: 100.0%		average iterations:275	DT Success rate:100%	Confidence Interval = 67.06697160568288 - 78.75842882166518
 
 Function?4 type?0 DT?false:		Completed: 22.0%		average iterations:1222	DT Success rate:0%	Confidence Interval = 0.07970139789872818 - 0.10965916590225497
 Function?4 type?1 DT?false:		Completed: 98.0%		average iterations:647	DT Success rate:0%	Confidence Interval = 0.037383911994890655 - 0.042137311777728344
 Function?4 type?1 DT?true:		Completed: 100.0%		average iterations:733	DT Success rate:100%	Confidence Interval = 0.040705362785363235 - 0.04371421791996034
-Function?4 type?2 DT?false:		Completed: 34.0%		average iterations:1137	DT Success rate:0%	Confidence Interval = 0.08436813082256003 - 0.11816277877845477
-Function?4 type?2 DT?true:		Completed: 26.0%		average iterations:1854	DT Success rate:100%	Confidence Interval = 0.06662756082577892 - 0.08652783863393468
+Function?4 type?2 DT?false:		Completed: 94.0%		average iterations:1104	DT Success rate:0%	Confidence Interval = 0.04195056913109555 - 0.04561395144357983
+Function?4 type?2 DT?true:		Completed: 100.0%		average iterations:1396	DT Success rate:100%	Confidence Interval = 0.038709053498401896 - 0.043355464841992805
 Function?4 type?4 DT?false:		Completed: 80.0%		average iterations:1230	DT Success rate:0%	Confidence Interval = 0.04448749004787696 - 0.051432370337271605
 Function?4 type?4 DT?true:		Completed: 98.0%		average iterations:1700	DT Success rate:100%	Confidence Interval = 0.04181190212985751 - 0.046837950050873794
 
