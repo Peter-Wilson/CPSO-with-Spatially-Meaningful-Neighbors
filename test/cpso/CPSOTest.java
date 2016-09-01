@@ -178,14 +178,14 @@ public class CPSOTest {
     @Test
     public void testInitializeSwarms3() {
         System.out.println("Initialize Swarms for random sizes");
-        int expectedDimensions = 6;
+        int expectedDimensions = 20;
         int expectedMaxLoops = 10;
         int swarmSize = 20;
-        int expectedSwarmSize = swarmSize/3;
+        int expectedSwarmSize = swarmSize/10;
         double expectedInertia = 0.5;
         double expectedC1 = 0.3;
         double expectedC2 = 0.2;
-        int k = 3;
+        int k = 10;
         CPSO instance = new CPSO(expectedDimensions, expectedMaxLoops, swarmSize, expectedInertia, expectedC1, expectedC2,k, true, 0, true);
         instance.InitializeSwarms(true);
         
