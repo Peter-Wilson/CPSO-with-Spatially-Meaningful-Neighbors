@@ -1,4 +1,4 @@
-# CPSO with Spatially Meaningful Neighbors  [![Build Status](https://travis-ci.org/Peter-Wilson/CPSO.svg?branch=develop)](https://travis-ci.org/Peter-Wilson/CPSO)
+# CPSO with Spatially Meaningful Neighbors  [![Build Status](https://travis-ci.org/Peter-Wilson/CPSO-with-Spatially-Meaningful-Neighbors.svg?branch=develop)](https://travis-ci.org/Peter-Wilson/CPSO-with-Spatially-Meaningful-Neighbors)
 Cooperative PSO with Spatially Meaningful Neighbors using Delaunay Triangulation to create a minimum weight triangulation, connecting particles with their closest neighbors. 
 
 For more information on this project and its findings, be sure to check out:
