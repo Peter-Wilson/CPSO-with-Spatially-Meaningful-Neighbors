@@ -18,12 +18,12 @@ Completed in partial fullfillment of Undergraduate Thesis (**Brock University- 2
 
 
 
-# CPSO Variants tested
+## CPSO Variants tested
 1. [CPSO-S](https://github.com/Peter-Wilson/CPSO/wiki/CPSO-S)
 2. [CPSO-Sk](https://github.com/Peter-Wilson/CPSO/wiki/CPSO-Sk)
 3. [CPSO-Rk](https://github.com/Peter-Wilson/CPSO/wiki/CPSO-Rk)
  
 
 
-# User Interface
+## User Interface
 ![ui mockup](https://github.com/Peter-Wilson/CPSO/blob/develop/pictures/UI%20Mockup/finished_ui.png)
