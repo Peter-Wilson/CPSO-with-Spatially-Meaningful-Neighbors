@@ -229,18 +229,18 @@ public class ReportMain {
     public static void testFunction(int numParticles, int numSwarms, int Dimensions, int function)
     {
         //PSO
-        //runTest(numParticles, Dimensions, false, function, 1, 0);
+        runTest(numParticles, Dimensions, false, function, 1, 0);
         //CPSO-S
-        //runTest(numParticles, Dimensions, false, function, 1, 1);
+        runTest(numParticles, Dimensions, false, function, 1, 1);
         //runTest(numParticles, Dimensions, true, function, 1, 1);
         //CPSO-Sk
         runTest(numParticles, Dimensions, false, function, numSwarms, 2);
-        runTest(numParticles, Dimensions, true, function, numSwarms, 2);
+        //runTest(numParticles, Dimensions, true, function, numSwarms, 2);
         //CPSO-Hk
-        //runTest(numParticles, Dimensions, false, function, numSwarms, 3);
+        runTest(numParticles, Dimensions, false, function, numSwarms, 3);
         //runTest(numParticles, Dimensions, true, function, numSwarms, 3);
         //CPSO-Rk
-        //runTest(numParticles, Dimensions, false, function, numSwarms, 4);
+        runTest(numParticles, Dimensions, false, function, numSwarms, 4);
         //runTest(numParticles, Dimensions, true, function, numSwarms, 4);
     }
     
