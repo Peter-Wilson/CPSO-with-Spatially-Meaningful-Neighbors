@@ -12,7 +12,8 @@ Completed in partial fullfillment of Undergraduate Thesis (**Brock University- 2
 - [x] Implement Delaunay Triangulation Algorithm
 - [x] Run Tests
 - [x] Write Thesis
-- [ ] Present Thesis
+- [x] Present Thesis
+- [ ] Write 8 page version of Thesis
 
 
 
