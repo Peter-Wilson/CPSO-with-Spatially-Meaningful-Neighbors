@@ -2,7 +2,7 @@
 Cooperative PSO with Spatially Meaningful Neighbors using Delaunay Triangulation to create a minimum weight triangulation, connecting particles with their closest neighbors. 
 
 For more information on this project and its findings, be sure to check out:
-- [The Written Thesis :open_file_folder:](https://github.com/Peter-Wilson/CPSO-with-Spatially-Meaningful-Neighbors/blob/master/thesis/4F90_Peter_Wilson_CPSO.pdf)
+- [The Written Thesis :open_file_folder:](https://github.com/Peter-Wilson/CPSO-with-Spatially-Meaningful-Neighbors/blob/master/thesis/4F90_Peter_Wilson_CPSO.pdf) ([IEEE Version](https://github.com/Peter-Wilson/CPSO-with-Spatially-Meaningful-Neighbors/blob/master/thesis/4F90_CPSO_IEEE_Journal.pdf))
 - [The Github WIKI :globe_with_meridians:](https://github.com/Peter-Wilson/CPSO/wiki) (NOTE: Now Complete)
 
 Completed in partial fullfillment of Undergraduate Thesis (**Brock University- 2016**).
