@@ -13,8 +13,8 @@ Completed in partial fullfillment of Undergraduate Thesis (**Brock University- 2
 - [x] Run Tests
 - [x] Write Thesis
 - [x] Present Thesis
-- [ ] Finish 8 page IEEE version of Thesis
-
+- [x] Finish 8 page IEEE version of Thesis
+- [ ] Implement Ombuki's change suggestions
 
 
 
