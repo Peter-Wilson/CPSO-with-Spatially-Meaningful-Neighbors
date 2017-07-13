@@ -42,40 +42,40 @@ public class ReportMain {
 
         System.out.println("");
         System.out.println("-----------------------------------------------");
-        System.out.println("------------------ S=50  N=20 ------------------");
+        System.out.println("------------------ S=125  N=50 ------------------");
         System.out.println("-----------------------------------------------");
-        testRastrigin(50, 10, 20); // dt
+        testRastrigin(125, 25, 50); // dt
             System.out.println("\b");
-        testRosenbrock(50, 10, 20); // no dt      
+        testRosenbrock(125, 25, 50); // no dt      
             System.out.println("\b");
-        testGriewanck(50, 10, 20); // dt
+        testGriewanck(125, 25, 50); // dt
             System.out.println("\b");
-        testAckley(50, 10, 20);
+        testAckley(125, 25, 50);
         
         System.out.println("");
         System.out.println("-----------------------------------------------");
-        System.out.println("------------------ S=75  N=20 ------------------");
+        System.out.println("------------------ S=187  N=50 ------------------");
         System.out.println("-----------------------------------------------");
-        testRastrigin(75, 10, 20); // dt
+        testRastrigin(187, 25, 50); // dt
             System.out.println("\b");
-        testRosenbrock(75, 10, 20); // no dt      
+        testRosenbrock(187, 25, 50); // no dt      
             System.out.println("\b");
-        testGriewanck(75, 10, 20); // dt
+        testGriewanck(187, 25, 50); // dt
             System.out.println("\b");
-        testAckley(75, 10, 20);
+        testAckley(187, 25, 50);
         
         System.out.println("");
         System.out.println("-----------------------------------------------");
-        System.out.println("------------------ S=100  N=20 ------------------");
+        System.out.println("------------------ S=250  N=50 ------------------");
         System.out.println("-----------------------------------------------");
         
-        testRastrigin(100, 10, 20); // dt
+        testRastrigin(250, 25, 50); // dt
             System.out.println("\b");
-        testRosenbrock(100, 10, 20);  // no dt      
+        testRosenbrock(250, 25, 50);  // no dt      
             System.out.println("\b");
-        testGriewanck(100, 10, 20); // dt
+        testGriewanck(250, 25, 50); // dt
             System.out.println("\b");
-        testAckley(100, 10, 20); 
+        testAckley(250, 25, 50); 
             writer.close();
     
         } catch (IOException e) {
@@ -232,16 +232,16 @@ public class ReportMain {
         runTest(numParticles, Dimensions, false, function, 1, 0);
         //CPSO-S
         runTest(numParticles, Dimensions, false, function, 1, 1);
-        //runTest(numParticles, Dimensions, true, function, 1, 1);
+        runTest(numParticles, Dimensions, true, function, 1, 1);
         //CPSO-Sk
         runTest(numParticles, Dimensions, false, function, numSwarms, 2);
-        //runTest(numParticles, Dimensions, true, function, numSwarms, 2);
+        runTest(numParticles, Dimensions, true, function, numSwarms, 2);
         //CPSO-Hk
         runTest(numParticles, Dimensions, false, function, numSwarms, 3);
-        //runTest(numParticles, Dimensions, true, function, numSwarms, 3);
+        runTest(numParticles, Dimensions, true, function, numSwarms, 3);
         //CPSO-Rk
         runTest(numParticles, Dimensions, false, function, numSwarms, 4);
-        //runTest(numParticles, Dimensions, true, function, numSwarms, 4);
+        runTest(numParticles, Dimensions, true, function, numSwarms, 4);
     }
     
     public static void testSchaffer(int numParticles, int numSwarms, int Dimensions)
